@@ -96,7 +96,6 @@
 </div>
 
 <script>
-  // Replace this URL with your actual Render backend URL
   const API_URL = 'https://job-api-xizv.onrender.com/api/jobs';
 
   async function fetchJobs() {
@@ -111,21 +110,31 @@
     }
   }
 
+  function stripHtml(html) {
+    if (!html) return '';
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
+  }
+
   function displayJobs(jobs) {
     const container = document.getElementById('jobsContainer');
     if (!jobs.length) {
       container.innerHTML = '<div class="loading">No jobs yet. Check back soon!</div>';
       return;
     }
-    container.innerHTML = jobs.map(job => `
-      <div class="job-card">
-        <div class="job-title">${escapeHtml(job.title)}</div>
-        <div class="company">${escapeHtml(job.company)}</div>
-        <div class="location">${escapeHtml(job.location || 'Location not specified')}</div>
-        <div class="description">${escapeHtml(job.description ? job.description.substring(0, 150) : '')}...</div>
-        <a href="${escapeHtml(job.url)}" target="_blank" class="job-link">View Job →</a>
-      </div>
-    `).join('');
+    container.innerHTML = jobs.map(job => {
+      const cleanDesc = stripHtml(job.description).substring(0, 200);
+      return `
+        <div class="job-card">
+          <div class="job-title">${escapeHtml(job.title)}</div>
+          <div class="company">${escapeHtml(job.company)}</div>
+          <div class="location">${escapeHtml(job.location || 'Location not specified')}</div>
+          <div class="description">${escapeHtml(cleanDesc)}...</div>
+          <a href="${escapeHtml(job.url)}" target="_blank" class="job-link">View Job →</a>
+        </div>
+      `;
+    }).join('');
   }
 
   function escapeHtml(str) {
