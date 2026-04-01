@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ApplyMore | Next-Gen Job Platform</title>
-  <meta name="description" content="ApplyMore finds the latest IT fresher jobs across India. Search, filter by location, and apply directly to company websites. Free and updated daily.">
+  <meta name="description" content="ApplyMore finds the latest IT fresher jobs across India. Search, filter by location, and apply directly. Free and updated daily.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -30,6 +30,7 @@
       --border: #e2e8f0;
       --shadow: 0 8px 20px rgba(0,0,0,0.05);
       --tag-bg: rgba(99,102,241,0.1);
+      --accent2: #3b82f6; /* darker for light mode */
     }
     body.vibrant {
       --bg: #fff0f5;
@@ -141,6 +142,7 @@
       background: var(--card);
       color: var(--text);
       font-size: 14px;
+      outline: none;
     }
     .location-filter select {
       flex: 0.5;
@@ -243,7 +245,7 @@
       opacity: 0.9;
     }
 
-    /* Skeleton */
+    /* Skeleton (fewer items for faster perception) */
     .skeleton {
       height: 200px;
       border-radius: 16px;
@@ -277,6 +279,7 @@
       .hero h1 { font-size: 32px; }
       .search-bar, .location-filter select { width: 100%; }
       .search-bar { flex-direction: column; }
+      .grid { gap: 16px; }
     }
   </style>
 </head>
@@ -335,7 +338,8 @@
   let allJobs = [];
 
   function showSkeleton() {
-    document.getElementById('jobs').innerHTML = Array(6).fill('<div class="skeleton"></div>').join('');
+    // Only 3 skeletons for faster perceived load
+    document.getElementById('jobs').innerHTML = Array(3).fill('<div class="skeleton"></div>').join('');
   }
 
   async function loadJobs() {
@@ -449,8 +453,8 @@
   document.getElementById('vibrantTheme').addEventListener('click', () => setTheme('vibrant'));
   document.getElementById('accentColor').addEventListener('input', (e) => setAccent(e.target.value));
 
-  document.getElementById('search').addEventListener('input', renderJobs);
-  document.getElementById('locationFilter').addEventListener('change', renderJobs);
+  document.getElementById('search').addEventListener('input', () => renderJobs());
+  document.getElementById('locationFilter').addEventListener('change', () => renderJobs());
 
   document.getElementById('shareTwitter').addEventListener('click', (e) => {
     e.preventDefault();
