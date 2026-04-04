@@ -53,6 +53,7 @@
       --accent-glow: #f472b6;
     }
 
+    /* Particle canvas */
     #particleCanvas {
       position: fixed;
       top: 0;
@@ -72,6 +73,24 @@
       backdrop-filter: blur(2px);
     }
 
+    /* Header */
+    .main-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .main-header h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -1px;
+    }
+    .main-header p {
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
     .top-bar {
       display: flex;
       justify-content: space-between;
@@ -85,15 +104,6 @@
       border-radius: 2rem;
       border: 1px solid var(--glass-border);
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .logo h1 {
-      font-size: 2rem;
-      background: linear-gradient(135deg, var(--accent), #a855f7);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
     }
 
     .theme-controls {
@@ -134,25 +144,104 @@
       background: var(--accent);
     }
 
-    .hero {
-      text-align: center;
-      margin: 2rem 0 3rem;
+    /* Add link box (top) */
+    .add-link-box {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
     }
-    .hero .tagline {
-      display: inline-block;
-      background: rgba(59,130,246,0.2);
-      padding: 0.4rem 1.2rem;
-      border-radius: 40px;
-      font-size: 0.9rem;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(59,130,246,0.4);
-      margin-bottom: 1rem;
+    .add-link-box h3 {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .hero p {
-      font-size: 1.1rem;
+    .add-link-box input {
+      flex: 3;
+      padding: 0.7rem 1rem;
+      background: rgba(10,10,40,0.6);
+      border: 1px solid var(--glass-border);
+      border-radius: 2rem;
+      color: var(--text-light);
+    }
+    .add-link-box button {
+      background: var(--accent);
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 2rem;
+      color: white;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .add-link-box button:hover {
+      background: var(--accent-glow);
+    }
+    .links-list {
+      flex: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .links-list span {
+      font-size: 0.8rem;
       color: var(--text-muted);
-      max-width: 700px;
-      margin: 0 auto;
+    }
+    .links-list a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.1);
+      padding: 0.2rem 0.6rem;
+      border-radius: 1rem;
+    }
+    .links-list a:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Opinion box (below) */
+    .opinion-box {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+    .opinion-box h3 {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .opinion-box textarea {
+      flex: 3;
+      padding: 0.7rem;
+      background: rgba(10,10,40,0.6);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      color: var(--text-light);
+      resize: vertical;
+    }
+    .opinion-box button {
+      background: var(--accent);
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 2rem;
+      color: white;
+      cursor: pointer;
     }
 
     .controls {
@@ -201,68 +290,6 @@
       color: var(--text-light);
       font-size: 0.9rem;
       cursor: pointer;
-    }
-
-    /* Recommended links & opinion box */
-    .side-boxes {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .recommended-box, .opinion-box {
-      flex: 1;
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border-radius: 1.5rem;
-      padding: 1.2rem;
-      border: 1px solid var(--glass-border);
-    }
-    .recommended-box h3, .opinion-box h3 {
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .links-list {
-      list-style: none;
-      max-height: 150px;
-      overflow-y: auto;
-      margin-bottom: 1rem;
-    }
-    .links-list li {
-      margin-bottom: 0.5rem;
-      font-size: 0.85rem;
-      word-break: break-all;
-    }
-    .links-list a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    .links-list a:hover {
-      text-decoration: underline;
-    }
-    .recommended-box input, .opinion-box textarea {
-      width: 100%;
-      padding: 0.5rem;
-      background: rgba(10,10,40,0.6);
-      border: 1px solid var(--glass-border);
-      border-radius: 1rem;
-      color: var(--text-light);
-      margin-bottom: 0.5rem;
-    }
-    .recommended-box button, .opinion-box button {
-      background: var(--accent);
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 2rem;
-      color: white;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .recommended-box button:hover, .opinion-box button:hover {
-      background: var(--accent-glow);
     }
 
     .jobs-grid {
@@ -395,6 +422,7 @@
       text-align: center;
       margin-top: 4rem;
       padding-top: 2rem;
+      padding-bottom: 2rem;
       border-top: 1px solid var(--glass-border);
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -416,15 +444,19 @@
       .container { padding: 1rem; }
       .controls { flex-direction: column; }
       .search-box, .location-filter select { width: 100%; }
-      .side-boxes { flex-direction: column; }
+      .add-link-box, .opinion-box { flex-direction: column; align-items: stretch; }
+      .links-list { justify-content: center; }
     }
   </style>
 </head>
 <body>
   <canvas id="particleCanvas"></canvas>
   <div class="container">
+    <div class="main-header">
+      <h1>ApplyMore</h1>
+      <p>⚡ Your launchpad to an IT career ⚡</p>
+    </div>
     <div class="top-bar">
-      <div class="logo"><h1>ApplyMore</h1></div>
       <div class="theme-controls">
         <button class="theme-btn" id="lightTheme">Light</button>
         <button class="theme-btn" id="darkTheme">Dark</button>
@@ -435,27 +467,23 @@
         </div>
       </div>
     </div>
-    <div class="hero">
-      <div class="tagline">✨ Your Launchpad to an IT Career ✨</div>
-      <p>Hand‑picked entry‑level IT jobs in top Indian cities. Apply before deadlines and start your journey.</p>
+
+    <!-- Found a job link? Add it here (top box) -->
+    <div class="add-link-box">
+      <h3><i class="fas fa-link"></i> Found a job link?</h3>
+      <input type="url" id="newLinkInput" placeholder="Paste the job URL here..." />
+      <button id="submitLinkBtn">Add Link</button>
+      <div class="links-list" id="linksListContainer">
+        <span>📌 Recent:</span>
+        <div id="linksList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+      </div>
     </div>
 
-    <!-- Recommended Links & Opinion Box -->
-    <div class="side-boxes">
-      <div class="recommended-box">
-        <h3><i class="fas fa-link"></i> Community Recommended Links</h3>
-        <ul id="linksList" class="links-list">
-          <li><em>No links yet. Be the first to share!</em></li>
-        </ul>
-        <input type="url" id="newLinkInput" placeholder="Paste a job link (URL)..." />
-        <button id="submitLinkBtn">Share Link</button>
-      </div>
-      <div class="opinion-box">
-        <h3><i class="fas fa-comment-dots"></i> Your Opinion</h3>
-        <textarea id="opinionText" rows="2" placeholder="Suggestions, feedback, or requests..."></textarea>
-        <button id="submitOpinionBtn">Submit Feedback</button>
-        <p style="font-size:0.7rem; margin-top:0.5rem;">(stored locally)</p>
-      </div>
+    <!-- Opinion box (below) -->
+    <div class="opinion-box">
+      <h3><i class="fas fa-comment-dots"></i> Your opinion</h3>
+      <textarea id="opinionText" rows="1" placeholder="Suggestions, feedback, or requests..."></textarea>
+      <button id="submitOpinionBtn">Submit</button>
     </div>
 
     <div class="controls">
@@ -468,7 +496,7 @@
           <option value="all">All Locations</option>
           <option value="Chennai">Chennai</option>
           <option value="Hyderabad">Hyderabad</option>
-          <option value="Delhi">Delhi</option>
+          <option value="Gurugram">Gurugram</option>
           <option value="Mumbai">Mumbai</option>
           <option value="Pune">Pune</option>
         </select>
@@ -481,25 +509,27 @@
         <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-company"></div><div class="skeleton-location"></div><div class="skeleton-desc"></div><div class="skeleton-btn"></div></div>
       </div>
     </div>
+
     <footer>
       <div class="footer-links">
         <a href="#" id="shareTwitter"><i class="fab fa-twitter"></i> Share on Twitter</a>
         <a href="#" id="shareLinkedin"><i class="fab fa-linkedin"></i> Share on LinkedIn</a>
+        <a href="#" id="reportIssue">Report Issue</a>
       </div>
-      <p>Made with ❤️ by Ram — Helping freshers land their dream job.</p>
-      <p class="copyright">© 2026 ApplyMore. Jobs are updated every 12 hours.</p>
+      <p>Made with <i class="fas fa-heart" style="color: #ec489a;"></i> by Ram — Helping freshers land their dream job.</p>
+      <p class="copyright">© 2026 ApplyMore. Jobs are updated every 12 hours. Data from LinkedIn & Indeed.</p>
     </footer>
   </div>
 
   <script>
     // --------------------------------------------------------------
-    // 1. FUTURISTIC PARTICLE BACKGROUND
+    // 1. ENHANCED PARTICLE BACKGROUND (GLOW ON MOUSE)
     // --------------------------------------------------------------
     const canvas = document.getElementById('particleCanvas');
     let ctx = canvas.getContext('2d');
     let particles = [];
     let mouseX = 0, mouseY = 0;
-    let particleCount = 100;
+    let particleCount = 180; // more particles
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -512,20 +542,24 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.5 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.5;
-        this.speedY = (Math.random() - 0.5) * 0.5;
-        this.color = `hsl(${Math.random() * 60 + 200}, 80%, 65%)`;
+        this.size = Math.random() * 3 + 1; // larger
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+        this.baseColor = `hsl(${Math.random() * 60 + 200}, 80%, 65%)`;
+        this.glowIntensity = 0;
       }
       update() {
         const dx = mouseX - this.x;
         const dy = mouseY - this.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
+        if (dist < 150) {
           const angle = Math.atan2(dy, dx);
-          const force = (120 - dist) / 800;
+          const force = (150 - dist) / 600;
           this.speedX += Math.cos(angle) * force;
           this.speedY += Math.sin(angle) * force;
+          this.glowIntensity = Math.min(1, (150 - dist) / 100);
+        } else {
+          this.glowIntensity = Math.max(0, this.glowIntensity - 0.02);
         }
         this.speedX *= 0.99;
         this.speedY *= 0.99;
@@ -539,18 +573,26 @@
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
+        let color = this.baseColor;
+        if (this.glowIntensity > 0) {
+          ctx.shadowBlur = 20 * this.glowIntensity;
+          ctx.shadowColor = `rgba(100, 200, 255, ${this.glowIntensity})`;
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.fillStyle = color;
         ctx.fill();
+        // draw connections with glow
         for (let p of particles) {
           const dx = this.x - p.x;
           const dy = this.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 110 && dist > 5) {
+          if (dist < 120 && dist > 5) {
             ctx.beginPath();
             ctx.moveTo(this.x, this.y);
             ctx.lineTo(p.x, p.y);
-            ctx.strokeStyle = `rgba(100, 150, 255, ${0.15 * (1 - dist / 110)})`;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = `rgba(100, 150, 255, ${0.2 * (1 - dist / 120) * (this.glowIntensity + 0.5)})`;
+            ctx.lineWidth = 1;
             ctx.stroke();
           }
         }
@@ -579,7 +621,7 @@
     });
 
     // --------------------------------------------------------------
-    // 2. SUPABASE FETCH & JOB DISPLAY
+    // 2. SUPABASE JOBS (same as before, stable)
     // --------------------------------------------------------------
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
@@ -706,24 +748,24 @@
     }
 
     // --------------------------------------------------------------
-    // 3. RECOMMENDED LINKS (localStorage)
+    // 3. RECOMMENDED LINKS (localStorage) – "Found a job link?"
     // --------------------------------------------------------------
     let recommendedLinks = JSON.parse(localStorage.getItem('recommendedLinks') || '[]');
     function renderLinks() {
-      const list = document.getElementById('linksList');
-      if (!list) return;
+      const container = document.getElementById('linksList');
+      if (!container) return;
       if (recommendedLinks.length === 0) {
-        list.innerHTML = '<li><em>No links yet. Be the first to share!</em></li>';
+        container.innerHTML = '<span style="color: var(--text-muted);">No links yet. Add one!</span>';
         return;
       }
-      list.innerHTML = recommendedLinks.map(link => `<li><a href="${escapeHtml(link)}" target="_blank">${escapeHtml(link)}</a></li>`).join('');
+      container.innerHTML = recommendedLinks.map(link => `<a href="${escapeHtml(link)}" target="_blank">🔗 ${link.length > 40 ? link.substring(0,40)+'...' : link}</a>`).join('');
     }
     function addLink(link) {
       if (!link) return;
       try {
-        new URL(link); // validate
+        new URL(link);
         recommendedLinks.unshift(link);
-        if (recommendedLinks.length > 20) recommendedLinks.pop();
+        if (recommendedLinks.length > 10) recommendedLinks.pop();
         localStorage.setItem('recommendedLinks', JSON.stringify(recommendedLinks));
         renderLinks();
         alert('Link added! It will appear at the top for everyone (on this browser).');
@@ -796,6 +838,10 @@
     document.getElementById('shareLinkedin')?.addEventListener('click', (e) => {
       e.preventDefault();
       window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=IT Fresher Jobs in India`, '_blank');
+    });
+    document.getElementById('reportIssue')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Please email your issue to applymore@example.com (replace with your actual contact)');
     });
 
     setInterval(() => fetchJobs(true), 5 * 60 * 1000);
