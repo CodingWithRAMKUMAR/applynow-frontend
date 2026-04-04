@@ -351,15 +351,42 @@
 </div>
 
 <script>
-  const API_URL = 'https://job-api-xizv.onrender.com/api/jobs';
+  // Supabase configuration
+  const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
+
   let allJobs = [];
+
+  // Helper to check if a job is new (within last 24 hours)
+  function isNewJob(createdAt) {
+    if (!createdAt) return false;
+    const jobDate = new Date(createdAt);
+    const now = new Date();
+    const diffHours = (now - jobDate) / (1000 * 60 * 60);
+    return diffHours <= 24;
+  }
 
   async function fetchJobs() {
     const container = document.getElementById('jobsContainer');
     try {
-      const res = await fetch(API_URL);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      allJobs = await res.json();
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      allJobs = data.map(job => ({
+        _id: job.id,
+        title: job.title,
+        company: job.company,
+        location: job.location,
+        description: job.description,
+        posted_date: job.posted_date,
+        created_at: job.created_at,
+        url: job.url
+      }));
       displayJobs();
     } catch (err) {
       console.error(err);
@@ -404,16 +431,18 @@
 
     container.innerHTML = filtered.map(job => {
       const cleanDesc = stripHtml(job.description).substring(0, 200);
-      const deadlineHtml = job.applicationDeadline ?
-        `<div class="deadline">⏰ Apply by ${formatDate(job.applicationDeadline)}</div>` : '';
+      const newBadge = isNewJob(job.created_at) ? '<span style="background:#22c55e; color:white; font-size:0.7rem; padding:0.2rem 0.5rem; border-radius:1rem; margin-left:0.5rem;">New</span>' : '';
       return `
         <div class="job-card">
-          <div class="job-title">${escapeHtml(job.title)}</div>
+          <div class="job-title">
+            ${escapeHtml(job.title)}
+            ${newBadge}
+          </div>
           <div class="company">${escapeHtml(job.company)}</div>
           <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
           <div class="description">${escapeHtml(cleanDesc)}...</div>
-          ${deadlineHtml}
-          <a href="job.html?id=${job._id}" class="view-details">View Details →</a>
+          <div class="deadline">📅 Posted: ${formatDate(job.posted_date || job.created_at)}</div>
+          <a href="${escapeHtml(job.url)}" target="_blank" class="view-details">Apply →</a>
         </div>
       `;
     }).join('');
@@ -429,7 +458,7 @@
     });
   }
 
-  // Theme switching
+  // Theme switching (unchanged)
   function setTheme(theme) {
     document.body.classList.remove('light', 'dark', 'vibrant');
     document.body.classList.add(theme);
