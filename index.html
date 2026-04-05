@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086"
+     crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>ApplyMore – Futuristic IT Fresher Jobs</title>
+  <title>ApplyMore – IT Fresher Jobs in India</title>
   <meta name="description" content="ApplyMore finds the latest IT fresher jobs across India. Search, filter by location, and apply directly to company websites. Free and updated daily.">
+  <meta name="keywords" content="IT jobs, fresher jobs, India, Hyderabad, Bangalore, Mumbai, Chennai, Pune, Gurugram">
+  <meta name="author" content="ApplyMore">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* Your existing CSS – same as the previous version (no changes needed) */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg-dark: #0a0a2a;
@@ -168,7 +173,7 @@
     @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 0.8; } 100% { opacity: 0.4; } }
 
     footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); text-align: center; }
-    .footer-links { display: flex; justify-content: center; gap: 1rem; margin: 0.5rem 0; }
+    .footer-links { display: flex; justify-content: center; gap: 1rem; margin: 0.5rem 0; flex-wrap: wrap; }
     .footer-links a { color: var(--accent); font-size: 0.7rem; text-decoration: none; }
     .copyright { font-size: 0.7rem; color: var(--text-muted); }
     @media (max-width: 640px) {
@@ -236,12 +241,15 @@
 
     <footer>
       <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
         <a href="#" id="shareTwitter"><i class="fab fa-twitter"></i> Share</a>
         <a href="#" id="shareLinkedin"><i class="fab fa-linkedin"></i> Share</a>
         <a href="#" id="reportIssue">Report Issue</a>
       </div>
       <p>Made with ❤️ by Ram — Helping freshers land their dream job.</p>
-      <p class="copyright">© 2026 ApplyMore. Jobs updated every 12 hours.</p>
+      <p class="copyright">© 2026 ApplyMore. Jobs are updated every 12 hours from public sources.</p>
     </footer>
   </div>
 
@@ -254,7 +262,6 @@
     let particles = [];
     let mouseX = 0, mouseY = 0;
     let particleCount = 80;
-    let animationId;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -321,7 +328,7 @@
         p.update();
         p.draw();
       }
-      animationId = requestAnimationFrame(animateParticles);
+      requestAnimationFrame(animateParticles);
     }
     animateParticles();
 
@@ -526,7 +533,7 @@
     });
     document.getElementById('reportIssue')?.addEventListener('click', (e) => {
       e.preventDefault();
-      alert('Please email your issue to applymore@example.com (replace with your actual contact)');
+      alert('Please email your issue to support@applymore.com');
     });
 
     setInterval(() => fetchJobs(true), 5 * 60 * 1000);
