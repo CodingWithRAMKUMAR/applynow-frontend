@@ -1,177 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ApplyMore – Job Details</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta name="description" content="View full job details, company information, and apply directly.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google AdSense – replace with your own code after you get it --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086"
-     crossorigin="anonymous"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
-     crossorigin="anonymous"></script>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-dark: #0a0a2a;
+      --glass-bg: rgba(20, 20, 50, 0.65);
+      --glass-border: rgba(100, 150, 255, 0.3);
+      --text-light: #f0f3ff;
+      --text-muted: #a0b0d0;
+      --accent: #3b82f6;
+      --accent-glow: #5a9eff;
+      --transition: all 0.2s ease;
+    }
     body {
       font-family: 'Inter', sans-serif;
-      background: #f8fafc;
-      color: #1e293b;
-      padding: 2rem 1rem;
+      background: radial-gradient(circle at 20% 30%, #0a0a2a, #020218);
+      min-height: 100vh;
+      color: var(--text-light);
+      padding: 2rem;
+    }
+    body.light {
+      background: radial-gradient(circle at 20% 30%, #f8fafc, #eef2f6);
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(0, 0, 0, 0.1);
+      --text-light: #1e293b;
+      --text-muted: #475569;
+    }
+    body.vibrant {
+      background: radial-gradient(circle at 20% 30%, #fdf2f8, #fce7f3);
+      --glass-bg: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(236, 72, 153, 0.4);
+      --text-light: #831843;
+      --text-muted: #9d174d;
+      --accent: #ec489a;
+      --accent-glow: #f472b6;
     }
     .container {
       max-width: 800px;
-      margin: auto;
-      background: white;
-      border-radius: 1.5rem;
+      margin: 0 auto;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
       padding: 2rem;
-      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+      border: 1px solid var(--glass-border);
     }
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
-    .company {
-      color: #3b82f6;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .location {
-      color: #475569;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .description {
-      line-height: 1.6;
-      margin: 1.5rem 0;
-      color: #334155;
-    }
-    .deadline {
-      background: #fee2e2;
-      color: #dc2626;
+    .back-link {
       display: inline-block;
-      padding: 0.2rem 0.6rem;
-      border-radius: 1rem;
-      font-size: 0.8rem;
       margin-bottom: 1rem;
+      color: var(--accent);
+      text-decoration: none;
     }
+    h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .company { font-size: 1.2rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .location { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; }
+    .description { white-space: pre-wrap; line-height: 1.6; margin: 1.5rem 0; }
     .apply-btn {
       display: inline-block;
-      background: #3b82f6;
+      background: var(--accent);
       color: white;
       padding: 0.8rem 1.5rem;
       border-radius: 2rem;
       text-decoration: none;
-      font-weight: 600;
-      margin-top: 1rem;
+      font-weight: bold;
+      transition: var(--transition);
     }
-    .apply-btn:hover {
-      background: #2563eb;
-    }
-    .back-link {
-      display: inline-block;
-      margin-top: 2rem;
-      color: #3b82f6;
-      text-decoration: none;
-    }
-    .ad-container {
-      margin: 2rem 0;
-      text-align: center;
-      background: #f1f5f9;
-      padding: 1rem;
-      border-radius: 1rem;
-    }
+    .apply-btn:hover { background: var(--accent-glow); }
+    .loading, .error { text-align: center; padding: 2rem; }
+    footer { margin-top: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-muted); }
     @media (max-width: 640px) {
-      .container {
-        padding: 1rem;
-      }
-      h1 {
-        font-size: 1.4rem;
-      }
+      body { padding: 1rem; }
+      .container { padding: 1rem; }
+      h1 { font-size: 1.4rem; }
     }
   </style>
 </head>
 <body>
-<div class="container" id="jobDetail">
-  <div style="text-align: center; padding: 2rem;">Loading job details...</div>
-</div>
+  <div class="container" id="jobContainer">
+    <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Jobs</a>
+    <div class="loading">Loading job details...</div>
+  </div>
+  <footer>
+    <p>© 2026 ApplyMore – Helping freshers land their dream job.</p>
+  </footer>
 
-<script>
-  const API_URL = 'https://job-api-xizv.onrender.com/api/jobs';
+  <script>
+    const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
 
-  function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-  }
-
-  async function loadJob() {
-    const jobId = getQueryParam('id');
-    if (!jobId) {
-      document.getElementById('jobDetail').innerHTML = '<div style="text-align:center; padding:2rem;">Invalid job ID. <a href="/">Go back</a></div>';
-      return;
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
     }
-    try {
-      const res = await fetch(API_URL);
-      const jobs = await res.json();
-      const job = jobs.find(j => j._id === jobId);
-      if (!job) throw new Error('Job not found');
-      displayJob(job);
-    } catch (err) {
-      document.getElementById('jobDetail').innerHTML = '<div style="text-align:center; padding:2rem;">Job not found. <a href="/">Go back</a></div>';
+
+    async function fetchJob() {
+      const jobId = getQueryParam('id');
+      if (!jobId) {
+        document.getElementById('jobContainer').innerHTML = `
+          <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Jobs</a>
+          <div class="error">No job ID specified.</div>
+        `;
+        return;
+      }
+
+      try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?id=eq.${jobId}`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const jobs = await response.json();
+        if (!jobs || jobs.length === 0) throw new Error('Job not found');
+        const job = jobs[0];
+        displayJob(job);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('jobContainer').innerHTML = `
+          <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Jobs</a>
+          <div class="error">Failed to load job. Please try again later.</div>
+        `;
+      }
     }
-  }
 
-  function stripHtml(html) {
-    if (!html) return '';
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || '';
-  }
+    function displayJob(job) {
+      document.title = `${job.title} at ${job.company} – ApplyMore`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', (job.description || '').substring(0, 160));
 
-  function formatDate(dateString) {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-  }
+      const container = document.getElementById('jobContainer');
+      container.innerHTML = `
+        <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Jobs</a>
+        <h1>${escapeHtml(job.title)}</h1>
+        <div class="company">${escapeHtml(job.company)}</div>
+        <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
+        <div class="description">${escapeHtml(job.description || 'No description provided.')}</div>
+        <a href="${escapeHtml(job.url)}" target="_blank" class="apply-btn">Apply Now →</a>
+      `;
+    }
 
-  function displayJob(job) {
-    const cleanDesc = stripHtml(job.description) || 'No description provided.';
-    const deadlineHtml = job.applicationDeadline ? `<div class="deadline">⏰ Apply by ${formatDate(job.applicationDeadline)}</div>` : '';
-    const html = `
-      <h1>${escapeHtml(job.title)}</h1>
-      <div class="company">${escapeHtml(job.company)}</div>
-      <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
-      ${deadlineHtml}
-      <div class="description">${escapeHtml(cleanDesc)}</div>
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+      });
+    }
 
-      <!-- Ad banner – replace with your AdSense ad unit -->
-      <div class="ad-container">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-             data-ad-slot="YOUR_AD_SLOT"
-             data-ad-format="auto"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>
-      </div>
+    // Theme switching (same as homepage)
+    function setTheme(theme) {
+      document.body.classList.remove('light', 'dark', 'vibrant');
+      document.body.classList.add(theme);
+      localStorage.setItem('theme', theme);
+    }
+    function setAccent(color) {
+      document.documentElement.style.setProperty('--accent', color);
+      localStorage.setItem('accentColor', color);
+    }
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+    const savedAccent = localStorage.getItem('accentColor') || '#3b82f6';
+    setAccent(savedAccent);
 
-      <a href="${escapeHtml(job.url)}" target="_blank" class="apply-btn">Apply Now →</a>
-      <br>
-      <a href="/" class="back-link">← Back to all jobs</a>
-    `;
-    document.getElementById('jobDetail').innerHTML = html;
-  }
-
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    });
-  }
-
-  loadJob();
-</script>
+    fetchJob();
+  </script>
 </body>
 </html>
