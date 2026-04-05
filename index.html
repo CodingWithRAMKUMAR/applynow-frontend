@@ -400,7 +400,7 @@
         const data = await response.json();
         if (data.length < PAGE_SIZE) hasMore = false;
         if (reset) {
-          allJobs = data;
+          allJobs = data;  // data already contains 'id' field
         } else {
           allJobs = [...allJobs, ...data];
         }
@@ -478,12 +478,11 @@
             <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
             <div class="description">${escapeHtml(cleanDesc)}...</div>
             <div class="deadline">📅 Posted: ${formatDate(job.posted_date || job.created_at)}</div>
-            <a href="job.html?id=${job._id}" class="view-details">View Details →</a>
+            <a href="job.html?id=${job.id}" class="view-details">View Details →</a>
           </div>
         `;
       }).join('');
 
-      // Add "Load More" button if more jobs exist
       if (hasMore && !searchTerm && selectedLocation === 'all') {
         const loadMoreDiv = document.createElement('div');
         loadMoreDiv.id = 'loadMoreTrigger';
