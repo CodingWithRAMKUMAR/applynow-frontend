@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086"
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
@@ -12,7 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* (Your existing CSS – same as before – keep it unchanged) */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg-dark: #0a0a2a;
@@ -267,7 +265,7 @@
 
   <script>
     // --------------------------------------------------------------
-    // PARTICLE BACKGROUND (unchanged)
+    // PARTICLE BACKGROUND
     // --------------------------------------------------------------
     const canvas = document.getElementById('particleCanvas');
     let ctx = canvas.getContext('2d');
@@ -350,7 +348,7 @@
     });
 
     // --------------------------------------------------------------
-    // SUPABASE JOBS (same as before)
+    // SUPABASE JOBS
     // --------------------------------------------------------------
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
@@ -386,18 +384,15 @@
       return '';
     }
 
-    // Experience classification (fresher, mid, senior)
+    // Experience classification
     function getExperienceLevel(job) {
       const text = (job.title + ' ' + (job.description || '')).toLowerCase();
-      // Fresher keywords
       if (/(fresher|entry level|entry-level|junior|graduate|trainee|0[- ]2 years|less than 2 years|recent graduate|new grad|early career)/i.test(text)) {
         return 'fresher';
       }
-      // Senior keywords (3+ years)
       if (/(senior|lead|principal|architect|3\+ years|4 years|5 years|experienced)/i.test(text)) {
         return 'senior';
       }
-      // Default to mid (1-2 years)
       return 'mid';
     }
 
@@ -472,12 +467,9 @@
       const selectedExp = document.getElementById('expFilter').value;
 
       let filtered = allJobs;
-
-      // Location filter
       if (selectedLocation !== 'all') {
         filtered = filtered.filter(job => job.location && job.location.toLowerCase().includes(selectedLocation.toLowerCase()));
       }
-      // Search filter
       if (searchTerm) {
         filtered = filtered.filter(job =>
           job.title.toLowerCase().includes(searchTerm) ||
@@ -485,7 +477,6 @@
           (job.description && job.description.toLowerCase().includes(searchTerm))
         );
       }
-      // Experience filter
       if (selectedExp !== 'all') {
         filtered = filtered.filter(job => getExperienceLevel(job) === selectedExp);
       }
