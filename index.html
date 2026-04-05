@@ -252,13 +252,13 @@
 
   <script>
     // --------------------------------------------------------------
-    // PARTICLE BACKGROUND (optimised)
+    // OPTIMISED PARTICLE BACKGROUND (reduced on mobile)
     // --------------------------------------------------------------
     const canvas = document.getElementById('particleCanvas');
     let ctx = canvas.getContext('2d');
     let particles = [];
     let mouseX = 0, mouseY = 0;
-    let particleCount = 80;
+    let particleCount = window.innerWidth < 768 ? 40 : 80; // fewer on mobile
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -335,12 +335,16 @@
     });
 
     // --------------------------------------------------------------
-    // SUPABASE JOBS
+    // SUPABASE JOBS – FAST INITIAL LOAD (limit 20, then infinite scroll)
     // --------------------------------------------------------------
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
 
     let allJobs = [];
+    let currentOffset = 0;
+    const PAGE_SIZE = 20;
+    let isLoading = false;
+    let hasMore = true;
 
     function showSkeleton() {
       const container = document.getElementById('jobsContainer');
@@ -367,10 +371,18 @@
       return '';
     }
 
-    async function fetchJobs(showLoader = true) {
-      if (showLoader) showSkeleton();
+    async function fetchJobs(reset = true) {
+      if (isLoading) return;
+      isLoading = true;
+      if (reset) {
+        currentOffset = 0;
+        allJobs = [];
+        hasMore = true;
+        showSkeleton();
+      }
       try {
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc`, {
+        const url = `${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc&limit=${PAGE_SIZE}&offset=${currentOffset}`;
+        const response = await fetch(url, {
           headers: {
             'apikey': SUPABASE_ANON_KEY,
             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
@@ -378,29 +390,34 @@
         });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
-        localStorage.setItem('cachedJobs', JSON.stringify({ timestamp: Date.now(), jobs: data }));
-        allJobs = data.map(job => ({
-          title: job.title,
-          company: job.company,
-          location: job.location,
-          description: job.description,
-          posted_date: job.posted_date,
-          created_at: job.created_at,
-          url: job.url
-        }));
+        if (data.length < PAGE_SIZE) hasMore = false;
+        if (reset) {
+          allJobs = data;
+        } else {
+          allJobs = [...allJobs, ...data];
+        }
+        currentOffset += data.length;
         displayJobs();
+        // Cache only first page for offline
+        if (reset) {
+          localStorage.setItem('cachedJobs', JSON.stringify({ timestamp: Date.now(), jobs: allJobs }));
+        }
       } catch (err) {
         console.error(err);
-        const cached = localStorage.getItem('cachedJobs');
-        if (cached) {
-          const { jobs } = JSON.parse(cached);
-          allJobs = jobs;
-          displayJobs(true);
-          const container = document.getElementById('jobsContainer');
-          container.innerHTML += '<div class="no-jobs" style="margin-top:1rem;">⚠️ Using cached jobs. New jobs will appear soon.</div>';
-        } else {
-          document.getElementById('jobsContainer').innerHTML = '<div class="no-jobs">Failed to load jobs. Please refresh.</div>';
+        if (reset) {
+          const cached = localStorage.getItem('cachedJobs');
+          if (cached) {
+            const { jobs } = JSON.parse(cached);
+            allJobs = jobs;
+            displayJobs(true);
+            const container = document.getElementById('jobsContainer');
+            container.innerHTML += '<div class="no-jobs" style="margin-top:1rem;">⚠️ Using cached jobs. New jobs will appear soon.</div>';
+          } else {
+            document.getElementById('jobsContainer').innerHTML = '<div class="no-jobs">Failed to load jobs. Please refresh.</div>';
+          }
         }
+      } finally {
+        isLoading = false;
       }
     }
 
@@ -458,6 +475,17 @@
           </div>
         `;
       }).join('');
+
+      // Add loading indicator at bottom if more jobs exist
+      if (hasMore && !searchTerm && selectedLocation === 'all') {
+        const loadMoreDiv = document.createElement('div');
+        loadMoreDiv.id = 'loadMoreTrigger';
+        loadMoreDiv.style.textAlign = 'center';
+        loadMoreDiv.style.margin = '1rem 0';
+        loadMoreDiv.innerHTML = '<button id="loadMoreBtn" style="background: var(--accent); border: none; padding: 0.4rem 1rem; border-radius: 2rem; color: white; cursor: pointer;">Load More Jobs</button>';
+        container.appendChild(loadMoreDiv);
+        document.getElementById('loadMoreBtn')?.addEventListener('click', () => fetchJobs(false));
+      }
     }
 
     // --------------------------------------------------------------
@@ -517,8 +545,13 @@
     document.getElementById('vibrantTheme')?.addEventListener('click', () => setTheme('vibrant'));
     document.getElementById('accentColor')?.addEventListener('input', (e) => setAccent(e.target.value));
 
-    document.getElementById('searchInput')?.addEventListener('input', () => displayJobs());
-    document.getElementById('locationFilter')?.addEventListener('change', () => displayJobs());
+    document.getElementById('searchInput')?.addEventListener('input', () => {
+      // Re-display filtered results from allJobs (already loaded)
+      displayJobs();
+    });
+    document.getElementById('locationFilter')?.addEventListener('change', () => {
+      displayJobs();
+    });
 
     document.getElementById('shareTwitter')?.addEventListener('click', (e) => {
       e.preventDefault();
@@ -533,8 +566,12 @@
       alert('Please email your issue to support@applymore.com');
     });
 
-    setInterval(() => fetchJobs(true), 5 * 60 * 1000);
-    fetchJobs();
+    // Initial load
+    fetchJobs(true);
+    // Refresh every 5 minutes (but only new jobs will appear after page reload or manual refresh)
+    setInterval(() => {
+      fetchJobs(true);
+    }, 5 * 60 * 1000);
   </script>
 </body>
 </html>
