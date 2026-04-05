@@ -126,15 +126,20 @@
         console.error(err);
         document.getElementById('jobContainer').innerHTML = `
           <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Jobs</a>
-          <div class="error">Failed to load job. Please try again later.</div>
+          <div class="error">Failed to load job: ${err.message}</div>
         `;
       }
     }
 
     function displayJob(job) {
       document.title = `${job.title} at ${job.company} – ApplyMore`;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) metaDesc.setAttribute('content', (job.description || '').substring(0, 160));
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.name = 'description';
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', (job.description || '').substring(0, 160));
 
       const container = document.getElementById('jobContainer');
       container.innerHTML = `
