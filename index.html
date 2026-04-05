@@ -5,12 +5,13 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>ApplyMore – IT Fresher Jobs in India</title>
-  <meta name="description" content="ApplyMore finds the latest IT fresher jobs across India. Search, filter by location, and apply directly to company websites. Free and updated daily.">
-  <meta name="keywords" content="IT fresher jobs, entry level IT jobs, Hyderabad, Chennai, Mumbai, Pune, Gurugram">
+  <title>ApplyMore – Daily IT Fresher Jobs in Hyderabad, Chennai, Mumbai, Pune, Gurugram</title>
+  <meta name="description" content="ApplyMore finds the latest entry‑level IT jobs for freshers in Hyderabad, Chennai, Mumbai, Pune & Gurugram. Updated daily. Free, no sign‑up. Apply directly.">
+  <meta name="keywords" content="IT fresher jobs, entry level IT jobs, Hyderabad jobs, Chennai jobs, Mumbai jobs, Pune jobs, Gurugram jobs">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* Your existing CSS – unchanged from the last working version */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg-dark: #0a0a2a;
@@ -259,13 +260,13 @@
         <a href="#" id="reportIssue">Report Issue</a>
       </div>
       <p>Made with ❤️ by Ram — Helping freshers land their dream job.</p>
-      <p class="copyright">© 2026 ApplyMore. Jobs are updated every 12 hours from public sources.</p>
+      <p class="copyright">© 2026 ApplyMore. Jobs are updated daily from public sources.</p>
     </footer>
   </div>
 
   <script>
     // --------------------------------------------------------------
-    // PARTICLE BACKGROUND
+    // PARTICLE BACKGROUND (unchanged)
     // --------------------------------------------------------------
     const canvas = document.getElementById('particleCanvas');
     let ctx = canvas.getContext('2d');
@@ -348,7 +349,7 @@
     });
 
     // --------------------------------------------------------------
-    // SUPABASE JOBS
+    // SUPABASE JOBS (no deletion, all jobs stay)
     // --------------------------------------------------------------
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
@@ -384,7 +385,6 @@
       return '';
     }
 
-    // Experience classification
     function getExperienceLevel(job) {
       const text = (job.title + ' ' + (job.description || '')).toLowerCase();
       if (/(fresher|entry level|entry-level|junior|graduate|trainee|0[- ]2 years|less than 2 years|recent graduate|new grad|early career)/i.test(text)) {
