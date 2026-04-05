@@ -6,21 +6,13 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  
-  <!-- Improved title for Google & users -->
-  <title>ApplyMore – Daily IT Fresher Jobs in Hyderabad, Chennai, Mumbai, Pune, Gurugram</title>
-  
-  <!-- Improved meta description (appears in Google search results) -->
-  <meta name="description" content="ApplyMore finds the latest entry‑level IT jobs for freshers in Hyderabad, Chennai, Mumbai, Pune & Gurugram. Updated daily. Free, no sign‑up. Apply directly to company websites.">
-  
-  <meta name="keywords" content="IT fresher jobs, entry level IT jobs, Hyderabad jobs, Chennai jobs, Mumbai jobs, Pune jobs, Gurugram jobs, software engineer fresher, data analyst fresher">
-  <meta name="author" content="ApplyMore">
-  <meta name="robots" content="index, follow">
-  
+  <title>ApplyMore – IT Fresher Jobs in India</title>
+  <meta name="description" content="ApplyMore finds the latest IT fresher jobs across India. Search, filter by location, and apply directly to company websites. Free and updated daily.">
+  <meta name="keywords" content="IT fresher jobs, entry level IT jobs, Hyderabad, Chennai, Mumbai, Pune, Gurugram">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
   <style>
+    /* (Your existing CSS – same as before – keep it unchanged) */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg-dark: #0a0a2a;
@@ -60,50 +52,11 @@
       --accent-glow: #f472b6;
       --input-bg: rgba(255, 240, 245, 0.9);
     }
-    #particleCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .container {
-      position: relative;
-      z-index: 2;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.5rem 1rem;
-      backdrop-filter: blur(2px);
-    }
-    
-    /* Improved header section */
-    .main-header {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .main-header h1 {
-      font-size: 2.8rem;
-      background: linear-gradient(135deg, var(--accent), #a855f7);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
-    }
-    .main-header .tagline {
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-top: 0.25rem;
-    }
-    .main-header .subhead {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0.5rem auto 0;
-    }
-    
+    #particleCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 1.5rem 1rem; backdrop-filter: blur(2px); }
+    .main-header { text-align: center; margin-bottom: 1.5rem; }
+    .main-header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), #a855f7); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .main-header p { font-size: 0.9rem; color: var(--text-muted); }
     .top-bar {
       display: flex;
       justify-content: flex-end;
@@ -165,8 +118,14 @@
     .search-box { flex: 2; position: relative; }
     .search-box i { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); font-size: 0.8rem; }
     .search-box input { width: 100%; padding: 0.5rem 1rem 0.5rem 2rem; background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 2rem; font-size: 0.8rem; color: var(--text-light); }
-    .location-filter select { padding: 0.5rem 1rem; background: var(--input-bg); border: 1px solid var(--glass-border); border-radius: 2rem; font-size: 0.8rem; color: var(--text-light); }
-
+    .location-filter select, .exp-filter select {
+      padding: 0.5rem 1rem;
+      background: var(--input-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
     .jobs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -191,6 +150,14 @@
     .new-badge, .expiring-badge { font-size: 0.6rem; padding: 0.1rem 0.4rem; border-radius: 1rem; }
     .new-badge { background: #22c55e; }
     .expiring-badge { background: #f97316; }
+    .fresher-badge {
+      background: #8b5cf6;
+      color: white;
+      font-size: 0.6rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 1rem;
+      margin-left: 0.3rem;
+    }
     .view-details {
       display: inline-block;
       background: var(--accent);
@@ -200,7 +167,6 @@
       font-size: 0.7rem;
       text-decoration: none;
     }
-
     .skeleton-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
     .skeleton-card { background: rgba(30,35,70,0.5); border-radius: 1rem; padding: 1rem; animation: pulse 1.2s infinite; }
     .skeleton-title, .skeleton-company, .skeleton-location, .skeleton-desc, .skeleton-btn { background: rgba(255,255,255,0.15); border-radius: 0.5rem; margin-bottom: 0.5rem; }
@@ -210,7 +176,6 @@
     .skeleton-desc { height: 2rem; width: 100%; }
     .skeleton-btn { height: 1.5rem; width: 40%; }
     @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 0.8; } 100% { opacity: 0.4; } }
-
     footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); text-align: center; }
     .footer-links { display: flex; justify-content: center; gap: 1rem; margin: 0.5rem 0; flex-wrap: wrap; }
     .footer-links a { color: var(--accent); font-size: 0.7rem; text-decoration: none; }
@@ -219,10 +184,9 @@
       .add-link-box { flex-direction: column; align-items: stretch; }
       .links-list { justify-content: center; }
       .controls { flex-direction: column; }
-      .search-box, .location-filter select { width: 100%; }
+      .search-box, .location-filter select, .exp-filter select { width: 100%; }
       .job-title { font-size: 0.9rem; }
       .main-header h1 { font-size: 1.8rem; }
-      .main-header .tagline { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -231,8 +195,7 @@
   <div class="container">
     <div class="main-header">
       <h1>ApplyMore</h1>
-      <div class="tagline">🚀 Daily IT Fresher Jobs – No Sign‑up, Free Forever</div>
-      <div class="subhead">Handpicked entry‑level roles in Hyderabad • Chennai • Mumbai • Pune • Gurugram. Updated every 12 hours from LinkedIn & Indeed.</div>
+      <p>⚡ Your launchpad to an IT career ⚡</p>
     </div>
     <div class="top-bar">
       <div class="theme-controls">
@@ -271,6 +234,14 @@
           <option value="Pune">Pune</option>
         </select>
       </div>
+      <div class="exp-filter">
+        <select id="expFilter">
+          <option value="fresher" selected>Fresher (0‑2 years)</option>
+          <option value="mid">1‑2 years</option>
+          <option value="senior">3+ years</option>
+          <option value="all">All jobs</option>
+        </select>
+      </div>
     </div>
 
     <div id="jobsContainer" class="jobs-grid">
@@ -296,7 +267,7 @@
 
   <script>
     // --------------------------------------------------------------
-    // OPTIMISED PARTICLE BACKGROUND
+    // PARTICLE BACKGROUND (unchanged)
     // --------------------------------------------------------------
     const canvas = document.getElementById('particleCanvas');
     let ctx = canvas.getContext('2d');
@@ -379,7 +350,7 @@
     });
 
     // --------------------------------------------------------------
-    // SUPABASE JOBS – FAST INITIAL LOAD (limit 20, then infinite scroll)
+    // SUPABASE JOBS (same as before)
     // --------------------------------------------------------------
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
@@ -413,6 +384,21 @@
       if (ageHours <= 24) return '<span class="new-badge">New</span>';
       if (ageHours <= 30) return '<span class="expiring-badge">Expiring soon</span>';
       return '';
+    }
+
+    // Experience classification (fresher, mid, senior)
+    function getExperienceLevel(job) {
+      const text = (job.title + ' ' + (job.description || '')).toLowerCase();
+      // Fresher keywords
+      if (/(fresher|entry level|entry-level|junior|graduate|trainee|0[- ]2 years|less than 2 years|recent graduate|new grad|early career)/i.test(text)) {
+        return 'fresher';
+      }
+      // Senior keywords (3+ years)
+      if (/(senior|lead|principal|architect|3\+ years|4 years|5 years|experienced)/i.test(text)) {
+        return 'senior';
+      }
+      // Default to mid (1-2 years)
+      return 'mid';
     }
 
     async function fetchJobs(reset = true) {
@@ -483,17 +469,25 @@
       const container = document.getElementById('jobsContainer');
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
       const selectedLocation = document.getElementById('locationFilter').value;
+      const selectedExp = document.getElementById('expFilter').value;
 
       let filtered = allJobs;
+
+      // Location filter
       if (selectedLocation !== 'all') {
         filtered = filtered.filter(job => job.location && job.location.toLowerCase().includes(selectedLocation.toLowerCase()));
       }
+      // Search filter
       if (searchTerm) {
         filtered = filtered.filter(job =>
           job.title.toLowerCase().includes(searchTerm) ||
           job.company.toLowerCase().includes(searchTerm) ||
           (job.description && job.description.toLowerCase().includes(searchTerm))
         );
+      }
+      // Experience filter
+      if (selectedExp !== 'all') {
+        filtered = filtered.filter(job => getExperienceLevel(job) === selectedExp);
       }
 
       if (!filtered.length) {
@@ -504,11 +498,14 @@
       container.innerHTML = filtered.map(job => {
         const cleanDesc = (job.description || '').substring(0, 120);
         const badge = getJobBadge(job.created_at);
+        const expLevel = getExperienceLevel(job);
+        const fresherBadge = expLevel === 'fresher' ? '<span class="fresher-badge">Fresher</span>' : '';
         return `
           <div class="job-card">
             <div class="job-title">
               ${escapeHtml(job.title)}
               ${badge}
+              ${fresherBadge}
             </div>
             <div class="company">${escapeHtml(job.company)}</div>
             <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
@@ -519,7 +516,7 @@
         `;
       }).join('');
 
-      if (hasMore && !searchTerm && selectedLocation === 'all') {
+      if (hasMore && !searchTerm && selectedLocation === 'all' && selectedExp === 'all') {
         const loadMoreDiv = document.createElement('div');
         loadMoreDiv.id = 'loadMoreTrigger';
         loadMoreDiv.style.textAlign = 'center';
@@ -589,6 +586,7 @@
 
     document.getElementById('searchInput')?.addEventListener('input', () => displayJobs());
     document.getElementById('locationFilter')?.addEventListener('change', () => displayJobs());
+    document.getElementById('expFilter')?.addEventListener('change', () => displayJobs());
 
     document.getElementById('shareTwitter')?.addEventListener('click', (e) => {
       e.preventDefault();
