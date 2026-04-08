@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>ApplyMore – IT Jobs in India</title>
-  <meta name="description" content="ApplyMore finds the latest IT jobs across India. Search, filter by location and experience, and apply directly. Free and updated daily.">
-  <meta name="keywords" content="IT jobs, fresher jobs, experienced jobs, Hyderabad, Chennai, Mumbai, Pune, Gurugram">
+  <title>ApplyMore – IT Jobs by Experience</title>
+  <meta name="description" content="ApplyMore lists IT jobs in India, grouped by experience level: Fresher, 1‑2 years, 3+ years. Free and updated daily.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -50,8 +48,23 @@
       --accent-glow: #f472b6;
       --input-bg: rgba(255, 240, 245, 0.9);
     }
-    #particleCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-    .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 1.5rem 1rem; backdrop-filter: blur(2px); }
+    #particleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+      backdrop-filter: blur(2px);
+    }
     .main-header { text-align: center; margin-bottom: 1.5rem; }
     .main-header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), #a855f7); background-clip: text; -webkit-background-clip: text; color: transparent; }
     .main-header p { font-size: 0.9rem; color: var(--text-muted); }
@@ -104,8 +117,8 @@
 
     .controls {
       display: flex;
-      flex-wrap: wrap;
       gap: 0.8rem;
+      flex-wrap: wrap;
       margin-bottom: 1.5rem;
       background: var(--glass-bg);
       backdrop-filter: blur(12px);
@@ -125,26 +138,6 @@
       font-size: 0.8rem;
       color: var(--text-light);
     }
-    .tag-filters {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .tag-btn {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid var(--glass-border);
-      border-radius: 2rem;
-      padding: 0.3rem 0.8rem;
-      cursor: pointer;
-      font-size: 0.7rem;
-      color: var(--text-light);
-      transition: var(--transition);
-    }
-    .tag-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
-    }
     .reset-btn {
       background: var(--accent);
       border: none;
@@ -154,38 +147,53 @@
       cursor: pointer;
       font-size: 0.8rem;
     }
+    .category-section {
+      margin-bottom: 3rem;
+    }
+    .category-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .category-badge {
+      font-size: 0.8rem;
+      background: #8b5cf6;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2rem;
+      color: white;
+    }
+    .category-badge.mid { background: #f59e0b; }
+    .category-badge.senior { background: #ef4444; }
     .jobs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
     }
     .job-card {
       background: rgba(20, 25, 55, 0.7);
       backdrop-filter: blur(8px);
       border-radius: 1rem;
-      padding: 1rem;
+      padding: 1.2rem;
       border: 1px solid rgba(100, 150, 255, 0.2);
       transition: var(--transition);
-      will-change: transform;
     }
     .job-card:hover { transform: translateY(-3px); border-color: var(--accent); }
-    .job-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem; }
-    .company { font-size: 0.85rem; color: var(--accent); }
-    .location { font-size: 0.75rem; color: var(--text-muted); margin: 0.3rem 0; }
-    .description { font-size: 0.75rem; margin-bottom: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .deadline { font-size: 0.7rem; background: rgba(220,38,38,0.2); display: inline-block; padding: 0.1rem 0.4rem; border-radius: 1rem; margin-bottom: 0.5rem; }
-    .new-badge, .expiring-badge { font-size: 0.6rem; padding: 0.1rem 0.4rem; border-radius: 1rem; }
-    .new-badge { background: #22c55e; }
-    .expiring-badge { background: #f97316; }
+    .job-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .company { color: var(--accent); font-weight: 500; margin-bottom: 0.3rem; }
+    .location { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .description { font-size: 0.8rem; color: #cbd5e6; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .exp-tag {
-      font-size: 0.6rem;
-      padding: 0.1rem 0.4rem;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 1rem;
-      margin-left: 0.3rem;
-      background: #8b5cf6;
       color: white;
+      white-space: nowrap;
     }
+    .exp-tag.fresher { background: #8b5cf6; }
     .exp-tag.mid { background: #f59e0b; }
     .exp-tag.senior { background: #ef4444; }
     .view-details {
@@ -194,29 +202,22 @@
       color: white;
       padding: 0.3rem 0.8rem;
       border-radius: 2rem;
-      font-size: 0.7rem;
       text-decoration: none;
+      font-size: 0.8rem;
     }
-    .skeleton-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-    .skeleton-card { background: rgba(30,35,70,0.5); border-radius: 1rem; padding: 1rem; animation: pulse 1.2s infinite; }
-    .skeleton-title, .skeleton-company, .skeleton-location, .skeleton-desc, .skeleton-btn { background: rgba(255,255,255,0.15); border-radius: 0.5rem; margin-bottom: 0.5rem; }
-    .skeleton-title { height: 1.2rem; width: 70%; }
-    .skeleton-company { height: 0.8rem; width: 50%; }
-    .skeleton-location { height: 0.8rem; width: 60%; }
-    .skeleton-desc { height: 2rem; width: 100%; }
-    .skeleton-btn { height: 1.5rem; width: 40%; }
-    @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 0.8; } 100% { opacity: 0.4; } }
-    footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); text-align: center; }
-    .footer-links { display: flex; justify-content: center; gap: 1rem; margin: 0.5rem 0; flex-wrap: wrap; }
-    .footer-links a { color: var(--accent); font-size: 0.7rem; text-decoration: none; }
-    .copyright { font-size: 0.7rem; color: var(--text-muted); }
+    .empty-message {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      background: rgba(20,25,55,0.5);
+      border-radius: 1rem;
+    }
+    footer { text-align: center; margin-top: 3rem; color: var(--text-muted); font-size: 0.8rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
+    .footer-links a { color: var(--accent); text-decoration: none; }
     @media (max-width: 640px) {
-      .add-link-box { flex-direction: column; align-items: stretch; }
-      .links-list { justify-content: center; }
-      .controls { flex-direction: column; align-items: stretch; }
-      .search-box, .location-filter select, .tag-filters, .reset-btn { width: 100%; }
-      .job-title { font-size: 0.9rem; }
-      .main-header h1 { font-size: 1.8rem; }
+      .add-link-box, .controls { flex-direction: column; align-items: stretch; }
+      .search-box, .location-filter select, .reset-btn { width: 100%; }
     }
   </style>
 </head>
@@ -264,20 +265,31 @@
           <option value="Pune">Pune</option>
         </select>
       </div>
-      <div class="tag-filters" id="tagFilters">
-        <button data-tag="all" class="tag-btn active">All jobs</button>
-        <button data-tag="fresher" class="tag-btn">Fresher (0‑2 yrs)</button>
-        <button data-tag="mid" class="tag-btn">1‑2 years</button>
-        <button data-tag="senior" class="tag-btn">3+ years</button>
-      </div>
-      <button id="resetFiltersBtn" class="reset-btn">Reset All</button>
+      <button id="resetFiltersBtn" class="reset-btn">Reset Filters</button>
     </div>
 
-    <div id="jobsContainer" class="jobs-grid">
-      <div class="skeleton-grid">
-        <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-company"></div><div class="skeleton-location"></div><div class="skeleton-desc"></div><div class="skeleton-btn"></div></div>
-        <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-company"></div><div class="skeleton-location"></div><div class="skeleton-desc"></div><div class="skeleton-btn"></div></div>
+    <div id="fresherSection" class="category-section">
+      <div class="category-title">
+        <span>🎓 Fresher (0 years)</span>
+        <span class="category-badge">Entry level</span>
       </div>
+      <div class="jobs-grid" id="fresherJobs"></div>
+    </div>
+
+    <div id="midSection" class="category-section">
+      <div class="category-title">
+        <span>📈 1‑2 years</span>
+        <span class="category-badge mid">Junior / Mid level</span>
+      </div>
+      <div class="jobs-grid" id="midJobs"></div>
+    </div>
+
+    <div id="seniorSection" class="category-section">
+      <div class="category-title">
+        <span>🚀 3+ years</span>
+        <span class="category-badge senior">Senior / Lead</span>
+      </div>
+      <div class="jobs-grid" id="seniorJobs"></div>
     </div>
 
     <footer>
@@ -296,7 +308,7 @@
 
   <script>
     // --------------------------------------------------------------
-    // PARTICLE BACKGROUND (same as before)
+    // PARTICLE BACKGROUND (unchanged)
     // --------------------------------------------------------------
     const canvas = document.getElementById('particleCanvas');
     let ctx = canvas.getContext('2d');
@@ -379,84 +391,104 @@
     });
 
     // --------------------------------------------------------------
-    // SUPABASE JOBS – fetch all, then display with filters
+    // SUPABASE & STRICT CLASSIFICATION
     // --------------------------------------------------------------
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
 
     let allJobs = [];
-    let activeTag = 'all';   // 'all', 'fresher', 'mid', 'senior'
 
-    function showSkeleton() {
-      const container = document.getElementById('jobsContainer');
-      container.innerHTML = `
-        <div class="skeleton-grid">
-          ${Array(6).fill(`
-            <div class="skeleton-card">
-              <div class="skeleton-title"></div>
-              <div class="skeleton-company"></div>
-              <div class="skeleton-location"></div>
-              <div class="skeleton-desc"></div>
-              <div class="skeleton-btn"></div>
-            </div>
-          `).join('')}
-        </div>
-      `;
-    }
-
-    function getJobBadge(createdAt) {
-      if (!createdAt) return '';
-      const ageHours = (new Date() - new Date(createdAt)) / (1000 * 60 * 60);
-      if (ageHours <= 24) return '<span class="new-badge">New</span>';
-      if (ageHours <= 30) return '<span class="expiring-badge">Expiring soon</span>';
-      return '';
-    }
-
-    // Determine experience level based on keywords
+    // Strict experience level determination
     function getExperienceLevel(job) {
       const text = (job.title + ' ' + (job.description || '')).toLowerCase();
-      // Fresher (0-2 years)
-      if (/(fresher|entry level|entry-level|junior|graduate|trainee|0[- ]2 years|less than 2 years|recent graduate|new grad|early career)/i.test(text)) {
-        return 'fresher';
+      
+      // 1. Senior keywords (immediate senior)
+      const seniorKeywords = ['senior', 'lead', 'principal', 'architect', 'manager', 'director', 'head', 'staff engineer', 'distinguished'];
+      for (let kw of seniorKeywords) {
+        if (text.includes(kw)) return 'senior';
       }
-      // Senior (3+ years)
-      if (/(senior|lead|principal|architect|3\+ years|4 years|5 years|experienced)/i.test(text)) {
-        return 'senior';
+      
+      // 2. Extract any numeric years (e.g., "3 years", "2+ years", "1-2 years", "5 years")
+      const yearPattern = /(\d+(?:\.\d+)?)\s*[-+]?\s*(?:\d+(?:\.\d+)?)?\s*years?/i;
+      const match = text.match(yearPattern);
+      if (match) {
+        let years = parseFloat(match[1]);
+        if (years >= 3) return 'senior';
+        if (years >= 1) return 'mid';
       }
-      // Default to mid (1-2 years)
+      
+      // 3. Fresher keywords (only if no senior keywords and no year numbers above)
+      const fresherKeywords = ['fresher', 'entry level', 'entry-level', 'junior', 'graduate', 'trainee', 'recent graduate', 'new grad', 'early career', '0 years', 'zero years', 'no experience'];
+      for (let kw of fresherKeywords) {
+        if (text.includes(kw)) return 'fresher';
+      }
+      
+      // 4. Default to mid (1-2 years) – this will catch jobs like "Software Engineer" without any years mentioned
       return 'mid';
     }
 
     async function fetchJobs() {
-      showSkeleton();
       try {
-        const url = `${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc`;
-        console.log('Fetching jobs from:', url);
-        const response = await fetch(url, {
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          }
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc`, {
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
         });
-        if (!response.ok) throw new Error(`HTTP ${response.status}: ${await response.text()}`);
-        const data = await response.json();
-        console.log(`Fetched ${data.length} jobs from Supabase`);
-        allJobs = data;
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        allJobs = await response.json();
         displayJobs();
-        // Cache for offline (optional)
-        localStorage.setItem('cachedJobs', JSON.stringify({ timestamp: Date.now(), jobs: allJobs }));
       } catch (err) {
-        console.error('Fetch error:', err);
-        const cached = localStorage.getItem('cachedJobs');
-        if (cached) {
-          const { jobs } = JSON.parse(cached);
-          allJobs = jobs;
-          displayJobs(true);
-          document.getElementById('jobsContainer').innerHTML += '<div class="no-jobs" style="margin-top:1rem;">⚠️ Using cached jobs. New jobs will appear soon.</div>';
-        } else {
-          document.getElementById('jobsContainer').innerHTML = '<div class="no-jobs">Failed to load jobs. Please refresh or try again later.</div>';
-        }
+        console.error(err);
+        document.querySelectorAll('.jobs-grid').forEach(grid => {
+          grid.innerHTML = '<div class="empty-message">Failed to load jobs. Please refresh.</div>';
+        });
       }
+    }
+
+    function displayJobs() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      const selectedLocation = document.getElementById('locationFilter').value;
+
+      let filtered = allJobs;
+      if (selectedLocation !== 'all') {
+        filtered = filtered.filter(job => job.location && job.location.toLowerCase().includes(selectedLocation.toLowerCase()));
+      }
+      if (searchTerm) {
+        filtered = filtered.filter(job =>
+          job.title.toLowerCase().includes(searchTerm) ||
+          job.company.toLowerCase().includes(searchTerm) ||
+          (job.description && job.description.toLowerCase().includes(searchTerm))
+        );
+      }
+
+      const fresherJobs = filtered.filter(job => getExperienceLevel(job) === 'fresher');
+      const midJobs = filtered.filter(job => getExperienceLevel(job) === 'mid');
+      const seniorJobs = filtered.filter(job => getExperienceLevel(job) === 'senior');
+
+      renderJobGrid('fresherJobs', fresherJobs, 'fresher');
+      renderJobGrid('midJobs', midJobs, 'mid');
+      renderJobGrid('seniorJobs', seniorJobs, 'senior');
+    }
+
+    function renderJobGrid(containerId, jobs, level) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      if (jobs.length === 0) {
+        container.innerHTML = '<div class="empty-message">No jobs in this category.</div>';
+        return;
+      }
+      let tagText = level === 'fresher' ? 'Fresher (0 yrs)' : (level === 'mid' ? '1-2 years' : '3+ years');
+      container.innerHTML = jobs.map(job => `
+        <div class="job-card">
+          <div class="job-title">
+            ${escapeHtml(job.title)}
+            <span class="exp-tag ${level}">${tagText}</span>
+          </div>
+          <div class="company">${escapeHtml(job.company)}</div>
+          <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
+          <div class="description">${escapeHtml((job.description || '').substring(0, 120))}...</div>
+          <div class="deadline">📅 Posted: ${formatDate(job.posted_date || job.created_at)}</div>
+          <a href="job.html?id=${job.id}" class="view-details">View Details →</a>
+        </div>
+      `).join('');
     }
 
     function formatDate(dateString) {
@@ -466,94 +498,7 @@
 
     function escapeHtml(str) {
       if (!str) return '';
-      return str.replace(/[&<>]/g, function(m) {
-        if (m === '&') return '&amp;';
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        return m;
-      });
-    }
-
-    function displayJobs() {
-      const container = document.getElementById('jobsContainer');
-      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-      const selectedLocation = document.getElementById('locationFilter').value;
-
-      let filtered = allJobs;
-
-      // Location filter
-      if (selectedLocation !== 'all') {
-        filtered = filtered.filter(job => job.location && job.location.toLowerCase().includes(selectedLocation.toLowerCase()));
-      }
-      // Search filter
-      if (searchTerm) {
-        filtered = filtered.filter(job =>
-          job.title.toLowerCase().includes(searchTerm) ||
-          job.company.toLowerCase().includes(searchTerm) ||
-          (job.description && job.description.toLowerCase().includes(searchTerm))
-        );
-      }
-      // Tag (experience) filter
-      if (activeTag !== 'all') {
-        filtered = filtered.filter(job => getExperienceLevel(job) === activeTag);
-      }
-
-      if (!filtered.length) {
-        container.innerHTML = '<div class="no-jobs">No jobs found. Try changing the search, location, or experience filter.</div>';
-        return;
-      }
-
-      container.innerHTML = filtered.map(job => {
-        const cleanDesc = (job.description || '').substring(0, 120);
-        const badge = getJobBadge(job.created_at);
-        const expLevel = getExperienceLevel(job);
-        let expTagClass = 'exp-tag';
-        let expText = '';
-        if (expLevel === 'fresher') {
-          expText = 'Fresher (0‑2 yrs)';
-          expTagClass += ' fresher';
-        } else if (expLevel === 'mid') {
-          expText = '1‑2 years';
-          expTagClass += ' mid';
-        } else {
-          expText = '3+ years';
-          expTagClass += ' senior';
-        }
-        return `
-          <div class="job-card">
-            <div class="job-title">
-              ${escapeHtml(job.title)}
-              ${badge}
-              <span class="${expTagClass}">${expText}</span>
-            </div>
-            <div class="company">${escapeHtml(job.company)}</div>
-            <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
-            <div class="description">${escapeHtml(cleanDesc)}...</div>
-            <div class="deadline">📅 Posted: ${formatDate(job.posted_date || job.created_at)}</div>
-            <a href="job.html?id=${job.id}" class="view-details">View Details →</a>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // Filter UI handlers
-    function setActiveTag(tag) {
-      activeTag = tag;
-      // Update button active styles
-      document.querySelectorAll('.tag-btn').forEach(btn => {
-        if (btn.dataset.tag === tag) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-      displayJobs();
-    }
-
-    function resetFilters() {
-      document.getElementById('searchInput').value = '';
-      document.getElementById('locationFilter').value = 'all';
-      setActiveTag('all');
+      return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
     }
 
     // --------------------------------------------------------------
@@ -613,16 +558,12 @@
     document.getElementById('vibrantTheme')?.addEventListener('click', () => setTheme('vibrant'));
     document.getElementById('accentColor')?.addEventListener('input', (e) => setAccent(e.target.value));
 
-    document.getElementById('searchInput')?.addEventListener('input', () => displayJobs());
-    document.getElementById('locationFilter')?.addEventListener('change', () => displayJobs());
-    document.getElementById('resetFiltersBtn')?.addEventListener('click', resetFilters);
-
-    // Attach tag filter listeners
-    document.querySelectorAll('.tag-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const tag = e.currentTarget.dataset.tag;
-        setActiveTag(tag);
-      });
+    document.getElementById('searchInput')?.addEventListener('input', displayJobs);
+    document.getElementById('locationFilter')?.addEventListener('change', displayJobs);
+    document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('locationFilter').value = 'all';
+      displayJobs();
     });
 
     document.getElementById('shareTwitter')?.addEventListener('click', (e) => {
@@ -638,7 +579,6 @@
       alert('Please email your issue to support@applymore.com');
     });
 
-    // Fetch jobs on load and every 5 minutes
     fetchJobs();
     setInterval(fetchJobs, 5 * 60 * 1000);
   </script>
