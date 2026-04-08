@@ -267,8 +267,8 @@
         </select>
       </div>
       <div class="filter-buttons">
-        <button data-filter="all" class="filter-btn active">All Jobs</button>
-        <button data-filter="fresher" class="filter-btn">Fresher (0 yrs)</button>
+        <button data-filter="all" class="filter-btn">All Jobs</button>
+        <button data-filter="fresher" class="filter-btn active">Fresher (0 yrs)</button>
         <button data-filter="mid" class="filter-btn">1‑2 years</button>
         <button data-filter="senior" class="filter-btn">3+ years</button>
       </div>
@@ -384,7 +384,7 @@
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
 
     let allJobs = [];
-    let currentFilter = 'all'; // 'all', 'fresher', 'mid', 'senior'
+    let currentFilter = 'fresher'; // default to fresher
 
     // Strict experience level determination
     function getExperienceLevel(job) {
@@ -444,8 +444,18 @@
           (job.description && job.description.toLowerCase().includes(searchTerm))
         );
       }
+
+      // Apply experience filter if not "all"
       if (currentFilter !== 'all') {
         filtered = filtered.filter(job => getExperienceLevel(job) === currentFilter);
+      } else {
+        // For "All Jobs", sort fresher jobs to the top, then mid, then senior
+        filtered.sort((a, b) => {
+          const order = { 'fresher': 1, 'mid': 2, 'senior': 3 };
+          const levelA = getExperienceLevel(a);
+          const levelB = getExperienceLevel(b);
+          return order[levelA] - order[levelB];
+        });
       }
 
       const container = document.getElementById('jobsContainer');
@@ -499,7 +509,7 @@
     function resetFilters() {
       document.getElementById('searchInput').value = '';
       document.getElementById('locationFilter').value = 'all';
-      setFilter('all');
+      setFilter('fresher'); // reset to default fresher
     }
 
     // --------------------------------------------------------------
