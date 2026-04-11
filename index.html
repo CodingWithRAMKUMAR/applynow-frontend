@@ -25,9 +25,6 @@
       --text-primary: #f0f3ff;
       --text-secondary: #9ca3cf;
       --text-muted: #6b7280;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
       --purple: #8b5cf6;
     }
 
@@ -36,19 +33,6 @@
       background: #0a0a2a;
       color: var(--text-primary);
       overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Animated Gradient Background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 30%, #1a1a4a, #0a0a2a);
-      z-index: -2;
     }
 
     /* Floating Orbs */
@@ -68,7 +52,6 @@
       background: radial-gradient(circle, #3b82f6, transparent);
       top: -200px;
       left: -200px;
-      animation-delay: 0s;
     }
 
     .orb-2 {
@@ -80,21 +63,9 @@
       animation-delay: -5s;
     }
 
-    .orb-3 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, #ec489a, transparent);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: -10s;
-      opacity: 0.2;
-    }
-
     @keyframes float {
       0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.05); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
+      50% { transform: translate(30px, -30px) scale(1.05); }
     }
 
     .container {
@@ -105,133 +76,42 @@
       z-index: 1;
     }
 
-    /* Character Animation Overlay */
-    .character-overlay {
+    /* Character Toast - Fixed position, appears briefly */
+    .character-toast {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
- backdrop-filter: blur(8px);
-      z-index: 9999;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .character-overlay.active {
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      border-radius: 3rem;
+      padding: 0.8rem 1.5rem;
       display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 10000;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      cursor: pointer;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .character-toast.show {
+      transform: translateX(0);
     }
 
-    .character-container {
-      text-align: center;
-      position: relative;
-      background: rgba(20, 25, 55, 0.9);
-      border-radius: 2rem;
-      padding: 2rem;
-      border: 1px solid var(--accent);
-      box-shadow: 0 0 50px rgba(59, 130, 246, 0.3);
-      min-width: 300px;
-    }
-
-    .character-emoji {
-      font-size: 5rem;
+    .character-toast .emoji {
+      font-size: 1.5rem;
       animation: bounce 0.5s ease infinite;
-      display: inline-block;
     }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-5px); }
     }
 
-    .rope {
-      width: 4px;
-      height: 0;
-      background: linear-gradient(180deg, #8b5cf6, #3b82f6);
-      margin: 0 auto;
-      animation: ropeLower 1.5s ease-out forwards;
-      position: relative;
-    }
-
-    @keyframes ropeLower {
-      0% { height: 0; }
-      100% { height: 150px; }
-    }
-
-    .rope::before {
-      content: '🪢';
-      position: absolute;
-      bottom: -15px;
-      left: -8px;
-      font-size: 1.2rem;
-      animation: knotShake 0.3s ease infinite;
-    }
-
-    @keyframes knotShake {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(10deg); }
-    }
-
-    .lowering-card {
-      background: var(--card-bg);
-      border-radius: 1rem;
-      padding: 1rem;
-      margin-top: 1rem;
-      border: 2px solid var(--accent);
-      animation: lowerCard 1.5s ease-out forwards;
-      transform-origin: top;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @keyframes lowerCard {
-      0% {
-        transform: translateY(-100px) scale(0.8);
-        opacity: 0;
-      }
-      50% {
-        transform: translateY(20px) scale(1.02);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-    }
-
-    .character-message {
-      font-size: 1rem;
-      margin-top: 1rem;
-      color: var(--accent);
-      animation: messagePulse 1s ease infinite;
-    }
-
-    @keyframes messagePulse {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; text-shadow: 0 0 10px var(--accent); }
-    }
-
-    .wave-emoji {
-      display: inline-block;
-      animation: wave 0.5s ease infinite;
-      transform-origin: 70% 70%;
-    }
-
-    @keyframes wave {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(20deg); }
-      75% { transform: rotate(-15deg); }
-      100% { transform: rotate(0deg); }
+    .character-toast .message {
+      font-size: 0.85rem;
+      color: white;
+      font-weight: 500;
     }
 
     /* Navigation */
@@ -246,7 +126,6 @@
       justify-content: center;
       gap: 2rem;
       flex-wrap: wrap;
-      animation: fadeInDown 0.6s ease;
     }
 
     .main-nav a {
@@ -257,23 +136,6 @@
       padding: 0.4rem 1rem;
       border-radius: 2rem;
       transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .main-nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%) scaleX(0);
-      width: 80%;
-      height: 2px;
-      background: var(--accent);
-      transition: transform 0.3s ease;
-    }
-
-    .main-nav a:hover::after {
-      transform: translateX(-50%) scaleX(1);
     }
 
     .main-nav a:hover {
@@ -284,22 +146,14 @@
     .main-header {
       text-align: center;
       margin-bottom: 2rem;
-      animation: fadeInUp 0.6s ease;
     }
 
     .main-header h1 {
       font-size: 3.5rem;
-      background: linear-gradient(135deg, var(--accent), var(--purple), #ec489a);
+      background: linear-gradient(135deg, var(--accent), var(--purple));
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      animation: gradientShift 5s ease infinite;
-      background-size: 200% 200%;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
     }
 
     .main-header p {
@@ -323,18 +177,11 @@
       text-align: center;
       border: 1px solid var(--glass-border);
       transition: all 0.3s ease;
-      animation: fadeInUp 0.6s ease;
-      animation-fill-mode: both;
     }
-
-    .stat-card:nth-child(1) { animation-delay: 0.1s; }
-    .stat-card:nth-child(2) { animation-delay: 0.2s; }
-    .stat-card:nth-child(3) { animation-delay: 0.3s; }
 
     .stat-card:hover {
       transform: translateY(-5px);
       border-color: var(--accent);
-      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
     }
 
     .stat-number {
@@ -359,9 +206,6 @@
       padding: 2rem;
       margin-bottom: 2rem;
       border: 1px solid var(--glass-border);
-      animation: fadeInUp 0.6s ease;
-      animation-delay: 0.2s;
-      animation-fill-mode: both;
     }
 
     .value-section h2 {
@@ -382,12 +226,6 @@
       border-radius: 1rem;
       padding: 1.2rem;
       border-left: 3px solid var(--accent);
-      transition: all 0.3s ease;
-    }
-
-    .tip-card:hover {
-      transform: translateX(5px);
-      background: rgba(59, 130, 246, 0.1);
     }
 
     .tip-card h3 {
@@ -399,14 +237,12 @@
     .tip-card p {
       font-size: 0.8rem;
       color: var(--text-secondary);
-      line-height: 1.5;
     }
 
     /* Top Bar */
     .top-bar {
       display: flex;
       justify-content: flex-end;
-      align-items: center;
       gap: 0.8rem;
       margin-bottom: 1.5rem;
       padding: 0.6rem 1rem;
@@ -429,7 +265,6 @@
 
     .theme-btn:hover {
       background: var(--accent);
-      transform: scale(1.05);
     }
 
     /* Controls */
@@ -467,13 +302,11 @@
       border-radius: 2rem;
       font-size: 0.85rem;
       color: var(--text-primary);
-      transition: all 0.3s ease;
     }
 
     .search-box input:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 10px var(--accent-glow);
     }
 
     .location-filter select {
@@ -505,13 +338,11 @@
 
     .filter-btn:hover {
       background: rgba(59, 130, 246, 0.3);
-      transform: translateY(-2px);
     }
 
     .filter-btn.active {
       background: var(--accent);
       border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
     }
 
     .reset-btn {
@@ -522,12 +353,6 @@
       color: white;
       cursor: pointer;
       font-size: 0.8rem;
-      transition: all 0.3s ease;
-    }
-
-    .reset-btn:hover {
-      background: var(--accent-dark);
-      transform: scale(1.02);
     }
 
     /* Jobs Grid */
@@ -538,32 +363,20 @@
       margin-top: 1rem;
     }
 
-    /* Job Card */
     .job-card {
       background: var(--card-bg);
       backdrop-filter: blur(8px);
       border-radius: 1rem;
       padding: 1.2rem;
       border: 1px solid var(--glass-border);
-      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.6s ease forwards;
+      transition: all 0.3s ease;
       cursor: pointer;
-      position: relative;
     }
 
     .job-card:hover {
-      transform: translateY(-8px) scale(1.02);
+      transform: translateY(-5px);
       border-color: var(--accent);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.2);
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
     .job-title {
@@ -580,7 +393,6 @@
       color: var(--accent);
       font-weight: 500;
       margin-bottom: 0.3rem;
-      font-size: 0.9rem;
     }
 
     .location {
@@ -593,7 +405,6 @@
       font-size: 0.8rem;
       color: var(--text-secondary);
       margin-bottom: 1rem;
-      line-height: 1.4;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -605,12 +416,11 @@
       padding: 0.2rem 0.6rem;
       border-radius: 1rem;
       color: white;
-      white-space: nowrap;
     }
 
     .exp-tag.fresher { background: var(--purple); }
-    .exp-tag.mid { background: var(--warning); }
-    .exp-tag.senior { background: var(--danger); }
+    .exp-tag.mid { background: #f59e0b; }
+    .exp-tag.senior { background: #ef4444; }
 
     .view-details {
       display: inline-flex;
@@ -623,8 +433,6 @@
       text-decoration: none;
       font-size: 0.8rem;
       transition: all 0.3s ease;
-      position: relative;
-      z-index: 2;
     }
 
     .view-details:hover {
@@ -632,7 +440,6 @@
       gap: 0.5rem;
     }
 
-    /* Skeleton Loading */
     .skeleton-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -662,14 +469,6 @@
       margin-bottom: 0.3rem;
     }
 
-    .skeleton-text-full {
-      width: 100%;
-      height: 15px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 0.5rem;
-      margin-bottom: 0.3rem;
-    }
-
     @keyframes pulse {
       0%, 100% { opacity: 0.5; }
       50% { opacity: 0.8; }
@@ -683,7 +482,6 @@
       border-radius: 1rem;
     }
 
-    /* Footer */
     footer {
       text-align: center;
       margin-top: 3rem;
@@ -702,55 +500,29 @@
     .footer-links a {
       color: var(--accent);
       text-decoration: none;
-      transition: all 0.3s ease;
     }
 
-    .footer-links a:hover {
-      color: var(--purple);
-    }
-
-    /* Responsive */
     @media (max-width: 768px) {
       .main-header h1 { font-size: 2.2rem; }
-      .stats-grid { grid-template-columns: repeat(3, 1fr); }
-      .stat-number { font-size: 1.5rem; }
       .controls { flex-direction: column; align-items: stretch; }
-      .filter-buttons { justify-content: center; }
       .main-nav { gap: 0.8rem; }
-      .main-nav a { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
-      .character-container { min-width: 250px; padding: 1.5rem; }
-      .character-emoji { font-size: 3rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+      .character-toast { bottom: 20px; right: 20px; padding: 0.6rem 1.2rem; }
+      .character-toast .emoji { font-size: 1.2rem; }
+      .character-toast .message { font-size: 0.75rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Floating Orbs -->
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
 
-  <!-- Character Animation Overlay -->
-  <div id="characterOverlay" class="character-overlay">
-    <div class="character-container">
-      <div class="character-emoji" id="characterEmoji">🤖</div>
-      <div id="ropeContainer" class="rope"></div>
-      <div id="loweringCard" class="lowering-card" style="display: none;">
-        <div style="font-size: 0.9rem; font-weight: bold;">📋 Opening Job...</div>
-      </div>
-      <div class="character-message" id="characterMessage">Hold on! Lowering the job for you... 🎪</div>
-    </div>
+  <!-- Character Toast - Appears briefly on click -->
+  <div id="characterToast" class="character-toast">
+    <span class="emoji" id="toastEmoji">🤖</span>
+    <span class="message" id="toastMessage">Opening job for you! 🚀</span>
   </div>
 
   <div class="container">
-    <!-- Navigation -->
     <nav class="main-nav">
       <a href="index.html">🏠 Home</a>
       <a href="about.html">📖 About</a>
@@ -760,13 +532,11 @@
       <a href="terms.html">⚖️ Terms</a>
     </nav>
 
-    <!-- Header -->
     <div class="main-header">
       <h1>ApplyMore</h1>
       <p>⚡ Apply more. Get hired faster. ⚡</p>
     </div>
 
-    <!-- Stats Grid -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-number" id="totalJobsCount">0</div>
@@ -782,31 +552,29 @@
       </div>
     </div>
 
-    <!-- Value Section -->
     <div class="value-section">
       <h2>🎯 Your IT Career Starts Here</h2>
       <p style="text-align: center; color: var(--text-secondary);">ApplyMore handpicks the best entry-level IT jobs from across India.</p>
       <div class="tips-grid">
         <div class="tip-card">
           <h3>📝 Resume Tips for Freshers</h3>
-          <p>Highlight internships, academic projects, and technical skills. Keep it under 1 page.</p>
+          <p>Highlight internships, academic projects, and technical skills.</p>
         </div>
         <div class="tip-card">
           <h3>💡 Interview Preparation</h3>
-          <p>Practice DSA problems on LeetCode. Prepare to explain 2-3 projects in depth.</p>
+          <p>Practice DSA problems. Prepare to explain 2-3 projects.</p>
         </div>
         <div class="tip-card">
           <h3>🚀 Top Skills for 2025</h3>
-          <p>Python, SQL, Cloud (AWS/Azure), Git, AI/ML fundamentals.</p>
+          <p>Python, SQL, Cloud, Git, AI/ML fundamentals.</p>
         </div>
         <div class="tip-card">
           <h3>📅 Daily Job Updates</h3>
-          <p>We scrape LinkedIn & Indeed every 12 hours. Bookmark and check daily!</p>
+          <p>We scrape LinkedIn & Indeed every 12 hours.</p>
         </div>
       </div>
     </div>
 
-    <!-- Top Bar -->
     <div class="top-bar">
       <div class="theme-controls">
         <button class="theme-btn" id="lightTheme">Light</button>
@@ -815,7 +583,6 @@
       </div>
     </div>
 
-    <!-- Controls -->
     <div class="controls">
       <div class="search-box">
         <i class="fas fa-search"></i>
@@ -832,8 +599,6 @@
           <option value="Bangalore">Bangalore</option>
           <option value="Delhi">Delhi</option>
           <option value="Kolkata">Kolkata</option>
-          <option value="Ahmedabad">Ahmedabad</option>
-          <option value="Noida">Noida</option>
         </select>
       </div>
       <div class="filter-buttons">
@@ -845,16 +610,14 @@
       <button id="resetFiltersBtn" class="reset-btn">Reset Filters</button>
     </div>
 
-    <!-- Jobs Container -->
     <div id="jobsContainer" class="jobs-grid">
       <div class="skeleton-grid">
-        <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text"></div><div class="skeleton-text-full"></div></div>
-        <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text"></div><div class="skeleton-text-full"></div></div>
-        <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text"></div><div class="skeleton-text-full"></div></div>
+        <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text"></div></div>
+        <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text"></div></div>
+        <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text"></div></div>
       </div>
     </div>
 
-    <!-- Footer -->
     <footer>
       <div class="footer-links">
         <a href="privacy.html">Privacy Policy</a>
@@ -864,110 +627,61 @@
         <a href="contact.html">Contact</a>
       </div>
       <p>Made with ❤️ by Ram — Helping freshers land their dream job in India.</p>
-      <p class="copyright">© 2026 ApplyMore. Jobs are updated daily from public sources.</p>
     </footer>
   </div>
 
   <script>
-    // Supabase Configuration
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
 
     let allJobs = [];
     let currentFilter = 'fresher';
-    let isAnimating = false;
 
-    // Character animation sequence
-    async function playCharacterAnimation(jobId) {
-      if (isAnimating) return;
-      isAnimating = true;
+    // Show character toast with different emojis
+    function showCharacterToast(message, emoji) {
+      const toast = document.getElementById('characterToast');
+      const toastEmoji = document.getElementById('toastEmoji');
+      const toastMessage = document.getElementById('toastMessage');
+      
+      toastEmoji.textContent = emoji;
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 800);
+    }
 
-      const overlay = document.getElementById('characterOverlay');
-      const characterEmoji = document.getElementById('characterEmoji');
-      const ropeContainer = document.getElementById('ropeContainer');
-      const loweringCard = document.getElementById('loweringCard');
-      const characterMessage = document.getElementById('characterMessage');
+    // Handle click with INSTANT navigation + toast
+    function handleCardClick(jobId, event) {
+      // Prevent if clicking on view details button (handled separately)
+      if (event.target.closest('.view-details')) {
+        return;
+      }
       
-      // Reset animations
-      ropeContainer.style.animation = 'none';
-      ropeContainer.offsetHeight; // Force reflow
-      ropeContainer.style.animation = 'ropeLower 1.5s ease-out forwards';
+      // Show character animation (no delay)
+      const messages = [
+        { emoji: '🤖', text: 'Opening job for you! 🚀' },
+        { emoji: '🎪', text: 'Here we go! ✨' },
+        { emoji: '🪢', text: 'Lowering details... 📋' },
+        { emoji: '🤖', text: 'Applying magic! 🎩' }
+      ];
+      const random = messages[Math.floor(Math.random() * messages.length)];
+      showCharacterToast(random.text, random.emoji);
       
-      loweringCard.style.display = 'none';
-      loweringCard.style.animation = 'none';
-      
-      // Show overlay
-      overlay.classList.add('active');
-      
-      // Phase 1: Character appears and says hello
-      characterEmoji.textContent = '🤖';
-      characterMessage.textContent = 'Hey there! I see you found a job... 🎯';
-      await delay(800);
-      
-      // Phase 2: Character prepares rope
-      characterEmoji.textContent = '🪢';
-      characterMessage.textContent = 'Let me lower the details for you!';
-      await delay(600);
-      
-      // Phase 3: Rope starts lowering
-      characterEmoji.textContent = '🏗️';
-      characterMessage.textContent = 'Releasing the rope... slowly...';
-      await delay(300);
-      
-      // Phase 4: Card appears and lowers
-      loweringCard.style.display = 'block';
-      loweringCard.style.animation = 'lowerCard 1.2s ease-out forwards';
-      characterMessage.textContent = '📄 Here it comes...';
-      await delay(800);
-      
-      // Phase 5: Almost there
-      characterEmoji.textContent = '🎪';
-      characterMessage.textContent = 'Almost there! Just a moment...';
-      await delay(600);
-      
-      // Phase 6: Character waves goodbye
-      characterEmoji.innerHTML = '👋 <span class="wave-emoji">🤖</span>';
-      characterMessage.textContent = 'Good luck with your application! 🚀';
-      await delay(800);
-      
-      // Phase 7: Navigate
-      overlay.classList.remove('active');
+      // INSTANT navigation (no delay)
       window.location.href = `job.html?id=${jobId}`;
     }
 
-    function delay(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    // Handle card click
-    function handleCardClick(jobId, event) {
-      // Prevent if already animating
-      if (isAnimating) return;
-      
-      // Get the clicked card
-      let card = event.target.closest('.job-card');
-      if (!card) return;
-      
-      // Prevent if clicking on the "View Details" button
-      if (event.target.closest('.view-details')) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      
-      // Play the character animation
-      playCharacterAnimation(jobId);
-    }
-
-    // Experience Level Detection
     function getExperienceLevel(job) {
       const text = (job.title + ' ' + (job.description || '')).toLowerCase();
       
-      const seniorKeywords = ['senior', 'lead', 'principal', 'architect', 'manager', 'director', 'head', 'staff engineer'];
+      const seniorKeywords = ['senior', 'lead', 'principal', 'architect', 'manager'];
       for (let kw of seniorKeywords) {
         if (text.includes(kw)) return 'senior';
       }
       
-      const yearPattern = /(\d+(?:\.\d+)?)\s*[-+]?\s*(?:\d+(?:\.\d+)?)?\s*years?/i;
+      const yearPattern = /(\d+(?:\.\d+)?)\s*years?/i;
       const match = text.match(yearPattern);
       if (match) {
         let years = parseFloat(match[1]);
@@ -975,7 +689,7 @@
         if (years >= 1) return 'mid';
       }
       
-      const fresherKeywords = ['fresher', 'entry level', 'entry-level', 'junior', 'graduate', 'trainee', 'recent graduate', 'new grad', '0 years', 'zero years', 'no experience'];
+      const fresherKeywords = ['fresher', 'entry level', 'junior', 'graduate', 'trainee', '0 years'];
       for (let kw of fresherKeywords) {
         if (text.includes(kw)) return 'fresher';
       }
@@ -983,13 +697,11 @@
       return 'mid';
     }
 
-    // Format Date
     function formatDate(dateString) {
       if (!dateString) return '';
       const date = new Date(dateString);
       const now = new Date();
-      const diffTime = Math.abs(now - date);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const diffDays = Math.ceil(Math.abs(now - date) / (1000 * 60 * 60 * 24));
       
       if (diffDays === 0) return 'Today';
       if (diffDays === 1) return 'Yesterday';
@@ -997,13 +709,11 @@
       return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
     }
 
-    // Escape HTML
     function escapeHtml(str) {
       if (!str) return '';
       return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
     }
 
-    // Update Stats
     function updateStats(jobs) {
       const total = jobs.length;
       const today = new Date().toISOString().split('T')[0];
@@ -1016,7 +726,6 @@
       document.getElementById('todayJobsCount').innerText = todayJobs;
     }
 
-    // Display Jobs
     function displayJobs() {
       const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
       const selectedLocation = document.getElementById('locationFilter').value;
@@ -1030,25 +739,19 @@
       if (searchTerm) {
         filtered = filtered.filter(job =>
           job.title.toLowerCase().includes(searchTerm) ||
-          (job.company && job.company.toLowerCase().includes(searchTerm)) ||
-          (job.description && job.description.toLowerCase().includes(searchTerm))
+          (job.company && job.company.toLowerCase().includes(searchTerm))
         );
       }
 
       if (currentFilter !== 'all') {
         filtered = filtered.filter(job => getExperienceLevel(job) === currentFilter);
-      } else {
-        filtered.sort((a, b) => {
-          const order = { 'fresher': 1, 'mid': 2, 'senior': 3 };
-          return order[getExperienceLevel(a)] - order[getExperienceLevel(b)];
-        });
       }
 
       updateStats(allJobs);
 
       const container = document.getElementById('jobsContainer');
       if (filtered.length === 0) {
-        container.innerHTML = '<div class="empty-message">✨ No jobs found. Try different filters or check back later! ✨</div>';
+        container.innerHTML = '<div class="empty-message">✨ No jobs found. Try different filters! ✨</div>';
         return;
       }
 
@@ -1058,7 +761,7 @@
         const delay = Math.min(index * 0.03, 0.5);
         
         return `
-          <div class="job-card" data-job-id="${job.id}" style="animation-delay: ${delay}s">
+          <div class="job-card" data-job-id="${job.id}" style="animation: fadeInUp 0.6s ease ${delay}s forwards; opacity: 0; transform: translateY(30px);">
             <div class="job-title">
               ${escapeHtml(job.title)}
               <span class="exp-tag ${level}">${tagText}</span>
@@ -1084,25 +787,33 @@
         `;
       }).join('');
 
-      // Attach click event listeners to all job cards
+      // Add click handlers to cards
       document.querySelectorAll('.job-card').forEach(card => {
         const jobId = card.getAttribute('data-job-id');
         card.addEventListener('click', (e) => handleCardClick(jobId, e));
       });
       
-      // Attach click event to view details buttons (override default)
+      // Add click handlers to view details buttons (with animation)
       document.querySelectorAll('.view-details').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
           const card = btn.closest('.job-card');
           const jobId = card.getAttribute('data-job-id');
-          playCharacterAnimation(jobId);
+          const messages = [
+            { emoji: '🤖', text: 'Opening job for you! 🚀' },
+            { emoji: '🎪', text: 'Here we go! ✨' },
+            { emoji: '🪢', text: 'Lowering details... 📋' }
+          ];
+          const random = messages[Math.floor(Math.random() * messages.length)];
+          showCharacterToast(random.text, random.emoji);
+          setTimeout(() => {
+            window.location.href = `job.html?id=${jobId}`;
+          }, 100);
         });
       });
     }
 
-    // Fetch Jobs from Supabase
     async function fetchJobs() {
       try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc`, {
@@ -1117,12 +828,11 @@
         allJobs = await response.json();
         displayJobs();
       } catch (err) {
-        console.error('Error fetching jobs:', err);
-        document.getElementById('jobsContainer').innerHTML = '<div class="empty-message">⚠️ Failed to load jobs. Please refresh the page. ⚠️</div>';
+        console.error(err);
+        document.getElementById('jobsContainer').innerHTML = '<div class="empty-message">⚠️ Failed to load jobs. Please refresh.</div>';
       }
     }
 
-    // Set Filter
     function setFilter(filter) {
       currentFilter = filter;
       document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1135,14 +845,12 @@
       displayJobs();
     }
 
-    // Reset Filters
     function resetFilters() {
       document.getElementById('searchInput').value = '';
       document.getElementById('locationFilter').value = 'all';
       setFilter('fresher');
     }
 
-    // Theme Functions
     function setTheme(theme) {
       const themes = {
         dark: {
@@ -1197,15 +905,16 @@
       });
     });
 
-    // Load saved theme
     const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
 
-    // Initial fetch
     fetchJobs();
-    
-    // Refresh every 5 minutes
     setInterval(fetchJobs, 5 * 60 * 1000);
+
+    // Add fadeInUp keyframe
+    const style = document.createElement('style');
+    style.textContent = `@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }`;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
