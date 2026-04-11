@@ -422,12 +422,63 @@
       opacity: 0;
       transform: translateY(30px);
       animation: fadeInUp 0.6s ease forwards;
+      cursor: pointer;
+      position: relative;
     }
 
     .job-card:hover {
       transform: translateY(-8px) scale(1.02);
       border-color: var(--accent);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Card Throw Animation Class */
+    .job-card.throw-animation {
+      animation: throwCard 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    @keyframes throwCard {
+      0% {
+        transform: translateY(0) scale(1) rotateX(0deg);
+        opacity: 1;
+      }
+      20% {
+        transform: translateY(-50px) scale(1.1) rotateX(15deg);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-150px) scale(1.3) rotateX(25deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-400px) scale(1.8) rotateX(40deg);
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* Ripple effect on click */
+    .job-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s;
+      pointer-events: none;
+    }
+
+    .job-card:active::after {
+      width: 200px;
+      height: 200px;
+      opacity: 0;
+      transition: 0s;
     }
 
     @keyframes fadeInUp {
@@ -501,6 +552,13 @@
       gap: 0.5rem;
     }
 
+    /* Disable button inside card from triggering card click */
+    .view-details,
+    .view-details * {
+      position: relative;
+      z-index: 2;
+    }
+
     /* Skeleton Loading */
     .skeleton-grid {
       display: grid;
@@ -552,6 +610,29 @@
       border-radius: 1rem;
     }
 
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--accent);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -587,6 +668,7 @@
       .filter-buttons { justify-content: center; }
       .main-nav { gap: 0.8rem; }
       .main-nav a { font-size: 0.75rem; padding: 0.3rem 0.6rem; }
+      .toast { font-size: 0.8rem; white-space: nowrap; width: 90%; text-align: center; }
     }
 
     @media (max-width: 480px) {
@@ -594,6 +676,7 @@
       .stat-card { padding: 0.8rem; }
       .stat-number { font-size: 1.2rem; }
       .stat-label { font-size: 0.7rem; }
+      .toast { font-size: 0.7rem; }
     }
 
     /* Reduced motion preference */
@@ -603,6 +686,9 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
+      .job-card.throw-animation {
+        animation: none !important;
+      }
     }
   </style>
 </head>
@@ -611,6 +697,9 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">✨ Opening job...</div>
 
   <div class="container">
     <!-- Navigation -->
@@ -739,6 +828,48 @@
 
     let allJobs = [];
     let currentFilter = 'fresher';
+    let isNavigating = false;
+
+    // Show toast notification
+    function showToast(message, duration = 1500) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
+    }
+
+    // Handle card click with throw animation
+    function handleCardClick(jobId, event) {
+      // Prevent if already navigating
+      if (isNavigating) return;
+      
+      // Get the clicked card
+      let card = event.target.closest('.job-card');
+      if (!card) return;
+      
+      // Prevent if clicking on the "View Details" button or its children
+      if (event.target.closest('.view-details')) {
+        return;
+      }
+      
+      isNavigating = true;
+      
+      // Show toast
+      showToast('🚀 Launching job details...', 800);
+      
+      // Add throw animation class
+      card.classList.add('throw-animation');
+      
+      // Play subtle sound effect (optional - creates mental feedback)
+      // Note: Some browsers require user interaction first, but it's fine
+      
+      // Navigate after animation completes
+      setTimeout(() => {
+        window.location.href = `job.html?id=${jobId}`;
+      }, 450);
+    }
 
     // Experience Level Detection
     function getExperienceLevel(job) {
@@ -840,7 +971,7 @@
         const delay = Math.min(index * 0.03, 0.5);
         
         return `
-          <div class="job-card" style="animation-delay: ${delay}s">
+          <div class="job-card" data-job-id="${job.id}" style="animation-delay: ${delay}s">
             <div class="job-title">
               ${escapeHtml(job.title)}
               <span class="exp-tag ${level}">${tagText}</span>
@@ -865,6 +996,12 @@
           </div>
         `;
       }).join('');
+
+      // Attach click event listeners to all job cards
+      document.querySelectorAll('.job-card').forEach(card => {
+        const jobId = card.getAttribute('data-job-id');
+        card.addEventListener('click', (e) => handleCardClick(jobId, e));
+      });
     }
 
     // Fetch Jobs from Supabase
@@ -937,7 +1074,6 @@
         });
         localStorage.setItem('theme', theme);
         
-        // Update background for light/vibrant
         if (theme === 'light') {
           document.body.style.background = '#f8fafc';
         } else if (theme === 'vibrant') {
