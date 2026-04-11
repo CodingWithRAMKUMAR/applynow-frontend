@@ -65,7 +65,74 @@
       padding: 1.5rem 1rem;
       backdrop-filter: blur(2px);
     }
-    .main-header { text-align: center; margin-bottom: 1.5rem; }
+    
+    /* ===== NEW: NAVIGATION MENU ===== */
+    .main-nav {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 3rem;
+      padding: 0.8rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .main-nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      transition: var(--transition);
+    }
+    .main-nav a:hover {
+      background: var(--accent);
+      color: white;
+    }
+    
+    /* ===== NEW: VALUE SECTION (Original Content) ===== */
+    .value-section {
+      background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--glass-border);
+    }
+    .value-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .tip-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 1rem;
+      padding: 1rem;
+      border-left: 3px solid var(--accent);
+    }
+    .tip-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+    .tip-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    
+    .main-header { text-align: center; margin-bottom: 1rem; }
     .main-header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), #a855f7); background-clip: text; -webkit-background-clip: text; color: transparent; }
     .main-header p { font-size: 0.9rem; color: var(--text-muted); }
     .top-bar {
@@ -219,16 +286,52 @@
       .add-link-box, .controls { flex-direction: column; align-items: stretch; }
       .search-box, .location-filter select, .filter-buttons, .reset-btn { width: 100%; }
       .filter-buttons { justify-content: center; }
+      .main-nav { gap: 0.8rem; }
     }
   </style>
 </head>
 <body>
   <canvas id="particleCanvas"></canvas>
   <div class="container">
+    <!-- ===== NEW: NAVIGATION MENU ===== -->
+    <nav class="main-nav">
+      <a href="index.html">🏠 Home</a>
+      <a href="about.html">📖 About</a>
+      <a href="blog.html">✍️ Blog</a>
+      <a href="contact.html">📧 Contact</a>
+      <a href="privacy.html">🔒 Privacy</a>
+      <a href="terms.html">⚖️ Terms</a>
+    </nav>
+
     <div class="main-header">
       <h1>ApplyMore</h1>
       <p>⚡ Apply more. Get hired faster.⚡</p>
     </div>
+
+    <!-- ===== NEW: VALUE SECTION (Original Content for AdSense) ===== -->
+    <div class="value-section">
+      <h2>🎯 Your IT Career Starts Here</h2>
+      <p>ApplyMore handpicks the best entry-level IT jobs from across India. No spam, no fake listings — just real opportunities for freshers and junior professionals.</p>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h3>📝 Resume Tips for Freshers</h3>
+          <p>Highlight internships, academic projects, and technical skills. Keep it under 1 page. Use action verbs like "developed", "built", "optimized".</p>
+        </div>
+        <div class="tip-card">
+          <h3>💡 Interview Preparation</h3>
+          <p>Practice DSA problems on LeetCode (Easy/Medium). Prepare to explain 2-3 projects in depth. Research the company before interview.</p>
+        </div>
+        <div class="tip-card">
+          <h3>🚀 Top Skills for 2025</h3>
+          <p>Python, SQL, Cloud (AWS/Azure basics), Git, AI/ML fundamentals. Soft skills: communication, problem-solving, teamwork.</p>
+        </div>
+        <div class="tip-card">
+          <h3>📅 Daily Job Updates</h3>
+          <p>We scrape LinkedIn & Indeed every 12 hours. Bookmark this page and check daily for new opportunities!</p>
+        </div>
+      </div>
+    </div>
+
     <div class="top-bar">
       <div class="theme-controls">
         <button class="theme-btn" id="lightTheme">Light</button>
@@ -264,6 +367,9 @@
           <option value="Gurugram">Gurugram</option>
           <option value="Mumbai">Mumbai</option>
           <option value="Pune">Pune</option>
+          <option value="Bangalore">Bangalore</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Kolkata">Kolkata</option>
         </select>
       </div>
       <div class="filter-buttons">
@@ -283,13 +389,14 @@
       <div class="footer-links">
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms of Service</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
         <a href="contact.html">Contact</a>
         <a href="#" id="shareTwitter"><i class="fab fa-twitter"></i> Share</a>
         <a href="#" id="shareLinkedin"><i class="fab fa-linkedin"></i> Share</a>
-        <a href="#" id="reportIssue">Report Issue</a>
       </div>
-      <p>Made with ❤️ by Ram — Helping freshers land their dream job.</p>
-      <p class="copyright">© 2026 ApplyMore. Jobs are updated daily from public sources.</p>
+      <p>Made with ❤️ by Ram — Helping freshers land their dream job in India.</p>
+      <p class="copyright">© 2026 ApplyMore. Jobs are updated daily from public sources. ApplyMore is not affiliated with LinkedIn or Indeed.</p>
     </footer>
   </div>
 
@@ -384,19 +491,16 @@
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
 
     let allJobs = [];
-    let currentFilter = 'fresher'; // default to fresher
+    let currentFilter = 'fresher';
 
-    // Strict experience level determination
     function getExperienceLevel(job) {
       const text = (job.title + ' ' + (job.description || '')).toLowerCase();
       
-      // Senior keywords (immediate senior)
       const seniorKeywords = ['senior', 'lead', 'principal', 'architect', 'manager', 'director', 'head', 'staff engineer', 'distinguished'];
       for (let kw of seniorKeywords) {
         if (text.includes(kw)) return 'senior';
       }
       
-      // Numeric years
       const yearPattern = /(\d+(?:\.\d+)?)\s*[-+]?\s*(?:\d+(?:\.\d+)?)?\s*years?/i;
       const match = text.match(yearPattern);
       if (match) {
@@ -405,13 +509,11 @@
         if (years >= 1) return 'mid';
       }
       
-      // Fresher keywords
       const fresherKeywords = ['fresher', 'entry level', 'entry-level', 'junior', 'graduate', 'trainee', 'recent graduate', 'new grad', 'early career', '0 years', 'zero years', 'no experience'];
       for (let kw of fresherKeywords) {
         if (text.includes(kw)) return 'fresher';
       }
       
-      // Default to mid (1-2 years)
       return 'mid';
     }
 
@@ -445,11 +547,9 @@
         );
       }
 
-      // Apply experience filter if not "all"
       if (currentFilter !== 'all') {
         filtered = filtered.filter(job => getExperienceLevel(job) === currentFilter);
       } else {
-        // For "All Jobs", sort fresher jobs to the top, then mid, then senior
         filtered.sort((a, b) => {
           const order = { 'fresher': 1, 'mid': 2, 'senior': 3 };
           const levelA = getExperienceLevel(a);
@@ -493,7 +593,6 @@
       return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
     }
 
-    // Filter UI handlers
     function setFilter(filter) {
       currentFilter = filter;
       document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -509,12 +608,10 @@
     function resetFilters() {
       document.getElementById('searchInput').value = '';
       document.getElementById('locationFilter').value = 'all';
-      setFilter('fresher'); // reset to default fresher
+      setFilter('fresher');
     }
 
-    // --------------------------------------------------------------
-    // RECOMMENDED LINKS (localStorage)
-    // --------------------------------------------------------------
+    // Recommended links
     let recommendedLinks = JSON.parse(localStorage.getItem('recommendedLinks') || '[]');
     function renderLinks() {
       const container = document.getElementById('linksList');
@@ -545,9 +642,7 @@
     });
     renderLinks();
 
-    // --------------------------------------------------------------
-    // THEME & EVENT LISTENERS
-    // --------------------------------------------------------------
+    // Theme
     function setTheme(theme) {
       document.body.classList.remove('light', 'dark', 'vibrant');
       document.body.classList.add(theme);
@@ -587,10 +682,6 @@
     document.getElementById('shareLinkedin')?.addEventListener('click', (e) => {
       e.preventDefault();
       window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=IT Jobs in India`, '_blank');
-    });
-    document.getElementById('reportIssue')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('Please email your issue to support@applymore.com');
     });
 
     fetchJobs();
