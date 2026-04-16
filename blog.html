@@ -1,140 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - IT Career Tips for Freshers | ApplyMore</title>
-  <meta name="description" content="Career tips, resume advice, and interview preparation for IT freshers in India.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>IT Career Blog – Tips for Freshers | ApplyMore</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 20% 30%, #0a0a2a, #020218);
-      min-height: 100vh;
+      background: #0a0a2a;
       color: #f0f3ff;
+      padding: 2rem;
     }
-    .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
-    .main-nav {
-      background: rgba(20, 20, 50, 0.65);
-      backdrop-filter: blur(12px);
-      border-radius: 3rem;
-      padding: 0.8rem 1.5rem;
+    .container { max-width: 900px; margin: 0 auto; }
+    .blog-header {
+      text-align: center;
       margin-bottom: 2rem;
-      border: 1px solid rgba(100, 150, 255, 0.3);
+    }
+    .blog-header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .blog-header p {
+      color: #9ca3cf;
+      margin-top: 0.5rem;
+    }
+    .nav-links {
       display: flex;
       justify-content: center;
-      gap: 2rem;
+      gap: 1rem;
+      margin-bottom: 2rem;
       flex-wrap: wrap;
     }
-    .main-nav a {
-      color: #f0f3ff;
+    .nav-links a {
+      color: #9ca3cf;
       text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2rem;
-      transition: all 0.2s ease;
     }
-    .main-nav a:hover { background: #3b82f6; color: white; }
-    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #3b82f6, #a855f7); background-clip: text; -webkit-background-clip: text; color: transparent; }
-    .subtitle { text-align: center; color: #a0b0d0; margin-bottom: 2rem; }
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 1.5rem;
-    }
-    .blog-card {
+    .nav-links a:hover { color: #3b82f6; }
+    .article-card {
       background: rgba(20, 20, 50, 0.65);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
       border-radius: 1rem;
-      padding: 1.5rem;
-      border: 1px solid rgba(100, 150, 255, 0.3);
-      transition: all 0.2s ease;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(59,130,246,0.3);
     }
-    .blog-card:hover { transform: translateY(-3px); border-color: #3b82f6; }
-    .blog-date { font-size: 0.7rem; color: #a0b0d0; margin-bottom: 0.5rem; }
-    .blog-card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; color: #3b82f6; }
-    .blog-card p { color: #cbd5e6; line-height: 1.5; margin-bottom: 1rem; }
-    .read-more {
+    .article-title {
+      font-size: 1.8rem;
       color: #3b82f6;
-      text-decoration: none;
-      font-weight: 500;
+      margin-bottom: 0.5rem;
     }
-    footer { text-align: center; margin-top: 3rem; color: #a0b0d0; font-size: 0.8rem; }
-    .footer-links { display: flex; justify-content: center; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
-    .footer-links a { color: #3b82f6; text-decoration: none; }
-    @media (max-width: 640px) { .main-nav { gap: 0.8rem; } }
+    .article-meta {
+      color: #9ca3cf;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 0.5rem;
+    }
+    .article-content {
+      line-height: 1.6;
+      color: #cbd5e6;
+    }
+    .article-content h2 {
+      color: #8b5cf6;
+      margin: 1rem 0 0.5rem;
+      font-size: 1.3rem;
+    }
+    .article-content p {
+      margin-bottom: 1rem;
+    }
+    .article-content ul, .article-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    hr {
+      border-color: rgba(255,255,255,0.1);
+      margin: 1rem 0;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #6b7280;
+      font-size: 0.8rem;
+    }
+    @media (max-width: 640px) {
+      body { padding: 1rem; }
+      .article-title { font-size: 1.3rem; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <nav class="main-nav">
+    <div class="nav-links">
       <a href="index.html">🏠 Home</a>
       <a href="about.html">📖 About</a>
       <a href="blog.html">✍️ Blog</a>
       <a href="contact.html">📧 Contact</a>
       <a href="privacy.html">🔒 Privacy</a>
       <a href="terms.html">⚖️ Terms</a>
-    </nav>
+    </div>
 
-    <h1>IT Career Blog</h1>
-    <p class="subtitle">Tips, guides, and resources for IT freshers in India</p>
+    <div class="blog-header">
+      <h1>IT Career Blog</h1>
+      <p>Tips, guides, and resources for IT freshers in India</p>
+    </div>
 
-    <div class="blog-grid">
-      
-      <article class="blog-card">
-        <div class="blog-date">📅 April 10, 2026</div>
-        <h2>How to Get Your First IT Job in 2026: A Complete Guide</h2>
-        <p>The IT job market in India is competitive but full of opportunities. Here's a step-by-step roadmap for freshers: build 2-3 solid projects, contribute to open source, network on LinkedIn, and apply strategically...</p>
-        <a href="#" class="read-more">Read More →</a>
-      </article>
+    <!-- Article 1 -->
+    <div class="article-card">
+      <div class="article-title">How to Get Your First IT Job in 2026: A Complete Guide</div>
+      <div class="article-meta">📅 April 10, 2026 | ✍️ Ram Kumar</div>
+      <div class="article-content">
+        <p>The IT job market in India is competitive but full of opportunities. Here’s a step‑by‑step roadmap for freshers:</p>
+        <h2>1. Build 2‑3 Solid Projects</h2>
+        <p>Your projects are your experience. Build a full‑stack web app, a data analysis dashboard, or a mobile app. Host them on GitHub and deploy on free platforms like Vercel or Render. Employers want to see what you can actually build.</p>
+        <h2>2. Contribute to Open Source</h2>
+        <p>Open source contributions show you can work in a team, read others’ code, and follow best practices. Start with “good first issue” labels on GitHub.</p>
+        <h2>3. Network on LinkedIn (the right way)</h2>
+        <p>Don’t just send connection requests. Post about your projects, comment on recruiters’ posts, and share what you’re learning. Recruiters notice active, genuine profiles.</p>
+        <h2>4. Apply Strategically</h2>
+        <p>Use ApplyMore to find only 0‑2 year jobs. Customise your resume for each role – match the keywords from the job description. Quality over quantity.</p>
+        <h2>5. Prepare for Technical Interviews</h2>
+        <p>Practice DSA problems on LeetCode (easy/medium), SQL queries, and be ready to explain your projects. Mock interviews help reduce anxiety.</p>
+        <p>Remember, every rejection is a step closer to the right offer. Keep improving, keep applying.</p>
+      </div>
+    </div>
 
-      <article class="blog-card">
-        <div class="blog-date">📅 April 5, 2026</div>
-        <h2>Top 10 In-Demand Skills for IT Freshers in 2026</h2>
-        <p>Companies are hiring freshers with Python, SQL, Cloud basics, and AI/ML fundamentals. Learn which skills will make your resume stand out and how to showcase them effectively...</p>
-        <a href="#" class="read-more">Read More →</a>
-      </article>
+    <!-- Article 2 -->
+    <div class="article-card">
+      <div class="article-title">Top 10 In‑Demand Skills for IT Freshers in 2026</div>
+      <div class="article-meta">📅 March 30, 2026 | ✍️ Ram Kumar</div>
+      <div class="article-content">
+        <p>Based on thousands of job postings on ApplyMore, these are the skills companies are actively hiring for:</p>
+        <ol>
+          <li><strong>Python</strong> – Data analysis, backend, automation.</li>
+          <li><strong>SQL</strong> – Every company uses databases.</li>
+          <li><strong>Cloud Basics (AWS/Azure)</strong> – EC2, S3, serverless.</li>
+          <li><strong>Git & GitHub</strong> – Version control is mandatory.</li>
+          <li><strong>JavaScript / TypeScript</strong> – Frontend and backend (Node.js).</li>
+          <li><strong>Data Structures & Algorithms</strong> – Required for coding interviews.</li>
+          <li><strong>React or Angular</strong> – Popular frontend frameworks.</li>
+          <li><strong>REST APIs</strong> – Understanding how to build and consume APIs.</li>
+          <li><strong>Basic Linux</strong> – Command line, shell scripting.</li>
+          <li><strong>AI/ML Fundamentals</strong> – Even basic knowledge of LLMs and prompt engineering is a plus.</li>
+        </ol>
+        <p>Pick 2‑3 skills to focus on first. Build a small project that combines them. Then move to the next.</p>
+      </div>
+    </div>
 
-      <article class="blog-card">
-        <div class="blog-date">📅 March 28, 2026</div>
-        <h2>Resume Tips for IT Freshers: What Recruiters Look For</h2>
-        <p>Your resume has 6 seconds to impress. Learn how to highlight internships, academic projects, and technical skills. Avoid common mistakes that get fresher resumes rejected...</p>
-        <a href="#" class="read-more">Read More →</a>
-      </article>
+    <!-- Article 3 -->
+    <div class="article-card">
+      <div class="article-title">Resume Tips for IT Freshers: What Recruiters Look For</div>
+      <div class="article-meta">📅 March 15, 2026 | ✍️ Ram Kumar</div>
+      <div class="article-content">
+        <p>Your resume has about 6 seconds to impress a recruiter. Here’s how to make it count:</p>
+        <ul>
+          <li><strong>Keep it to one page</strong> – Freshers don’t need more.</li>
+          <li><strong>Highlight projects</strong> – For each project, write what you built, the tech stack, and a measurable result (e.g., “Reduced load time by 30%”).</li>
+          <li><strong>List technical skills prominently</strong> – Programming languages, frameworks, tools.</li>
+          <li><strong>Include internships (even virtual)</strong> – Describe your contributions.</li>
+          <li><strong>Add GitHub and LinkedIn links</strong> – Make sure they are active and professional.</li>
+          <li><strong>Avoid clichés</strong> – “Hardworking”, “team player” – instead, show examples.</li>
+          <li><strong>Use a clean, ATS‑friendly format</strong> – No tables, no fancy graphics. Use standard sections: Education, Skills, Projects, Internships, Certifications.</li>
+        </ul>
+        <p>Tailor your resume for each job. Match keywords from the job description. Save different versions for different roles (Java, Python, Data Analyst).</p>
+      </div>
+    </div>
 
-      <article class="blog-card">
-        <div class="blog-date">📅 March 20, 2026</div>
-        <h2>How to Prepare for Technical Interviews (DSA + System Design)</h2>
-        <p>Most fresher interviews focus on Data Structures, Algorithms, and one project deep-dive. Here's a 4-week preparation plan using LeetCode, GFG, and mock interviews...</p>
-        <a href="#" class="read-more">Read More →</a>
-      </article>
-
-      <article class="blog-card">
-        <div class="blog-date">📅 March 15, 2026</div>
-        <h2>Remote vs. Onsite Jobs: Which is Better for Freshers?</h2>
-        <p>Remote jobs offer flexibility, but onsite roles provide mentorship. We break down the pros and cons for IT freshers starting their careers in India...</p>
-        <a href="#" class="read-more">Read More →</a>
-      </article>
-
-      <article class="blog-card">
-        <div class="blog-date">📅 March 10, 2026</div>
-        <h2>Top IT Companies Hiring Freshers in India (2026 List)</h2>
-        <p>TCS, Infosys, Wipro, Accenture, Capgemini, and many startups are hiring. Check out which companies have active fresher drives and how to apply...</p>
-        <a href="#" class="read-more">Read More →</a>
-      </article>
+    <!-- Article 4 (new) -->
+    <div class="article-card">
+      <div class="article-title">Remote vs. Onsite Jobs: Which is Better for Freshers?</div>
+      <div class="article-meta">📅 March 10, 2026 | ✍️ Ram Kumar</div>
+      <div class="article-content">
+        <p>Both remote and onsite jobs have pros and cons for freshers. Here’s a breakdown:</p>
+        <h2>Remote Jobs – Pros</h2>
+        <ul>
+          <li>Flexibility – work from anywhere.</li>
+          <li>No commute – save time and money.</li>
+          <li>Access to companies across India (not limited to your city).</li>
+        </ul>
+        <h2>Remote Jobs – Cons</h2>
+        <ul>
+          <li>Less mentorship – harder to ask quick questions.</li>
+          <li>Requires self‑discipline and good communication.</li>
+          <li>May feel isolated.</li>
+        </ul>
+        <h2>Onsite Jobs – Pros</h2>
+        <ul>
+          <li>Better mentorship – learn by watching seniors.</li>
+          <li>Build stronger relationships with colleagues.</li>
+          <li>Separate work and personal life.</li>
+        </ul>
+        <h2>Onsite Jobs – Cons</h2>
+        <ul>
+          <li>Commute and relocation costs.</li>
+          <li>Less flexibility.</li>
+        </ul>
+        <p>For freshers, onsite or hybrid roles often provide better learning opportunities. But if you are self‑motivated and have a good home setup, remote can work too. ApplyMore lists both – use the location filter to find onsite roles in your city.</p>
+      </div>
     </div>
 
     <footer>
-      <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <p>© 2026 ApplyMore. Helping IT freshers land their dream job.</p>
+      <p>© 2026 ApplyMore — Helping IT freshers land their dream job in India</p>
     </footer>
   </div>
 </body>
