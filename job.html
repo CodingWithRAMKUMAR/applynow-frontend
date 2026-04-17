@@ -88,7 +88,6 @@
       transition: all 0.3s ease;
     }
     .theme-btn:hover { background: var(--accent); }
-    /* Job header */
     .job-header {
       background: var(--glass-bg);
       backdrop-filter: blur(16px);
@@ -100,7 +99,6 @@
     .job-header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--accent); }
     .company-name { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem; }
     .job-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; }
-    /* Informational sections */
     .info-section {
       background: var(--glass-bg);
       backdrop-filter: blur(16px);
@@ -137,7 +135,6 @@
       font-size: 0.7rem;
       color: var(--accent);
     }
-    /* Full description */
     .description-section {
       background: var(--glass-bg);
       backdrop-filter: blur(16px);
@@ -148,7 +145,6 @@
     }
     .description-section h3 { font-size: 1.2rem; margin-bottom: 0.8rem; color: var(--accent); }
     .description-section p { font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary); white-space: pre-wrap; }
-    /* Similar jobs */
     .similar-jobs-section {
       background: var(--glass-bg);
       backdrop-filter: blur(16px);
@@ -179,7 +175,6 @@
     .similar-job-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; }
     .similar-job-company { font-size: 0.8rem; color: var(--accent); margin-bottom: 0.3rem; }
     .similar-job-location { font-size: 0.7rem; color: var(--text-muted); }
-    /* Apply button at bottom */
     .apply-section {
       background: linear-gradient(135deg, rgba(25, 35, 65, 0.9), rgba(20, 25, 55, 0.8));
       backdrop-filter: blur(16px);
@@ -252,7 +247,6 @@
       return urlParams.get(param);
     }
 
-    // Extract common skills
     function extractSkills(title, description) {
       const text = (title + ' ' + description).toLowerCase();
       const commonSkills = ['python', 'sql', 'java', 'javascript', 'react', 'angular', 'node.js', 'pandas', 'numpy', 'tableau', 'power bi', 'aws', 'azure', 'git', 'docker', 'kubernetes', 'django', 'flask', 'spring', 'html', 'css', 'c++', 'c#', 'typescript', 'mongodb', 'postgresql', 'mysql', 'excel'];
@@ -317,7 +311,7 @@
       const companyInitial = job.company ? job.company.trim()[0].toUpperCase() : '?';
       document.title = `${job.title} at ${job.company} – ApplyMore`;
 
-      // Helper to generate random tips (but consistent for each job)
+      // Helper content arrays
       const resumeTips = [
         "Keep your resume concise and one page – Recruiters prefer short, focused resumes.",
         "Use a clean, professional design – Simple layouts make your resume easy to read.",
@@ -340,6 +334,47 @@
         "Double‑check your contact information – email and phone number.",
         "Submit before the deadline – don't wait until the last minute.",
         "Use a professional email address – avoid nicknames or numbers."
+      ];
+      const companyCulture = [
+        "Most IT companies value continuous learning – show your curiosity in the interview.",
+        "Team collaboration is key – highlight group projects or open‑source contributions.",
+        "Innovation and problem‑solving are highly regarded – prepare examples.",
+        "Many firms offer mentorship programs for freshers – ask about them during the interview."
+      ];
+      const benefits = [
+        "Competitive salary (as per industry standards for freshers).",
+        "Health insurance and wellness programs (common in medium/large companies).",
+        "Opportunities for professional development – certifications, workshops.",
+        "Flexible work hours or remote options (depending on the role).",
+        "Performance‑based bonuses and incentives."
+      ];
+      const certifications = [
+        "AWS Certified Cloud Practitioner",
+        "Microsoft Azure Fundamentals (AZ‑900)",
+        "Google Associate Cloud Engineer",
+        "Python Institute PCEP",
+        "Oracle Certified Associate, Java SE 8 Programmer",
+        "CompTIA IT Fundamentals (ITF+)"
+      ];
+      const successStories = [
+        "Riya, a 2025 graduate, landed a Data Analyst role after using ApplyMore and following our resume tips.",
+        "Arjun, a self‑taught coder, got his first Software Engineer job through a listing on ApplyMore.",
+        "Priya improved her interview skills using our guides and secured a DevOps internship."
+      ];
+      const checklist = [
+        "☐ Read the full job description.",
+        "☐ Update your resume with relevant keywords.",
+        "☐ Prepare a tailored cover letter (optional but recommended).",
+        "☐ Check your internet connection and documents before applying.",
+        "☐ Apply before the deadline.",
+        "☐ Follow up after 1 week if no response."
+      ];
+      const commonMistakes = [
+        "❌ Submitting the same generic resume for every job.",
+        "❌ Ignoring application instructions (e.g., wrong subject line).",
+        "❌ Applying after the deadline.",
+        "❌ Not proofreading your application.",
+        "❌ Forgetting to attach required documents."
       ];
       const faq = [
         { q: "Can I apply if I'm still a student?", a: "Yes, many fresher jobs accept final‑year students. Check the eligibility section in the job description." },
@@ -404,6 +439,52 @@
             ${applicationTips.map(tip => `<li>${escapeHtml(tip)}</li>`).join('')}
           </ul>
           <p style="margin-top: 0.5rem;"><strong>Important:</strong> Only official company job openings are posted. Read the full description before applying.</p>
+        </div>
+
+        <!-- Company Culture & Benefits -->
+        <div class="info-section">
+          <h3><i class="fas fa-building"></i> Company Culture & Benefits (Typical for IT Freshers)</h3>
+          <p><strong>What to expect:</strong></p>
+          <ul>
+            ${companyCulture.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
+          <p style="margin-top: 0.5rem;"><strong>Common benefits offered:</strong></p>
+          <ul>
+            ${benefits.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
+        </div>
+
+        <!-- Recommended Certifications -->
+        <div class="info-section">
+          <h3><i class="fas fa-certificate"></i> Certifications That Add Value</h3>
+          <p>Earning any of these can boost your resume (not mandatory, but helpful):</p>
+          <div class="skill-tags">
+            ${certifications.map(cert => `<span class="skill-tag">${escapeHtml(cert)}</span>`).join('')}
+          </div>
+        </div>
+
+        <!-- Success Stories -->
+        <div class="info-section">
+          <h3><i class="fas fa-star"></i> Success Stories from ApplyMore Users</h3>
+          <ul>
+            ${successStories.map(story => `<li>✨ ${escapeHtml(story)}</li>`).join('')}
+          </ul>
+        </div>
+
+        <!-- Checklist Before Applying -->
+        <div class="info-section">
+          <h3><i class="fas fa-check-circle"></i> Checklist Before You Apply</h3>
+          <ul>
+            ${checklist.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
+        </div>
+
+        <!-- Common Mistakes to Avoid -->
+        <div class="info-section">
+          <h3><i class="fas fa-exclamation-triangle"></i> Common Mistakes Freshers Make</h3>
+          <ul>
+            ${commonMistakes.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
         </div>
 
         <!-- FAQ -->
