@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ===== FULL STYLES (same as before) ===== */
     * {
       margin: 0;
       padding: 0;
@@ -60,35 +59,9 @@
       z-index: -1;
       animation: float 20s ease-in-out infinite;
     }
-
-    .orb-1 {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, var(--accent), transparent);
-      top: -200px;
-      left: -200px;
-      animation-delay: 0s;
-    }
-
-    .orb-2 {
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, var(--purple), transparent);
-      bottom: -300px;
-      right: -200px;
-      animation-delay: -5s;
-    }
-
-    .orb-3 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, var(--pink), transparent);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: -10s;
-      opacity: 0.3;
-    }
+    .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--accent), transparent); top: -200px; left: -200px; animation-delay: 0s; }
+    .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, var(--purple), transparent); bottom: -300px; right: -200px; animation-delay: -5s; }
+    .orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, var(--pink), transparent); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -10s; opacity: 0.3; }
 
     @keyframes float {
       0%, 100% { transform: translate(0, 0) scale(1); }
@@ -117,12 +90,10 @@
       flex-wrap: wrap;
       animation: slideDown 0.5s ease;
     }
-
     @keyframes slideDown {
       from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .main-nav a {
       color: var(--text-primary);
       text-decoration: none;
@@ -133,7 +104,6 @@
       transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       position: relative;
     }
-
     .main-nav a::before {
       content: '';
       position: absolute;
@@ -145,20 +115,35 @@
       background: linear-gradient(90deg, var(--accent), var(--purple));
       transition: transform 0.3s ease;
     }
+    .main-nav a:hover::before { transform: translateX(-50%) scaleX(1); }
+    .main-nav a:hover { background: rgba(59, 130, 246, 0.15); transform: translateY(-2px); }
 
-    .main-nav a:hover::before {
-      transform: translateX(-50%) scaleX(1);
-    }
-
-    .main-nav a:hover {
-      background: rgba(59, 130, 246, 0.15);
-      transform: translateY(-2px);
-    }
-
-    .main-header {
+    /* Hero Section */
+    .hero-section {
       text-align: center;
       margin-bottom: 2rem;
       animation: fadeUp 0.6s ease;
+    }
+    .hero-section h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, var(--accent), var(--purple), var(--pink));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .hero-section p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 1rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      border-radius: 2rem;
+      padding: 0.2rem 1rem;
+      font-size: 0.8rem;
     }
 
     @keyframes fadeUp {
@@ -166,30 +151,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .main-header h1 {
-      font-size: 3.5rem;
-      background: linear-gradient(135deg, var(--accent), var(--purple), var(--pink));
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      animation: gradientShift 5s ease infinite;
-      background-size: 200% 200%;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    .badge {
-      display: inline-block;
-      background: rgba(59, 130, 246, 0.2);
-      border-radius: 2rem;
-      padding: 0.2rem 1rem;
-      font-size: 0.7rem;
-      margin-top: 0.5rem;
-    }
-
+    /* Stats */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -198,7 +160,6 @@
       animation: fadeUp 0.6s ease;
       animation-fill-mode: both;
     }
-
     .stats-grid > div:nth-child(1) { animation-delay: 0.1s; }
     .stats-grid > div:nth-child(2) { animation-delay: 0.2s; }
     .stats-grid > div:nth-child(3) { animation-delay: 0.3s; }
@@ -213,13 +174,11 @@
       transition: all 0.3s ease;
       cursor: pointer;
     }
-
     .stat-card:hover {
       transform: translateY(-5px);
       border-color: var(--accent);
       box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
     }
-
     .stat-number {
       font-size: 2.5rem;
       font-weight: 800;
@@ -228,85 +187,66 @@
       -webkit-background-clip: text;
       color: transparent;
     }
-
     .stat-label {
       font-size: 0.8rem;
       color: var(--text-secondary);
       margin-top: 0.3rem;
     }
 
-    /* New AdSense-friendly paragraph section */
-    .intro-paragraph {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
-      border-radius: 1rem;
-      padding: 1.2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .intro-paragraph p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: var(--text-secondary);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .value-section {
+    /* Services Section */
+    .services-section {
       background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
       border-radius: 1.5rem;
       padding: 2rem;
       margin-bottom: 2rem;
       border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(10px);
-      animation: fadeUp 0.6s ease;
-      animation-delay: 0.2s;
-      animation-fill-mode: both;
     }
-
-    .value-section h2 {
+    .services-section h2 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
       text-align: center;
     }
-
-    .value-section > p {
+    .services-section > p {
       text-align: center;
       color: var(--text-secondary);
       margin-bottom: 1.5rem;
     }
-
-    .tips-grid {
+    .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
-
-    .tip-card {
+    .service-card {
       background: rgba(255, 255, 255, 0.03);
       border-radius: 1rem;
-      padding: 1.2rem;
-      border-left: 3px solid var(--accent);
+      padding: 1.5rem;
+      text-align: center;
       transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
-
-    .tip-card:hover {
-      transform: translateX(8px);
+    .service-card:hover {
+      transform: translateY(-5px);
       background: rgba(59, 130, 246, 0.1);
+      border-color: var(--accent);
     }
-
-    .tip-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      color: var(--accent);
-    }
-
-    .tip-card p {
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .service-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--accent); }
+    .service-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+    .service-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      text-decoration: none;
       font-size: 0.8rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
+      transition: 0.3s;
     }
+    .service-btn:hover { background: var(--accent-dark); transform: scale(1.02); }
 
+    /* Community Section */
     .community-section {
       background: rgba(15, 25, 45, 0.6);
       backdrop-filter: blur(16px);
@@ -315,11 +255,7 @@
       margin-bottom: 2rem;
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      animation: fadeUp 0.6s ease;
-      animation-delay: 0.15s;
-      animation-fill-mode: both;
     }
-
     .community-section h2 {
       font-size: 1.6rem;
       margin-bottom: 0.5rem;
@@ -328,20 +264,17 @@
       -webkit-background-clip: text;
       color: transparent;
     }
-
     .community-section p {
       color: var(--text-secondary);
       margin-bottom: 1.5rem;
       font-size: 0.9rem;
     }
-
     .social-buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 1.2rem;
     }
-
     .social-btn {
       display: inline-flex;
       align-items: center;
@@ -357,31 +290,14 @@
       transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       backdrop-filter: blur(8px);
     }
+    .social-btn i { font-size: 1.2rem; }
+    .social-btn.whatsapp-group { background: linear-gradient(135deg, #25D366, #128C7E); border: none; }
+    .social-btn.whatsapp-community { background: linear-gradient(135deg, #075E54, #25D366); border: none; }
+    .social-btn.linkedin { background: linear-gradient(135deg, #0077B5, #0A66C2); border: none; }
+    .social-btn.telegram { background: linear-gradient(135deg, #26A5E4, #0088cc); border: none; }
+    .social-btn:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); }
 
-    .social-btn i {
-      font-size: 1.2rem;
-    }
-
-    .social-btn.whatsapp-group {
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      border: none;
-    }
-
-    .social-btn.whatsapp-community {
-      background: linear-gradient(135deg, #075E54, #25D366);
-      border: none;
-    }
-
-    .social-btn.linkedin {
-      background: linear-gradient(135deg, #0077B5, #0A66C2);
-      border: none;
-    }
-
-    .social-btn:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-
+    /* Controls */
     .controls {
       display: flex;
       gap: 1rem;
@@ -394,20 +310,8 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       align-items: center;
     }
-
-    .search-box {
-      flex: 2;
-      position: relative;
-    }
-
-    .search-box i {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-secondary);
-    }
-
+    .search-box { flex: 2; position: relative; }
+    .search-box i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
     .search-box input {
       width: 100%;
       padding: 0.8rem 1rem 0.8rem 2.5rem;
@@ -418,13 +322,7 @@
       color: var(--text-primary);
       transition: all 0.3s ease;
     }
-
-    .search-box input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-    }
-
+    .search-box input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
     .location-filter select {
       padding: 0.8rem 1.2rem;
       background: rgba(0, 0, 0, 0.3);
@@ -434,13 +332,7 @@
       color: var(--text-primary);
       cursor: pointer;
     }
-
-    .filter-buttons {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
+    .filter-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .filter-btn {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -451,18 +343,8 @@
       color: var(--text-primary);
       transition: all 0.3s ease;
     }
-
-    .filter-btn:hover {
-      background: rgba(59, 130, 246, 0.2);
-      transform: translateY(-2px);
-    }
-
-    .filter-btn.active {
-      background: linear-gradient(135deg, var(--accent), var(--purple));
-      border-color: transparent;
-      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-    }
-
+    .filter-btn:hover { background: rgba(59, 130, 246, 0.2); transform: translateY(-2px); }
+    .filter-btn.active { background: linear-gradient(135deg, var(--accent), var(--purple)); border-color: transparent; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3); }
     .reset-btn {
       background: linear-gradient(135deg, var(--accent), var(--purple));
       border: none;
@@ -473,18 +355,15 @@
       font-size: 0.85rem;
       transition: all 0.3s ease;
     }
+    .reset-btn:hover { transform: scale(1.02); box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3); }
 
-    .reset-btn:hover {
-      transform: scale(1.02);
-      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-    }
-
+    /* Job Cards */
     .jobs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 1.5rem;
+      margin-top: 1rem;
     }
-
     .job-card {
       background: linear-gradient(135deg, rgba(25, 35, 65, 0.8), rgba(20, 25, 55, 0.7));
       backdrop-filter: blur(10px);
@@ -495,8 +374,10 @@
       cursor: pointer;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
     }
-
     .job-card::before {
       content: '';
       position: absolute;
@@ -507,64 +388,35 @@
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
       transition: left 0.5s ease;
     }
-
-    .job-card:hover::before {
-      left: 100%;
-    }
-
-    .job-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--accent);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.15);
-    }
-
-    .job-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+    .job-card:hover::before { left: 100%; }
+    .job-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.15); }
+    .card-company-row { display: flex; align-items: center; gap: 0.8rem; }
+    .company-logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--purple));
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .company {
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-      font-size: 0.9rem;
-    }
-
-    .location {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.5rem;
-    }
-
-    .description {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-      line-height: 1.5;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .exp-tag {
-      font-size: 0.7rem;
-      padding: 0.2rem 0.7rem;
-      border-radius: 1rem;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-transform: uppercase;
       color: white;
-      font-weight: 500;
+      flex-shrink: 0;
     }
-
+    .company-details { flex: 1; }
+    .company-name { font-size: 0.9rem; font-weight: 600; color: var(--accent); }
+    .job-type-badge { font-size: 0.65rem; background: rgba(255,255,255,0.1); padding: 0.2rem 0.5rem; border-radius: 1rem; display: inline-block; margin-top: 0.2rem; }
+    .job-title { font-size: 1.1rem; font-weight: 700; margin: 0.2rem 0; }
+    .location { font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.3rem; }
+    .description { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.2rem; }
+    .posted-date { font-size: 0.7rem; color: var(--text-muted); }
+    .exp-tag { font-size: 0.7rem; padding: 0.2rem 0.7rem; border-radius: 1rem; color: white; font-weight: 500; }
     .exp-tag.fresher { background: linear-gradient(135deg, var(--purple), #a855f7); }
     .exp-tag.mid { background: linear-gradient(135deg, var(--warning), #f97316); }
     .exp-tag.senior { background: linear-gradient(135deg, var(--danger), #dc2626); }
-
     .view-details {
       display: inline-flex;
       align-items: center;
@@ -576,146 +428,32 @@
       text-decoration: none;
       font-size: 0.8rem;
       transition: all 0.3s ease;
+      align-self: flex-end;
     }
+    .view-details:hover { gap: 0.8rem; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3); }
 
-    .view-details:hover {
-      gap: 0.8rem;
-      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-    }
+    .skeleton-card { background: linear-gradient(135deg, rgba(25, 35, 65, 0.5), rgba(20, 25, 55, 0.4)); border-radius: 1rem; padding: 1.2rem; animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
+    .skeleton-title { width: 80%; height: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 0.5rem; margin-bottom: 0.5rem; }
+    .skeleton-text { width: 60%; height: 15px; background: rgba(255, 255, 255, 0.08); border-radius: 0.5rem; margin-bottom: 0.3rem; }
+    .empty-message { text-align: center; padding: 3rem; color: var(--text-secondary); background: rgba(15, 25, 45, 0.6); backdrop-filter: blur(16px); border-radius: 1rem; }
 
-    .deadline {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin: 0.5rem 0;
-    }
+    footer { text-align: center; margin-top: 3rem; color: var(--text-muted); font-size: 0.8rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin: 1rem 0; flex-wrap: wrap; }
+    .footer-links a { color: var(--accent); text-decoration: none; transition: all 0.3s ease; }
+    .footer-links a:hover { color: var(--purple); }
 
-    .skeleton-card {
-      background: linear-gradient(135deg, rgba(25, 35, 65, 0.5), rgba(20, 25, 55, 0.4));
-      border-radius: 1rem;
-      padding: 1.2rem;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
+    .top-bar { display: flex; justify-content: flex-end; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; }
+    .theme-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 2rem; padding: 0.3rem 0.8rem; cursor: pointer; font-size: 0.7rem; color: var(--text-primary); transition: all 0.3s ease; }
+    .theme-btn:hover { background: var(--accent); transform: scale(1.05); }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 0.8; }
-    }
-
-    .skeleton-title {
-      width: 80%;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .skeleton-text {
-      width: 60%;
-      height: 15px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 0.5rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .empty-message {
-      text-align: center;
-      padding: 3rem;
-      color: var(--text-secondary);
-      background: rgba(15, 25, 45, 0.6);
-      backdrop-filter: blur(16px);
-      border-radius: 1rem;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1rem 0;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--purple);
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .theme-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 2rem;
-      padding: 0.3rem 0.8rem;
-      cursor: pointer;
-      font-size: 0.7rem;
-      color: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .theme-btn:hover {
-      background: var(--accent);
-      transform: scale(1.05);
-    }
-
-    .add-link-box {
-      background: rgba(15, 25, 45, 0.6);
-      backdrop-filter: blur(16px);
-      border-radius: 1.5rem;
-      padding: 0.8rem 1rem;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .add-link-box input {
-      flex: 2;
-      padding: 0.5rem 0.8rem;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 2rem;
-      font-size: 0.8rem;
-      color: var(--text-primary);
-    }
-
-    .add-link-box button {
-      background: var(--accent);
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      color: white;
-      cursor: pointer;
-    }
-
-    .links-list {
-      flex: 2;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-    }
+    .add-link-box { background: rgba(15, 25, 45, 0.6); backdrop-filter: blur(16px); border-radius: 1.5rem; padding: 0.8rem 1rem; margin-bottom: 1rem; border: 1px solid rgba(255, 255, 255, 0.08); display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+    .add-link-box input { flex: 2; padding: 0.5rem 0.8rem; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 2rem; font-size: 0.8rem; color: var(--text-primary); }
+    .add-link-box button { background: var(--accent); border: none; padding: 0.5rem 1rem; border-radius: 2rem; color: white; cursor: pointer; }
+    .links-list { flex: 2; display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
     @media (max-width: 768px) {
-      .main-header h1 { font-size: 2rem; }
+      .hero-section h1 { font-size: 2rem; }
       .controls { flex-direction: column; align-items: stretch; }
       .filter-buttons { justify-content: center; }
       .main-nav { gap: 0.8rem; padding: 0.8rem 1rem; }
@@ -725,13 +463,7 @@
       .social-buttons { flex-direction: column; align-items: center; }
       .social-btn { width: 80%; justify-content: center; }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
   </style>
 </head>
 <body>
@@ -750,12 +482,14 @@
       <a href="terms.html">⚖️ Terms</a>
     </nav>
 
-    <div class="main-header">
+    <!-- Hero Section -->
+    <div class="hero-section">
       <h1>ApplyMore</h1>
       <p>⚡ Apply more. Get hired faster. ⚡</p>
-      <div class="badge">✨ Trusted by 10,000+ IT freshers ✨</div>
+      <div class="hero-badge">✨ Trusted by 10,000+ IT freshers ✨</div>
     </div>
 
+    <!-- Stats -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-number" id="totalJobsCount">0</div>
@@ -771,36 +505,40 @@
       </div>
     </div>
 
-    <!-- New AdSense-friendly introductory paragraph -->
-    <div class="intro-paragraph">
-      <p>ApplyMore aggregates the latest IT jobs for freshers and junior professionals in Hyderabad, Chennai, Mumbai, Pune, and Gurugram. We filter out senior roles so you only see jobs that match your experience level (0‑2 years). Updated daily from public sources. <strong>No premium plans. No hidden charges. Forever free.</strong></p>
-    </div>
-
-    <div class="value-section">
+    <!-- Services Section -->
+    <div class="services-section">
       <h2>🎯 Your IT Career Starts Here</h2>
       <p>Handpicked entry-level IT jobs from across India — no spam, just real opportunities</p>
-      <div class="tips-grid">
-        <div class="tip-card"><h3>📝 Resume Tips</h3><p>Highlight internships, projects, and technical skills. Keep it under 1 page.</p></div>
-        <div class="tip-card"><h3>💡 Interview Prep</h3><p>Practice DSA problems. Prepare to explain 2-3 projects in depth.</p></div>
-        <div class="tip-card"><h3>🚀 Top Skills 2025</h3><p>Python, SQL, Cloud, Git, AI/ML fundamentals.</p></div>
-        <div class="tip-card"><h3>📅 Daily Updates</h3><p>We scrape LinkedIn & Indeed every 12 hours. Check daily!</p></div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-code"></i></div>
+          <h3>Skills You Need</h3>
+          <p>Python, SQL, Cloud basics, Git, JavaScript, DSA – these are the top skills companies are hiring for in 2026.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-file-alt"></i></div>
+          <h3>Resume That Gets Noticed</h3>
+          <p>One page, project-focused, ATS-friendly. Highlight internships and GitHub links. Avoid clichés.</p>
+          <a href="contact.html" class="service-btn">Get Resume Review →</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-chalkboard-user"></i></div>
+          <h3>Free Interview Prep</h3>
+          <p>Mock interviews, common DSA questions, and company-specific tips. We're here to help.</p>
+          <a href="contact.html" class="service-btn">Request a Session →</a>
+        </div>
       </div>
     </div>
 
-    <!-- Community Section -->
+    <!-- Community Section (with Telegram) -->
     <div class="community-section">
       <h2>🌐 Join Our Community</h2>
       <p>Get daily job alerts, career tips, and connect with fellow job seekers</p>
       <div class="social-buttons">
-        <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="social-btn whatsapp-group">
-          <i class="fab fa-whatsapp"></i> WhatsApp Group
-        </a>
-        <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank" class="social-btn whatsapp-community">
-          <i class="fab fa-whatsapp"></i> WhatsApp Community
-        </a>
-        <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="social-btn linkedin">
-          <i class="fab fa-linkedin-in"></i> LinkedIn
-        </a>
+        <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="social-btn whatsapp-group"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+        <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank" class="social-btn whatsapp-community"><i class="fab fa-whatsapp"></i> WhatsApp Community</a>
+        <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="social-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="social-btn telegram"><i class="fab fa-telegram"></i> Telegram</a>
       </div>
     </div>
 
@@ -817,6 +555,7 @@
       <div class="links-list" id="linksList"></div>
     </div>
 
+    <!-- Controls -->
     <div class="controls">
       <div class="search-box">
         <i class="fas fa-search"></i>
@@ -846,6 +585,7 @@
       <button id="resetFiltersBtn" class="reset-btn">Reset Filters</button>
     </div>
 
+    <!-- Jobs Container -->
     <div id="jobsContainer" class="jobs-grid">
       <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text"></div></div>
       <div class="skeleton-card"><div class="skeleton-title"></div><div class="skeleton-text"></div><div class="skeleton-text"></div></div>
@@ -869,10 +609,18 @@
 
   <script>
     // ============================================
-    // SUPABASE CONFIGURATION
+    // UTILITY FUNCTIONS
     // ============================================
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
+
+    // Decode HTML entities (e.g., &#x1f680; → 🚀)
+    function decodeHtmlEntities(str) {
+      if (!str) return '';
+      const textarea = document.createElement('textarea');
+      textarea.innerHTML = str;
+      return textarea.value;
+    }
 
     let allJobs = [];
     let currentFilter = 'fresher';
@@ -891,6 +639,14 @@
       const fresherKeywords = ['fresher', 'entry level', 'entry-level', 'junior', 'graduate', 'trainee', 'recent graduate', 'new grad', '0 years', 'zero years', 'no experience'];
       for (let kw of fresherKeywords) if (text.includes(kw)) return 'fresher';
       return 'mid';
+    }
+
+    function getJobType(title) {
+      const t = title.toLowerCase();
+      if (t.includes('intern')) return 'Internship';
+      if (t.includes('trainee')) return 'Trainee';
+      if (t.includes('contract')) return 'Contract';
+      return 'Full-time';
     }
 
     function formatDate(dateString) {
@@ -969,17 +725,26 @@
       container.innerHTML = filtered.map(job => {
         const level = getExperienceLevel(job);
         let tagText = level === 'fresher' ? 'Fresher' : (level === 'mid' ? '1-2 Years' : '3+ Years');
+        const jobType = getJobType(job.title);
+        const companyInitial = (job.company && job.company.trim()) ? job.company.trim()[0].toUpperCase() : '?';
+        const decodedDesc = decodeHtmlEntities(job.description || '');
         return `
           <div class="job-card" data-job-id="${job.id}">
-            <div class="job-title">
-              <span>${escapeHtml(job.title)}</span>
+            <div class="card-company-row">
+              <div class="company-logo">${escapeHtml(companyInitial)}</div>
+              <div class="company-details">
+                <div class="company-name">${escapeHtml(job.company)}</div>
+                <div class="job-type-badge">${jobType}</div>
+              </div>
+            </div>
+            <div class="job-title">${escapeHtml(job.title)}</div>
+            <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
+            <div class="description">${escapeHtml(decodedDesc.substring(0, 120))}...</div>
+            <div class="card-footer">
+              <span class="posted-date">📅 Posted: ${formatDate(job.posted_date || job.created_at)}</span>
               <span class="exp-tag ${level}">${tagText}</span>
             </div>
-            <div class="company"><i class="fas fa-building"></i> ${escapeHtml(job.company)}</div>
-            <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
-            <div class="description">${escapeHtml((job.description || '').substring(0, 120))}...</div>
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-              <span class="deadline">📅 Posted: ${formatDate(job.posted_date || job.created_at)}</span>
+            <div style="display: flex; justify-content: flex-end;">
               <a href="#" class="view-details" data-job-id="${job.id}">View Details <i class="fas fa-arrow-right"></i></a>
             </div>
           </div>
@@ -1034,24 +799,9 @@
 
     function setTheme(theme) {
       const themes = {
-        dark: {
-          '--glass-bg': 'rgba(15, 25, 45, 0.65)',
-          '--card-bg': 'linear-gradient(135deg, rgba(25, 35, 65, 0.8), rgba(20, 25, 55, 0.7))',
-          '--text-primary': '#f0f3ff',
-          '--text-secondary': '#9ca3cf'
-        },
-        light: {
-          '--glass-bg': 'rgba(255, 255, 255, 0.75)',
-          '--card-bg': 'linear-gradient(135deg, rgba(245, 245, 255, 0.9), rgba(235, 235, 255, 0.85))',
-          '--text-primary': '#1e293b',
-          '--text-secondary': '#475569'
-        },
-        vibrant: {
-          '--glass-bg': 'rgba(255, 240, 245, 0.75)',
-          '--card-bg': 'linear-gradient(135deg, rgba(255, 235, 245, 0.9), rgba(255, 225, 235, 0.85))',
-          '--text-primary': '#831843',
-          '--text-secondary': '#9d174d'
-        }
+        dark: { '--glass-bg': 'rgba(15, 25, 45, 0.65)', '--card-bg': 'linear-gradient(135deg, rgba(25, 35, 65, 0.8), rgba(20, 25, 55, 0.7))', '--text-primary': '#f0f3ff', '--text-secondary': '#9ca3cf' },
+        light: { '--glass-bg': 'rgba(255, 255, 255, 0.75)', '--card-bg': 'linear-gradient(135deg, rgba(245, 245, 255, 0.9), rgba(235, 235, 255, 0.85))', '--text-primary': '#1e293b', '--text-secondary': '#475569' },
+        vibrant: { '--glass-bg': 'rgba(255, 240, 245, 0.75)', '--card-bg': 'linear-gradient(135deg, rgba(255, 235, 245, 0.9), rgba(255, 225, 235, 0.85))', '--text-primary': '#831843', '--text-secondary': '#9d174d' }
       };
       const selected = themes[theme];
       if (selected) {
@@ -1082,9 +832,7 @@
         localStorage.setItem('recommendedLinks', JSON.stringify(recommendedLinks));
         renderLinks();
         alert('Link added!');
-      } catch(e) {
-        alert('Invalid URL');
-      }
+      } catch(e) { alert('Invalid URL'); }
     }
 
     document.getElementById('lightTheme')?.addEventListener('click', () => setTheme('light'));
