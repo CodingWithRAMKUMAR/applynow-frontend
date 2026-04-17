@@ -553,5 +553,19 @@
 
     fetchJob();
   </script>
+  <!-- Cookie Consent Banner -->
+<div id="cookieConsent" style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15,25,45,0.95); backdrop-filter: blur(10px); border-top: 1px solid rgba(59,130,246,0.3); padding: 1rem; text-align: center; z-index: 1000; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1rem; font-size: 0.85rem;">
+  <span>🍪 We use cookies to improve your experience and for AdSense personalisation. By using our site, you accept our <a href="privacy.html" style="color: #3b82f6;">Privacy Policy</a>.</span>
+  <button id="acceptCookies" style="background: #3b82f6; border: none; padding: 0.4rem 1rem; border-radius: 2rem; color: white; cursor: pointer;">Accept</button>
+</div>
+<script>
+  if (localStorage.getItem('cookiesAccepted') === 'true') {
+    document.getElementById('cookieConsent').style.display = 'none';
+  }
+  document.getElementById('acceptCookies')?.addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'true');
+    document.getElementById('cookieConsent').style.display = 'none';
+  });
+</script>
 </body>
 </html>
