@@ -2,643 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>About ApplyMore – Helping IT Freshers Land Their Dream Jobs</title>
-  <meta name="description" content="Learn about ApplyMore's mission to help IT freshers find jobs. Founded by Ram, a software engineer passionate about helping new graduates succeed.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – ApplyMore</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --accent: #3b82f6;
-      --accent-dark: #2563eb;
-      --purple: #8b5cf6;
-      --pink: #ec489a;
-      --bg: #0a0a2a;
-      --card-bg: rgba(20, 25, 55, 0.9);
-      --text: #f0f3ff;
-      --text-muted: #b9c3e0;
-      --border: rgba(255, 255, 255, 0.1);
-      --success: #10b981;
-      --warning: #f59e0b;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-    body.light {
-      --bg: #f8fafc;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --text: #1e293b;
-      --text-muted: #334155;
-      --border: rgba(0, 0, 0, 0.1);
-    }
-    body.vibrant {
-      --bg: #fdf2f8;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --text: #831843;
-      --text-muted: #9d174d;
-      --accent: #ec489a;
-    }
-    .gradient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 30% 20%, #1a1a4a, #0a0a2a);
-      z-index: -1;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem;
-      position: relative;
-      z-index: 2;
-    }
-    .main-nav {
-      background: var(--card-bg);
-      border-radius: 2rem;
-      padding: 0.5rem 1rem;
-      margin-bottom: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-    }
-    .main-nav a {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.85rem;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2rem;
-      transition: 0.3s;
-    }
-    .main-nav a:hover, .main-nav a.active {
-      background: var(--accent);
-      color: white;
-    }
-    .theme-bar {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    .theme-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      border-radius: 2rem;
-      padding: 0.3rem 0.8rem;
-      cursor: pointer;
-      font-size: 0.7rem;
-      color: var(--text);
-      transition: all 0.3s ease;
-    }
-    .theme-btn:hover { background: var(--accent); color: white; }
-    .hero {
-      text-align: center;
-      margin-bottom: 3rem;
-      background: var(--card-bg);
-      border-radius: 2rem;
-      padding: 2rem;
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(135deg, var(--accent), var(--purple));
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .section {
-      background: var(--card-bg);
-      border-radius: 1.5rem;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-    }
-    .section h2 {
-      font-size: 1.8rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .section h3 {
-      font-size: 1.3rem;
-      color: var(--accent);
-      margin: 1.5rem 0 0.8rem 0;
-    }
-    .section p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-    .section ul {
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .section li {
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-    .stat-card {
-      background: rgba(59, 130, 246, 0.1);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      text-align: center;
-      border: 1px solid rgba(59, 130, 246, 0.2);
-    }
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent), var(--purple));
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      display: block;
-    }
-    .stat-label {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-    }
-    .founder-card {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-      border-radius: 1.5rem;
-      padding: 2rem;
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      margin: 2rem 0;
-    }
-    .founder-info {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .founder-avatar {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--accent), var(--purple));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 700;
-      color: white;
-    }
-    .founder-details h3 {
-      font-size: 1.5rem;
-      color: var(--accent);
-      margin: 0 0 0.3rem 0;
-    }
-    .founder-details p {
-      color: var(--text-muted);
-      margin: 0;
-    }
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      color: white;
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: 0.3s;
-    }
-    .social-link.linkedin { background: #0077B5; }
-    .social-link.github { background: #333; }
-    .social-link.email { background: var(--accent); }
-    .social-link:hover { transform: translateY(-2px); }
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0.5rem;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent), var(--purple));
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2rem;
-      padding-left: 1.5rem;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -0.5rem;
-      top: 0.5rem;
-      width: 12px;
-      height: 12px;
-      background: var(--accent);
-      border-radius: 50%;
-      border: 3px solid var(--bg);
-    }
-    .timeline-date {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-    .timeline-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    .timeline-desc {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-    .feature-card {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      text-align: center;
-    }
-    .feature-icon {
-      font-size: 2.5rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-    .feature-card h3 {
-      font-size: 1.2rem;
-      margin: 0 0 0.8rem 0;
-      color: var(--accent);
-    }
-    .feature-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin: 0;
-    }
-    .cta-section {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-      border-radius: 1.5rem;
-      padding: 2rem;
-      text-align: center;
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      margin: 2rem 0;
-    }
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-    }
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      border-radius: 2rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .cta-btn.primary {
-      background: var(--accent);
-      color: white;
-    }
-    .cta-btn.secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .cta-btn:hover {
-      transform: translateY(-2px);
-    }
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      padding: 2rem;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    @media (max-width: 640px) {
-      .container { padding: 1rem; }
-      .hero h1 { font-size: 2rem; }
-      .founder-info { flex-direction: column; text-align: center; }
-      .social-links { justify-content: center; }
-      .cta-buttons { flex-direction: column; align-items: center; }
-    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--bg:#0a0a2a;--card-bg:rgba(20,20,50,0.65);--text:#f0f3ff;--text-muted:#9ca3cf;--border:rgba(255,255,255,0.1);--accent:#3b82f6}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:2rem;line-height:1.6}
+    body.light{--bg:#f8fafc;--card-bg:rgba(255,255,255,0.85);--text:#1e293b;--text-muted:#475569;--border:rgba(0,0,0,0.1);--accent:#2563eb}
+    body.vibrant{--bg:#fdf2f8;--card-bg:rgba(255,255,255,0.9);--text:#831843;--text-muted:#9d174d;--accent:#ec489a}
+    .container{max-width:800px;margin:0 auto}
+    .about-card{background:var(--card-bg);backdrop-filter:blur(10px);border-radius:1rem;padding:2rem;border:1px solid var(--border)}
+    h1{color:var(--accent);margin-bottom:0.5rem}
+    h2{color:var(--accent);margin:1.5rem 0 0.5rem}
+    p{margin-bottom:1rem;color:var(--text-muted)}
+    .highlight{background:rgba(59,130,246,0.1);padding:1rem;border-radius:0.5rem;margin:1rem 0;border-left:3px solid var(--accent)}
+    .quote{font-style:italic;padding:1rem;background:rgba(0,0,0,0.2);border-radius:0.5rem;margin:1rem 0}
+    .nav-links{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+    .nav-links a{color:var(--text-muted);text-decoration:none}
+    .nav-links a:hover{color:var(--accent)}
+    .top-bar{display:flex;justify-content:flex-end;gap:0.5rem;margin-bottom:1rem}
+    .theme-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:2rem;padding:0.2rem 0.6rem;cursor:pointer;font-size:0.7rem;color:var(--text)}
   </style>
-  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-  <div class="gradient-bg"></div>
-  
-  <div class="container">
-    <div class="theme-bar">
-      <button class="theme-btn" id="lightTheme">Light</button>
-      <button class="theme-btn" id="darkTheme">Dark</button>
-      <button class="theme-btn" id="vibrantTheme">Vibrant</button>
-    </div>
-
-    <nav class="main-nav">
-      <a href="index.html">🏠 Home</a>
-      <a href="about.html" class="active">📖 About</a>
-      <a href="blog.html">✍️ Blog</a>
-      <a href="contact.html">📧 Contact</a>
-      <a href="privacy.html">🔒 Privacy</a>
-      <a href="terms.html">⚖️ Terms</a>
-    </nav>
-
-    <div class="hero">
-      <h1>About ApplyMore</h1>
-      <p>We're on a mission to help every IT fresher in India land their dream job. No gatekeeping, no premium features – just real opportunities and genuine support.</p>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card">
-        <span class="stat-number">10,000+</span>
-        <div class="stat-label">IT Freshers Helped</div>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">500+</span>
-        <div class="stat-label">Jobs Posted Daily</div>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">50+</span>
-        <div class="stat-label">Partner Companies</div>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">100%</span>
-        <div class="stat-label">Free Forever</div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
-      <p>The IT job market in India is tough for freshers. Despite having the skills, many graduates struggle to find their first opportunity. We believe every talented individual deserves a fair chance.</p>
-      
-      <p>ApplyMore bridges this gap by:</p>
-      <ul>
-        <li><strong>Curating genuine opportunities</strong> – We filter out fake postings and focus on real jobs</li>
-        <li><strong>Providing career guidance</strong> – Resume tips, interview prep, and skill development advice</li>
-        <li><strong>Building a supportive community</strong> – Connect with peers, share experiences, and grow together</li>
-        <li><strong>Staying completely free</strong> – No hidden costs, no premium tiers, just pure value</li>
-      </ul>
-    </div>
-
-    <div class="founder-card">
-      <div class="founder-info">
-        <div class="founder-avatar">R</div>
-        <div class="founder-details">
-          <h3>Ram Kumar Badavath</h3>
-          <p>Founder & Software Engineer</p>
-          <p>Passionate about helping freshers succeed in tech</p>
-        </div>
-      </div>
-      
-      <p>Hi! I'm Ram, a software engineer who remembers the struggle of finding that first job. After seeing countless talented freshers struggle with the job search process, I decided to build something that could actually help.</p>
-      
-      <p>ApplyMore started as a simple idea: what if there was a platform that genuinely cared about helping freshers, without trying to monetize their desperation? Today, we've helped thousands of IT graduates take their first step into the industry.</p>
-      
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/ramkumarbadavath/" target="_blank" class="social-link linkedin" rel="noopener">
-          <i class="fab fa-linkedin-in"></i> LinkedIn
-        </a>
-        <a href="https://github.com/ramkumarbadavath" target="_blank" class="social-link github" rel="noopener">
-          <i class="fab fa-github"></i> GitHub
-        </a>
-        <a href="mailto:connectwithme.ramkumar@gmail.com" class="social-link email">
-          <i class="fas fa-envelope"></i> Email
-        </a>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2><i class="fas fa-history"></i> Our Journey</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-date">January 2024</div>
-          <div class="timeline-title">The Idea</div>
-          <div class="timeline-desc">Ram noticed the gap between talented freshers and available opportunities. Started collecting job postings manually.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">March 2024</div>
-          <div class="timeline-title">First Website Launch</div>
-          <div class="timeline-desc">Launched the first version of ApplyMore with basic job listings and filtering.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">June 2024</div>
-          <div class="timeline-title">Community Building</div>
-          <div class="timeline-desc">Started WhatsApp groups and Telegram channels to build a supportive community.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">September 2024</div>
-          <div class="timeline-title">1,000 Users</div>
-          <div class="timeline-desc">Reached our first milestone of 1,000 active users and 100+ successful placements.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">December 2024</div>
-          <div class="timeline-title">Major Redesign</div>
-          <div class="timeline-desc">Complete platform overhaul with better UX, mobile optimization, and advanced features.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">April 2026</div>
-          <div class="timeline-title">10,000+ Community</div>
-          <div class="timeline-desc">Proud to serve over 10,000 IT freshers with daily job updates and career guidance.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2><i class="fas fa-star"></i> What Makes Us Different</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-heart"></i></div>
-          <h3>Genuinely Free</h3>
-          <p>No hidden costs, no premium features. We believe job searching shouldn't cost money.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3>Quality First</h3>
-          <p>We manually verify job postings to ensure they're legitimate and worth your time.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-users"></i></div>
-          <h3>Community Driven</h3>
-          <p>Built by freshers, for freshers. We understand your challenges because we've been there.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-rocket"></i></div>
-          <h3>Career Growth</h3>
-          <p>Beyond job listings – we provide resume tips, interview prep, and skill guidance.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2><i class="fas fa-chart-line"></i> Our Impact</h2>
-      <p>Since launching, ApplyMore has become a trusted resource for IT freshers across India. Here's what we've achieved together:</p>
-      
-      <h3>Success Stories</h3>
-      <ul>
-        <li><strong>2,500+ successful placements</strong> in companies ranging from startups to Fortune 500</li>
-        <li><strong>Average salary increase of 40%</strong> for users who followed our guidance</li>
-        <li><strong>85% job application success rate</strong> for users who optimized their resumes with our tips</li>
-        <li><strong>Active community of 10,000+ members</strong> supporting each other's growth</li>
-      </ul>
-
-      <h3>What Our Users Say</h3>
-      <p><em>"ApplyMore helped me land my first job at a great startup. The community support was incredible!"</em> – Priya, Software Developer</p>
-      <p><em>"Finally, a platform that actually cares about freshers. No spam, just real opportunities."</em> – Arjun, Data Analyst</p>
-      <p><em>"The resume tips and interview prep made all the difference. Got 3 offers in 2 weeks!"</em> – Sneha, Frontend Developer</p>
-    </div>
-
-    <div class="cta-section">
-      <h2>Ready to Start Your IT Career?</h2>
-      <p>Join thousands of freshers who've found their dream jobs through ApplyMore. It's completely free, and we're here to support you every step of the way.</p>
-      
-      <div class="cta-buttons">
-        <a href="index.html" class="cta-btn primary">
-          <i class="fas fa-search"></i> Browse Jobs
-        </a>
-        <a href="contact.html" class="cta-btn secondary">
-          <i class="fas fa-envelope"></i> Get in Touch
-        </a>
-      </div>
-    </div>
-
-    <footer>
-      <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="blog.html">Blog</a>
-      </div>
-      <p>© 2026 ApplyMore. Made with ❤️ by Ram for the IT fresher community.</p>
-      <p>Helping you apply more and get hired faster.</p>
-    </footer>
+<div class="container">
+  <div class="top-bar">
+    <button class="theme-btn" id="lightTheme">Light</button>
+    <button class="theme-btn" id="darkTheme">Dark</button>
+    <button class="theme-btn" id="vibrantTheme">Vibrant</button>
   </div>
-
-  <!-- Cookie Consent Banner -->
-  <div id="cookieConsent" style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15,25,45,0.95); backdrop-filter: blur(10px); border-top: 1px solid rgba(59,130,246,0.3); padding: 0.8rem; text-align: center; z-index: 1000; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.8rem; font-size: 0.8rem;">
-    <span>🍪 We use cookies to improve your experience. <a href="privacy.html" style="color: #3b82f6;">Privacy Policy</a></span>
-    <button id="acceptCookies" style="background: #3b82f6; border: none; padding: 0.4rem 1rem; border-radius: 2rem; color: white; cursor: pointer;">Accept</button>
+  <div class="nav-links">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">📖 About</a>
+    <a href="blog.html">✍️ Blog</a>
+    <a href="contact.html">📧 Contact</a>
+    <a href="privacy.html">🔒 Privacy</a>
+    <a href="terms.html">⚖️ Terms</a>
   </div>
-
-  <!-- Feedback Widget -->
-  <div id="feedbackWidget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
-    <button id="feedbackBtn" style="background: #3b82f6; border: none; padding: 0.5rem 1rem; border-radius: 2rem; color: white; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
-      💬 Quick Feedback
-    </button>
-    <div id="feedbackForm" style="display: none; background: rgba(20, 20, 50, 0.95); padding: 1rem; border-radius: 1rem; margin-top: 0.5rem; width: 300px; border: 1px solid #3b82f6;">
-      <textarea id="feedbackText" placeholder="Found a bug? Have a suggestion? Tell Ram..." style="width: 100%; height: 80px; margin-bottom: 0.5rem; padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #3b82f6; background: rgba(0,0,0,0.3); color: white;"></textarea>
-      <button onclick="submitFeedback()" style="background: #3b82f6; border: none; padding: 0.3rem 0.8rem; border-radius: 1rem; color: white; cursor: pointer;">Send to Ram</button>
-      <button onclick="closeFeedback()" style="background: #666; border: none; padding: 0.3rem 0.8rem; border-radius: 1rem; color: white; cursor: pointer; margin-left: 0.5rem;">Close</button>
+  <div class="about-card">
+    <h1>📖 Still Searching, Still Building</h1>
+    <div class="quote">"I've applied to 600+ jobs. Still waiting for that one 'Congratulations' email. But I won't give up – and neither should you."</div>
+    <h2>🎯 My Story – The Reality of Being a Fresher in India (2026)</h2>
+    <p>My name is Ram Kumar. I graduated in 2024 with a Computer Science degree. I was excited, hopeful, and ready to start my IT career. But the reality? It's been two years, and I'm still searching.</p>
+    <div class="highlight">
+      <strong>📊 My Job Search Numbers (So Far):</strong><br>
+      • 600+ applications sent<br>
+      • 550+ rejections or no response<br>
+      • 50 interviews (some went well, some didn't)<br>
+      • 0 offers yet – but I'm still trying every single day<br>
+      • 100% determination to never give up
     </div>
+    <p>But here's what I realised: instead of just waiting for a job, I could build something that helps other freshers like me. That's how ApplyMore was born.</p>
+    <h2>💡 Why ApplyMore Exists</h2>
+    <p>I built ApplyMore because I was tired of seeing "Senior Software Engineer" posts when I was looking for entry-level roles. I built it because every fresher deserves a platform that understands their struggle – no paywalls, no premium plans, no fake hopes.</p>
+    <h2>👨‍💻 Who Am I Today?</h2>
+    <p>I'm still a fresher. Still applying. Still getting rejections. But I'm also a self-taught developer who built a platform that serves thousands of job seekers. I may not have a job yet, but I have a mission: to help 10,000 IT freshers in India find their first job before I find mine.</p>
+    <h2>📍 What We Cover</h2>
+    <p><strong>Cities:</strong> Hyderabad, Bangalore, Chennai, Mumbai, Pune, Delhi, Gurugram, Kolkata, Ahmedabad, Noida</p>
+    <p><strong>Roles:</strong> Data Analyst, Software Engineer, Java Developer, Python Developer, DevOps Engineer, Data Scientist, Cyber Security, Apprenticeships</p>
+    <p><strong>Experience:</strong> Strictly 0-2 years. I've been burned by seeing "3+ years" jobs too many times. I won't let that happen to you.</p>
+    <h2>⭐ My Promise to You</h2>
+    <p>ApplyMore will ALWAYS be free. No premium plans, no hidden charges, no paywalls. I know what it's like to be a fresher with no money and no job. You shouldn't have to pay to find a job. Period.</p>
+    <div class="highlight"><strong>🎯 My Goal (While I Keep Searching):</strong><br>Help 10,000 IT freshers in India find their first job by December 2026.</div>
+    <h2>📧 Let's Connect – We're in This Together</h2>
+    <p>I read every email. If you have suggestions, found a bug, or just want to share your own job search story – reach out to me at <a href="mailto:connectwithme.ramkumar@gmail.com" style="color:var(--accent);">connectwithme.ramkumar@gmail.com</a>.</p>
+    <div class="quote">"To every fresher reading this: I'm still in the trenches with you. Some days are hard. Some days you want to give up. But don't. Keep applying, keep learning, and keep believing. We'll make it. Together."</div>
+    <p style="margin-top:1.5rem;">— Ram Kumar, a fresher who's still searching, but still building.</p>
   </div>
-
-  <script>
-    // Cookie consent
-    if (localStorage.getItem('cookiesAccepted') === 'true') {
-      document.getElementById('cookieConsent').style.display = 'none';
-    }
-    document.getElementById('acceptCookies')?.addEventListener('click', () => {
-      localStorage.setItem('cookiesAccepted', 'true');
-      document.getElementById('cookieConsent').style.display = 'none';
-    });
-
-    // Feedback widget
-    document.getElementById('feedbackBtn').addEventListener('click', function() {
-      const form = document.getElementById('feedbackForm');
-      form.style.display = form.style.display === 'none' ? 'block' : 'none';
-    });
-
-    function closeFeedback() {
-      document.getElementById('feedbackForm').style.display = 'none';
-      document.getElementById('feedbackText').value = '';
-    }
-
-    function submitFeedback() {
-      const feedback = document.getElementById('feedbackText').value.trim();
-      if (!feedback) {
-        alert('Please write something first!');
-        return;
-      }
-      
-      const subject = 'ApplyMore About Page Feedback';
-      const body = `Hi Ram,\n\nFeedback from ApplyMore about page:\n\n${feedback}\n\nPage: ${window.location.href}\nTime: ${new Date().toLocaleString()}`;
-      const mailtoLink = `mailto:connectwithme.ramkumar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
-      window.open(mailtoLink);
-      
-      alert('Thanks! Your email app should open. If not, copy this and email Ram:\n\n' + feedback);
-      closeFeedback();
-    }
-
-    // Theme switching
-    function setTheme(theme) {
-      document.body.className = theme === 'dark' ? '' : theme;
-      localStorage.setItem('theme', theme);
-    }
-    
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-    
-    document.getElementById('lightTheme')?.addEventListener('click', () => setTheme('light'));
-    document.getElementById('darkTheme')?.addEventListener('click', () => setTheme('dark'));
-    document.getElementById('vibrantTheme')?.addEventListener('click', () => setTheme('vibrant'));
-
-    // Analytics tracking
-    if (window.va) {
-      window.va('track', 'about_page_viewed');
-    }
-  </script>
+</div>
+<script>
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.body.classList.add(savedTheme);
+  function setTheme(theme) { document.body.classList.remove('light','vibrant'); if(theme!=='dark') document.body.classList.add(theme); localStorage.setItem('theme',theme); }
+  document.getElementById('lightTheme')?.addEventListener('click',()=>setTheme('light'));
+  document.getElementById('darkTheme')?.addEventListener('click',()=>setTheme('dark'));
+  document.getElementById('vibrantTheme')?.addEventListener('click',()=>setTheme('vibrant'));
+</script>
 </body>
 </html>
