@@ -20,6 +20,8 @@
     .location{font-size:0.9rem;color:var(--text-muted);margin-bottom:1rem}
     .description{white-space:pre-wrap;margin:1rem 0}
     .apply-btn{display:inline-block;background:var(--accent);color:white;padding:0.6rem 1.5rem;border-radius:2rem;text-decoration:none;margin-top:1rem}
+    .apply-btn:hover{background:var(--accent-dark)}
+    .missing-url{color:#ef4444;font-size:0.9rem;margin-top:1rem}
     .loading,.error{text-align:center;padding:2rem}
     footer{margin-top:2rem;text-align:center;font-size:0.7rem;color:var(--text-muted)}
     .nav-links{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
@@ -73,6 +75,8 @@
       if (!jobs.length) throw new Error();
       const job = jobs[0];
       const cleanDesc = decodeHtmlEntities(job.description || 'No description provided.');
+      const applyUrl = job.url ? job.url.trim() : '';
+      const isValidUrl = applyUrl && (applyUrl.startsWith('http://') || applyUrl.startsWith('https://'));
       document.getElementById('jobContent').innerHTML = `
         <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Jobs</a>
         <div class="detail-card">
@@ -80,7 +84,7 @@
           <div class="company"><i class="fas fa-building"></i> ${escapeHtml(job.company)}</div>
           <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</div>
           <div class="description">${escapeHtml(cleanDesc)}</div>
-          <a href="${escapeHtml(job.url)}" target="_blank" class="apply-btn">Apply Now →</a>
+          ${isValidUrl ? `<a href="${escapeHtml(applyUrl)}" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply Now →</a>` : '<div class="missing-url">⚠️ No valid application link available for this job.</div>'}
         </div>
       `;
     } catch(e) { document.getElementById('jobContent').innerHTML = '<div class="error">Failed to load job. Please try again later.</div>'; }
