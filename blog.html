@@ -2,369 +2,217 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT Career Blog – Tips for Freshers | ApplyMore</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>IT Career Blog – ApplyMore</title>
+  <meta name="description" content="Expert career guidance, resume tips, interview prep, and IT fresher job strategies. Your daily dose of IT career success.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0a0a2a;
-      color: #f0f3ff;
-      padding: 2rem;
-    }
-    .container { max-width: 900px; margin: 0 auto; }
-    .blog-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .blog-header h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .blog-header p {
-      color: #9ca3cf;
-      margin-top: 0.5rem;
-    }
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .nav-links a {
-      color: #9ca3cf;
-      text-decoration: none;
-    }
-    .nav-links a:hover { color: #3b82f6; }
-    .article-card {
-      background: rgba(20, 20, 50, 0.65);
-      backdrop-filter: blur(10px);
-      border-radius: 1rem;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(59,130,246,0.3);
-    }
-    .article-title {
-      font-size: 1.8rem;
-      color: #3b82f6;
-      margin-bottom: 0.5rem;
-    }
-    .article-meta {
-      color: #9ca3cf;
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding-bottom: 0.5rem;
-    }
-    .article-content {
-      line-height: 1.6;
-      color: #cbd5e6;
-    }
-    .article-content h2 {
-      color: #8b5cf6;
-      margin: 1rem 0 0.5rem;
-      font-size: 1.3rem;
-    }
-    .article-content p {
-      margin-bottom: 1rem;
-    }
-    .article-content ul, .article-content ol {
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    hr {
-      border-color: rgba(255,255,255,0.1);
-      margin: 1rem 0;
-    }
-    footer {
-      text-align: center;
-      margin-top: 2rem;
-      color: #6b7280;
-      font-size: 0.8rem;
-    }
-    @media (max-width: 640px) {
-      body { padding: 1rem; }
-      .article-title { font-size: 1.3rem; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--bg:#0a0a2a;--card-bg:rgba(20,20,50,0.65);--text:#f0f3ff;--text-muted:#9ca3cf;--border:rgba(255,255,255,0.1);--accent:#3b82f6;--purple:#8b5cf6}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:1.5rem;line-height:1.5}
+    body.light{--bg:#f8fafc;--card-bg:rgba(255,255,255,0.85);--text:#1e293b;--text-muted:#475569;--border:rgba(0,0,0,0.1);--accent:#2563eb}
+    body.vibrant{--bg:#fdf2f8;--card-bg:rgba(255,255,255,0.9);--text:#831843;--text-muted:#9d174d;--accent:#ec489a}
+    .container{max-width:1400px;margin:0 auto}
+    /* Navigation & theme */
+    .top-bar{display:flex;justify-content:flex-end;gap:0.5rem;margin-bottom:1rem}
+    .theme-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:2rem;padding:0.2rem 0.6rem;cursor:pointer;font-size:0.7rem;color:var(--text)}
+    .nav-links{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+    .nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.9rem}
+    .nav-links a:hover{color:var(--accent)}
+    /* Hero */
+    .blog-hero{text-align:center;margin-bottom:2rem}
+    .blog-hero h1{font-size:2.5rem;background:linear-gradient(135deg,var(--accent),var(--purple));background-clip:text;-webkit-background-clip:text;color:transparent;margin-bottom:0.5rem}
+    .blog-hero p{color:var(--text-muted);max-width:700px;margin:0 auto}
+    /* Search & filters */
+    .search-section{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;align-items:center;justify-content:center}
+    .search-box{flex:2;min-width:200px;position:relative}
+    .search-box i{position:absolute;left:0.8rem;top:50%;transform:translateY(-50%);color:var(--text-muted)}
+    .search-box input{width:100%;padding:0.6rem 0.6rem 0.6rem 2rem;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:2rem;color:var(--text);font-size:0.9rem}
+    .category-filters{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center}
+    .filter-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:2rem;padding:0.3rem 1rem;cursor:pointer;font-size:0.8rem;color:var(--text);transition:0.2s}
+    .filter-btn.active{background:var(--accent);border-color:var(--accent);color:white}
+    .filter-btn:hover{background:var(--accent);color:white}
+    /* Featured section */
+    .featured-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin-bottom:2rem}
+    .featured-card{background:var(--card-bg);border-radius:1rem;padding:1.2rem;border:1px solid var(--border);transition:0.2s}
+    .featured-card:hover{transform:translateY(-5px);border-color:var(--accent)}
+    .featured-badge{display:inline-block;background:var(--accent);color:white;font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:1rem;margin-bottom:0.5rem}
+    .featured-card h3{font-size:1.2rem;margin-bottom:0.5rem}
+    .featured-card p{color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem}
+    .article-meta{display:flex;gap:1rem;font-size:0.7rem;color:var(--text-muted);margin-bottom:0.5rem}
+    .read-more{color:var(--accent);text-decoration:none;font-weight:500;font-size:0.8rem}
+    /* Latest articles grid */
+    .articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;margin-bottom:2rem}
+    .article-card{background:var(--card-bg);border-radius:1rem;padding:1rem;border:1px solid var(--border);transition:0.2s}
+    .article-card:hover{transform:translateY(-3px);border-color:var(--accent)}
+    .article-category{display:inline-block;background:rgba(59,130,246,0.2);color:var(--accent);font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:1rem;margin-bottom:0.5rem}
+    .article-card h4{font-size:1rem;margin-bottom:0.3rem}
+    .article-card p{font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem}
+    .no-results{text-align:center;padding:2rem;color:var(--text-muted)}
+    footer{text-align:center;margin-top:2rem;color:var(--text-muted);font-size:0.7rem}
+    .footer-links{display:flex;justify-content:center;gap:1rem;margin-bottom:0.5rem}
+    .footer-links a{color:var(--accent);text-decoration:none}
+    @media (max-width:640px){
+      .blog-hero h1{font-size:1.8rem}
+      .search-section{flex-direction:column}
+      .category-filters{justify-content:flex-start}
+      .featured-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="nav-links">
-      <a href="index.html">🏠 Home</a>
-      <a href="about.html">📖 About</a>
-      <a href="blog.html">✍️ Blog</a>
-      <a href="contact.html">📧 Contact</a>
-      <a href="privacy.html">🔒 Privacy</a>
-      <a href="terms.html">⚖️ Terms</a>
-    </div>
-
-    <div class="blog-header">
-      <h1>IT Career Blog</h1>
-      <p>Tips, guides, and resources for IT freshers in India</p>
-    </div>
-
-    <!-- ========== EXISTING ARTICLES (1–7) ========== -->
-
-    <!-- Article 1 -->
-    <div class="article-card">
-      <div class="article-title">How to Get Your First IT Job in 2026: A Complete Guide</div>
-      <div class="article-meta">📅 April 10, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>The IT job market in India is competitive but full of opportunities. Here’s a step‑by‑step roadmap for freshers:</p>
-        <h2>1. Build 2‑3 Solid Projects</h2>
-        <p>Your projects are your experience. Build a full‑stack web app, a data analysis dashboard, or a mobile app. Host them on GitHub and deploy on free platforms like Vercel or Render. Employers want to see what you can actually build.</p>
-        <h2>2. Contribute to Open Source</h2>
-        <p>Open source contributions show you can work in a team, read others’ code, and follow best practices. Start with “good first issue” labels on GitHub.</p>
-        <h2>3. Network on LinkedIn (the right way)</h2>
-        <p>Don’t just send connection requests. Post about your projects, comment on recruiters’ posts, and share what you’re learning. Recruiters notice active, genuine profiles.</p>
-        <h2>4. Apply Strategically</h2>
-        <p>Use ApplyMore to find only 0‑2 year jobs. Customise your resume for each role – match the keywords from the job description. Quality over quantity.</p>
-        <h2>5. Prepare for Technical Interviews</h2>
-        <p>Practice DSA problems on LeetCode (easy/medium), SQL queries, and be ready to explain your projects. Mock interviews help reduce anxiety.</p>
-        <p>Remember, every rejection is a step closer to the right offer. Keep improving, keep applying.</p>
-      </div>
-    </div>
-
-    <!-- Article 2 -->
-    <div class="article-card">
-      <div class="article-title">Top 10 In‑Demand Skills for IT Freshers in 2026</div>
-      <div class="article-meta">📅 March 30, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Based on thousands of job postings on ApplyMore, these are the skills companies are actively hiring for:</p>
-        <ol>
-          <li><strong>Python</strong> – Data analysis, backend, automation.</li>
-          <li><strong>SQL</strong> – Every company uses databases.</li>
-          <li><strong>Cloud Basics (AWS/Azure)</strong> – EC2, S3, serverless.</li>
-          <li><strong>Git & GitHub</strong> – Version control is mandatory.</li>
-          <li><strong>JavaScript / TypeScript</strong> – Frontend and backend (Node.js).</li>
-          <li><strong>Data Structures & Algorithms</strong> – Required for coding interviews.</li>
-          <li><strong>React or Angular</strong> – Popular frontend frameworks.</li>
-          <li><strong>REST APIs</strong> – Understanding how to build and consume APIs.</li>
-          <li><strong>Basic Linux</strong> – Command line, shell scripting.</li>
-          <li><strong>AI/ML Fundamentals</strong> – Even basic knowledge of LLMs and prompt engineering is a plus.</li>
-        </ol>
-        <p>Pick 2‑3 skills to focus on first. Build a small project that combines them. Then move to the next.</p>
-      </div>
-    </div>
-
-    <!-- Article 3 -->
-    <div class="article-card">
-      <div class="article-title">Resume Tips for IT Freshers: What Recruiters Look For</div>
-      <div class="article-meta">📅 March 15, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Your resume has about 6 seconds to impress a recruiter. Here’s how to make it count:</p>
-        <ul>
-          <li><strong>Keep it to one page</strong> – Freshers don’t need more.</li>
-          <li><strong>Highlight projects</strong> – For each project, write what you built, the tech stack, and a measurable result (e.g., “Reduced load time by 30%”).</li>
-          <li><strong>List technical skills prominently</strong> – Programming languages, frameworks, tools.</li>
-          <li><strong>Include internships (even virtual)</strong> – Describe your contributions.</li>
-          <li><strong>Add GitHub and LinkedIn links</strong> – Make sure they are active and professional.</li>
-          <li><strong>Avoid clichés</strong> – “Hardworking”, “team player” – instead, show examples.</li>
-          <li><strong>Use a clean, ATS‑friendly format</strong> – No tables, no fancy graphics. Use standard sections: Education, Skills, Projects, Internships, Certifications.</li>
-        </ul>
-        <p>Tailor your resume for each job. Match keywords from the job description. Save different versions for different roles (Java, Python, Data Analyst).</p>
-      </div>
-    </div>
-
-    <!-- Article 4 -->
-    <div class="article-card">
-      <div class="article-title">Remote vs. Onsite Jobs: Which is Better for Freshers?</div>
-      <div class="article-meta">📅 March 10, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Both remote and onsite jobs have pros and cons for freshers. Here’s a breakdown:</p>
-        <h2>Remote Jobs – Pros</h2>
-        <ul>
-          <li>Flexibility – work from anywhere.</li>
-          <li>No commute – save time and money.</li>
-          <li>Access to companies across India (not limited to your city).</li>
-        </ul>
-        <h2>Remote Jobs – Cons</h2>
-        <ul>
-          <li>Less mentorship – harder to ask quick questions.</li>
-          <li>Requires self‑discipline and good communication.</li>
-          <li>May feel isolated.</li>
-        </ul>
-        <h2>Onsite Jobs – Pros</h2>
-        <ul>
-          <li>Better mentorship – learn by watching seniors.</li>
-          <li>Build stronger relationships with colleagues.</li>
-          <li>Separate work and personal life.</li>
-        </ul>
-        <h2>Onsite Jobs – Cons</h2>
-        <ul>
-          <li>Commute and relocation costs.</li>
-          <li>Less flexibility.</li>
-        </ul>
-        <p>For freshers, onsite or hybrid roles often provide better learning opportunities. But if you are self‑motivated and have a good home setup, remote can work too. ApplyMore lists both – use the location filter to find onsite roles in your city.</p>
-      </div>
-    </div>
-
-    <!-- Article 5 -->
-    <div class="article-card">
-      <div class="article-title">Top 5 Free Certifications for IT Freshers</div>
-      <div class="article-meta">📅 April 17, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Certifications can make your resume stand out. Here are 5 free (or low‑cost) certifications that add value:</p>
-        <ol>
-          <li><strong>Google IT Support Professional Certificate</strong> (financial aid available) – Covers networking, OS, security.</li>
-          <li><strong>AWS Cloud Practitioner Essentials</strong> (free digital training) – Great for cloud basics.</li>
-          <li><strong>Harvard CS50’s Introduction to Computer Science</strong> (free audit) – Highly respected.</li>
-          <li><strong>GitHub Skills</strong> (free) – Learn version control and open‑source collaboration.</li>
-          <li><strong>LinkedIn Learning Paths</strong> (1‑month free trial) – Choose from Python, SQL, or data analysis.</li>
-        </ol>
-        <p>Add these to your resume under “Certifications” – they show initiative and self‑learning.</p>
-      </div>
-    </div>
-
-    <!-- Article 6 -->
-    <div class="article-card">
-      <div class="article-title">How to Negotiate Your First Salary as a Fresher</div>
-      <div class="article-meta">📅 April 16, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Many freshers hesitate to negotiate, but it’s normal and expected. Here’s how:</p>
-        <ul>
-          <li><strong>Research market rates</strong> – Use Glassdoor, AmbitionBox, or AskApplyMore (coming soon).</li>
-          <li><strong>Know your value</strong> – Highlight projects, internships, and unique skills.</li>
-          <li><strong>Be polite but confident</strong> – “Based on my research and skills, I was hoping for a range of X‑Y.”</li>
-          <li><strong>Consider total package</strong> – Benefits, learning opportunities, and work culture matter too.</li>
-          <li><strong>Don’t demand</strong> – Negotiate, don’t ultimatum.</li>
-        </ul>
-        <p>Even a small increase in starting salary compounds over your career. Practice with a friend before the call.</p>
-      </div>
-    </div>
-
-    <!-- Article 7 -->
-    <div class="article-card">
-      <div class="article-title">How to Prepare for a Java Developer Interview as a Fresher</div>
-      <div class="article-meta">📅 April 15, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Java remains one of the most sought‑after skills for fresher IT jobs. Here’s how to prepare effectively:</p>
-        <ol>
-          <li><strong>Master core Java concepts</strong> – OOP, collections, multithreading, exception handling.</li>
-          <li><strong>Practice coding problems</strong> – Use platforms like LeetCode or HackerRank (easy/medium level).</li>
-          <li><strong>Understand basic SQL</strong> – Joins, group by, subqueries.</li>
-          <li><strong>Build a small project</strong> – A simple CRUD application using Spring Boot and MySQL.</li>
-          <li><strong>Prepare for HR questions</strong> – “Tell me about yourself”, “Why do you want to work here?”</li>
-        </ol>
-        <p>Remember, interviewers value problem‑solving approach over perfect syntax. Explain your thought process clearly.</p>
-      </div>
-    </div>
-
-    <!-- ========== NEW ARTICLES (8–12) ========== -->
-
-    <!-- Article 8: Fresher Jobs in Pune -->
-    <div class="article-card">
-      <div class="article-title">Fresher Jobs in Pune – Top IT Companies Hiring Entry‑Level Candidates</div>
-      <div class="article-meta">📅 April 19, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Pune has emerged as a major IT hub in India, with companies like Infosys, TCS, Tech Mahindra, and many startups actively hiring freshers. If you are a recent graduate looking for your first IT job in Pune, here’s what you need to know.</p>
-        <h2>Which Companies Hire Freshers in Pune?</h2>
-        <ul>
-          <li><strong>Infosys</strong> – Regularly conducts off‑campus drives for entry‑level roles (System Engineer, Digital Specialist Engineer).</li>
-          <li><strong>TCS</strong> – The TCS NQT (National Qualifier Test) is a common pathway for freshers.</li>
-          <li><strong>Tech Mahindra</strong> – Offers roles like Associate Software Engineer, Graduate Engineer Trainee.</li>
-          <li><strong>Persistent Systems</strong> – Known for hiring freshers in Java, Python, and cloud roles.</li>
-          <li><strong>Startups</strong> – Pune has a thriving startup scene; platforms like ApplyMore list these roles daily.</li>
-        </ul>
-        <h2>How to Find Fresher Jobs in Pune?</h2>
-        <p>You can use ApplyMore to filter jobs by location “Pune”. We update listings every 12 hours from LinkedIn and Indeed. You will only see roles that ask for 0‑2 years of experience – no senior job noise.</p>
-        <p><strong>👉 Check latest fresher jobs in Pune here:</strong> <a href="https://applymore.vercel.app/?location=Pune" style="color: var(--accent);">ApplyMore – Pune Fresher Jobs</a></p>
-        <p>Prepare your resume with keywords like “Java”, “Python”, “SQL”, “AWS basics”. Many fresher roles in Pune also value internship experience and personal projects.</p>
-      </div>
-    </div>
-
-    <!-- Article 9: Entry Level Software Engineer Jobs -->
-    <div class="article-card">
-      <div class="article-title">Entry Level Software Engineer Jobs – What You Need to Know</div>
-      <div class="article-meta">📅 April 19, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>“Entry level software engineer” is one of the most searched terms by freshers. But what do companies actually expect from an entry‑level candidate? Let’s break it down.</p>
-        <h2>Common Requirements for Entry‑Level Software Engineer Jobs</h2>
-        <ul>
-          <li><strong>Programming languages</strong> – Java, Python, JavaScript (at least one).</li>
-          <li><strong>Data structures & algorithms</strong> – Basics of arrays, strings, recursion, sorting.</li>
-          <li><strong>Database knowledge</strong> – SQL queries (SELECT, JOIN, GROUP BY).</li>
-          <li><strong>Version control</strong> – Basic Git commands (clone, commit, push).</li>
-          <li><strong>Frameworks (bonus)</strong> – React, Spring Boot, Django, or Flask.</li>
-        </ul>
-        <h2>Where to Find Entry‑Level Software Engineer Jobs?</h2>
-        <p>ApplyMore lists thousands of entry‑level software engineer roles from Hyderabad, Chennai, Mumbai, Pune, and Gurugram. We filter out any job that asks for more than 2 years of experience.</p>
-        <p><strong>👉 Browse entry‑level software engineer jobs:</strong> <a href="https://applymore.vercel.app/?search=software%20engineer" style="color: var(--accent);">ApplyMore – Entry Level Software Engineer Jobs</a></p>
-        <p>Many freshers get their first job by building 2‑3 solid projects (e.g., a to‑do app, a weather dashboard, a simple e‑commerce site). Recruiters value real projects more than certificates.</p>
-      </div>
-    </div>
-
-    <!-- Article 10: IT Fresher Jobs in Chennai -->
-    <div class="article-card">
-      <div class="article-title">IT Fresher Jobs in Chennai – A Complete Guide for 2026 Graduates</div>
-      <div class="article-meta">📅 April 19, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Chennai is home to major IT parks like Tidel Park, SP Infocity, and Ramanujan IT City. Companies like Zoho, CTS, HCL, and Amazon have a strong presence here. If you are a 2026 graduate, here is your roadmap.</p>
-        <h2>Top Companies Hiring IT Freshers in Chennai</h2>
-        <ul>
-          <li><strong>Zoho</strong> – Known for its transparent hiring process and excellent training for freshers.</li>
-          <li><strong>Cognizant (CTS)</strong> – Regularly hires freshers for GenC and GenC Next roles.</li>
-          <li><strong>HCL Technologies</strong> – Graduate Engineer Trainee positions open throughout the year.</li>
-          <li><strong>Amazon Chennai</strong> – Offers entry‑level roles in operations and basic tech support.</li>
-          <li><strong>Freshworks</strong> – A product‑based company that hires freshers for support and engineering roles.</li>
-        </ul>
-        <h2>How to Apply for Fresher Jobs in Chennai?</h2>
-        <p>Use ApplyMore’s location filter to select “Chennai”. We aggregate jobs from LinkedIn, Indeed, and company career pages. All listings are for 0‑2 years experience – no senior roles.</p>
-        <p><strong>👉 View live fresher jobs in Chennai:</strong> <a href="https://applymore.vercel.app/?location=Chennai" style="color: var(--accent);">ApplyMore – Chennai Fresher Jobs</a></p>
-        <p>Chennai companies often ask for basic SQL, Java, or Python. Focus on building a small project in one of these technologies to stand out.</p>
-      </div>
-    </div>
-
-    <!-- Article 11: Data Analyst Fresher Jobs – Skills and How to Apply -->
-    <div class="article-card">
-      <div class="article-title">Data Analyst Fresher Jobs – Skills and How to Apply</div>
-      <div class="article-meta">📅 April 18, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>Data Analyst is one of the most popular entry‑level roles in IT. Companies are looking for freshers who can work with data using SQL, Excel, and basic Python. Here’s how to prepare and where to find these jobs.</p>
-        <h2>Skills Required for Data Analyst Fresher Jobs</h2>
-        <ul>
-          <li><strong>SQL</strong> – Must know SELECT, JOIN, GROUP BY, subqueries.</li>
-          <li><strong>Excel / Google Sheets</strong> – Pivot tables, VLOOKUP, charts.</li>
-          <li><strong>Basic Python or R</strong> – Data cleaning, pandas, matplotlib (bonus).</li>
-          <li><strong>Tableau / Power BI</strong> – Basic dashboard creation is a plus.</li>
-          <li><strong>Communication skills</strong> – Explaining insights to non‑technical teams.</li>
-        </ul>
-        <h2>Where to Find Data Analyst Fresher Jobs?</h2>
-        <p>ApplyMore has a dedicated filter for “Data Analyst”. You can also search for “entry level data analyst” on our site. We update listings daily.</p>
-        <p><strong>👉 Search for data analyst fresher jobs:</strong> <a href="https://applymore.vercel.app/?search=data%20analyst" style="color: var(--accent);">ApplyMore – Data Analyst Jobs</a></p>
-        <p>Build a portfolio with 2‑3 data analysis projects (e.g., sales dashboard, customer segmentation, COVID‑19 data analysis). Host them on GitHub and include links in your resume.</p>
-      </div>
-    </div>
-
-    <!-- Article 12: DevOps Fresher Jobs – How to Break into DevOps -->
-    <div class="article-card">
-      <div class="article-title">DevOps Fresher Jobs – How to Break into DevOps</div>
-      <div class="article-meta">📅 April 18, 2026 | ✍️ Ram Kumar</div>
-      <div class="article-content">
-        <p>DevOps is a high‑demand field, but freshers often think it requires years of experience. That’s not true – many companies hire junior DevOps engineers with basic skills and a willingness to learn.</p>
-        <h2>Skills for Entry‑Level DevOps Roles</h2>
-        <ul>
-          <li><strong>Linux basics</strong> – Command line, file permissions, process management.</li>
-          <li><strong>Git & GitHub</strong> – Version control is mandatory.</li>
-          <li><strong>CI/CD pipelines</strong> – Basic understanding of GitHub Actions or GitLab CI.</li>
-          <li><strong>Containers (Docker)</strong> – Writing Dockerfiles, running containers.</li>
-          <li><strong>Cloud basics (AWS/Azure)</strong> – EC2, S3, IAM roles.</li>
-        </ul>
-        <h2>Where to Find DevOps Fresher Jobs?</h2>
-        <p>On ApplyMore, you can search for “DevOps”, “DevOps Engineer”, or “Junior DevOps”. We list only 0‑2 years experience roles.</p>
-        <p><strong>👉 Browse DevOps fresher jobs:</strong> <a href="https://applymore.vercel.app/?search=devops" style="color: var(--accent);">ApplyMore – DevOps Fresher Jobs</a></p>
-        <p>Create a small project: containerize a simple web app with Docker and deploy it to a free cloud tier. Add this to your resume – it will make you stand out.</p>
-      </div>
-    </div>
-
-    <footer>
-      <p>© 2026 ApplyMore — Helping IT freshers land their dream job in India</p>
-    </footer>
+<div class="container">
+  <div class="top-bar">
+    <button class="theme-btn" id="lightTheme">Light</button>
+    <button class="theme-btn" id="darkTheme">Dark</button>
+    <button class="theme-btn" id="vibrantTheme">Vibrant</button>
   </div>
+  <div class="nav-links">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">📖 About</a>
+    <a href="blog.html">✍️ Blog</a>
+    <a href="contact.html">📧 Contact</a>
+    <a href="privacy.html">🔒 Privacy</a>
+    <a href="terms.html">⚖️ Terms</a>
+  </div>
+  <div class="blog-hero">
+    <h1>IT Career Blog</h1>
+    <p>Actionable advice, resume templates, interview prep, and insider tips – all for IT freshers in India.</p>
+  </div>
+  <div class="search-section">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search articles...">
+    </div>
+    <div class="category-filters" id="categoryFilters">
+      <button data-cat="all" class="filter-btn active">All</button>
+      <button data-cat="Job Search" class="filter-btn">📈 Job Search</button>
+      <button data-cat="Resume" class="filter-btn">💼 Resume & Portfolio</button>
+      <button data-cat="Interview" class="filter-btn">🎤 Interview Prep</button>
+      <button data-cat="Skills" class="filter-btn">🚀 Skill Development</button>
+      <button data-cat="Company" class="filter-btn">🏢 Company Insights</button>
+      <button data-cat="Success" class="filter-btn">🌟 Success Stories</button>
+      <button data-cat="Trends" class="filter-btn">📊 Industry Trends</button>
+    </div>
+  </div>
+  <div id="featuredSection"></div>
+  <div id="articlesContainer"></div>
+  <footer>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p>© 2026 ApplyMore — Helping IT freshers land their dream job</p>
+  </footer>
+</div>
+<script>
+  // Theme sync
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.body.classList.add(savedTheme);
+  function setTheme(theme) { document.body.classList.remove('light','vibrant'); if(theme!=='dark') document.body.classList.add(theme); localStorage.setItem('theme',theme); }
+  document.getElementById('lightTheme')?.addEventListener('click',()=>setTheme('light'));
+  document.getElementById('darkTheme')?.addEventListener('click',()=>setTheme('dark'));
+  document.getElementById('vibrantTheme')?.addEventListener('click',()=>setTheme('vibrant'));
+
+  // Articles data (15+ high-value posts)
+  const articles = [
+    { id:1, title:"How to Find Your First IT Job in 2026: Complete Guide", category:"Job Search", excerpt:"Step-by-step roadmap from application to offer letter. Includes timeline, resources, and success tips.", readTime:"8 min", featured:true, date:"Apr 10, 2026" },
+    { id:2, title:"IT Fresher Resume Template: ATS-Friendly Format That Works", category:"Resume", excerpt:"Copy-paste template with 47 keywords that beat applicant tracking systems. Downloadable DOCX included.", readTime:"6 min", featured:true, date:"Apr 8, 2026" },
+    { id:3, title:"50 Most Asked Interview Questions for IT Freshers (With Answers)", category:"Interview", excerpt:"Real questions from TCS, Infosys, Wipro, and startups. Includes STAR method examples.", readTime:"12 min", featured:true, date:"Apr 5, 2026" },
+    { id:4, title:"How to Learn Data Science in 6 Months (Free Roadmap)", category:"Skills", excerpt:"Curated list of free courses, projects, and certifications to become job-ready.", readTime:"7 min", featured:true, date:"Apr 1, 2026" },
+    { id:5, title:"TCS vs Infosys vs Wipro: Fresher's Comparison 2026", category:"Company", excerpt:"Salary, training, work culture, and promotion timeline – which one is best for you?", readTime:"5 min", featured:false, date:"Mar 28, 2026" },
+    { id:6, title:"From Rejection to Dream Job: 5 Inspiring Fresher Stories", category:"Success", excerpt:"Real journeys of candidates who landed offers after months of struggle.", readTime:"9 min", featured:false, date:"Mar 25, 2026" },
+    { id:7, title:"Remote vs Office Jobs: What's Better for Freshers?", category:"Job Search", excerpt:"Pros, cons, and how to decide based on your learning style and career goals.", readTime:"4 min", featured:false, date:"Mar 22, 2026" },
+    { id:8, title:"GitHub Portfolio Ideas: 10 Projects That Get You Hired", category:"Resume", excerpt:"Project ideas with code repos and live demos that impress recruiters.", readTime:"10 min", featured:false, date:"Mar 20, 2026" },
+    { id:9, title:"How to Answer 'Tell Me About Yourself' Like a Pro", category:"Interview", excerpt:"3 templates for freshers (technical, non-technical, and career change).", readTime:"5 min", featured:false, date:"Mar 18, 2026" },
+    { id:10, title:"Top 5 Programming Languages for Freshers in 2026", category:"Skills", excerpt:"Which language gives the best ROI for job hunting? Data-driven analysis.", readTime:"6 min", featured:false, date:"Mar 15, 2026" },
+    { id:11, title:"Working at Startups vs MNCs: Fresher's Perspective", category:"Company", excerpt:"Real employee reviews, learning curves, and salary differences.", readTime:"7 min", featured:false, date:"Mar 12, 2026" },
+    { id:12, title:"How to Get a Job Without Internship Experience", category:"Success", excerpt:"3 case studies of freshers who used projects and freelancing to land offers.", readTime:"8 min", featured:false, date:"Mar 10, 2026" },
+    { id:13, title:"AI Impact on IT Jobs: Opportunities for Freshers", category:"Trends", excerpt:"Which roles are growing? What skills should you learn now?", readTime:"6 min", featured:false, date:"Mar 8, 2026" },
+    { id:14, title:"LinkedIn Optimization for IT Freshers (Checklist)", category:"Job Search", excerpt:"Step-by-step guide to make your profile attract recruiters.", readTime:"7 min", featured:false, date:"Mar 5, 2026" },
+    { id:15, title:"How to Negotiate Your First Salary (Without Fear)", category:"Interview", excerpt:"Scripts, data points, and tactics to get 20-30% more.", readTime:"5 min", featured:false, date:"Mar 2, 2026" }
+  ];
+
+  // Render featured articles (top 4)
+  function renderFeatured() {
+    const featured = articles.filter(a => a.featured).slice(0,4);
+    const container = document.getElementById('featuredSection');
+    if (!container) return;
+    if (!featured.length) { container.innerHTML = ''; return; }
+    container.innerHTML = `
+      <h2 style="margin:1rem 0 0.5rem; font-size:1.3rem;">✨ Featured Articles</h2>
+      <div class="featured-grid">
+        ${featured.map(art => `
+          <div class="featured-card">
+            <div class="featured-badge">🔥 Featured</div>
+            <h3>${escapeHtml(art.title)}</h3>
+            <div class="article-meta"><span><i class="far fa-clock"></i> ${art.readTime}</span><span><i class="far fa-calendar-alt"></i> ${art.date}</span></div>
+            <p>${escapeHtml(art.excerpt)}</p>
+            <a href="#" class="read-more" data-id="${art.id}">Read full article →</a>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  function renderArticles(filterCat = 'all', searchTerm = '') {
+    let filtered = articles;
+    if (filterCat !== 'all') filtered = filtered.filter(a => a.category === filterCat);
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      filtered = filtered.filter(a => a.title.toLowerCase().includes(term) || a.excerpt.toLowerCase().includes(term));
+    }
+    const container = document.getElementById('articlesContainer');
+    if (!filtered.length) { container.innerHTML = '<div class="no-results">No articles found. Try a different category or search term.</div>'; return; }
+    container.innerHTML = `
+      <h2 style="margin:1rem 0 0.5rem; font-size:1.3rem;">📚 Latest Articles</h2>
+      <div class="articles-grid">
+        ${filtered.map(art => `
+          <div class="article-card">
+            <div class="article-category">${art.category}</div>
+            <h4>${escapeHtml(art.title)}</h4>
+            <div class="article-meta" style="margin-bottom:0.3rem;"><span><i class="far fa-clock"></i> ${art.readTime}</span><span><i class="far fa-calendar-alt"></i> ${art.date}</span></div>
+            <p>${escapeHtml(art.excerpt)}</p>
+            <a href="#" class="read-more" data-id="${art.id}">Read more →</a>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    attachReadMoreEvents();
+  }
+
+  function attachReadMoreEvents() {
+    document.querySelectorAll('.read-more').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('data-id');
+        // For now, open a new page with article ID (you can implement a dedicated article page later)
+        window.open(`article.html?id=${id}`, '_blank');
+        // Or simply alert that full article is coming soon
+        // alert('Full article will be available soon. Check back later!');
+      });
+    });
+  }
+
+  function escapeHtml(str) { return str ? str.replace(/[&<>]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]) : ''; }
+
+  // Filtering and search events
+  let currentCategory = 'all';
+  let currentSearch = '';
+  function updateDisplay() { renderArticles(currentCategory, currentSearch); }
+  document.getElementById('searchInput')?.addEventListener('input', (e) => { currentSearch = e.target.value.trim(); updateDisplay(); });
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCategory = btn.getAttribute('data-cat');
+      updateDisplay();
+    });
+  });
+
+  renderFeatured();
+  renderArticles('all', '');
+</script>
 </body>
 </html>
