@@ -7,7 +7,7 @@ import re
 
 SUPABASE_URL = os.environ["SUPABASE_URL"]
 SUPABASE_SERVICE_ROLE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
-RAPIDAPI_KEY = os.environ["RAPIDAPI_KEY"]
+RAPIDAPI_KEY = os.environ["RAPIDAPI_KEY"].strip()  # Remove newlines/spaces
 
 SEARCHES = [
     ("Data Analyst", "Hyderabad"), ("Data Analyst", "Bangalore"),
@@ -25,12 +25,22 @@ supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 async def fetch(session, role, city):
     url = "https://jsearch.p.rapidapi.com/search"
     params = {"query": f"{role} {city}", "page": 1, "num_pages": 1, "country": "in", "date_posted": "all"}
-    headers = {"x-rapidapi-key": RAPIDAPI_KEY, "x-rapidapi-host": "jsearch.p.rapidapi.com"}
-    async with session.get(url, headers=headers, params=params) as resp:
-        if resp.status != 200:
-            return []
-        data = await resp.json()
-        return data.get("data", [])
+    headers = {
+        "x-rapidapi-key": RAPIDAPI_KEY,
+        "x-rapidapi-host": "jsearch.p.rapidapi.com"
+    }
+    # Sanitize: ensure no newline or null bytes
+    headers = {k: v.replace('\n', '').replace('\r', '').strip() for k, v in headers.items()}
+    try:
+        async with session.get(url, headers=headers, params=params) as resp:
+            if resp.status != 200:
+                print(f"Error {resp.status} for {role} in {city}")
+                return []
+            data = await resp.json()
+            return data.get("data", [])
+    except Exception as e:
+        print(f"Exception for {role} in {city}: {e}")
+        return []
 
 def parse_location(loc):
     if not loc:
