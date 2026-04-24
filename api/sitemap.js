@@ -6,34 +6,20 @@ module.exports = async (req, res) => {
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-  // Check environment variables
-  if (!supabaseUrl) {
-    console.error('SUPABASE_URL is missing');
-    return res.status(500).send('Missing SUPABASE_URL');
-  }
-  if (!supabaseAnonKey) {
-    console.error('SUPABASE_ANON_KEY is missing');
-    return res.status(500).send('Missing SUPABASE_ANON_KEY');
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Missing env vars');
+    return res.status(500).send('Missing environment variables');
   }
 
-  console.log('Both env vars are present');
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
   try {
-    const supabase = createClient(supabaseUrl, supabaseAnonKey);
-    
-    console.log('Attempting to fetch jobs from Supabase...');
     const { data: jobs, error } = await supabase
       .from('ApplyMore')
       .select('id, created_at')
-      .eq('is_hidden', false)
       .order('created_at', { ascending: false });
 
-    if (error) {
-      console.error('Supabase query error:', error);
-      return res.status(500).send('Supabase error: ' + error.message);
-    }
-
-    console.log(`Found ${jobs ? jobs.length : 0} jobs`);
+    if (error) throw error;
 
     const baseUrl = 'https://applymore.vercel.app';
     const today = new Date().toISOString().split('T')[0];
@@ -50,7 +36,7 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'application/xml');
     res.status(200).send(xml);
   } catch (err) {
-    console.error('Unexpected error:', err);
-    res.status(500).send('Internal Server Error: ' + err.message);
+    console.error('Sitemap error:', err);
+    res.status(500).send('Error: ' + err.message);
   }
 };
