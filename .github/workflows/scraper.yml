@@ -1,28 +1,22 @@
-name: Automated Job Scraper
+name: ApplyMore Job Scraper
 
 on:
   schedule:
-    - cron: '0 0,12 * * *'
+    - cron: '0 */12 * * *'   # every 12 hours
   workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          pip install pandas python-jobspy supabase
-
-      - name: Run scraper
+      - run: pip install supabase requests
+      - run: python scraper.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: python scraper.py
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
