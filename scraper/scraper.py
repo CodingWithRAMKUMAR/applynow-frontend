@@ -1,95 +1,95 @@
 import os
-import time
-import random
-import requests
-from datetime import datetime
-from dotenv import load_dotenv
-from jobspy import scrape_jobs
+import asyncio
+import aiohttp
+from datetime import datetime, timezone
+from supabase import create_client
+import re
 
-load_dotenv()
+SUPABASE_URL = os.environ["SUPABASE_URL"]
+SUPABASE_SERVICE_ROLE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
+RAPIDAPI_KEY = os.environ["RAPIDAPI_KEY"]
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")   # anon key works here
-
-SEARCH_TERMS = [
-    "software engineer", "data analyst", "java developer", "python developer",
-    "devops engineer", "data scientist", "cyber security", "frontend developer"
+SEARCHES = [
+    ("Data Analyst", "Hyderabad"), ("Data Analyst", "Bangalore"),
+    ("Apprenticeship", "Chennai"), ("Java Developer", "Mumbai"),
+    ("Python Developer", "Pune"), ("Cyber Security", "Gurugram"),
+    ("DevOps Engineer", "Noida"), ("Data Scientist", "Delhi"),
+    ("Software Engineer", "Hyderabad"), ("Software Engineer", "Bangalore"),
 ]
-LOCATIONS = ["Hyderabad", "Chennai", "Mumbai", "Pune", "Gurugram",
-             "Bangalore", "Delhi", "Kolkata", "Ahmedabad", "Noida"]
-RESULTS_WANTED = 20
-SLEEP_SECONDS = 30
 
-def get_existing_urls():
-    url = f"{SUPABASE_URL}/rest/v1/ApplyMore?select=url"
-    headers = {
-        "apikey": SUPABASE_KEY,
-        "Authorization": f"Bearer {SUPABASE_KEY}"
-    }
-    resp = requests.get(url, headers=headers)
-    if resp.status_code == 200:
-        return {item["url"] for item in resp.json()}
-    print(f"Failed to fetch existing URLs: {resp.status_code}")
-    return set()
+ALLOWED_CITIES = {c.lower() for c in ["Hyderabad","Chennai","Mumbai","Pune","Gurugram","Bangalore","Delhi","Kolkata","Ahmedabad","Noida"]}
+SENIOR_KEYWORDS = ["senior","lead","principal","architect","manager","director","head"]
 
-def insert_jobs(jobs):
-    if not jobs:
-        return
-    url = f"{SUPABASE_URL}/rest/v1/ApplyMore"
-    headers = {
-        "Content-Type": "application/json",
-        "apikey": SUPABASE_KEY,
-        "Authorization": f"Bearer {SUPABASE_KEY}",
-        "Prefer": "return=minimal"
-    }
-    batch_size = 50
-    for i in range(0, len(jobs), batch_size):
-        batch = jobs[i:i+batch_size]
-        resp = requests.post(url, headers=headers, json=batch)
-        if resp.status_code in (200, 201):
-            print(f"Inserted batch of {len(batch)} jobs")
-        else:
-            print(f"Insert failed: {resp.status_code} - {resp.text}")
+supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
-def scrape_and_store():
-    existing_urls = get_existing_urls()
+async def fetch(session, role, city):
+    url = "https://jsearch.p.rapidapi.com/search"
+    params = {"query": f"{role} {city}", "page": 1, "num_pages": 1, "country": "in", "date_posted": "all"}
+    headers = {"x-rapidapi-key": RAPIDAPI_KEY, "x-rapidapi-host": "jsearch.p.rapidapi.com"}
+    async with session.get(url, headers=headers, params=params) as resp:
+        if resp.status != 200:
+            return []
+        data = await resp.json()
+        return data.get("data", [])
+
+def parse_location(loc):
+    if not loc:
+        return None
+    city = loc.split(",")[0].strip()
+    return city if city.lower() in ALLOWED_CITIES else None
+
+def is_senior(title):
+    return any(kw in title.lower() for kw in SENIOR_KEYWORDS)
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch(session, role, city) for role, city in SEARCHES]
+        results = await asyncio.gather(*tasks)
+    all_jobs = [job for sublist in results for job in sublist]
+    print(f"Raw: {len(all_jobs)}")
+
+    existing = supabase.table("ApplyMore").select("url").execute()
+    existing_urls = {row["url"] for row in existing.data} if existing.data else set()
+
     new_jobs = []
+    seen = set()
+    for job in all_jobs:
+        title = job.get("job_title")
+        company = job.get("employer_name")
+        url = job.get("job_apply_link")
+        loc_raw = job.get("job_location")
+        desc = job.get("job_description", "")
+        posted = job.get("job_posted_at_datetime_utc") or datetime.now(timezone.utc).isoformat()
 
-    for location in LOCATIONS:
-        for term in SEARCH_TERMS:
-            print(f"Scraping {term} in {location}")
-            try:
-                jobs_df = scrape_jobs(
-                    site_name=["linkedin", "indeed"],
-                    search_term=term,
-                    location=location,
-                    results_wanted=RESULTS_WANTED,
-                    hours_old=72,
-                    country_indeed='india'
-                )
-                for _, row in jobs_df.iterrows():
-                    url = row.get('job_url', '')
-                    if url and url not in existing_urls:
-                        new_jobs.append({
-                            "title": row.get('title', '')[:200],
-                            "company": row.get('company', '')[:100],
-                            "location": location,
-                            "url": url,
-                            "description": row.get('description', '')[:2000],
-                            "posted_date": datetime.now().isoformat(),
-                            "created_at": datetime.now().isoformat()
-                        })
-                        existing_urls.add(url)
-                time.sleep(random.randint(SLEEP_SECONDS, SLEEP_SECONDS + 20))
-            except Exception as e:
-                print(f"Error: {e}")
-                time.sleep(SLEEP_SECONDS * 2)
+        if not title or not company or not url:
+            continue
+        if url in existing_urls or url in seen:
+            continue
+        city = parse_location(loc_raw)
+        if not city:
+            continue
+        if is_senior(title):
+            continue
+        seen.add(url)
+        new_jobs.append({
+            "title": title, "company": company, "location": city,
+            "url": url, "description": desc, "posted_date": posted,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        })
 
+    print(f"New: {len(new_jobs)}")
     if new_jobs:
-        insert_jobs(new_jobs)
-        print(f"Inserted {len(new_jobs)} new jobs.")
-    else:
-        print("No new jobs found.")
+        for i in range(0, len(new_jobs), 50):
+            supabase.table("ApplyMore").insert(new_jobs[i:i+50]).execute()
+        print("Inserted.")
+
+    # Telegram
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID")
+    if token and chat_id and new_jobs:
+        async with aiohttp.ClientSession() as session:
+            msg = f"✅ ApplyMore: {len(new_jobs)} new jobs added."
+            await session.post(f"https://api.telegram.org/bot{token}/sendMessage", json={"chat_id": chat_id, "text": msg})
 
 if __name__ == "__main__":
-    scrape_and_store()
+    asyncio.run(main())
