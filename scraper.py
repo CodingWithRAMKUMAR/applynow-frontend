@@ -1,150 +1,103 @@
 import os
-import pandas as pd
-import numpy as np
-from datetime import datetime, timezone
-from supabase import create_client, Client
-from jobspy import scrape_jobs
+import requests
+import json
+from datetime import datetime, timezone, timedelta
+from supabase import create_client
 import time
-import random
-import math
 
 SUPABASE_URL = os.environ["SUPABASE_URL"]
 SUPABASE_SERVICE_ROLE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
+RAPIDAPI_KEY = os.environ["RAPIDAPI_KEY"]
 
-# Search terms – focus on fresher roles
-ROLES = [
-    "Software Engineer fresher", "Data Analyst entry level", "Python Developer fresher",
-    "DevOps Engineer entry level", "Cyber Security fresher", "Java Developer fresher",
-    "Frontend Developer fresher", "Backend Developer fresher", "Full Stack fresher",
-    "Android Developer fresher", "iOS Developer fresher", "Cloud Engineer fresher",
-    "AWS fresher", "Azure fresher", "Network Engineer fresher", "Support Engineer fresher",
-    "QA Tester fresher", "Manual Testing fresher", "Automation Testing fresher", "IT Support fresher"
-]
-LOCATIONS = ["Hyderabad, India", "Bangalore, India", "Chennai, India"]
-RESULTS_WANTED = 20   # Reduced for speed
-HOURS_OLD = 72        # Last 3 days
+supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
-# Strict fresher keywords (including 2024 batch)
-FRESHER_KEYWORDS = [
-    "fresher", "entry level", "graduate", "trainee", "junior", 
-    "0-1", "0-2", "1 year", "2 years", "2024", "2025", "recent graduate"
-]
-SENIOR_KEYWORDS = [
-    "senior", "lead", "principal", "architect", "manager", 
-    "director", "head", "vp", "cto", "staff", "expert"
-]
+# Config
+CITIES = ["Hyderabad", "Bangalore", "Chennai"]
+SEARCH_BASE = "IT fresher entry level 2024"
+DAYS_BACK = 3
 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+FRESHER_WORDS = ["fresher", "entry level", "graduate", "trainee", "junior", "0-2", "2024", "2025"]
+SENIOR_WORDS = ["senior", "lead", "principal", "architect", "manager", "director", "head", "vp", "cto"]
 
-def is_fresher_job(title, description):
-    if not isinstance(title, str): title = ""
-    if not isinstance(description, str): description = ""
+def is_fresher(title, description):
     text = (title + " " + description).lower()
-    has_fresher = any(kw in text for kw in FRESHER_KEYWORDS)
-    has_senior = any(kw in text for kw in SENIOR_KEYWORDS)
-    return has_fresher and not has_senior
-
-def clean_value(v):
-    """Convert NaN, inf, None to None (JSON null) and ensure strings are valid."""
-    if v is None:
-        return None
-    if isinstance(v, float):
-        if math.isnan(v) or math.isinf(v):
-            return None
-    if pd.isna(v):
-        return None
-    if isinstance(v, (datetime, pd.Timestamp)):
-        return v.isoformat() if hasattr(v, 'isoformat') else str(v)
-    return v
+    return any(w in text for w in FRESHER_WORDS) and not any(w in text for w in SENIOR_WORDS)
 
 def get_existing_urls():
-    response = supabase.table("ApplyMore").select("url").execute()
-    return {row["url"] for row in response.data} if response.data else set()
+    resp = supabase.table("ApplyMore").select("url").execute()
+    return {row["url"] for row in resp.data} if resp.data else set()
 
-def batch_upsert_jobs(jobs, batch_size=50):
-    if not jobs:
-        return
-    for i in range(0, len(jobs), batch_size):
-        batch = jobs[i:i+batch_size]
-        # Clean each job dict
-        cleaned_batch = []
-        for job in batch:
-            cleaned = {k: clean_value(v) for k, v in job.items()}
-            cleaned_batch.append(cleaned)
-        supabase.table("ApplyMore").insert(cleaned_batch).execute()
-        print(f"Inserted batch {i//batch_size + 1} ({len(cleaned_batch)} jobs)")
+def fetch_jobs(city):
+    url = "https://jsearch.p.rapidapi.com/search"
+    params = {
+        "query": f"{SEARCH_BASE} {city}",
+        "page": 1,
+        "num_pages": 1,
+        "country": "in",
+        "date_posted": "week"
+    }
+    headers = {
+        "x-rapidapi-key": RAPIDAPI_KEY,
+        "x-rapidapi-host": "jsearch.p.rapidapi.com"
+    }
+    resp = requests.get(url, headers=headers, params=params, timeout=10)
+    if resp.status_code != 200:
+        print(f"Error {resp.status_code} for {city}")
+        return []
+    data = resp.json()
+    return data.get("data", [])
 
-def scrape_all_jobs():
-    all_new_jobs = []
-    seen_urls = get_existing_urls()
-    print(f"Existing jobs in DB: {len(seen_urls)}")
-    
-    for location in LOCATIONS:
-        for role in ROLES:
-            print(f"\n--- {role} in {location} ---")
-            try:
-                jobs_df = scrape_jobs(
-                    site_name=["linkedin"],  # Only LinkedIn for speed (Indeed often returns none)
-                    search_term=role,
-                    location=location,
-                    results_wanted=RESULTS_WANTED,
-                    hours_old=HOURS_OLD,
-                    country_indeed='india',
-                    verbose=0,  # Reduce log noise
-                )
-                if jobs_df.empty:
-                    print("  No jobs found")
-                    continue
-                
-                print(f"  Raw jobs: {len(jobs_df)}")
-                for _, job in jobs_df.iterrows():
-                    title = job.get('title')
-                    company = job.get('company')
-                    url = job.get('job_url')
-                    desc = job.get('description')
-                    posted = job.get('date_posted')
-                    
-                    # Basic validation
-                    if not title or not company or not url:
-                        continue
-                    if url in seen_urls:
-                        continue
-                    if not is_fresher_job(title, desc):
-                        continue
-                    
-                    # Handle posted date
-                    if pd.isna(posted):
-                        posted_iso = datetime.now(timezone.utc).isoformat()
-                    elif isinstance(posted, (datetime, pd.Timestamp)):
-                        posted_iso = posted.isoformat()
-                    else:
-                        posted_iso = str(posted)
-                    
-                    new_job = {
-                        "title": title,
-                        "company": company,
-                        "location": location.split(',')[0],
-                        "url": url,
-                        "description": desc,
-                        "posted_date": posted_iso,
-                        "created_at": datetime.now(timezone.utc).isoformat()
-                    }
-                    all_new_jobs.append(new_job)
-                    seen_urls.add(url)
-                
-                print(f"  New jobs so far: {len(all_new_jobs)}")
-                # Short delay to be polite (remove if you want faster, but may get blocked)
-                time.sleep(random.uniform(1, 3))
-                
-            except Exception as e:
-                print(f"  Error: {e}")
+def main():
+    print("Starting JSearch scraper...")
+    existing = get_existing_urls()
+    print(f"Existing URLs: {len(existing)}")
+    cutoff = datetime.now(timezone.utc) - timedelta(days=DAYS_BACK)
+    new_jobs = []
+    seen = set()
+
+    for city in CITIES:
+        print(f"Fetching {city}...")
+        jobs = fetch_jobs(city)
+        print(f"  Raw jobs: {len(jobs)}")
+        for job in jobs:
+            title = job.get("job_title")
+            company = job.get("employer_name")
+            url = job.get("job_apply_link")
+            desc = job.get("job_description", "")
+            posted_str = job.get("job_posted_at_datetime_utc") or job.get("job_posted_at")
+            if not title or not company or not url:
                 continue
-    
-    print(f"\n=== Total new fresher jobs: {len(all_new_jobs)} ===")
-    if all_new_jobs:
-        batch_upsert_jobs(all_new_jobs)
+            if url in existing or url in seen:
+                continue
+            # Date filter
+            try:
+                if posted_str:
+                    posted = datetime.fromisoformat(posted_str.replace('Z', '+00:00'))
+                    if posted < cutoff:
+                        continue
+            except:
+                pass
+            if not is_fresher(title, desc):
+                continue
+            new_jobs.append({
+                "title": title,
+                "company": company,
+                "location": city,
+                "url": url,
+                "description": desc,
+                "posted_date": posted_str or datetime.now(timezone.utc).isoformat(),
+                "created_at": datetime.now(timezone.utc).isoformat()
+            })
+            seen.add(url)
+        time.sleep(1)
+
+    print(f"New fresher jobs: {len(new_jobs)}")
+    if new_jobs:
+        for i in range(0, len(new_jobs), 50):
+            supabase.table("ApplyMore").insert(new_jobs[i:i+50]).execute()
+            print(f"Inserted batch {i//50 + 1}")
     else:
-        print("No new jobs to insert.")
+        print("No new jobs.")
 
 if __name__ == "__main__":
-    scrape_all_jobs()
+    main()
