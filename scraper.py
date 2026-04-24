@@ -27,8 +27,8 @@ supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 # ================= HELPER FUNCTIONS =================
 def is_fresher_job(title: str, description: str) -> bool:
     text = (title + " " + description).lower()
-    has_fresher = any(w in text for w in FRESHER_WORDS)
-    has_senior = any(w in text for w in SENIOR_WORDS)
+    has_fresher = any(word in text for word in FRESHER_WORDS)
+    has_senior = any(word in text for word in SENIOR_WORDS)
     return has_fresher and not has_senior
 
 async def fetch_jobs(session: aiohttp.ClientSession, query: str, city: str) -> list:
@@ -125,31 +125,45 @@ async def main():
 
     print(f"✨ New fresher jobs found: {len(new_jobs)}")
 
-    # 4. Insert and get IDs for ApplyMore links
-    inserted_ids = []
+    # 4. Insert and retrieve IDs for ApplyMore links
+    inserted_jobs_with_ids = []
     if new_jobs:
+        # Insert in batches
         for i in range(0, len(new_jobs), 50):
             batch = new_jobs[i:i+50]
             result = supabase.table("ApplyMore").insert(batch).execute()
+            # Supabase returns inserted rows; if not, fallback to fetch by created_at
             if result.data:
-                inserted_ids.extend([row['id'] for row in result.data])
+                inserted_jobs_with_ids.extend(result.data)
+            else:
+                # Fallback: fetch newly inserted rows using created_at timestamp
+                # (use the last few seconds to be safe)
+                fetch_after = datetime.now(timezone.utc) - timedelta(seconds=5)
+                fetch_resp = supabase.table("ApplyMore").select("*").gte("created_at", fetch_after.isoformat()).execute()
+                if fetch_resp.data:
+                    inserted_jobs_with_ids.extend(fetch_resp.data)
             print(f"   Inserted batch {i//50 + 1} ({len(batch)} jobs)")
-        print(f"✅ Inserted {len(inserted_ids)} jobs with IDs.")
 
-        # 5. Send Telegram alert with ApplyMore links + "APPLY ASAP"
+        print(f"✅ Inserted {len(inserted_jobs_with_ids)} jobs with IDs.")
+
+        # 5. Send Telegram alert using ApplyMore internal links + "APPLY ASAP"
         async with aiohttp.ClientSession() as session:
-            lines = [f"✅ <b>ApplyMore – {len(inserted_ids)} new fresher jobs</b>\n"]
-            for idx, job_id in enumerate(inserted_ids[:10], 1):
-                job_data = new_jobs[idx-1]
+            lines = [f"✅ <b>ApplyMore – {len(inserted_jobs_with_ids)} new fresher jobs</b>\n"]
+            for idx, job_record in enumerate(inserted_jobs_with_ids[:10], 1):
+                job_id = job_record.get("id")
+                title = job_record.get("title")
+                company = job_record.get("company")
+                if not job_id or not title or not company:
+                    continue
                 applymore_url = f"https://applymore.vercel.app/job.html?id={job_id}"
                 lines.append(
-                    f"{idx}. <b>{job_data['title']}</b>\n"
-                    f"   🏢 {job_data['company']}\n"
+                    f"{idx}. <b>{title}</b>\n"
+                    f"   🏢 {company}\n"
                     f"   🔗 <a href='{applymore_url}'>View & Apply on ApplyMore</a>\n"
                     f"   ⚠️ <b>APPLY ASAP</b>"
                 )
-            if len(inserted_ids) > 10:
-                lines.append(f"\n... and {len(inserted_ids)-10} more. <a href='https://applymore.vercel.app'>Browse all jobs</a>")
+            if len(inserted_jobs_with_ids) > 10:
+                lines.append(f"\n... and {len(inserted_jobs_with_ids)-10} more. <a href='https://applymore.vercel.app'>Browse all jobs</a>")
             else:
                 lines.append(f"\n🌐 <a href='https://applymore.vercel.app'>Visit ApplyMore</a>")
             await send_telegram_message(session, "\n\n".join(lines))
