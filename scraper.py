@@ -38,13 +38,9 @@ def is_fresher(title, desc):
     return any(k in text for k in FRESHER_WORDS) and not any(k in text for k in SENIOR_WORDS)
 
 def extract_exp(title, desc):
-    text = (safe_str(title) + " " + safe_str(desc)).lower()
-    if any(w in text for w in ["fresher","entry","graduate","trainee"]):
-        return "Fresher (0-2 years)"
-    return "Fresher (0-2 years)"
+    return "Fresher (0-2 years)"  # all jobs are fresher anyway
 
 def extract_skills(desc):
-    """Extract up to 4 relevant skills from description."""
     if not desc:
         return []
     text = desc.lower()
@@ -52,14 +48,12 @@ def extract_skills(desc):
     return found[:4]
 
 def format_posted_date(posted):
-    """Return relative days ago string."""
     if not posted:
         return "Recently"
     try:
         if isinstance(posted, datetime):
             diff = (datetime.now(timezone.utc) - posted).days
         else:
-            # try to parse string
             posted_dt = datetime.fromisoformat(safe_str(posted).replace('Z', '+00:00'))
             diff = (datetime.now(timezone.utc) - posted_dt).days
         if diff == 0:
@@ -81,9 +75,6 @@ async def send_telegram(session, job, job_id):
     desc = safe_str(job.get("description", ""))[:300].replace('\n', ' ')
     if len(desc) > 297:
         desc += "..."
-    
-    # Extract additional details
-    job_type = safe_str(job.get("job_type", "")) or "Not specified"
     posted_str = format_posted_date(job.get("posted_date"))
     skills = extract_skills(job.get("description", ""))
     skills_text = ", ".join(skills) if skills else "Not listed"
@@ -91,7 +82,7 @@ async def send_telegram(session, job, job_id):
     message = (
         f"🚀 *New: {title}*\n"
         f"🏢 {company} | 📍 {location}\n"
-        f"📅 Posted: {posted_str} | 💼 Type: {job_type}\n"
+        f"📅 Posted: {posted_str}\n"
         f"🎓 Experience: Fresher (0-2 years)\n"
         f"🔧 Skills: {skills_text}\n\n"
         f"📝 *Description:*\n{desc}\n\n"
@@ -133,7 +124,6 @@ async def scrape_city(session, city):
                 url = safe_str(job.get('job_url'))
                 desc = safe_str(job.get('description'))
                 posted = job.get('date_posted')
-                job_type = safe_str(job.get('job_type'))  # may be present
                 if not title or not company or not url:
                     continue
                 if url in existing_urls or url in seen:
@@ -148,7 +138,6 @@ async def scrape_city(session, city):
                     "url": url,
                     "description": desc,
                     "posted_date": posted_iso,
-                    "job_type": job_type,
                     "created_at": datetime.now(timezone.utc).isoformat(),
                     "experience_level": extract_exp(title, desc)
                 })
@@ -158,7 +147,7 @@ async def scrape_city(session, city):
     return new_jobs
 
 async def main():
-    print("⚡ ApplyMore – Enhanced Alerts Scraper Started")
+    print("⚡ ApplyMore – Enhanced Alerts Scraper Started (Fixed DB schema)")
     start = datetime.now(timezone.utc)
 
     async with aiohttp.ClientSession() as session:
