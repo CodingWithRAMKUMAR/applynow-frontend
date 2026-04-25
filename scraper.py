@@ -1,48 +1,45 @@
 import os
 import asyncio
 import aiohttp
+import random
+import re
+import pandas as pd
 from datetime import datetime, timezone, timedelta
 from supabase import create_client
-import re
+from jobspy import scrape_jobs
 
 # ================= CONFIGURATION =================
 SUPABASE_URL = os.environ["SUPABASE_URL"]
 SUPABASE_SERVICE_ROLE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
-RAPIDAPI_KEY = os.environ["RAPIDAPI_KEY"].strip()
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
-# Only these job sources (LinkedIn, Indeed, Glassdoor)
-ALLOWED_SOURCES = {"linkedin", "indeed", "glassdoor"}
-
-# Only these cities
-CITIES = ["Hyderabad", "Bangalore", "Chennai"]
-
-# Search terms for fresher jobs
 SEARCH_TERMS = [
-    "fresher software engineer",
-    "graduate engineer trainee",
-    "entry level developer",
-    "fresher data analyst",
-    "trainee engineer",
-    "fresher devops",
-    "fresher cybersecurity",
-    "fresher qa"
+    "fresher software engineer", "graduate engineer trainee", "entry level developer",
+    "fresher data analyst", "trainee engineer", "fresher devops",
+    "fresher cybersecurity", "fresher qa"
 ]
+# Note: Naukri.com primarily works with Indian cities.
+# The city name is used in the search term, but the location parameter might be ignored.
+CITIES = ["Hyderabad, India", "Bangalore, India", "Chennai, India"]
+RESULTS_WANTED = 20          # per site per search
+HOURS_OLD = 72               # last 3 days
 
-DAYS_BACK = 3
-RESULTS_PER_PAGE = 20
+# COMPLETE JobBoards List (Updated for Naukri)
+SITES_TO_SCRAPE = ["linkedin", "indeed", "glassdoor", "naukri"]
 
-# Fresher keywords (must appear)
-FRESHER_WORDS = {"fresher", "entry level", "graduate", "trainee", "junior", "0-1", "0-2", "1 year", "2 years", "2024", "2025", "recent graduate"}
-
-# Senior keywords (exclude)
-SENIOR_WORDS = {"senior", "lead", "principal", "architect", "manager", "director", "head", "vp", "cto", "staff"}
+FRESHER_WORDS = {"fresher", "entry level", "graduate", "trainee", "junior",
+                 "0-1", "0-2", "1 year", "2 years", "2024", "2025", "recent graduate"}
+SENIOR_WORDS = {"senior", "lead", "principal", "architect", "manager",
+                "director", "head", "vp", "cto", "staff"}
 
 supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
-# ================= HELPER FUNCTIONS =================
-def extract_experience_level(title: str, description: str) -> str:
+def is_fresher_job(title, description):
+    text = (title + " " + description).lower()
+    return any(w in text for w in FRESHER_WORDS) and not any(w in text for w in SENIOR_WORDS)
+
+def extract_experience_level(title, description):
     text = (title + " " + description).lower()
     if any(w in text for w in ["fresher", "entry level", "graduate", "trainee"]):
         return "Fresher (0-2 years)"
@@ -51,203 +48,136 @@ def extract_experience_level(title: str, description: str) -> str:
         return f"{match.group(1)}-{match.group(2)} years"
     return "Fresher (0-2 years)"
 
-def is_fresher_job(title: str, description: str) -> bool:
-    text = (title + " " + description).lower()
-    has_fresher = any(w in text for w in FRESHER_WORDS)
-    has_senior = any(w in text for w in SENIOR_WORDS)
-    return has_fresher and not has_senior
-
-def clean_description(desc: str, max_len: int = 300) -> str:
-    """Truncate description and remove excess whitespace."""
-    if not desc:
-        return "No description provided."
-    desc = re.sub(r'\s+', ' ', desc).strip()
-    if len(desc) > max_len:
-        desc = desc[:max_len] + "..."
-    return desc
-
-async def fetch_jobs(session: aiohttp.ClientSession, query: str, city: str) -> list:
-    url = "https://jsearch.p.rapidapi.com/search"
-    params = {
-        "query": f"{query} {city}",
-        "page": 1,
-        "num_pages": 1,
-        "country": "in",
-        "date_posted": "week",
-        "results_per_page": RESULTS_PER_PAGE
-    }
-    headers = {
-        "x-rapidapi-key": RAPIDAPI_KEY,
-        "x-rapidapi-host": "jsearch.p.rapidapi.com"
-    }
-    # Remove any hidden newlines or spaces
-    headers = {k: v.replace('\n', '').replace('\r', '').strip() for k, v in headers.items()}
-    try:
-        async with session.get(url, headers=headers, params=params, timeout=10) as resp:
-            if resp.status != 200:
-                return []
-            data = await resp.json()
-            return data.get("data", [])
-    except Exception:
-        return []
-
-async def send_telegram_message(session: aiohttp.ClientSession, text: str):
-    """Send a message to Telegram. No crash if secrets missing."""
+async def send_telegram(session, text):
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
-        print("⚠️ Telegram credentials missing – skipping notification.")
         return
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": text,
-        "parse_mode": "HTML",
-        "disable_web_page_preview": True
-    }
     try:
-        await session.post(url, json=payload)
+        await session.post(url, json={
+            "chat_id": TELEGRAM_CHAT_ID,
+            "text": text,
+            "parse_mode": "HTML",
+            "disable_web_page_preview": True
+        })
     except Exception as e:
-        print(f"Telegram send error: {e}")
+        print(f"Telegram error: {e}")
 
-# ================= MAIN WORKFLOW =================
 async def main():
-    print("🚀 ApplyMore – final robust scraper started")
+    print("🚀 Unlimited direct scraper started (Updated with Naukri)")
     start_time = datetime.now(timezone.utc)
 
-    # 1. Fetch existing URLs from DB (so we don't re-insert)
+    # Fetch existing URLs to avoid duplicates
     existing_resp = supabase.table("ApplyMore").select("url").execute()
     existing_urls = {row["url"] for row in existing_resp.data} if existing_resp.data else set()
-    print(f"📊 Existing jobs in DB (to avoid duplicates): {len(existing_urls)}")
+    print(f"Existing jobs: {len(existing_urls)}")
 
-    # 2. Parallel API calls for all (city, term) combinations
-    async with aiohttp.ClientSession() as session:
-        tasks = []
-        for city in CITIES:
-            for term in SEARCH_TERMS:
-                tasks.append((city, term, fetch_jobs(session, term, city)))
-        # Gather results while preserving city/term
-        results = await asyncio.gather(*[task[2] for task in tasks])
-        meta = [(task[0], task[1]) for task in tasks]
-
-    # 3. Process each result with its city
+    new_jobs_raw = []   # will store dicts before insertion
     seen_urls = set()
-    new_jobs = []
-    cutoff_date = datetime.now(timezone.utc) - timedelta(days=DAYS_BACK)
-    total_raw = 0
 
-    for (city, term), job_list in zip(meta, results):
-        total_raw += len(job_list)
-        for job in job_list:
-            title = job.get("job_title")
-            company = job.get("employer_name")
-            url = job.get("job_apply_link")
-            description = job.get("job_description", "")
-            posted_str = job.get("job_posted_at_datetime_utc") or job.get("job_posted_at")
-            source = job.get("job_publisher", "").lower()
+    # Scrape sequentially to be polite
+    for location in CITIES:
+        for term in SEARCH_TERMS:
+            print(f"Scraping {term} in {location}...")
+            try:
+                jobs_df = scrape_jobs(
+                    site_name=SITES_TO_SCRAPE,
+                    search_term=term,
+                    location=location,         # used by Indeed/LinkedIn/Glassdoor
+                    results_wanted=RESULTS_WANTED,
+                    hours_old=HOURS_OLD,
+                    country_indeed='india',
+                    verbose=0                  # reduce log noise
+                )
+                print(f"  Raw jobs found: {len(jobs_df)}")
+                if jobs_df.empty:
+                    continue
 
-            # Basic validation
-            if not title or not company or not url:
-                continue
+                for _, job in jobs_df.iterrows():
+                    title = job.get('title')
+                    company = job.get('company')
+                    url = job.get('job_url')
+                    desc = job.get('description')
+                    posted_str = job.get('date_posted')
+                    # job_source = job.get('site') # ['linkedin', 'indeed', 'glassdoor', 'naukri']
 
-            # Source filter (LinkedIn, Indeed, Glassdoor only)
-            if source not in ALLOWED_SOURCES:
-                continue
-
-            # Duplicate check (existing DB + this run)
-            if url in existing_urls or url in seen_urls:
-                continue
-
-            # Date filter
-            if posted_str:
-                try:
-                    posted_dt = datetime.fromisoformat(posted_str.replace('Z', '+00:00'))
-                    if posted_dt < cutoff_date:
+                    if not title or not company or not url:
                         continue
-                except:
-                    pass
+                    if url in existing_urls or url in seen_urls:
+                        continue
+                    if not is_fresher_job(title, desc):
+                        continue
 
-            # Fresher filter
-            if not is_fresher_job(title, description):
+                    # Normalise date
+                    if pd.isna(posted_str):
+                        posted_iso = datetime.now(timezone.utc).isoformat()
+                    elif isinstance(posted_str, datetime):
+                        posted_iso = posted_str.isoformat()
+                    else:
+                        posted_iso = str(posted_str)
+
+                    exp_level = extract_experience_level(title, desc)
+                    new_jobs_raw.append({
+                        "title": title,
+                        "company": company,
+                        "location": location.split(',')[0],
+                        "url": url,
+                        "description": str(desc) if desc else "",
+                        "posted_date": posted_iso,
+                        "created_at": datetime.now(timezone.utc).isoformat(),
+                        "experience_level": exp_level
+                    })
+                    seen_urls.add(url)
+
+                # Delay to avoid being blocked
+                await asyncio.sleep(random.uniform(3, 6))
+            except Exception as e:
+                print(f"  Error scraping {term} in {location}: {e}")
                 continue
 
-            # If passed all filters, prepare job record
-            exp_level = extract_experience_level(title, description)
-            new_jobs.append({
-                "title": title,
-                "company": company,
-                "location": city,
-                "url": url,
-                "description": description,
-                "posted_date": posted_str or datetime.now(timezone.utc).isoformat(),
-                "created_at": datetime.now(timezone.utc).isoformat(),
-                "experience_level": exp_level
-            })
-            seen_urls.add(url)
-
-    print(f"📡 Raw jobs from API: {total_raw}")
-    print(f"✨ New fresher jobs after filters: {len(new_jobs)}")
-
-    # 4. Insert new jobs and send Telegram alert
-    inserted_count = 0
-    if new_jobs:
-        # Insert in batches of 50
-        for i in range(0, len(new_jobs), 50):
-            batch = new_jobs[i:i+50]
-            result = supabase.table("ApplyMore").insert(batch).execute()
-            inserted_count += len(result.data) if result.data else 0
-            print(f"   Inserted batch {i//50 + 1} ({len(batch)} jobs)")
-
-        # Fetch the newly inserted jobs (to get their IDs) – order by created_at desc, limit to inserted count
-        latest_resp = supabase.table("ApplyMore")\
-            .select("id, title, company, location, description, experience_level")\
-            .order("created_at", desc=True)\
-            .limit(inserted_count)\
-            .execute()
-        if latest_resp.data:
-            # Reverse to show oldest first (same order as insertion)
-            inserted_jobs = list(reversed(latest_resp.data))
-        else:
-            inserted_jobs = []
-
-        # Send Telegram alert with ApplyMore links
+    print(f"New fresher jobs (before insert): {len(new_jobs_raw)}")
+    if not new_jobs_raw:
         async with aiohttp.ClientSession() as session:
-            if inserted_jobs:
-                lines = [f"✅ <b>ApplyMore – {len(inserted_jobs)} new fresher jobs</b>\n"]
-                for idx, job in enumerate(inserted_jobs[:10], 1):
-                    job_link = f"https://applymore.vercel.app/job.html?id={job['id']}"
-                    desc_short = clean_description(job.get("description", ""), 200)
-                    lines.append(
-                        f"{idx}. <b>{job['title']}</b>\n"
-                        f"   🏢 {job['company']} | 📍 {job['location']}\n"
-                        f"   🎓 {job.get('experience_level', 'Fresher')}\n"
-                        f"   📝 {desc_short}\n"
-                        f"   🔗 <a href='{job_link}'>View & Apply on ApplyMore</a>\n"
-                        f"   ⚠️ <b>APPLY ASAP</b>"
-                    )
-                if len(inserted_jobs) > 10:
-                    lines.append(f"\n... and {len(inserted_jobs)-10} more. <a href='https://applymore.vercel.app'>Browse all jobs</a>")
-                else:
-                    lines.append(f"\n🌐 <a href='https://applymore.vercel.app'>Visit ApplyMore</a>")
-                await send_telegram_message(session, "\n\n".join(lines))
+            await send_telegram(session, "⚠️ ApplyMore scraper ran but found no new fresher jobs.")
+        return
+
+    # Insert in batches and capture returned IDs
+    inserted_ids = []
+    for i in range(0, len(new_jobs_raw), 50):
+        batch = new_jobs_raw[i:i+50]
+        result = supabase.table("ApplyMore").insert(batch).execute()
+        if result.data:
+            inserted_ids.extend([row['id'] for row in result.data])
+        print(f"Inserted batch {i//50+1} ({len(batch)} jobs)")
+
+    print(f"Total inserted jobs with IDs: {len(inserted_ids)}")
+
+    # Prepare Telegram alerts – one message per job (to avoid truncation)
+    # But to prevent spam, we send a single message with the first 10 jobs + link to site
+    async with aiohttp.ClientSession() as session:
+        if inserted_ids:
+            # Map inserted_ids back to the raw job data (same order)
+            # Since we inserted in the same order, we can zip
+            # However, we must ensure we have the same number
+            jobs_with_ids = list(zip(inserted_ids, new_jobs_raw[:len(inserted_ids)]))
+            lines = [f"✅ <b>ApplyMore – {len(jobs_with_ids)} new fresher jobs</b>\n"]
+            for idx, (jid, job) in enumerate(jobs_with_ids[:10], 1):
+                link = f"https://applymore.vercel.app/job.html?id={jid}"
+                lines.append(
+                    f"{idx}. <b>{job['title']}</b>\n"
+                    f"   🏢 {job['company']} | 📍 {job['location']}\n"
+                    f"   🔗 <a href='{link}'>Apply on ApplyMore</a>\n"
+                    f"   ⚠️ <b>APPLY ASAP</b>"
+                )
+            if len(jobs_with_ids) > 10:
+                lines.append(f"\n... and {len(jobs_with_ids)-10} more. <a href='https://applymore.vercel.app'>Browse all jobs</a>")
             else:
-                await send_telegram_message(session, "⚠️ ApplyMore: Jobs were inserted but could not retrieve IDs for Telegram message.")
-    else:
-        # No new jobs found – send a clear explanation
-        async with aiohttp.ClientSession() as session:
-            msg = (
-                "⚠️ <b>ApplyMore Scraper – No New Jobs</b>\n\n"
-                f"• Raw jobs fetched from API: {total_raw}\n"
-                f"• After filters (source, duplicate, date, fresher): 0 kept.\n"
-                "Possible reasons:\n"
-                "  1. No new jobs posted in the last 3 days for these cities.\n"
-                "  2. All jobs were from disallowed sources (not LinkedIn/Indeed/Glassdoor).\n"
-                "  3. Jobs existed but were senior roles or lacked fresher keywords.\n\n"
-                "The scraper will run again in 12 hours."
-            )
-            await send_telegram_message(session, msg)
+                lines.append(f"\n🌐 <a href='https://applymore.vercel.app'>Visit ApplyMore</a>")
+            await send_telegram(session, "\n\n".join(lines))
+        else:
+            await send_telegram(session, "⚠️ Jobs were found but could not retrieve IDs.")
 
     elapsed = (datetime.now(timezone.utc) - start_time).total_seconds()
-    print(f"✅ Finished in {elapsed:.2f} seconds")
-    print(f"✅ Inserted {inserted_count} new jobs.")
+    print(f"Finished in {elapsed:.2f}s. Inserted {len(inserted_ids)} jobs.")
 
 if __name__ == "__main__":
     asyncio.run(main())
