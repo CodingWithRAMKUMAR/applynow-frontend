@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Article – ApplyMore Blog</title>
+  <meta name="description" content="Read in-depth career advice, resume templates, interview prep, and success stories for IT freshers.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--bg:#0a0a2a;--card-bg:rgba(20,20,50,0.65);--text:#f0f3ff;--text-muted:#9ca3cf;--border:rgba(255,255,255,0.1);--accent:#3b82f6;--purple:#8b5cf6}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:1.5rem;line-height:1.6}
+    body.light{--bg:#f8fafc;--card-bg:rgba(255,255,255,0.85);--text:#1e293b;--text-muted:#475569;--border:rgba(0,0,0,0.1);--accent:#2563eb}
+    body.vibrant{--bg:#fdf2f8;--card-bg:rgba(255,255,255,0.9);--text:#831843;--text-muted:#9d174d;--accent:#ec489a}
+    .container{max-width:900px;margin:0 auto}
+    .top-bar{display:flex;justify-content:flex-end;gap:0.5rem;margin-bottom:1rem}
+    .theme-btn{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:2rem;padding:0.2rem 0.6rem;cursor:pointer;font-size:0.7rem;color:var(--text)}
+    .nav-links{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+    .nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.9rem}
+    .nav-links a:hover{color:var(--accent)}
+    .article-card{background:var(--card-bg);backdrop-filter:blur(10px);border-radius:1.5rem;padding:2rem;border:1px solid var(--border)}
+    h1{font-size:2rem;margin-bottom:0.5rem;color:var(--accent)}
+    .meta{display:flex;gap:1rem;font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:1rem}
+    .category-badge{background:rgba(59,130,246,0.2);color:var(--accent);padding:0.2rem 0.8rem;border-radius:2rem;font-size:0.7rem;display:inline-block}
+    .content p{margin-bottom:1rem}
+    .content h2{margin:1.5rem 0 0.5rem;color:var(--accent)}
+    .content h3{margin:1rem 0 0.5rem;color:var(--accent)}
+    .content ul, .content ol{margin-left:1.5rem;margin-bottom:1rem}
+    .back-link{display:inline-block;margin-top:2rem;color:var(--accent);text-decoration:none}
+    .back-link:hover{text-decoration:underline}
+    footer{margin-top:3rem;text-align:center;font-size:0.7rem;color:var(--text-muted)}
+    .error{text-align:center;padding:2rem;color:var(--text-muted)}
+  </style>
+  <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <meta property="og:image" content="https://applymore.vercel.app/logo.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div class="container">
+  <div class="top-bar">
+    <button class="theme-btn" id="lightTheme">Light</button>
+    <button class="theme-btn" id="darkTheme">Dark</button>
+    <button class="theme-btn" id="vibrantTheme">Vibrant</button>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">🏠 Home</a>
+    <a href="about.html">📖 About</a>
+    <a href="blog.html">✍️ Blog</a>
+    <a href="contact.html">📧 Contact</a>
+    <a href="privacy.html">🔒 Privacy</a>
+    <a href="terms.html">⚖️ Terms</a>
+  </div>
+  <div id="articleContent" class="article-card">
+    <div class="error">Loading article...</div>
+  </div>
+  <footer>
+    <p>© 2026 ApplyMore — Helping IT freshers land their dream job</p>
+  </footer>
+</div>
+
+<script>
+  // Theme
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.body.classList.add(savedTheme);
+  function setTheme(theme) { document.body.classList.remove('light','vibrant'); if(theme!=='dark') document.body.classList.add(theme); localStorage.setItem('theme',theme); }
+  document.getElementById('lightTheme')?.addEventListener('click',()=>setTheme('light'));
+  document.getElementById('darkTheme')?.addEventListener('click',()=>setTheme('dark'));
+  document.getElementById('vibrantTheme')?.addEventListener('click',()=>setTheme('vibrant'));
+
+  // Article database (will be populated one by one)
+  const articlesDB = {};
+
+  // Helper to get URL parameter
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  // Escape HTML to prevent injection
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // Render article content
+  function renderArticle() {
+    const id = getQueryParam('id');
+    if (!id) {
+      document.getElementById('articleContent').innerHTML = '<div class="error">No article ID specified.</div>';
+      return;
+    }
+    const article = articlesDB[id];
+    if (!article) {
+      document.getElementById('articleContent').innerHTML = '<div class="error">Article not found. It may be coming soon.</div>';
+      return;
+    }
+    const html = `
+      <h1>${escapeHtml(article.title)}</h1>
+      <div class="meta">
+        <span><i class="far fa-calendar-alt"></i> ${escapeHtml(article.date)}</span>
+        <span><i class="far fa-clock"></i> ${escapeHtml(article.readTime)}</span>
+        <span><span class="category-badge">${escapeHtml(article.category)}</span></span>
+      </div>
+      <div class="content">
+        ${article.content}
+      </div>
+      <a href="blog.html" class="back-link">← Back to Blog</a>
+    `;
+    document.getElementById('articleContent').innerHTML = html;
+  }
+
+  // We will populate articlesDB progressively (ask for confirmation before adding each)
+  // For now, we start with an empty object. After you confirm, I will provide the first article content.
+
+  renderArticle();
+</script>
+</body>
+</html>
