@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IT Career Blog – ApplyMore</title>
+  <meta name="description" content="Practical career advice, resume templates, interview prep, and skill guides for IT freshers in India.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -12,12 +13,12 @@
     body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:1.5rem;line-height:1.5}
     .container{max-width:1400px;margin:0 auto}
     .nav-links{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
-    .nav-links a{color:var(--text-muted);text-decoration:none}
+    .nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.9rem}
     .nav-links a:hover{color:var(--accent)}
     .blog-hero{text-align:center;margin-bottom:2rem}
     .blog-hero h1{font-size:2.5rem;background:linear-gradient(135deg,var(--accent),var(--purple));background-clip:text;-webkit-background-clip:text;color:transparent}
     .blog-hero p{color:var(--text-muted);max-width:700px;margin:0 auto}
-    .articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+    .articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
     .article-card{background:var(--card-bg);border-radius:1rem;padding:1.2rem;border:1px solid var(--border);transition:0.2s}
     .article-card:hover{transform:translateY(-5px);border-color:var(--accent)}
     .article-category{display:inline-block;background:rgba(59,130,246,0.2);color:var(--accent);font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:1rem;margin-bottom:0.5rem}
@@ -47,20 +48,21 @@
   </div>
   <div class="blog-hero">
     <h1>IT Career Blog</h1>
-    <p>Actionable advice, resume templates, interview prep, and insider tips – all for IT freshers in India.</p>
+    <p>Practical advice, resume templates, interview prep, and skill guides – all for IT freshers in India.</p>
   </div>
   <div id="articlesContainer" class="articles-grid"></div>
   <footer><p>© 2026 ApplyMore — Helping IT freshers land their dream job</p></footer>
 </div>
 <script>
   const articles = [
-    { id:1, title:"How to Find Your First IT Job in 2026: Complete Guide", category:"Job Search", excerpt:"Data-driven roadmap with skill gap analyzer, project plan, and real success stories.", readTime:"25 min", date:"Apr 10, 2026" },
-    { id:2, title:"IT Fresher Resume Template: ATS-Friendly Format That Works", category:"Resume", excerpt:"Copy-paste template with 57 keywords, before/after examples, and ATS scoring tips.", readTime:"20 min", date:"Apr 8, 2026" },
-    { id:3, title:"50 Most Asked Interview Questions for IT Freshers (With Answers)", category:"Interview", excerpt:"STAR-based answers, technical code snippets, and preparation plan from real transcripts.", readTime:"30 min", date:"Apr 5, 2026" },
-    { id:4, title:"How to Learn Data Science in 6 Months (Free Roadmap)", category:"Skills", excerpt:"Month-by-month guide with free courses, projects, and deployment advice.", readTime:"18 min", date:"Mar 28, 2026" },
-    { id:5, title:"TCS vs Infosys vs Wipro: Fresher's Comparison 2026", category:"Company", excerpt:"Salary, training, work culture, promotion timeline – data-driven comparison.", readTime:"12 min", date:"Mar 20, 2026" },
-    { id:6, title:"Remote vs Office Jobs: What's Better for Freshers?", category:"Job Search", excerpt:"Survey results from 500 freshers, pros/cons, and decision framework.", readTime:"8 min", date:"Mar 15, 2026" },
-    { id:7, title:"GitHub Portfolio Ideas: 10 Projects That Get You Hired", category:"Resume", excerpt:"Project tutorials, live demos, and how to present them for maximum impact.", readTime:"15 min", date:"Mar 10, 2026" }
+    { id:1, title:"How to Write an ATS-Friendly Resume as an IT Fresher in 2026", category:"Resume", excerpt:"Step-by-step template, 57 keywords, and before/after examples to beat ATS filters.", readTime:"10 min", date:"Apr 20, 2026" },
+    { id:2, title:"Top 10 Skills Every IT Fresher Should Learn Before Applying", category:"Skills", excerpt:"Data-driven list of technical and soft skills that actually get you hired.", readTime:"12 min", date:"Apr 18, 2026" },
+    { id:3, title:"LinkedIn vs Indeed: Where Should IT Freshers Apply in India?", category:"Job Search", excerpt:"Comparison of both platforms with a hybrid strategy that maximises interview calls.", readTime:"9 min", date:"Apr 15, 2026" },
+    { id:4, title:"How to Crack Your First IT Interview: A Step-by-Step Guide", category:"Interview", excerpt:"4-week preparation framework covering behavioural, technical, and mock interviews.", readTime:"14 min", date:"Apr 12, 2026" },
+    { id:5, title:"Why You’re Not Getting Callbacks (And How to Fix It)", category:"Job Search", excerpt:"Top 5 reasons and actionable fixes, including a follow-up email template.", readTime:"10 min", date:"Apr 10, 2026" },
+    { id:6, title:"Best Free Courses to Learn Python, SQL and Cloud in 2026", category:"Skills", excerpt:"100% free, high-quality resources with a 3‑month study plan to become job‑ready.", readTime:"11 min", date:"Apr 8, 2026" },
+    { id:7, title:"How to Write a Cold Email to a Hiring Manager", category:"Job Search", excerpt:"Template, subject line tips, and where to find email addresses – for freshers.", readTime:"8 min", date:"Apr 5, 2026" },
+    { id:8, title:"What is an ATS System and Why Your Resume Gets Rejected", category:"Resume", excerpt:"How ATS works, common mistakes, and how to test your resume for free.", readTime:"9 min", date:"Apr 2, 2026" }
   ];
 
   function renderArticles() {
