@@ -6,7 +6,6 @@
   <title>ApplyMore – India’s IT Fresher Job Board</title>
   <meta name="description" content="ApplyMore – free job board for IT freshers in India. Find genuine entry-level jobs in Hyderabad, Bangalore, Chennai. Updated daily. Resume builder & interview prep included.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -28,6 +27,16 @@
     .search-box{position:relative}
     .search-box i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--text-muted)}
     .search-box input{padding-left:2rem;width:260px}
+    /* Two column resource section */
+    .resources-wrapper{display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:2rem}
+    .resource-col{flex:1;min-width:250px}
+    .resource-col h2{color:var(--accent);margin-bottom:1rem;font-size:1.3rem}
+    .resource-card{background:var(--card-bg);border-radius:1rem;padding:1rem;margin-bottom:1rem}
+    .resource-card h3{color:var(--accent);margin-bottom:0.5rem}
+    .resource-card p{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem}
+    .resource-card a{color:var(--accent);text-decoration:none}
+    .coming-soon{opacity:0.7; font-style:italic}
+    /* Job section */
     .jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;margin-bottom:2rem}
     .job-card{background:var(--card-bg);border-radius:1rem;padding:1.2rem;border:1px solid var(--border);transition:0.2s;cursor:pointer}
     .job-card:hover{transform:translateY(-3px);border-color:var(--accent)}
@@ -38,16 +47,9 @@
     .experience-tag{background:rgba(59,130,246,0.2);padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.7rem;width:fit-content}
     .new-badge{background:#dc2626;color:white;padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.6rem;margin-left:0.5rem;display:inline-block}
     .load-more{text-align:center;margin:2rem 0}
-    .load-more button{background:var(--accent);color:white;border:none;padding:0.6rem 1.5rem;border-radius:2rem;cursor:pointer;transition:0.2s}
-    .load-more button:hover{background:var(--purple)}
+    .load-more button{background:var(--accent);color:white;border:none;padding:0.6rem 1.5rem;border-radius:2rem;cursor:pointer}
     .skeleton{background:rgba(255,255,255,0.05);border-radius:1rem;height:200px;animation:pulse 1.5s infinite}
     @keyframes pulse{0%{opacity:0.6}50%{opacity:1}100%{opacity:0.6}}
-    .resources-section{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-bottom:2rem}
-    .resource-card{background:var(--card-bg);border-radius:1rem;padding:1rem}
-    .resource-card h3{color:var(--accent);margin-bottom:0.5rem}
-    .resource-card p{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem}
-    .resource-card a{color:var(--accent);text-decoration:none}
-    .section-title{margin:2rem 0 1rem;color:var(--accent);font-size:1.4rem}
     .message-box{background:var(--card-bg);border-radius:1rem;padding:1.5rem;text-align:center;color:var(--text-muted)}
     footer{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.7rem}
     @media (max-width:640px){.hero h1{font-size:1.8rem}.stats{flex-direction:column;align-items:center}}
@@ -82,16 +84,22 @@
     <div class="filter-group"><select id="locationFilter"><option value="">All Cities</option><option value="Hyderabad">Hyderabad</option><option value="Bangalore">Bangalore</option><option value="Chennai">Chennai</option></select></div>
     <div class="filter-group"><select id="expFilter"><option value="">All Experience</option><option value="Fresher">Fresher (0-2 years)</option><option value="1-2">1-2 years</option><option value="3+">3+ years</option></select></div>
   </div>
+
+  <!-- Two column resource section (PDFs left, Certifications right) -->
+  <div class="resources-wrapper">
+    <div class="resource-col">
+      <h2>📘 Interview Ready PDFs</h2>
+      <div id="pdfsContainer"></div>
+    </div>
+    <div class="resource-col">
+      <h2>🎓 Recommended Certifications</h2>
+      <div id="certsContainer"></div>
+    </div>
+  </div>
+
+  <!-- Job listings -->
   <div id="jobsGrid" class="jobs-grid"></div>
   <div id="loadMoreContainer" class="load-more" style="display:none"><button id="loadMoreBtn">Load More</button></div>
-
-  <!-- PDF Section -->
-  <h2 class="section-title">📘 Interview Ready PDFs</h2>
-  <div id="pdfsContainer" class="resources-section"></div>
-
-  <!-- Certifications Section -->
-  <h2 class="section-title">🎓 Recommended Certifications (Free / Low Cost)</h2>
-  <div id="certsContainer" class="resources-section"></div>
 
   <footer>© 2026 ApplyMore – Helping IT freshers land their dream job</footer>
 </div>
@@ -139,9 +147,7 @@
 
     function showSkeletons(show) {
       const grid = document.getElementById('jobsGrid');
-      if (show) {
-        grid.innerHTML = Array(6).fill().map(() => '<div class="skeleton" style="height:180px"></div>').join('');
-      }
+      if (show) grid.innerHTML = Array(6).fill().map(() => '<div class="skeleton" style="height:180px"></div>').join('');
     }
 
     async function fetchJobs() {
@@ -209,27 +215,51 @@
       document.getElementById('loadMoreContainer').style.display = hasMore ? 'block' : 'none';
     }
 
+    // Check if a PDF file actually exists (to avoid 404)
+    async function pdfExists(url) {
+      try {
+        const res = await fetch(url, { method: 'HEAD' });
+        return res.ok;
+      } catch {
+        return false;
+      }
+    }
+
     async function loadResources() {
       try {
         const res = await fetch('/data/resources.json');
         if (!res.ok) throw new Error('Resources not found');
         const data = await res.json();
-        
-        // PDFs section
+
+        // PDFs column
         const pdfsContainer = document.getElementById('pdfsContainer');
         if (data.pdfs && data.pdfs.length > 0) {
-          pdfsContainer.innerHTML = data.pdfs.map(pdf => `
-            <div class="resource-card">
-              <h3>📄 ${escapeHtml(pdf.title)}</h3>
-              <p>${escapeHtml(pdf.description)}</p>
-              <a href="${pdf.url}" target="_blank">📥 Download PDF →</a>
-            </div>
-          `).join('');
+          const pdfItems = await Promise.all(data.pdfs.map(async (pdf) => {
+            const exists = await pdfExists(pdf.url);
+            if (exists) {
+              return `
+                <div class="resource-card">
+                  <h3>📄 ${escapeHtml(pdf.title)}</h3>
+                  <p>${escapeHtml(pdf.description)}</p>
+                  <a href="${pdf.url}" target="_blank">📥 Download PDF →</a>
+                </div>
+              `;
+            } else {
+              return `
+                <div class="resource-card coming-soon">
+                  <h3>📄 ${escapeHtml(pdf.title)}</h3>
+                  <p>${escapeHtml(pdf.description)}</p>
+                  <p><em>Coming soon (file not yet uploaded)</em></p>
+                </div>
+              `;
+            }
+          }));
+          pdfsContainer.innerHTML = pdfItems.join('');
         } else {
-          pdfsContainer.innerHTML = '<div class="message-box">📚 No PDF resources available yet – check back soon.</div>';
+          pdfsContainer.innerHTML = '<div class="message-box">📚 No PDF resources at the moment. Check back later.</div>';
         }
-        
-        // Certifications section
+
+        // Certifications (always external links – no existence check needed)
         const certsContainer = document.getElementById('certsContainer');
         if (data.certifications && data.certifications.length > 0) {
           certsContainer.innerHTML = data.certifications.map(cert => `
@@ -240,7 +270,7 @@
             </div>
           `).join('');
         } else {
-          certsContainer.innerHTML = '<div class="message-box">🎓 No certifications added yet – check back soon.</div>';
+          certsContainer.innerHTML = '<div class="message-box">🎓 No certifications added yet. Check back later.</div>';
         }
       } catch (e) {
         console.error('Resources error:', e);
