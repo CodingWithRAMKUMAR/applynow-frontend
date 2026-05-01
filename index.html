@@ -27,21 +27,22 @@
     .search-box{position:relative}
     .search-box i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--text-muted)}
     .search-box input{padding-left:2rem;width:260px}
-    /* Two column resource section */
-    .resources-wrapper{display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:2rem}
-    .resource-col{flex:1;min-width:250px}
-    .resource-col h2{color:var(--accent);margin-bottom:1rem;font-size:1.3rem}
+    /* Two column main layout */
+    .main-layout{display:flex;flex-wrap:wrap;gap:2rem}
+    .jobs-column{flex:2;min-width:300px}
+    .resources-column{flex:1;min-width:250px}
+    /* Resource cards */
     .resource-card{background:var(--card-bg);border-radius:1rem;padding:1rem;margin-bottom:1rem}
     .resource-card h3{color:var(--accent);margin-bottom:0.5rem}
     .resource-card p{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem}
     .resource-card a{color:var(--accent);text-decoration:none}
-    .coming-soon{opacity:0.7; font-style:italic}
-    /* Job section */
-    .jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;margin-bottom:2rem}
+    .resource-card .coming-soon{opacity:0.7; font-style:italic}
+    /* Job cards */
+    .jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem}
     .job-card{background:var(--card-bg);border-radius:1rem;padding:1.2rem;border:1px solid var(--border);transition:0.2s;cursor:pointer}
     .job-card:hover{transform:translateY(-3px);border-color:var(--accent)}
-    .job-title{font-size:1.1rem;font-weight:600;margin-bottom:0.3rem;color:var(--accent)}
-    .company{font-size:0.85rem;margin-bottom:0.3rem}
+    .job-title{font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--accent)}
+    .company{font-size:0.8rem;margin-bottom:0.3rem}
     .job-meta{display:flex;gap:0.8rem;font-size:0.7rem;color:var(--text-muted);margin-bottom:0.5rem}
     .job-meta span{display:flex;align-items:center;gap:0.2rem}
     .experience-tag{background:rgba(59,130,246,0.2);padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.7rem;width:fit-content}
@@ -51,8 +52,9 @@
     .skeleton{background:rgba(255,255,255,0.05);border-radius:1rem;height:200px;animation:pulse 1.5s infinite}
     @keyframes pulse{0%{opacity:0.6}50%{opacity:1}100%{opacity:0.6}}
     .message-box{background:var(--card-bg);border-radius:1rem;padding:1.5rem;text-align:center;color:var(--text-muted)}
+    .section-title{color:var(--accent);margin:1rem 0 0.5rem;font-size:1.3rem}
     footer{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.7rem}
-    @media (max-width:640px){.hero h1{font-size:1.8rem}.stats{flex-direction:column;align-items:center}}
+    @media (max-width:840px){.main-layout{flex-direction:column}.resources-column{order:2}.jobs-column{order:1}}
   </style>
   <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
   <link rel="apple-touch-icon" href="/logo.png">
@@ -85,21 +87,19 @@
     <div class="filter-group"><select id="expFilter"><option value="">All Experience</option><option value="Fresher">Fresher (0-2 years)</option><option value="1-2">1-2 years</option><option value="3+">3+ years</option></select></div>
   </div>
 
-  <!-- Two column resource section (PDFs left, Certifications right) -->
-  <div class="resources-wrapper">
-    <div class="resource-col">
-      <h2>📘 Interview Ready PDFs</h2>
-      <div id="pdfsContainer"></div>
+  <!-- Main two‑column layout: jobs left, resources right -->
+  <div class="main-layout">
+    <div class="jobs-column">
+      <div id="jobsGrid" class="jobs-grid"></div>
+      <div id="loadMoreContainer" class="load-more" style="display:none"><button id="loadMoreBtn">Load More</button></div>
     </div>
-    <div class="resource-col">
-      <h2>🎓 Recommended Certifications</h2>
+    <div class="resources-column">
+      <h2 class="section-title">📘 Interview Ready PDFs</h2>
+      <div id="pdfsContainer"></div>
+      <h2 class="section-title" style="margin-top:1.5rem;">🎓 Recommended Certifications</h2>
       <div id="certsContainer"></div>
     </div>
   </div>
-
-  <!-- Job listings -->
-  <div id="jobsGrid" class="jobs-grid"></div>
-  <div id="loadMoreContainer" class="load-more" style="display:none"><button id="loadMoreBtn">Load More</button></div>
 
   <footer>© 2026 ApplyMore – Helping IT freshers land their dream job</footer>
 </div>
@@ -215,7 +215,6 @@
       document.getElementById('loadMoreContainer').style.display = hasMore ? 'block' : 'none';
     }
 
-    // Check if a PDF file actually exists (to avoid 404)
     async function pdfExists(url) {
       try {
         const res = await fetch(url, { method: 'HEAD' });
@@ -231,7 +230,7 @@
         if (!res.ok) throw new Error('Resources not found');
         const data = await res.json();
 
-        // PDFs column
+        // PDFs
         const pdfsContainer = document.getElementById('pdfsContainer');
         if (data.pdfs && data.pdfs.length > 0) {
           const pdfItems = await Promise.all(data.pdfs.map(async (pdf) => {
@@ -259,7 +258,7 @@
           pdfsContainer.innerHTML = '<div class="message-box">📚 No PDF resources at the moment. Check back later.</div>';
         }
 
-        // Certifications (always external links – no existence check needed)
+        // Certifications
         const certsContainer = document.getElementById('certsContainer');
         if (data.certifications && data.certifications.length > 0) {
           certsContainer.innerHTML = data.certifications.map(cert => `
