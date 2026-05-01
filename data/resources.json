@@ -1,0 +1,26 @@
+{
+  "pdfs": [
+    {
+      "title": "Interview Preparation Guide 2026",
+      "url": "/pdfs/interview-guide-2026.pdf",
+      "description": "120+ common questions, STAR method templates, and company‑specific tips."
+    },
+    {
+      "title": "Resume Writing Handbook",
+      "url": "/pdfs/resume-handbook.pdf",
+      "description": "ATS‑friendly templates, keyword checklists, and before/after examples."
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Google Data Analytics Professional Certificate (Coursera)",
+      "url": "https://www.coursera.org/professional-certificates/google-data-analytics",
+      "description": "Free audit option; financial aid available."
+    },
+    {
+      "title": "AWS Cloud Practitioner Essentials (Free)",
+      "url": "https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/",
+      "description": "Official free digital course. Great for cloud freshers."
+    }
+  ]
+}
