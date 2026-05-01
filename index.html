@@ -38,7 +38,8 @@
     .experience-tag{background:rgba(59,130,246,0.2);padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.7rem;width:fit-content}
     .new-badge{background:#dc2626;color:white;padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.6rem;margin-left:0.5rem;display:inline-block}
     .load-more{text-align:center;margin:2rem 0}
-    .load-more button{background:var(--accent);color:white;border:none;padding:0.6rem 1.5rem;border-radius:2rem;cursor:pointer}
+    .load-more button{background:var(--accent);color:white;border:none;padding:0.6rem 1.5rem;border-radius:2rem;cursor:pointer;transition:0.2s}
+    .load-more button:hover{background:var(--purple)}
     .skeleton{background:rgba(255,255,255,0.05);border-radius:1rem;height:200px;animation:pulse 1.5s infinite}
     @keyframes pulse{0%{opacity:0.6}50%{opacity:1}100%{opacity:0.6}}
     .resources-section{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-bottom:2rem}
@@ -47,6 +48,7 @@
     .resource-card p{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem}
     .resource-card a{color:var(--accent);text-decoration:none}
     .section-title{margin:2rem 0 1rem;color:var(--accent);font-size:1.4rem}
+    .message-box{background:var(--card-bg);border-radius:1rem;padding:1.5rem;text-align:center;color:var(--text-muted)}
     footer{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.7rem}
     @media (max-width:640px){.hero h1{font-size:1.8rem}.stats{flex-direction:column;align-items:center}}
   </style>
@@ -83,10 +85,13 @@
   <div id="jobsGrid" class="jobs-grid"></div>
   <div id="loadMoreContainer" class="load-more" style="display:none"><button id="loadMoreBtn">Load More</button></div>
 
+  <!-- PDF Section -->
   <h2 class="section-title">📘 Interview Ready PDFs</h2>
-  <div id="pdfsContainer" class="resources-section"><div class="skeleton" style="height:100px"></div><div class="skeleton" style="height:100px"></div></div>
+  <div id="pdfsContainer" class="resources-section"></div>
+
+  <!-- Certifications Section -->
   <h2 class="section-title">🎓 Recommended Certifications (Free / Low Cost)</h2>
-  <div id="certsContainer" class="resources-section"><div class="skeleton" style="height:100px"></div><div class="skeleton" style="height:100px"></div></div>
+  <div id="certsContainer" class="resources-section"></div>
 
   <footer>© 2026 ApplyMore – Helping IT freshers land their dream job</footer>
 </div>
@@ -156,7 +161,7 @@
       } catch (err) {
         console.error('Job fetch error:', err);
         showSkeletons(false);
-        document.getElementById('jobsGrid').innerHTML = '<div style="text-align:center;padding:2rem;">Unable to load jobs. Please refresh.</div>';
+        document.getElementById('jobsGrid').innerHTML = '<div class="message-box">⚠️ Unable to load jobs. Please refresh.</div>';
       }
     }
 
@@ -184,20 +189,20 @@
       const paginated = filteredJobs.slice(start, start + jobsPerPage);
       const grid = document.getElementById('jobsGrid');
       if (paginated.length === 0) {
-        grid.innerHTML = '<div style="text-align:center;padding:2rem;">No jobs found. Try different filters.</div>';
+        grid.innerHTML = '<div class="message-box">📭 No jobs found. Try different filters.</div>';
         document.getElementById('loadMoreContainer').style.display = 'none';
         return;
       }
       grid.innerHTML = paginated.map(job => `
         <div class="job-card" onclick="window.location.href='job.html?id=${job.id}'">
           <div class="job-title">${escapeHtml(job.title)}</div>
-          <div class="company">${escapeHtml(job.company)}</div>
+          <div class="company">🏢 ${escapeHtml(job.company)}</div>
           <div class="job-meta">
             <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</span>
             <span><i class="fas fa-calendar-alt"></i> ${formatDate(job.created_at)}</span>
           </div>
-          <div class="experience-tag">${getExperienceLevel(job)} years</div>
-          ${isNewJob(job.created_at) ? '<div class="new-badge">New</div>' : ''}
+          <div class="experience-tag">📅 ${getExperienceLevel(job)} years</div>
+          ${isNewJob(job.created_at) ? '<div class="new-badge">✨ New</div>' : ''}
         </div>
       `).join('');
       const hasMore = start + jobsPerPage < filteredJobs.length;
@@ -209,26 +214,38 @@
         const res = await fetch('/data/resources.json');
         if (!res.ok) throw new Error('Resources not found');
         const data = await res.json();
+        
+        // PDFs section
         const pdfsContainer = document.getElementById('pdfsContainer');
-        pdfsContainer.innerHTML = (data.pdfs || []).map(pdf => `
-          <div class="resource-card">
-            <h3>📄 ${escapeHtml(pdf.title)}</h3>
-            <p>${escapeHtml(pdf.description)}</p>
-            <a href="${pdf.url}" target="_blank">Download PDF →</a>
-          </div>
-        `).join('');
+        if (data.pdfs && data.pdfs.length > 0) {
+          pdfsContainer.innerHTML = data.pdfs.map(pdf => `
+            <div class="resource-card">
+              <h3>📄 ${escapeHtml(pdf.title)}</h3>
+              <p>${escapeHtml(pdf.description)}</p>
+              <a href="${pdf.url}" target="_blank">📥 Download PDF →</a>
+            </div>
+          `).join('');
+        } else {
+          pdfsContainer.innerHTML = '<div class="message-box">📚 No PDF resources available yet – check back soon.</div>';
+        }
+        
+        // Certifications section
         const certsContainer = document.getElementById('certsContainer');
-        certsContainer.innerHTML = (data.certifications || []).map(cert => `
-          <div class="resource-card">
-            <h3>🎓 ${escapeHtml(cert.title)}</h3>
-            <p>${escapeHtml(cert.description)}</p>
-            <a href="${cert.url}" target="_blank">View Course →</a>
-          </div>
-        `).join('');
+        if (data.certifications && data.certifications.length > 0) {
+          certsContainer.innerHTML = data.certifications.map(cert => `
+            <div class="resource-card">
+              <h3>🎓 ${escapeHtml(cert.title)}</h3>
+              <p>${escapeHtml(cert.description)}</p>
+              <a href="${cert.url}" target="_blank">🔗 View Course →</a>
+            </div>
+          `).join('');
+        } else {
+          certsContainer.innerHTML = '<div class="message-box">🎓 No certifications added yet – check back soon.</div>';
+        }
       } catch (e) {
         console.error('Resources error:', e);
-        document.getElementById('pdfsContainer').innerHTML = '<div class="resource-card">📄 PDF resources will appear soon.</div>';
-        document.getElementById('certsContainer').innerHTML = '<div class="resource-card">🎓 Certification links will appear soon.</div>';
+        document.getElementById('pdfsContainer').innerHTML = '<div class="message-box">📚 PDF resources will appear soon.</div>';
+        document.getElementById('certsContainer').innerHTML = '<div class="message-box">🎓 Certification links will appear soon.</div>';
       }
     }
 
