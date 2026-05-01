@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ApplyMore – India’s IT Fresher Job Board</title>
-  <meta name="description" content="ApplyMore – free job board for IT freshers in India. Find genuine entry-level jobs in Hyderabad, Bangalore, Chennai. Updated daily. Resume builder & interview prep included.">
+  <meta name="description" content="ApplyMore – free job board for IT freshers in India. Find genuine entry-level jobs in Hyderabad, Bangalore, Chennai. Updated daily. Resume builder & interview prep included. Join our community on Telegram, WhatsApp, and LinkedIn.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -22,6 +22,15 @@
     .stats{display:flex;justify-content:center;gap:2rem;margin-bottom:2rem}
     .stat-card{background:var(--card-bg);padding:1rem 2rem;border-radius:1rem;text-align:center}
     .stat-number{font-size:2rem;font-weight:700;color:var(--accent)}
+    /* Community section */
+    .community-section{background:linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));border-radius:1.5rem;padding:1.5rem;margin-bottom:2rem;text-align:center}
+    .community-section h2{color:var(--accent);margin-bottom:0.5rem}
+    .community-section p{color:var(--text-muted);margin-bottom:1rem}
+    .community-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+    .community-btn{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:2rem;padding:0.6rem 1.2rem;color:var(--text);text-decoration:none;transition:0.2s}
+    .community-btn:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+    .community-btn i{font-size:1.2rem}
+    /* Filters */
     .filters{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;align-items:center;justify-content:center}
     .filter-group select,.search-box input{padding:0.5rem 1rem;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:2rem;color:var(--text)}
     .search-box{position:relative}
@@ -36,7 +45,6 @@
     .resource-card h3{color:var(--accent);margin-bottom:0.5rem}
     .resource-card p{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem}
     .resource-card a{color:var(--accent);text-decoration:none}
-    .resource-card .coming-soon{opacity:0.7; font-style:italic}
     /* Job cards */
     .jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem}
     .job-card{background:var(--card-bg);border-radius:1rem;padding:1.2rem;border:1px solid var(--border);transition:0.2s;cursor:pointer}
@@ -54,6 +62,8 @@
     .message-box{background:var(--card-bg);border-radius:1rem;padding:1.5rem;text-align:center;color:var(--text-muted)}
     .section-title{color:var(--accent);margin:1rem 0 0.5rem;font-size:1.3rem}
     footer{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.7rem}
+    .footer-links{display:flex;justify-content:center;gap:1rem;margin-bottom:0.5rem}
+    .footer-links a{color:var(--text-muted);text-decoration:none;font-size:0.7rem}
     @media (max-width:840px){.main-layout{flex-direction:column}.resources-column{order:2}.jobs-column{order:1}}
   </style>
   <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
@@ -81,6 +91,19 @@
     <div class="stat-card"><div class="stat-number" id="totalJobs">0</div><div>Total Jobs</div></div>
     <div class="stat-card"><div class="stat-number" id="newJobs">0</div><div>New Today</div></div>
   </div>
+
+  <!-- Community Section -->
+  <div class="community-section">
+    <h2>🚀 Join Our Community</h2>
+    <p>Get daily job alerts, interview tips, and support from fellow freshers.</p>
+    <div class="community-icons">
+      <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="community-btn"><i class="fab fa-telegram"></i> Telegram</a>
+      <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="community-btn"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+      <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank" class="community-btn"><i class="fab fa-whatsapp"></i> WhatsApp Community</a>
+      <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="community-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    </div>
+  </div>
+
   <div class="filters">
     <div class="search-box"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Search jobs..."></div>
     <div class="filter-group"><select id="locationFilter"><option value="">All Cities</option><option value="Hyderabad">Hyderabad</option><option value="Bangalore">Bangalore</option><option value="Chennai">Chennai</option></select></div>
@@ -101,7 +124,15 @@
     </div>
   </div>
 
-  <footer>© 2026 ApplyMore – Helping IT freshers land their dream job</footer>
+  <footer>
+    <div class="footer-links">
+      <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank">Telegram</a>
+      <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank">WhatsApp Group</a>
+      <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank">WhatsApp Community</a>
+      <a href="https://www.linkedin.com/company/applymore/" target="_blank">LinkedIn</a>
+    </div>
+    <p>© 2026 ApplyMore – Helping IT freshers land their dream job</p>
+  </footer>
 </div>
 
 <script>
@@ -230,7 +261,6 @@
         if (!res.ok) throw new Error('Resources not found');
         const data = await res.json();
 
-        // PDFs
         const pdfsContainer = document.getElementById('pdfsContainer');
         if (data.pdfs && data.pdfs.length > 0) {
           const pdfItems = await Promise.all(data.pdfs.map(async (pdf) => {
@@ -258,7 +288,6 @@
           pdfsContainer.innerHTML = '<div class="message-box">📚 No PDF resources at the moment. Check back later.</div>';
         }
 
-        // Certifications
         const certsContainer = document.getElementById('certsContainer');
         if (data.certifications && data.certifications.length > 0) {
           certsContainer.innerHTML = data.certifications.map(cert => `
