@@ -2,79 +2,451 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>ApplyMore – IT, Government & Non‑IT Jobs for Freshers</title>
-  <meta name="description" content="Find the latest IT, Government, and Non‑IT jobs for freshers in India. Free, updated daily, no sign‑up required.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApplyMore – IT, Government & Non-IT Jobs for Freshers</title>
+  <meta name="description" content="Find the latest IT, Government, and Non-IT jobs for freshers in India. Free, updated daily.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',sans-serif;background:#f0fdf4;color:#166534}
-    .container{max-width:1400px;margin:0 auto;padding:1rem}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
     /* Navbar */
-    .navbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:0.8rem 1.5rem;background:#ffffff;border-radius:3rem;box-shadow:0 4px 12px rgba(0,0,0,0.05);margin-bottom:2rem}
-    .logo{font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#15803d,#22c55e);background-clip:text;-webkit-background-clip:text;color:transparent}
-    .nav-links{display:flex;gap:1.5rem;flex-wrap:wrap}
-    .nav-links a{color:#166534;text-decoration:none;font-size:0.9rem;font-weight:500}
-    .nav-links a:hover{color:#22c55e}
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: #ffffff;
+      border-radius: 3rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #15803d, #22c55e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #166534;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #22c55e;
+    }
+
     /* Hero */
-    .hero{text-align:center;margin-bottom:2.5rem;padding:2rem;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-radius:2rem}
-    .hero h1{font-size:2.5rem;color:#14532d;margin-bottom:0.5rem}
-    .hero p{color:#166534;margin-bottom:1rem}
-    .search-bar{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:1rem}
-    .search-bar input,.search-bar select{padding:0.6rem 1rem;background:white;border:1px solid #bbf7d0;border-radius:2rem;color:#14532d;min-width:140px}
-    .search-bar button{background:#22c55e;border:none;padding:0.6rem 1.5rem;border-radius:2rem;color:white;font-weight:600;cursor:pointer}
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border-radius: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      color: #166534;
+      margin-bottom: 1rem;
+    }
+
+    .search-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .search-bar input,
+    .search-bar select {
+      padding: 0.6rem 1rem;
+      background: white;
+      border: 1px solid #bbf7d0;
+      border-radius: 2rem;
+      color: #14532d;
+      min-width: 140px;
+    }
+
+    .search-bar button {
+      background: #22c55e;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 2rem;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .search-bar button:hover {
+      background: #15803d;
+    }
+
     /* Stats */
-    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
-    .stat-card{background:white;border-radius:1rem;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.03);border:1px solid #bbf7d0}
-    .stat-number{font-size:2rem;font-weight:800;color:#22c55e}
-    .stat-label{font-size:0.8rem;color:#166534}
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      border: 1px solid #bbf7d0;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #22c55e;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #166534;
+    }
+
     /* Section titles */
-    .section-title{font-size:1.5rem;font-weight:700;color:#14532d;margin:2rem 0 1rem}
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #14532d;
+      margin: 2rem 0 1rem;
+    }
+
     /* Latest jobs */
-    .jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin-bottom:1.5rem}
-    .job-card{background:white;border-radius:1rem;padding:1rem;border:1px solid #dcfce7;transition:0.2s;box-shadow:0 2px 4px rgba(0,0,0,0.02)}
-    .job-card:hover{transform:translateY(-3px);border-color:#22c55e;box-shadow:0 8px 20px rgba(34,197,94,0.1)}
-    .job-title{font-weight:700;color:#14532d;margin-bottom:0.3rem}
-    .job-company{font-size:0.85rem;color:#22c55e;font-weight:500;margin-bottom:0.3rem}
-    .job-location{font-size:0.75rem;color:#166534;margin-bottom:0.5rem}
-    .apply-btn{background:#22c55e;color:white;padding:0.2rem 0.8rem;border-radius:2rem;text-decoration:none;font-size:0.75rem;display:inline-block}
-    .view-all{text-align:right;margin-bottom:0.5rem}
-    .view-all a{color:#22c55e;text-decoration:none;font-weight:500}
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid #dcfce7;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .job-card:hover {
+      transform: translateY(-3px);
+      border-color: #22c55e;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.1);
+    }
+
+    .job-title {
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 0.3rem;
+    }
+
+    .job-company {
+      font-size: 0.85rem;
+      color: #22c55e;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .job-location {
+      font-size: 0.75rem;
+      color: #166534;
+      margin-bottom: 0.5rem;
+    }
+
+    .apply-btn {
+      background: #22c55e;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 0.75rem;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+
+    .apply-btn:hover {
+      background: #15803d;
+    }
+
+    .view-all {
+      text-align: right;
+      margin-bottom: 0.5rem;
+    }
+
+    .view-all a {
+      color: #22c55e;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
     /* Two column layout */
-    .two-column{display:grid;grid-template-columns:2fr 1fr;gap:2rem;margin-bottom:2rem}
-    .city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.8rem}
-    .city-card{background:white;border-radius:0.8rem;padding:0.6rem;text-align:center;border:1px solid #dcfce7}
-    .city-name{font-weight:500;color:#14532d;font-size:0.85rem}
-    .city-count{font-size:0.7rem;color:#22c55e}
-    .community-feed{background:white;border-radius:1rem;padding:1rem;border:1px solid #dcfce7;max-height:400px;overflow-y:auto}
-    .feed-item{margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid #dcfce7}
-    .feed-text{font-size:0.8rem;color:#166534}
-    .feed-time{font-size:0.6rem;color:#22c55e}
+    .two-column {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .city-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.8rem;
+    }
+
+    .city-card {
+      background: white;
+      border-radius: 0.8rem;
+      padding: 0.6rem;
+      text-align: center;
+      border: 1px solid #dcfce7;
+      transition: all 0.2s;
+    }
+
+    .city-card:hover {
+      border-color: #22c55e;
+    }
+
+    .city-name {
+      font-weight: 500;
+      color: #14532d;
+      font-size: 0.85rem;
+    }
+
+    .city-count {
+      font-size: 0.7rem;
+      color: #22c55e;
+    }
+
+    .community-feed {
+      background: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid #dcfce7;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .feed-item {
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #dcfce7;
+    }
+
+    .feed-text {
+      font-size: 0.8rem;
+      color: #166534;
+    }
+
+    .feed-time {
+      font-size: 0.6rem;
+      color: #22c55e;
+    }
+
     /* Batch & job type grids */
-    .batch-grid,.jobtype-grid,.company-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.8rem;margin-bottom:2rem}
-    .batch-card,.jobtype-card,.company-card{background:white;border-radius:0.8rem;padding:0.6rem;text-align:center;border:1px solid #dcfce7;cursor:pointer}
-    .batch-name,.jobtype-name,.company-name{font-weight:500;font-size:0.8rem;color:#14532d}
-    .batch-count,.jobtype-count,.company-count{font-size:0.65rem;color:#22c55e}
+    .batch-grid,
+    .jobtype-grid,
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .batch-card,
+    .jobtype-card,
+    .company-card {
+      background: white;
+      border-radius: 0.8rem;
+      padding: 0.6rem;
+      text-align: center;
+      border: 1px solid #dcfce7;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .batch-card:hover,
+    .jobtype-card:hover,
+    .company-card:hover {
+      border-color: #22c55e;
+      transform: translateY(-2px);
+    }
+
+    .batch-name,
+    .jobtype-name,
+    .company-name {
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: #14532d;
+    }
+
+    .batch-count,
+    .jobtype-count,
+    .company-count {
+      font-size: 0.65rem;
+      color: #22c55e;
+    }
+
     /* Career advice */
-    .advice-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:2rem}
-    .advice-card{background:white;border-radius:1rem;padding:1rem;border:1px solid #dcfce7;transition:0.2s}
-    .advice-card:hover{transform:translateY(-3px);border-color:#22c55e}
-    .advice-icon{font-size:1.8rem;color:#22c55e;margin-bottom:0.5rem}
-    .advice-title{font-weight:700;color:#14532d;margin-bottom:0.3rem}
-    .advice-desc{font-size:0.75rem;color:#166534}
+    .advice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .advice-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid #dcfce7;
+      transition: all 0.2s;
+    }
+
+    .advice-card:hover {
+      transform: translateY(-3px);
+      border-color: #22c55e;
+    }
+
+    .advice-icon {
+      font-size: 1.8rem;
+      color: #22c55e;
+      margin-bottom: 0.5rem;
+    }
+
+    .advice-title {
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 0.3rem;
+    }
+
+    .advice-desc {
+      font-size: 0.75rem;
+      color: #166534;
+    }
+
     /* Footer */
-    footer{background:#ffffff;border-radius:1.5rem;padding:2rem;margin-top:2rem;border:1px solid #dcfce7}
-    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:1.5rem}
-    .footer-col h3{font-size:1rem;color:#14532d;margin-bottom:0.5rem}
-    .footer-col p,.footer-col a{font-size:0.75rem;color:#166534;text-decoration:none;display:block;margin-bottom:0.3rem}
-    .footer-col a:hover{color:#22c55e}
-    .subscribe{display:flex;gap:0.5rem;margin-top:0.5rem}
-    .subscribe input{flex:1;padding:0.4rem 0.8rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:2rem;color:#14532d}
-    .subscribe button{background:#22c55e;border:none;padding:0.4rem 1rem;border-radius:2rem;color:white;cursor:pointer}
-    .copyright{text-align:center;font-size:0.7rem;color:#166534;padding-top:1rem;border-top:1px solid #dcfce7}
-    @media (max-width:768px){.two-column{grid-template-columns:1fr}}
-    .loading{color:#166534;padding:1rem;text-align:center}
+    footer {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-top: 2rem;
+      border: 1px solid #dcfce7;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col h3 {
+      font-size: 1rem;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.75rem;
+      color: #166534;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-col a:hover {
+      color: #22c55e;
+    }
+
+    .subscribe {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .subscribe input {
+      flex: 1;
+      padding: 0.4rem 0.8rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 2rem;
+      color: #14532d;
+    }
+
+    .subscribe button {
+      background: #22c55e;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #166534;
+      padding-top: 1rem;
+      border-top: 1px solid #dcfce7;
+    }
+
+    @media (max-width: 768px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .loading {
+      color: #166534;
+      padding: 1rem;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -86,7 +458,7 @@
       <a href="index.html">Home</a>
       <a href="it-jobs.html">IT Jobs</a>
       <a href="government-jobs.html">Govt Jobs</a>
-      <a href="non-it-jobs.html">Non‑IT</a>
+      <a href="non-it-jobs.html">Non-IT</a>
       <a href="#">Dashboard</a>
       <a href="#">Login</a>
     </div>
@@ -94,63 +466,161 @@
 
   <!-- Hero Section -->
   <div class="hero">
-    <h1>Latest Off‑Campus Drives</h1>
-    <p>Find your dream job – IT, Government, Non‑IT – all in one place</p>
+    <h1>Latest Off-Campus Drives</h1>
+    <p>Find your dream job – IT, Government, Non-IT – all in one place</p>
     <div class="search-bar">
       <input type="text" id="searchInput" placeholder="Job title, company...">
-      <select id="locationFilter"><option value="all">All Locations</option></select>
-      <select id="categoryFilter"><option value="all">All Categories</option><option value="IT">IT</option><option value="Government">Government</option><option value="Non-IT">Non‑IT</option></select>
-      <select id="jobTypeFilter"><option value="all">All Job Types</option><option value="Off Campus">Off Campus</option><option value="Internship">Internship</option><option value="WFH">WFH</option><option value="Walk-in">Walk‑in</option><option value="Experienced">Experienced</option><option value="Hybrid">Hybrid</option></select>
+      <select id="locationFilter">
+        <option value="all">All Locations</option>
+      </select>
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="IT">IT</option>
+        <option value="Government">Government</option>
+        <option value="Non-IT">Non-IT</option>
+      </select>
+      <select id="jobTypeFilter">
+        <option value="all">All Job Types</option>
+        <option value="Off Campus">Off Campus</option>
+        <option value="Internship">Internship</option>
+        <option value="WFH">WFH</option>
+        <option value="Walk-in">Walk-in</option>
+        <option value="Experienced">Experienced</option>
+        <option value="Hybrid">Hybrid</option>
+      </select>
       <button id="searchBtn">Search</button>
     </div>
   </div>
 
   <!-- Stats -->
   <div class="stats">
-    <div class="stat-card"><div class="stat-number" id="statVisitors">50,000+</div><div class="stat-label">Monthly Visitors</div></div>
-    <div class="stat-card"><div class="stat-number" id="statShares">10,000+</div><div class="stat-label">Shares</div></div>
-    <div class="stat-card"><div class="stat-number" id="statCompanies">500+</div><div class="stat-label">Companies</div></div>
+    <div class="stat-card">
+      <div class="stat-number" id="statVisitors">50,000+</div>
+      <div class="stat-label">Monthly Visitors</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="statShares">10,000+</div>
+      <div class="stat-label">Shares</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="statCompanies">500+</div>
+      <div class="stat-label">Companies</div>
+    </div>
   </div>
 
   <!-- Latest Jobs -->
-  <div class="view-all"><a href="it-jobs.html">View All Drives →</a></div>
-  <div class="section-title">🔥 Latest Off‑Campus Jobs</div>
-  <div id="latestJobs" class="jobs-grid"><div class="loading">Loading jobs...</div></div>
+  <div class="view-all">
+    <a href="it-jobs.html">View All Drives →</a>
+  </div>
+  <div class="section-title">🔥 Latest Off-Campus Jobs</div>
+  <div id="latestJobs" class="jobs-grid">
+    <div class="loading">Loading jobs...</div>
+  </div>
 
   <!-- Two column layout -->
   <div class="two-column">
-    <div><div class="section-title">📍 Jobs by Location</div><div id="cityGrid" class="city-grid"><div class="loading">Loading...</div></div></div>
-    <div><div class="section-title">💬 Community Updates</div><div id="communityFeed" class="community-feed"><div class="feed-item"><div class="feed-text">Welcome to ApplyMore community!</div><div class="feed-time">Just now</div></div></div></div>
+    <div>
+      <div class="section-title">📍 Jobs by Location</div>
+      <div id="cityGrid" class="city-grid">
+        <div class="loading">Loading...</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-title">💬 Community Updates</div>
+      <div id="communityFeed" class="community-feed">
+        <div class="feed-item">
+          <div class="feed-text">Welcome to ApplyMore community!</div>
+          <div class="feed-time">Just now</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-text">New IT jobs posted: 15 positions added today</div>
+          <div class="feed-time">1 hour ago</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-text">Government job alerts: SSC CGL 2026 notification out</div>
+          <div class="feed-time">3 hours ago</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-text">Apply for Wipro off-campus drive for 2026 batch</div>
+          <div class="feed-time">5 hours ago</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-text">Remote work opportunities increased by 25% this month</div>
+          <div class="feed-time">Yesterday</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Jobs by Graduation Batch -->
   <div class="section-title">🎓 Jobs by Graduation Batch</div>
-  <div id="batchGrid" class="batch-grid"><div class="loading">Loading...</div></div>
+  <div id="batchGrid" class="batch-grid">
+    <div class="loading">Loading...</div>
+  </div>
 
   <!-- Browse by Job Type -->
   <div class="section-title">🔍 Browse by Job Type</div>
-  <div id="jobTypeGrid" class="jobtype-grid"><div class="loading">Loading...</div></div>
+  <div id="jobTypeGrid" class="jobtype-grid">
+    <div class="loading">Loading...</div>
+  </div>
 
   <!-- Top Hiring Companies -->
   <div class="section-title">🏢 Top Hiring Companies</div>
-  <div id="companyGrid" class="company-grid"><div class="loading">Loading...</div></div>
+  <div id="companyGrid" class="company-grid">
+    <div class="loading">Loading...</div>
+  </div>
 
   <!-- Career Advice -->
   <div class="section-title">📚 Career Path Advice & Placement Prep</div>
   <div class="advice-grid">
-    <div class="advice-card"><div class="advice-icon"><i class="fas fa-file-alt"></i></div><div class="advice-title">Resume Tips</div><div class="advice-desc">ATS-friendly templates & keywords</div></div>
-    <div class="advice-card"><div class="advice-icon"><i class="fas fa-chalkboard-user"></i></div><div class="advice-title">Interview Prep</div><div class="advice-desc">Common questions & STAR method</div></div>
-    <div class="advice-card"><div class="advice-icon"><i class="fas fa-certificate"></i></div><div class="advice-title">Free Courses</div><div class="advice-desc">Upskill with certification courses</div></div>
-    <div class="advice-card"><div class="advice-icon"><i class="fas fa-chart-line"></i></div><div class="advice-title">Salary Guide</div><div class="advice-desc">Negotiation tips & market rates</div></div>
+    <div class="advice-card">
+      <div class="advice-icon"><i class="fas fa-file-alt"></i></div>
+      <div class="advice-title">Resume Tips</div>
+      <div class="advice-desc">ATS-friendly templates & keywords to get noticed</div>
+    </div>
+    <div class="advice-card">
+      <div class="advice-icon"><i class="fas fa-chalkboard-user"></i></div>
+      <div class="advice-title">Interview Prep</div>
+      <div class="advice-desc">Common questions & STAR method for success</div>
+    </div>
+    <div class="advice-card">
+      <div class="advice-icon"><i class="fas fa-certificate"></i></div>
+      <div class="advice-title">Free Courses</div>
+      <div class="advice-desc">Upskill with certification courses from top platforms</div>
+    </div>
+    <div class="advice-card">
+      <div class="advice-icon"><i class="fas fa-chart-line"></i></div>
+      <div class="advice-title">Salary Guide</div>
+      <div class="advice-desc">Negotiation tips & market rates for freshers</div>
+    </div>
   </div>
 
   <!-- Footer -->
   <footer>
     <div class="footer-grid">
-      <div class="footer-col"><h3>ApplyMore</h3><p>Helping freshers land their dream job since 2026</p></div>
-      <div class="footer-col"><h3>Quick Links</h3><a href="it-jobs.html">IT Jobs</a><a href="government-jobs.html">Government Jobs</a><a href="non-it-jobs.html">Non‑IT Jobs</a></div>
-      <div class="footer-col"><h3>Resources</h3><a href="#">Resume Builder</a><a href="#">Interview Prep</a><a href="#">Blog</a></div>
-      <div class="footer-col"><h3>Get Alerts</h3><div class="subscribe"><input type="email" id="emailSubscribe" placeholder="Your email"><button id="subscribeBtn">Subscribe</button></div></div>
+      <div class="footer-col">
+        <h3>ApplyMore</h3>
+        <p>Helping freshers land their dream job since 2026</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <a href="it-jobs.html">IT Jobs</a>
+        <a href="government-jobs.html">Government Jobs</a>
+        <a href="non-it-jobs.html">Non-IT Jobs</a>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <a href="#">Resume Builder</a>
+        <a href="#">Interview Prep</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h3>Get Alerts</h3>
+        <div class="subscribe">
+          <input type="email" id="emailSubscribe" placeholder="Your email">
+          <button id="subscribeBtn">Subscribe</button>
+        </div>
+      </div>
     </div>
     <div class="copyright">© 2026 ApplyMore – All rights reserved. Freshers first.</div>
   </footer>
@@ -164,20 +634,29 @@
   async function fetchAllJobs() {
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=id,title,company,location,category,created_at&order=created_at.desc&limit=100`, {
-        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
       });
       allJobs = await res.json();
-      renderLatestJobs(allJobs.slice(0,12));
+      renderLatestJobs(allJobs.slice(0, 12));
       renderCityJobs(allJobs);
       renderBatchJobs(allJobs);
       renderJobTypeJobs(allJobs);
       renderCompanies(allJobs);
-    } catch(e) { console.error(e); document.querySelectorAll('.loading').forEach(el => el.innerHTML = 'Unable to load data'); }
+    } catch (e) {
+      console.error(e);
+      document.querySelectorAll('.loading').forEach(el => el.innerHTML = 'Unable to load data');
+    }
   }
 
   function renderLatestJobs(jobs) {
     const container = document.getElementById('latestJobs');
-    if (!jobs.length) { container.innerHTML = '<div class="loading">No jobs found.</div>'; return; }
+    if (!jobs.length) {
+      container.innerHTML = '<div class="loading">No jobs found.</div>';
+      return;
+    }
     container.innerHTML = jobs.map(job => `
       <div class="job-card">
         <div class="job-title">${escapeHtml(job.title)}</div>
@@ -190,29 +669,73 @@
 
   function renderCityJobs(jobs) {
     const cityCount = {};
-    jobs.forEach(job => { let c = (job.location || 'India').split(',')[0]; cityCount[c] = (cityCount[c] || 0) + 1; });
-    const cities = Object.entries(cityCount).sort((a,b)=>b[1]-a[1]).slice(0,8);
-    document.getElementById('cityGrid').innerHTML = cities.map(([name,count]) => `<div class="city-card"><div class="city-name">${escapeHtml(name)}</div><div class="city-count">${count} jobs</div></div>`).join('');
+    jobs.forEach(job => {
+      let c = (job.location || 'India').split(',')[0];
+      cityCount[c] = (cityCount[c] || 0) + 1;
+    });
+    const cities = Object.entries(cityCount).sort((a, b) => b[1] - a[1]).slice(0, 8);
+    document.getElementById('cityGrid').innerHTML = cities.map(([name, count]) => `
+      <div class="city-card">
+        <div class="city-name">${escapeHtml(name)}</div>
+        <div class="city-count">${count} jobs</div>
+      </div>
+    `).join('');
   }
 
   function renderBatchJobs(jobs) {
-    const batches = {'2027 New':0,'2026 Current':0,'2025 Recent':0,'2024 & before':0};
-    document.getElementById('batchGrid').innerHTML = Object.entries(batches).map(([batch,count]) => `<div class="batch-card"><div class="batch-name">${batch}</div><div class="batch-count">${count} jobs</div></div>`).join('');
+    const batches = {
+      '2027 New': 0,
+      '2026 Current': 0,
+      '2025 Recent': 0,
+      '2024 & before': 0
+    };
+    document.getElementById('batchGrid').innerHTML = Object.entries(batches).map(([batch, count]) => `
+      <div class="batch-card">
+        <div class="batch-name">${batch}</div>
+        <div class="batch-count">${count} jobs</div>
+      </div>
+    `).join('');
   }
 
   function renderJobTypeJobs(jobs) {
-    const types = {'Off Campus':0,'Internship':0,'WFH':0,'Walk-in':0,'Experienced':0,'Hybrid':0};
-    document.getElementById('jobTypeGrid').innerHTML = Object.entries(types).map(([type,count]) => `<div class="jobtype-card"><div class="jobtype-name">${type}</div><div class="jobtype-count">${count} jobs</div></div>`).join('');
+    const types = {
+      'Off Campus': 0,
+      'Internship': 0,
+      'WFH': 0,
+      'Walk-in': 0,
+      'Experienced': 0,
+      'Hybrid': 0
+    };
+    document.getElementById('jobTypeGrid').innerHTML = Object.entries(types).map(([type, count]) => `
+      <div class="jobtype-card">
+        <div class="jobtype-name">${type}</div>
+        <div class="jobtype-count">${count} jobs</div>
+      </div>
+    `).join('');
   }
 
   function renderCompanies(jobs) {
     const companyCount = {};
-    jobs.forEach(job => { companyCount[job.company] = (companyCount[job.company] || 0) + 1; });
-    const topCompanies = Object.entries(companyCount).sort((a,b)=>b[1]-a[1]).slice(0,8);
-    document.getElementById('companyGrid').innerHTML = topCompanies.map(([name,count]) => `<div class="company-card"><div class="company-name">${escapeHtml(name)}</div><div class="company-count">${count} jobs</div></div>`).join('');
+    jobs.forEach(job => {
+      companyCount[job.company] = (companyCount[job.company] || 0) + 1;
+    });
+    const topCompanies = Object.entries(companyCount).sort((a, b) => b[1] - a[1]).slice(0, 8);
+    document.getElementById('companyGrid').innerHTML = topCompanies.map(([name, count]) => `
+      <div class="company-card">
+        <div class="company-name">${escapeHtml(name)}</div>
+        <div class="company-count">${count} jobs</div>
+      </div>
+    `).join('');
   }
 
-  function escapeHtml(str) { return str ? str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]) : ''; }
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, m => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;'
+    })[m]);
+  }
 
   fetchAllJobs();
 </script>
