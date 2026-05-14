@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Jobs for Freshers – ApplyMore</title>
+  <meta name="description" content="Find latest Government jobs for freshers in India. SSC, Banking, Railways, PSUs, State Govt & more. Updated daily.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: #ffffff;
+      border-radius: 3rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #15803d, #22c55e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #166534;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #22c55e;
+    }
+
+    .nav-links a.active {
+      color: #22c55e;
+      font-weight: 600;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      color: #166534;
+    }
+
+    /* Info Banner */
+    .info-banner {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #22c55e;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .info-banner i {
+      font-size: 1.5rem;
+      color: #22c55e;
+    }
+
+    .info-banner p {
+      font-size: 0.85rem;
+      color: #166534;
+    }
+
+    /* Filters */
+    .filters {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #dcfce7;
+    }
+
+    .filters-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .filter-group {
+      flex: 1;
+      min-width: 160px;
+    }
+
+    .filter-group label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #14532d;
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+    }
+
+    .filter-group input,
+    .filter-group select {
+      width: 100%;
+      padding: 0.6rem 1rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 2rem;
+      color: #14532d;
+    }
+
+    .reset-btn {
+      background: #e2e8f0;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      color: #166534;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: #cbd5e1;
+    }
+
+    /* Results count */
+    .results-count {
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: #166534;
+    }
+
+    /* Jobs grid */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.2rem;
+      border: 1px solid #dcfce7;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .job-card:hover {
+      transform: translateY(-3px);
+      border-color: #22c55e;
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.1);
+    }
+
+    .job-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #14532d;
+      margin-bottom: 0.3rem;
+    }
+
+    .job-company {
+      font-size: 0.85rem;
+      color: #22c55e;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .job-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.7rem;
+      color: #166534;
+    }
+
+    .exam-badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 0.2rem 0.5rem;
+      border-radius: 1rem;
+      font-size: 0.65rem;
+      margin-left: 0.5rem;
+    }
+
+    .job-desc {
+      font-size: 0.75rem;
+      color: #166534;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .apply-btn {
+      background: #22c55e;
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 0.75rem;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+
+    .apply-btn:hover {
+      background: #15803d;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .page-btn {
+      background: white;
+      border: 1px solid #bbf7d0;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #166534;
+    }
+
+    .page-btn:hover,
+    .page-btn.active {
+      background: #22c55e;
+      color: white;
+      border-color: #22c55e;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #166534;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 3rem;
+      background: white;
+      border-radius: 1rem;
+      border: 1px solid #dcfce7;
+    }
+
+    /* Footer */
+    footer {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-top: 2rem;
+      border: 1px solid #dcfce7;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col h3 {
+      font-size: 1rem;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.75rem;
+      color: #166534;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-col a:hover {
+      color: #22c55e;
+    }
+
+    .subscribe {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .subscribe input {
+      flex: 1;
+      padding: 0.4rem 0.8rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 2rem;
+      color: #14532d;
+    }
+
+    .subscribe button {
+      background: #22c55e;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #166534;
+      padding-top: 1rem;
+      border-top: 1px solid #dcfce7;
+    }
+
+    @media (max-width: 768px) {
+      .filters-grid {
+        flex-direction: column;
+      }
+      .filter-group {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">ApplyMore</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="it-jobs.html">IT Jobs</a>
+      <a href="government-jobs.html" class="active">Govt Jobs</a>
+      <a href="non-it-jobs.html">Non-IT</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Login</a>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1><i class="fas fa-landmark"></i> Government Jobs for Freshers</h1>
+    <p>SSC • Banking • Railways • PSUs • Defence • State Government</p>
+  </div>
+
+  <!-- Info Banner -->
+  <div class="info-banner">
+    <i class="fas fa-bell"></i>
+    <p><strong>Latest Updates:</strong> SSC CGL 2026 Notification • IBPS PO 2026 • RRB NTPC Recruitment • State PSC Exams</p>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <div class="filters-grid">
+      <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="searchInput" placeholder="Job title, department...">
+      </div>
+      <div class="filter-group">
+        <label>Location</label>
+        <select id="locationFilter">
+          <option value="all">All Locations</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Exam Type</label>
+        <select id="examFilter">
+          <option value="all">All Exams</option>
+          <option value="SSC">SSC</option>
+          <option value="Banking">Banking</option>
+          <option value="Railways">Railways</option>
+          <option value="PSU">PSU</option>
+          <option value="Defence">Defence</option>
+          <option value="State Govt">State Govt</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Sort By</label>
+        <select id="sortFilter">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <button class="reset-btn" id="resetBtn">Reset Filters</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Count -->
+  <div class="results-count" id="resultsCount"></div>
+
+  <!-- Jobs Grid -->
+  <div id="jobsGrid" class="jobs-grid">
+    <div class="loading">Loading Government jobs...</div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" id="pagination"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>ApplyMore</h3>
+        <p>Helping freshers land their dream job since 2026</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <a href="it-jobs.html">IT Jobs</a>
+        <a href="government-jobs.html">Government Jobs</a>
+        <a href="non-it-jobs.html">Non-IT Jobs</a>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <a href="#">Resume Builder</a>
+        <a href="#">Interview Prep</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h3>Get Alerts</h3>
+        <div class="subscribe">
+          <input type="email" id="emailSubscribe" placeholder="Your email">
+          <button id="subscribeBtn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© 2026 ApplyMore – All rights reserved. Freshers first.</div>
+  </footer>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
+  let allGovtJobs = [];
+  let filteredJobs = [];
+  let currentPage = 1;
+  const jobsPerPage = 12;
+
+  async function fetchGovtJobs() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=id,title,company,location,category,description,created_at&order=created_at.desc&limit=200`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      const allJobs = await res.json();
+      allGovtJobs = allJobs.filter(job => job.category === 'Government' || job.category === 'govt' || job.category === 'Government Jobs');
+      filteredJobs = [...allGovtJobs];
+      populateLocationFilter();
+      renderJobs();
+    } catch (e) {
+      console.error(e);
+      document.getElementById('jobsGrid').innerHTML = '<div class="loading">Unable to load Government jobs. Please try again later.</div>';
+    }
+  }
+
+  function populateLocationFilter() {
+    const locations = new Set();
+    allGovtJobs.forEach(job => {
+      if (job.location) locations.add(job.location.split(',')[0]);
+    });
+    const select = document.getElementById('locationFilter');
+    Array.from(locations).sort().forEach(loc => {
+      const option = document.createElement('option');
+      option.value = loc;
+      option.textContent = loc;
+      select.appendChild(option);
+    });
+  }
+
+  function getExamType(title, company) {
+    const text = (title + ' ' + company).toLowerCase();
+    if (text.includes('ssc')) return 'SSC';
+    if (text.includes('bank') || text.includes('ibps') || text.includes('rbi') || text.includes('sbi')) return 'Banking';
+    if (text.includes('railway') || text.includes('rrb') || text.includes('rpf')) return 'Railways';
+    if (text.includes('psu') || text.includes('bpcl') || text.includes('hpcl') || text.includes('ongc')) return 'PSU';
+    if (text.includes('defence') || text.includes('army') || text.includes('navy') || text.includes('air force')) return 'Defence';
+    return 'State Govt';
+  }
+
+  function applyFilters() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const location = document.getElementById('locationFilter').value;
+    const examType = document.getElementById('examFilter').value;
+    const sortBy = document.getElementById('sortFilter').value;
+
+    filteredJobs = allGovtJobs.filter(job => {
+      let match = true;
+      if (searchTerm && !job.title.toLowerCase().includes(searchTerm) && !job.company.toLowerCase().includes(searchTerm)) {
+        match = false;
+      }
+      if (location !== 'all' && (!job.location || !job.location.includes(location))) {
+        match = false;
+      }
+      if (examType !== 'all' && getExamType(job.title, job.company) !== examType) {
+        match = false;
+      }
+      return match;
+    });
+
+    if (sortBy === 'newest') {
+      filteredJobs.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    } else {
+      filteredJobs.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    }
+
+    currentPage = 1;
+    renderJobs();
+  }
+
+  function renderJobs() {
+    const container = document.getElementById('jobsGrid');
+    const resultsCount = document.getElementById('resultsCount');
+    const start = (currentPage - 1) * jobsPerPage;
+    const end = start + jobsPerPage;
+    const pageJobs = filteredJobs.slice(start, end);
+
+    resultsCount.textContent = `Showing ${start + 1}-${Math.min(end, filteredJobs.length)} of ${filteredJobs.length} Government jobs`;
+
+    if (pageJobs.length === 0) {
+      container.innerHTML = `
+        <div class="no-results">
+          <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; color: #22c55e;"></i>
+          <h3>No Government jobs found</h3>
+          <p>Try adjusting your search filters</p>
+          <button class="reset-btn" onclick="resetFilters()" style="margin-top: 1rem;">Reset Filters</button>
+        </div>
+      `;
+      document.getElementById('pagination').innerHTML = '';
+      return;
+    }
+
+    container.innerHTML = pageJobs.map(job => {
+      const examType = getExamType(job.title, job.company);
+      return `
+        <div class="job-card">
+          <div class="job-title">${escapeHtml(job.title)} <span class="exam-badge">${examType}</span></div>
+          <div class="job-company">${escapeHtml(job.company)}</div>
+          <div class="job-meta">
+            <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</span>
+            <span><i class="fas fa-calendar-alt"></i> ${formatDate(job.created_at)}</span>
+          </div>
+          <div class="job-desc">${escapeHtml(job.description ? job.description.substring(0, 120) : 'Government job opportunity. Apply now before the deadline.')}...</div>
+          <a href="job.html?id=${job.id}" class="apply-btn">View Details →</a>
+        </div>
+      `;
+    }).join('');
+
+    renderPagination();
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+    const paginationDiv = document.getElementById('pagination');
+    
+    if (totalPages <= 1) {
+      paginationDiv.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+      html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+    }
+    if (totalPages > 5) {
+      html += `<span style="padding: 0.4rem;">...</span>`;
+      html += `<button class="page-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+    }
+    paginationDiv.innerHTML = html;
+  }
+
+  function goToPage(page) {
+    currentPage = page;
+    renderJobs();
+    window.scrollTo({ top: 400, behavior: 'smooth' });
+  }
+
+  function resetFilters() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('locationFilter').value = 'all';
+    document.getElementById('examFilter').value = 'all';
+    document.getElementById('sortFilter').value = 'newest';
+    applyFilters();
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return 'Recently';
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
+    return date.toLocaleDateString();
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, m => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;'
+    })[m]);
+  }
+
+  // Event listeners
+  document.getElementById('searchInput').addEventListener('input', applyFilters);
+  document.getElementById('locationFilter').addEventListener('change', applyFilters);
+  document.getElementById('examFilter').addEventListener('change', applyFilters);
+  document.getElementById('sortFilter').addEventListener('change', applyFilters);
+  document.getElementById('resetBtn').addEventListener('click', resetFilters);
+
+  fetchGovtJobs();
+</script>
+</body>
+</html>
