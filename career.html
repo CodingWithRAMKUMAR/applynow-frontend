@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Career Flowchart - ApplyMore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: #ffffff;
+      border-radius: 3rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #15803d, #22c55e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #166534;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #22c55e;
+    }
+
+    /* Flowchart Container */
+    .flowchart {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      border: 1px solid #dcfce7;
+      overflow-x: auto;
+    }
+
+    /* Horizontal Layout */
+    .tree-level {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .node-wrapper {
+      position: relative;
+    }
+
+    /* Connecting Line from parent to children */
+    .node-wrapper.has-children::before {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #22c55e;
+      transform: translateX(-50%);
+    }
+
+    .node {
+      background: linear-gradient(135deg, #ffffff, #f0fdf4);
+      border: 2px solid #22c55e;
+      border-radius: 1rem;
+      padding: 0.8rem 1.2rem;
+      min-width: 150px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .node:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.2);
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      color: white;
+    }
+
+    .node:hover .node-icon,
+    .node:hover .node-title,
+    .node:hover .node-desc {
+      color: white;
+    }
+
+    .node-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.3rem;
+      color: #22c55e;
+    }
+
+    .node-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #14532d;
+      margin-bottom: 0.2rem;
+    }
+
+    .node-desc {
+      font-size: 0.65rem;
+      color: #166534;
+    }
+
+    /* Children Container */
+    .children-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 2px dashed #bbf7d0;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Modal for Career Details */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 1.5rem;
+      max-width: 700px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      padding: 1.2rem;
+      border-radius: 1.5rem 1.5rem 0 0;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: 1.3rem;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .detail-section {
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #dcfce7;
+    }
+
+    .detail-section h4 {
+      color: #14532d;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .detail-section p {
+      font-size: 0.8rem;
+      color: #166534;
+      line-height: 1.4;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      background: #dcfce7;
+      padding: 0.2rem 0.6rem;
+      border-radius: 1rem;
+      font-size: 0.7rem;
+      margin: 0.2rem;
+    }
+
+    .reset-btn {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .reset-btn:hover {
+      background: #15803d;
+    }
+
+    footer {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-top: 2rem;
+      border: 1px solid #dcfce7;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col h3 {
+      font-size: 1rem;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col p, .footer-col a {
+      font-size: 0.75rem;
+      color: #166534;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #166534;
+      padding-top: 1rem;
+      border-top: 1px solid #dcfce7;
+    }
+
+    @media (max-width: 768px) {
+      .node {
+        min-width: 120px;
+        padding: 0.6rem 1rem;
+      }
+      .node-icon {
+        font-size: 1.2rem;
+      }
+      .node-title {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="navbar">
+    <div class="logo" onclick="location.reload()">ApplyMore</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="career.html" style="color:#22c55e">Career Path</a>
+      <a href="#">Learning Hub</a>
+      <a href="#">Interview Prep</a>
+    </div>
+  </div>
+
+  <button class="reset-btn" onclick="resetFlowchart()"><i class="fas fa-home"></i> Reset to Start (10th Class)</button>
+
+  <div class="flowchart" id="flowchartContainer">
+    <div class="tree-level" id="rootLevel"></div>
+  </div>
+
+  <!-- Modal for Career Details -->
+  <div id="careerModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col"><h3>ApplyMore</h3><p>Interactive career flowchart - Start from 10th class</p></div>
+      <div class="footer-col"><h3>Quick Links</h3><a href="index.html">Jobs</a><a href="career.html">Career Path</a></div>
+      <div class="footer-col"><h3>Resources</h3><a href="#">Resume Guide</a><a href="#">Interview Prep</a></div>
+    </div>
+    <div class="copyright">© 2026 ApplyMore – Click any node to expand. Explore your complete career path!</div>
+  </footer>
+</div>
+
+<script>
+  // ============================================
+  // COMPLETE CAREER DATABASE
+  // ============================================
+  
+  const careerDatabase = {
+    // ROOT - 10th Class
+    '10th': {
+      id: '10th',
+      name: '10th Class',
+      icon: 'fa-graduation-cap',
+      description: 'Your career journey starts here',
+      type: 'junction',
+      children: ['study-path', 'direct-job-path', 'it-careers', 'nonit-careers', 'government-careers']
+    },
+
+    // MAIN PATH 1: STUDY PATH
+    'study-path': {
+      id: 'study-path',
+      name: '📚 Study Path',
+      icon: 'fa-book',
+      description: 'Continue education after 10th',
+      type: 'junction',
+      children: ['intermediate', 'polytechnic', 'iti', 'vocational']
+    },
+
+    'intermediate': {
+      id: 'intermediate',
+      name: '📖 Intermediate (11th-12th)',
+      icon: 'fa-layer-group',
+      description: '2 years academic study',
+      type: 'junction',
+      children: ['science-stream', 'commerce-stream', 'arts-stream']
+    },
+
+    'science-stream': {
+      id: 'science-stream',
+      name: '🔬 Science (PCM/PCB)',
+      icon: 'fa-atom',
+      description: 'Engineering, Medical, Research',
+      type: 'junction',
+      children: ['btech-engineering', 'medical-courses', 'bsc-general', 'bca-it', 'bpharm', 'bsc-nursing']
+    },
+
+    'commerce-stream': {
+      id: 'commerce-stream',
+      name: '💰 Commerce',
+      icon: 'fa-chart-line',
+      description: 'Business, Finance, Accounting',
+      type: 'junction',
+      children: ['bcom', 'ca-course', 'cs-course', 'cma-course', 'bba', 'economics-hons']
+    },
+
+    'arts-stream': {
+      id: 'arts-stream',
+      name: '🎨 Arts / Humanities',
+      icon: 'fa-palette',
+      description: 'Law, Design, Journalism, Social Work',
+      type: 'junction',
+      children: ['ba-general', 'law-course', 'mass-comm', 'psychology', 'social-work', 'design-course']
+    },
+
+    'polytechnic': {
+      id: 'polytechnic',
+      name: '🔧 Polytechnic Diploma',
+      icon: 'fa-microchip',
+      description: '3-year technical diploma',
+      type: 'junction',
+      children: ['poly-cse', 'poly-civil', 'poly-mech', 'poly-ece', 'poly-ee']
+    },
+
+    'iti': {
+      id: 'iti',
+      name: '⚙️ ITI Course',
+      icon: 'fa-tools',
+      description: '1-2 year skill training',
+      type: 'junction',
+      children: ['iti-electrician', 'iti-fitter', 'iti-welder', 'iti-plumber', 'iti-carpenter', 'iti-computer']
+    },
+
+    'vocational': {
+      id: 'vocational',
+      name: '💼 Vocational Courses',
+      icon: 'fa-certificate',
+      description: 'Skill-based direct job training',
+      type: 'career',
+      details: {
+        overview: 'Vocational courses provide hands-on training for specific jobs. Duration 6 months to 2 years.',
+        careers: 'Beauty & Wellness, Retail Management, Hospitality, Healthcare Assistant, Agriculture',
+        salary: '₹1.5 LPA - ₹4 LPA',
+        institutes: 'ITI, Private Vocational Training Centers, NSDC Partners'
+      }
+    },
+
+    // BTECH ENGINEERING
+    'btech-engineering': {
+      id: 'btech-engineering',
+      name: '🏗️ B.Tech / B.E Engineering',
+      icon: 'fa-microchip',
+      description: '4-year degree - Choose specialization',
+      type: 'junction',
+      children: ['cse-engg', 'it-engg', 'ece-engg', 'eee-engg', 'mech-engg', 'civil-engg']
+    },
+
+    'cse-engg': {
+      id: 'cse-engg',
+      name: '💻 Computer Science Engg',
+      icon: 'fa-laptop-code',
+      description: 'Software, AI/ML, Cloud, Highest paying',
+      type: 'career',
+      details: {
+        overview: 'Computer Science Engineering is the most sought-after branch. Learn programming, algorithms, AI/ML, cloud computing.',
+        duration: '4 Years',
+        entranceExams: 'JEE Main, JEE Advanced, BITSAT, VITEEE, State CETs',
+        syllabus: 'Programming, Data Structures, Algorithms, DBMS, OS, Networks, AI/ML, Cloud',
+        skills: ['Problem Solving', 'Programming', 'Logical Thinking', 'Mathematics'],
+        jobs: 'Software Engineer, Data Scientist, AI/ML Engineer, Cloud Architect, DevOps',
+        salary: '₹4 LPA - ₹30 LPA',
+        companies: 'Google, Microsoft, Amazon, Flipkart, Startups',
+        higherStudies: 'M.Tech CSE, MS abroad, MBA'
+      }
+    },
+
+    'it-engg': {
+      id: 'it-engg',
+      name: '🌐 Information Technology',
+      icon: 'fa-globe',
+      description: 'Networking, Web Technologies, Databases',
+      type: 'career',
+      details: {
+        overview: 'IT Engineering focuses on networking, web technologies, database management, and system administration.',
+        duration: '4 Years',
+        entranceExams: 'JEE Main, State CETs',
+        syllabus: 'Web Technologies, Networking, DBMS, Cloud Computing, Cybersecurity',
+        skills: ['Networking', 'Database Management', 'Web Development', 'System Admin'],
+        jobs: 'Network Engineer, Database Admin, Web Developer, System Analyst',
+        salary: '₹3.5 LPA - ₹20 LPA',
+        companies: 'TCS, Infosys, Wipro, HCL, Tech Mahindra'
+      }
+    },
+
+    'ece-engg': {
+      id: 'ece-engg',
+      name: '📡 Electronics & Communication',
+      icon: 'fa-microchip',
+      description: 'Circuits, VLSI, Embedded, Telecom',
+      type: 'career',
+      details: {
+        overview: 'ECE deals with electronic circuits, communication systems, VLSI design, and embedded systems.',
+        duration: '4 Years',
+        entranceExams: 'JEE Main, State CETs',
+        syllabus: 'Analog/Digital Circuits, Microprocessors, Communication Systems, VLSI',
+        skills: ['Circuit Design', 'Problem Solving', 'Mathematics', 'Programming Basics'],
+        jobs: 'Embedded Engineer, VLSI Designer, Telecom Engineer, Hardware Engineer',
+        salary: '₹3.5 LPA - ₹15 LPA',
+        companies: 'Intel, Qualcomm, Samsung, Texas Instruments, ISRO'
+      }
+    },
+
+    'mech-engg': {
+      id: 'mech-engg',
+      name: '⚙️ Mechanical Engineering',
+      icon: 'fa-cogs',
+      description: 'Manufacturing, Automobile, Robotics',
+      type: 'career',
+      details: {
+        overview: 'Mechanical Engineering covers design, manufacturing, and maintenance of mechanical systems.',
+        duration: '4 Years',
+        entranceExams: 'JEE Main, State CETs',
+        syllabus: 'Thermodynamics, Fluid Mechanics, Manufacturing, CAD/CAM, Robotics',
+        skills: ['Mechanical Aptitude', 'CAD Design', 'Problem Solving', 'Mathematics'],
+        jobs: 'Design Engineer, Production Engineer, Quality Engineer, Maintenance Engineer',
+        salary: '₹3 LPA - ₹12 LPA',
+        companies: 'Automobile Companies, Manufacturing Plants, PSUs'
+      }
+    },
+
+    'civil-engg': {
+      id: 'civil-engg',
+      name: '🏗️ Civil Engineering',
+      icon: 'fa-city',
+      description: 'Construction, Infrastructure, Design',
+      type: 'career',
+      details: {
+        overview: 'Civil Engineering involves design, construction, and maintenance of infrastructure like buildings, bridges, dams.',
+        duration: '4 Years',
+        entranceExams: 'JEE Main, State CETs',
+        syllabus: 'Structural Analysis, Geotechnical, Transportation, Environmental Engineering',
+        skills: ['Technical Drawing', 'Project Management', 'Problem Solving'],
+        jobs: 'Structural Engineer, Project Manager, Site Engineer, Consultant',
+        salary: '₹3 LPA - ₹12 LPA',
+        companies: 'L&T, Shapoorji, Gammon, Real Estate, Government PSUs'
+      }
+    },
+
+    'eee-engg': {
+      id: 'eee-engg',
+      name: '⚡ Electrical & Electronics',
+      icon: 'fa-bolt',
+      description: 'Power Systems, Motors, Renewable Energy',
+      type: 'career',
+      details: {
+        overview: 'EEE covers power generation, transmission, motors, and renewable energy systems.',
+        duration: '4 Years',
+        entranceExams: 'JEE Main, State CETs',
+        syllabus: 'Power Systems, Electrical Machines, Control Systems, Renewable Energy',
+        skills: ['Analytical Thinking', 'Circuit Knowledge', 'Problem Solving'],
+        jobs: 'Power Engineer, Electrical Designer, Maintenance Engineer',
+        salary: '₹3 LPA - ₹12 LPA',
+        companies: 'Power Grid, NTPC, BHEL, Siemens, ABB'
+      }
+    },
+
+    // MEDICAL COURSES
+    'medical-courses': {
+      id: 'medical-courses',
+      name: '🩺 Medical Courses',
+      icon: 'fa-heartbeat',
+      description: 'Doctor, Dentist, Physiotherapy, Nursing',
+      type: 'junction',
+      children: ['mbbs', 'bds', 'bams', 'bhms', 'bpt', 'bsc-nursing-detail', 'bpharm-detail']
+    },
+
+    'mbbs': {
+      id: 'mbbs',
+      name: '👨‍⚕️ MBBS - Doctor',
+      icon: 'fa-stethoscope',
+      description: '5.5 years, through NEET',
+      type: 'career',
+      details: {
+        overview: 'MBBS is the most prestigious medical degree. Become a doctor, diagnose diseases, treat patients.',
+        duration: '5.5 Years (4.5 + 1 year internship)',
+        entranceExams: 'NEET-UG (compulsory)',
+        eligibility: '12th Science (PCB) with 50%+',
+        topColleges: 'AIIMS Delhi, JIPMER, CMC Vellore, AFMC Pune',
+        syllabus: 'Anatomy, Physiology, Biochemistry, Pharmacology, Pathology, Medicine, Surgery',
+        jobs: 'Doctor, Surgeon, Physician, Medical Officer, Researcher',
+        salary: '₹6 LPA - ₹30 LPA',
+        higherStudies: 'MD/MS in Cardiology, Neurology, Pediatrics, Orthopedics'
+      }
+    },
+
+    'bds': {
+      id: 'bds',
+      name: '🦷 BDS - Dentist',
+      icon: 'fa-tooth',
+      description: '5 years, through NEET',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Dental Surgery. Become a dentist specializing in oral health.',
+        duration: '5 Years',
+        entranceExams: 'NEET-UG',
+        salary: '₹4 LPA - ₹12 LPA',
+        jobs: 'Dentist, Dental Surgeon, Oral Pathologist',
+        higherStudies: 'MDS (Master of Dental Surgery)'
+      }
+    },
+
+    'bams': {
+      id: 'bams',
+      name: '🌿 BAMS - Ayurveda',
+      icon: 'fa-leaf',
+      description: '5.5 years, Ayurvedic Doctor',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Ayurvedic Medicine and Surgery. Practice traditional Indian medicine.',
+        duration: '5.5 Years',
+        entranceExams: 'NEET-UG',
+        salary: '₹3 LPA - ₹8 LPA',
+        jobs: 'Ayurvedic Doctor, Panchakarma Specialist, Researcher'
+      }
+    },
+
+    'bhms': {
+      id: 'bhms',
+      name: '💊 BHMS - Homeopathy',
+      icon: 'fa-capsules',
+      description: '5.5 years, Homeopathic Doctor',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Homeopathic Medicine and Surgery. Practice homeopathic treatments.',
+        duration: '5.5 Years',
+        entranceExams: 'NEET-UG',
+        salary: '₹3 LPA - ₹7 LPA',
+        jobs: 'Homeopathic Doctor, Clinic Owner'
+      }
+    },
+
+    'bpt': {
+      id: 'bpt',
+      name: '🦿 BPT - Physiotherapy',
+      icon: 'fa-person-walking',
+      description: '4.5 years, Physical Therapist',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Physiotherapy. Help patients recover from injuries and improve mobility.',
+        duration: '4.5 Years',
+        salary: '₹3 LPA - ₹8 LPA',
+        jobs: 'Physiotherapist, Sports Therapist, Rehabilitation Specialist'
+      }
+    },
+
+    'bsc-nursing-detail': {
+      id: 'bsc-nursing-detail',
+      name: '🏥 B.Sc Nursing',
+      icon: 'fa-hospital-user',
+      description: '4 years, through NEET',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Science in Nursing. Become a registered nurse in hospitals.',
+        duration: '4 Years',
+        entranceExams: 'NEET-UG',
+        salary: '₹2.5 LPA - ₹6 LPA',
+        jobs: 'Staff Nurse, Nursing Supervisor, Nursing Educator'
+      }
+    },
+
+    'bpharm-detail': {
+      id: 'bpharm-detail',
+      name: '💊 B.Pharm - Pharmacy',
+      icon: 'fa-capsules',
+      description: '4 years, through NEET/GPAT',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Pharmacy. Work in pharmaceutical industry, research, or retail pharmacy.',
+        duration: '4 Years',
+        entranceExams: 'NEET, GPAT',
+        salary: '₹2.5 LPA - ₹7 LPA',
+        jobs: 'Pharmacist, Clinical Research Associate, Drug Inspector',
+        higherStudies: 'M.Pharm, Pharm.D'
+      }
+    },
+
+    'bsc-general': {
+      id: 'bsc-general',
+      name: '🔬 B.Sc (General)',
+      icon: 'fa-flask',
+      description: 'Physics, Chemistry, Maths, Biology, CS',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Science in various specializations. Foundation for research and teaching.',
+        duration: '3 Years',
+        specializations: 'Physics, Chemistry, Mathematics, Biology, Computer Science, Biotechnology',
+        salary: '₹2 LPA - ₹5 LPA (starting)',
+        higherStudies: 'M.Sc, PhD, B.Ed (for teaching)',
+        jobs: 'Lab Technician, Research Assistant, Teacher, Quality Analyst'
+      }
+    },
+
+    'bca-it': {
+      id: 'bca-it',
+      name: '💻 BCA / B.Sc IT',
+      icon: 'fa-code',
+      description: 'Computer Applications, IT Jobs',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Computer Applications. Focus on software development and IT applications.',
+        duration: '3 Years',
+        syllabus: 'Programming, Web Development, Database, Networking, Software Engineering',
+        skills: ['Programming', 'Web Development', 'Problem Solving'],
+        jobs: 'Software Developer, Web Developer, IT Support, System Analyst',
+        salary: '₹2.5 LPA - ₹8 LPA',
+        higherStudies: 'MCA, MBA, M.Sc IT'
+      }
+    },
+
+    // COMMERCE CAREERS
+    'bcom': {
+      id: 'bcom',
+      name: '📊 B.Com (General/Hons)',
+      icon: 'fa-chart-simple',
+      description: 'Bachelor of Commerce',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Commerce. Foundation for careers in accounting, finance, and business.',
+        duration: '3 Years',
+        syllabus: 'Financial Accounting, Business Law, Economics, Taxation, Cost Accounting',
+        jobs: 'Accountant, Tax Consultant, Financial Analyst, Banker',
+        salary: '₹2 LPA - ₹6 LPA',
+        higherStudies: 'M.Com, MBA, CA, CMA, CS'
+      }
+    },
+
+    'ca-course': {
+      id: 'ca-course',
+      name: '🧮 Chartered Accountant (CA)',
+      icon: 'fa-calculator',
+      description: 'Premier finance & accounting course',
+      type: 'career',
+      details: {
+        overview: 'CA is the most respected finance professional course in India.',
+        duration: '4-5 Years',
+        levels: 'CA Foundation → Intermediate → Final + 3 years Articleship',
+        syllabus: 'Accounting, Taxation, Auditing, Financial Management, Corporate Laws',
+        jobs: 'Auditor, Tax Consultant, Financial Analyst, CFO',
+        salary: '₹6 LPA - ₹30 LPA',
+        companies: 'Big 4 (Deloitte, KPMG, PwC, EY), Banks, MNCs'
+      }
+    },
+
+    'cs-course': {
+      id: 'cs-course',
+      name: '📋 Company Secretary (CS)',
+      icon: 'fa-file-signature',
+      description: 'Corporate governance expert',
+      type: 'career',
+      details: {
+        overview: 'Company Secretary handles corporate compliance, governance, and legal matters.',
+        duration: '3-4 Years',
+        levels: 'CS Foundation → Executive → Professional',
+        syllabus: 'Company Law, Corporate Governance, Securities Law, Taxation',
+        jobs: 'Company Secretary, Compliance Officer, Legal Advisor',
+        salary: '₹5 LPA - ₹20 LPA'
+      }
+    },
+
+    'cma-course': {
+      id: 'cma-course',
+      name: '💰 CMA - Cost Accountant',
+      icon: 'fa-chart-line',
+      description: 'Cost & Management Accountant',
+      type: 'career',
+      details: {
+        overview: 'CMA focuses on cost management, financial control, and strategic decision-making.',
+        duration: '3-4 Years',
+        levels: 'CMA Foundation → Intermediate → Final',
+        syllabus: 'Cost Accounting, Financial Management, Strategic Management',
+        jobs: 'Cost Accountant, Financial Controller, Management Accountant',
+        salary: '₹5 LPA - ₹18 LPA'
+      }
+    },
+
+    'bba': {
+      id: 'bba',
+      name: '📈 BBA - Business Admin',
+      icon: 'fa-briefcase',
+      description: 'Management studies',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Business Administration. Foundation for management careers.',
+        duration: '3 Years',
+        syllabus: 'Management Principles, Marketing, Finance, HR, Operations',
+        jobs: 'Business Analyst, Marketing Executive, HR Executive, Operations Manager',
+        salary: '₹2.5 LPA - ₹8 LPA',
+        higherStudies: 'MBA (top B-schools)'
+      }
+    },
+
+    'economics-hons': {
+      id: 'economics-hons',
+      name: '📉 B.A Economics (Hons)',
+      icon: 'fa-chart-line',
+      description: 'Economics specialization',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Arts in Economics. Study economic theories, policies, and data analysis.',
+        duration: '3 Years',
+        syllabus: 'Microeconomics, Macroeconomics, Econometrics, Indian Economy',
+        jobs: 'Economist, Policy Analyst, Data Analyst, Banker',
+        salary: '₹3 LPA - ₹12 LPA',
+        higherStudies: 'M.A Economics, MBA, PhD'
+      }
+    },
+
+    // ARTS/HUMANITIES CAREERS
+    'ba-general': {
+      id: 'ba-general',
+      name: '📖 B.A (General/Hons)',
+      icon: 'fa-book',
+      description: 'Humanities & Social Sciences',
+      type: 'career',
+      details: {
+        overview: 'Bachelor of Arts in various humanities subjects like History, Political Science, Sociology.',
+        duration: '3 Years',
+        subjects: 'History, Political Science, Sociology, Psychology, Geography, Economics',
+        jobs: 'Civil Services, Teacher, Social Worker, Journalist, Researcher',
+        salary: '₹2 LPA - ₹8 LPA',
+        higherStudies: 'M.A, PhD, B.Ed, Law'
+      }
+    },
+
+    'law-course': {
+      id: 'law-course',
+      name: '⚖️ Law (BA LLB / LLB)',
+      icon: 'fa-gavel',
+      description: '5 years integrated / 3 years LLB',
+      type: 'career',
+      details: {
+        overview: 'Law degree prepares you to become a lawyer, judge, or legal advisor.',
+        duration: '5 Years (BA LLB) or 3 Years (LLB after graduation)',
+        entranceExams: 'CLAT, AILET, LSAT India',
+        topColleges: 'NLU Delhi, NALSAR, NLSIU Bangalore, GNLU',
+        syllabus: 'Constitutional Law, Criminal Law, Civil Law, Corporate Law, Taxation',
+        jobs: 'Lawyer, Advocate, Judge (Judicial Services), Legal Advisor',
+        salary: '₹3 LPA - ₹20 LPA',
+        govtExams: 'Judicial Services Examination'
+      }
+    },
+
+    'mass-comm': {
+      id: 'mass-comm',
+      name: '📺 Mass Communication',
+      icon: 'fa-tv',
+      description: 'Journalism, Media, PR',
+      type: 'career',
+      details: {
+        overview: 'Study media, journalism, advertising, and public relations.',
+        duration: '3 Years',
+        syllabus: 'Journalism, Advertising, PR, Digital Media, Film Studies',
+        jobs: 'Journalist, News Anchor, PR Executive, Content Writer, Social Media Manager',
+        salary: '₹2.5 LPA - ₹10 LPA',
+        higherStudies: 'M.A Mass Comm, PG Diploma in Journalism'
+      }
+    },
+
+    'psychology': {
+      id: 'psychology',
+      name: '🧠 Psychology',
+      icon: 'fa-brain',
+      description: 'Clinical, Counseling, Organizational Psychology',
+      type: 'career',
+      details: {
+        overview: 'Study human behavior, mental processes, and counseling techniques.',
+        duration: '3 Years (BA/B.Sc Psychology)',
+        syllabus: 'Clinical Psychology, Counseling, Organizational Behavior, Research Methods',
+        jobs: 'Clinical Psychologist, Counselor, HR Professional, Researcher',
+        salary: '₹3 LPA - ₹12 LPA',
+        higherStudies: 'M.A/M.Sc Psychology, M.Phil, PhD'
+      }
+    },
+
+    'social-work': {
+      id: 'social-work',
+      name: '🤝 Social Work (BSW/MSW)',
+      icon: 'fa-hand-holding-heart',
+      description: 'NGO, Social Services',
+      type: 'career',
+      details: {
+        overview: 'Work for social welfare, community development, and NGO management.',
+        duration: '3 Years (BSW), 2 Years (MSW)',
+        syllabus: 'Social Welfare, Community Development, NGO Management, Counseling',
+        jobs: 'Social Worker, NGO Coordinator, Community Organizer, CSR Professional',
+        salary: '₹2 LPA - ₹6 LPA'
+      }
+    },
+
+    'design-course': {
+      id: 'design-course',
+      name: '🎨 Design (B.Des/BFA)',
+      icon: 'fa-paintbrush',
+      description: 'Fashion, Interior, Product, Graphic Design',
+      type: 'career',
+      details: {
+        overview: 'Creative careers in design - fashion, interior, product, graphic, communication.',
+        duration: '4 Years (B.Des), 3 Years (BFA)',
+        entranceExams: 'NID DAT, UCEED, NIFT, CEED',
+        topColleges: 'NID, NIFT, IIT Design Schools, MIT ID',
+        specializations: 'Fashion Design, Interior Design, Product Design, Graphic Design, UX/UI Design',
+        jobs: 'Fashion Designer, Interior Designer, Graphic Designer, UX Designer',
+        salary: '₹3 LPA - ₹15 LPA'
+      }
+    },
+
+    // POLYTECHNIC SPECIALIZATIONS
+    'poly-cse': {
+      id: 'poly-cse',
+      name: '💻 Computer Science / IT',
+      icon: 'fa-code',
+      description: 'Software, Web, Programming jobs',
+      type: 'career',
+      details: {
+        overview: '3-year diploma in Computer Science. Get entry-level IT jobs or lateral entry to B.Tech.',
+        duration: '3 Years',
+        jobs: 'Junior Developer, IT Support, Web Designer, Network Technician',
+        salary: '₹2 LPA - ₹5 LPA',
+        furtherStudy: 'Lateral Entry to B.Tech CSE (2nd year), BCA'
+      }
+    },
+    'poly-civil': {
+      id: 'poly-civil',
+      name: '🏗️ Civil Engineering',
+      icon: 'fa-building',
+      description: 'Construction, Site Supervisor',
+      type: 'career',
+      details: { overview: '3-year diploma in Civil Engineering. Work in construction projects.', salary: '₹2 LPA - ₹5 LPA', jobs: 'Junior Engineer, Site Supervisor, Quantity Surveyor' }
+    },
+    'poly-mech': {
+      id: 'poly-mech',
+      name: '⚙️ Mechanical Engineering',
+      icon: 'fa-cogs',
+      description: 'Manufacturing, Maintenance',
+      type: 'career',
+      details: { overview: '3-year diploma in Mechanical Engineering. Work in manufacturing.', salary: '₹2 LPA - ₹5 LPA', jobs: 'Junior Engineer, Maintenance Engineer, Production Supervisor' }
+    },
+    'poly-ece': {
+      id: 'poly-ece',
+      name: '📡 Electronics & Communication',
+      icon: 'fa-microchip',
+      description: 'Circuits, Embedded Systems',
+      type: 'career',
+      details: { overview: '3-year diploma in Electronics.', salary: '₹2 LPA - ₹5 LPA', jobs: 'Electronics Technician, Embedded Trainee' }
+    },
+    'poly-ee': {
+      id: 'poly-ee',
+      name: '⚡ Electrical Engineering',
+      icon: 'fa-bolt',
+      description: 'Power Systems, Motors',
+      type: 'career',
+      details: { overview: '3-year diploma in Electrical Engineering.', salary: '₹2 LPA - ₹5 LPA', jobs: 'Electrical Technician, Maintenance Engineer' }
+    },
+
+    // ITI COURSES
+    'iti-electrician': { id: 'iti-electrician', name: '⚡ Electrician', icon: 'fa-bolt', type: 'career', details: { overview: '1-2 year ITI course. Wiring, motor repair, maintenance.', salary: '₹1.5 LPA - ₹3.5 LPA', jobs: 'Electrician, Wireman, Maintenance Technician' } },
+    'iti-fitter': { id: 'iti-fitter', name: '🔧 Fitter', icon: 'fa-tools', type: 'career', details: { overview: '1-2 year ITI course. Assembly, fitting, manufacturing.', salary: '₹1.5 LPA - ₹3.5 LPA', jobs: 'Fitter, Assembly Technician' } },
+    'iti-welder': { id: 'iti-welder', name: '🔥 Welder', icon: 'fa-fire', type: 'career', details: { overview: '1-2 year ITI course. Metal joining, fabrication.', salary: '₹1.5 LPA - ₹3.5 LPA', jobs: 'Welder, Fabricator' } },
+    'iti-plumber': { id: 'iti-plumber', name: '🚰 Plumber', icon: 'fa-wrench', type: 'career', details: { overview: '1-2 year ITI course. Pipe fitting, sanitation.', salary: '₹1.5 LPA - ₹3 LPA', jobs: 'Plumber, Pipe Fitter' } },
+    'iti-carpenter': { id: 'iti-carpenter', name: '🪚 Carpenter', icon: 'fa-hammer', type: 'career', details: { overview: '1-2 year ITI course. Wood work, furniture.', salary: '₹1.5 LPA - ₹3.5 LPA', jobs: 'Carpenter, Furniture Maker' } },
+    'iti-computer': { id: 'iti-computer', name: '💻 Computer Operator', icon: 'fa-desktop', type: 'career', details: { overview: '1 year ITI course. Basic IT, data entry.', salary: '₹1.5 LPA - ₹3 LPA', jobs: 'Data Entry Operator, Computer Assistant' } },
+
+    // PATH 2: DIRECT JOB AFTER 10TH
+    'direct-job-path': {
+      id: 'direct-job-path',
+      name: '💼 Direct Job Path',
+      icon: 'fa-briefcase',
+      description: 'Start working after 10th',
+      type: 'junction',
+      children: ['govt-10th-jobs', 'private-10th-jobs']
+    },
+
+    'govt-10th-jobs': {
+      id: 'govt-10th-jobs',
+      name: '🏛️ Govt Jobs (10th Pass)',
+      icon: 'fa-landmark',
+      description: 'SSC MTS, Postman, Peon, Driver',
+      type: 'junction',
+      children: ['mts-job', 'postman-job', 'peon-job', 'driver-job']
+    },
+
+    'mts-job': { id: 'mts-job', name: 'SSC MTS', icon: 'fa-tasks', type: 'career', details: { examName: 'SSC MTS', salary: '₹18,000 - ₹56,900', eligibility: '10th Pass, Age 18-25', syllabus: 'Reasoning, GK, Math, English', applyLink: 'https://ssc.nic.in' } },
+    'postman-job': { id: 'postman-job', name: 'Postman', icon: 'fa-envelope', type: 'career', details: { salary: '₹21,700 - ₹69,100', eligibility: '10th Pass, Age 18-27', applyLink: 'https://indiapost.gov.in' } },
+    'peon-job': { id: 'peon-job', name: 'Office Attendant', icon: 'fa-broom', type: 'career', details: { salary: '₹18,000 - ₹56,900', eligibility: '10th Pass' } },
+    'driver-job': { id: 'driver-job', name: 'Driver', icon: 'fa-car', type: 'career', details: { salary: '₹19,900 - ₹63,200', eligibility: '10th Pass + Driving License' } },
+
+    'private-10th-jobs': {
+      id: 'private-10th-jobs',
+      name: '🏢 Private Jobs',
+      icon: 'fa-building',
+      description: 'Retail, BPO, Security, Sales',
+      type: 'junction',
+      children: ['retail-job', 'bpo-job', 'security-job', 'sales-job']
+    },
+    'retail-job': { id: 'retail-job', name: 'Retail Associate', icon: 'fa-store', type: 'career', details: { salary: '₹1.5 LPA - ₹3 LPA', companies: 'Reliance Retail, DMart, Lifestyle' } },
+    'bpo-job': { id: 'bpo-job', name: 'BPO Executive', icon: 'fa-headset', type: 'career', details: { salary: '₹1.8 LPA - ₹4 LPA', companies: 'Teleperformance, Wipro BPO, Genpact' } },
+    'security-job': { id: 'security-job', name: 'Security Guard', icon: 'fa-shield', type: 'career', details: { salary: '₹1.5 LPA - ₹2.5 LPA' } },
+    'sales-job': { id: 'sales-job', name: 'Sales Executive', icon: 'fa-chart-simple', type: 'career', details: { salary: '₹2 LPA - ₹5 LPA + Incentives' } },
+
+    // PATH 3: IT CAREERS (Separate Branch)
+    'it-careers': {
+      id: 'it-careers',
+      name: '💻 IT Careers',
+      icon: 'fa-code',
+      description: 'Software, Data Science, Cloud, Cyber Security',
+      type: 'junction',
+      children: ['software-dev', 'data-science', 'devops', 'cloud-engg', 'cyber-security', 'qa-engg', 'mobile-dev']
+    },
+    'software-dev': { id: 'software-dev', name: 'Software Developer', icon: 'fa-laptop-code', type: 'career', details: { skills: ['Java/Python', 'React/Angular', 'SQL'], salary: '₹4 LPA - ₹25 LPA', companies: 'Google, Microsoft, Amazon' } },
+    'data-science': { id: 'data-science', name: 'Data Scientist', icon: 'fa-chart-line', type: 'career', details: { skills: ['Python', 'ML', 'Statistics'], salary: '₹6 LPA - ₹30 LPA', companies: 'Google, Amazon, Fractal' } },
+    'devops': { id: 'devops', name: 'DevOps Engineer', icon: 'fa-cogs', type: 'career', details: { skills: ['Docker', 'Kubernetes', 'AWS'], salary: '₹5 LPA - ₹25 LPA' } },
+    'cloud-engg': { id: 'cloud-engg', name: 'Cloud Engineer', icon: 'fa-cloud', type: 'career', details: { skills: ['AWS/Azure', 'Terraform'], salary: '₹5 LPA - ₹22 LPA' } },
+    'cyber-security': { id: 'cyber-security', name: 'Cyber Security Analyst', icon: 'fa-shield-alt', type: 'career', details: { skills: ['Network Security', 'Ethical Hacking'], salary: '₹4 LPA - ₹20 LPA' } },
+    'qa-engg': { id: 'qa-engg', name: 'QA Engineer', icon: 'fa-bug', type: 'career', details: { skills: ['Selenium', 'Manual Testing'], salary: '₹3 LPA - ₹12 LPA' } },
+    'mobile-dev': { id: 'mobile-dev', name: 'Mobile App Developer', icon: 'fa-mobile-alt', type: 'career', details: { skills: ['Kotlin/Swift', 'Flutter/React Native'], salary: '₹4 LPA - ₹18 LPA' } },
+
+    // PATH 4: NON-IT CAREERS (Separate Branch)
+    'nonit-careers': {
+      id: 'nonit-careers',
+      name: '📊 Non-IT Careers',
+      icon: 'fa-briefcase',
+      description: 'BPO, Sales, Marketing, Teaching, HR',
+      type: 'junction',
+      children: ['bpo-career', 'sales-career', 'marketing-career', 'teaching-career', 'hr-career', 'hospitality-career', 'logistics-career']
+    },
+    'bpo-career': { id: 'bpo-career', name: 'BPO/Customer Support', icon: 'fa-headset', type: 'career', details: { salary: '₹1.8 LPA - ₹4.5 LPA', skills: ['Communication', 'Typing'] } },
+    'sales-career': { id: 'sales-career', name: 'Sales Executive', icon: 'fa-chart-simple', type: 'career', details: { salary: '₹2.5 LPA - ₹8 LPA + Incentives', skills: ['Communication', 'Negotiation'] } },
+    'marketing-career': { id: 'marketing-career', name: 'Marketing Executive', icon: 'fa-bullhorn', type: 'career', details: { salary: '₹2.8 LPA - ₹10 LPA', skills: ['Digital Marketing', 'SEO/SEM'] } },
+    'teaching-career': { id: 'teaching-career', name: 'Teacher/Educator', icon: 'fa-chalkboard-user', type: 'career', details: { salary: '₹2.5 LPA - ₹8 LPA', exams: 'CTET, State TET' } },
+    'hr-career': { id: 'hr-career', name: 'HR Executive', icon: 'fa-users', type: 'career', details: { salary: '₹2.5 LPA - ₹8 LPA', skills: ['Recruitment', 'Payroll'] } },
+    'hospitality-career': { id: 'hospitality-career', name: 'Hospitality Professional', icon: 'fa-hotel', type: 'career', details: { salary: '₹1.8 LPA - ₹6 LPA', jobs: 'Hotel Management, Airlines' } },
+    'logistics-career': { id: 'logistics-career', name: 'Logistics Coordinator', icon: 'fa-truck', type: 'career', details: { salary: '₹2 LPA - ₹6 LPA', skills: ['Supply Chain'] } },
+
+    // PATH 5: GOVERNMENT CAREERS (Separate Branch)
+    'government-careers': {
+      id: 'government-careers',
+      name: '🏛️ Government Careers',
+      icon: 'fa-landmark',
+      description: 'All govt jobs - 10th pass to UPSC',
+      type: 'junction',
+      children: ['govt-10th', 'govt-12th', 'govt-graduation', 'govt-postgrad', 'govt-technical']
+    },
+    'govt-10th': { id: 'govt-10th', name: '10th Pass Govt Jobs', icon: 'fa-school', type: 'junction', children: ['mts-job', 'postman-job', 'peon-job'] },
+    'govt-12th': { id: 'govt-12th', name: '12th Pass Govt Jobs', icon: 'fa-book', type: 'junction', children: ['ssc-gd-detail', 'ssc-chsl-detail', 'railway-d-detail'] },
+    'govt-graduation': { id: 'govt-graduation', name: 'Graduation Govt Jobs', icon: 'fa-graduation-cap', type: 'junction', children: ['ssc-cgl-detail', 'bank-po-detail', 'state-psc-detail'] },
+    'govt-postgrad': { id: 'govt-postgrad', name: 'Post Graduation Jobs', icon: 'fa-university', type: 'junction', children: ['ias-detail', 'ips-detail', 'psu-detail'] },
+    'govt-technical': { id: 'govt-technical', name: 'Technical Govt Jobs', icon: 'fa-microchip', type: 'junction', children: ['ies-detail', 'isro-detail', 'barc-detail'] },
+
+    // Government Job Details
+    'ssc-gd-detail': { id: 'ssc-gd-detail', name: 'SSC GD Constable', icon: 'fa-shield', type: 'career', details: { examName: 'SSC GD', salary: '₹21,700 - ₹69,100', eligibility: '12th Pass, Age 18-23', physical: 'Height 170cm, Run 5km/24min' } },
+    'ssc-chsl-detail': { id: 'ssc-chsl-detail', name: 'SSC CHSL', icon: 'fa-file-alt', type: 'career', details: { examName: 'SSC CHSL', salary: '₹29,200 - ₹92,300', eligibility: '12th Pass, Age 18-27' } },
+    'railway-d-detail': { id: 'railway-d-detail', name: 'Railway Group D', icon: 'fa-train', type: 'career', details: { examName: 'RRB Group D', salary: '₹18,000 - ₹56,900', eligibility: '10th/ITI' } },
+    'ssc-cgl-detail': { id: 'ssc-cgl-detail', name: 'SSC CGL', icon: 'fa-star', type: 'career', details: { examName: 'SSC CGL', salary: '₹47,600 - ₹2,08,700', posts: 'Income Tax, CBI, Auditor', syllabus: 'Reasoning, GK, Maths, English' } },
+    'bank-po-detail': { id: 'bank-po-detail', name: 'Bank PO', icon: 'fa-university', type: 'career', details: { examName: 'SBI PO / IBPS PO', salary: '₹52,000 - ₹1,20,000', eligibility: 'Graduation, Age 20-30' } },
+    'state-psc-detail': { id: 'state-psc-detail', name: 'State PSC', icon: 'fa-building', type: 'career', details: { salary: '₹56,100 - ₹1,77,500', posts: 'Deputy Collector, DSP, BDO' } },
+    'ias-detail': { id: 'ias-detail', name: 'IAS', icon: 'fa-crown', type: 'career', details: { examName: 'UPSC CSE', salary: '₹56,100 - ₹2,50,000', posts: 'DM, Commissioner, Secretary', syllabus: 'GS, Optional, Essay, Interview' } },
+    'ips-detail': { id: 'ips-detail', name: 'IPS', icon: 'fa-user-graduate', type: 'career', details: { examName: 'UPSC CSE', salary: '₹56,100 - ₹2,25,000', physical: 'Height 165cm, Run 100m/800m' } },
+    'psu-detail': { id: 'psu-detail', name: 'PSU Officer', icon: 'fa-industry', type: 'career', details: { salary: '₹60,000 - ₹1,80,000', companies: 'ONGC, IOCL, NTPC, BHEL' } },
+    'ies-detail': { id: 'ies-detail', name: 'IES Engineer', icon: 'fa-engine', type: 'career', details: { examName: 'IES', salary: '₹56,100 - ₹1,77,500', branches: 'Civil, Mechanical, Electrical, ECE' } },
+    'isro-detail': { id: 'isro-detail', name: 'ISRO Scientist', icon: 'fa-rocket', type: 'career', details: { salary: '₹1,20,000 - ₹1,50,000', work: 'Space missions, Satellites' } },
+    'barc-detail': { id: 'barc-detail', name: 'BARC Scientist', icon: 'fa-atom', type: 'career', details: { salary: '₹1,00,000 - ₹1,40,000', work: 'Nuclear research' } }
+  };
+
+  // ============================================
+  // FLOWCHART RENDERING ENGINE
+  // ============================================
+  
+  let expandedNodes = new Set(['10th']);
+
+  function renderNode(nodeId) {
+    const node = careerDatabase[nodeId];
+    if (!node) return '';
+    
+    return `
+      <div class="node-wrapper ${node.children ? 'has-children' : ''}" data-id="${nodeId}">
+        <div class="node" onclick="toggleNode('${nodeId}')">
+          <div class="node-icon"><i class="fas ${node.icon}"></i></div>
+          <div class="node-title">${node.name}</div>
+          <div class="node-desc">${node.description}</div>
+        </div>
+        ${expandedNodes.has(nodeId) && node.children ? `
+          <div class="children-container">
+            ${node.children.map(childId => renderNode(childId)).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+
+  function renderRoot() {
+    const rootNode = careerDatabase['10th'];
+    const rootHtml = `
+      <div class="tree-level">
+        <div class="node-wrapper ${rootNode.children ? 'has-children' : ''}" data-id="10th">
+          <div class="node" onclick="toggleNode('10th')">
+            <div class="node-icon"><i class="fas ${rootNode.icon}"></i></div>
+            <div class="node-title">${rootNode.name}</div>
+            <div class="node-desc">${rootNode.description}</div>
+          </div>
+          ${expandedNodes.has('10th') && rootNode.children ? `
+            <div class="children-container">
+              ${rootNode.children.map(childId => renderNode(childId)).join('')}
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+    document.getElementById('flowchartContainer').innerHTML = rootHtml;
+  }
+
+  function toggleNode(nodeId) {
+    if (expandedNodes.has(nodeId)) {
+      expandedNodes.delete(nodeId);
+    } else {
+      expandedNodes.add(nodeId);
+    }
+    renderRoot();
+  }
+
+  function showCareerDetails(nodeId) {
+    const node = careerDatabase[nodeId];
+    if (!node || node.type !== 'career' || !node.details) return;
+    
+    const details = node.details;
+    let modalHtml = '';
+    
+    for (let [key, value] of Object.entries(details)) {
+      if (typeof value === 'object' && Array.isArray(value)) {
+        modalHtml += `
+          <div class="detail-section">
+            <h4>${key.replace(/([A-Z])/g, ' $1').toUpperCase()}</h4>
+            ${value.map(v => `<span class="skill-tag">${v}</span>`).join('')}
+          </div>
+        `;
+      } else if (typeof value === 'string') {
+        modalHtml += `
+          <div class="detail-section">
+            <h4>${key.replace(/([A-Z])/g, ' $1').toUpperCase()}</h4>
+            <p>${value}</p>
+          </div>
+        `;
+      }
+    }
+    
+    document.getElementById('modalTitle').innerHTML = `<i class="fas ${node.icon}"></i> ${node.name}`;
+    document.getElementById('modalBody').innerHTML = modalHtml;
+    document.getElementById('careerModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('careerModal').style.display = 'none';
+  }
+
+  function resetFlowchart() {
+    expandedNodes.clear();
+    expandedNodes.add('10th');
+    renderRoot();
+  }
+
+  // Override node click for career nodes
+  document.addEventListener('click', function(e) {
+    const nodeDiv = e.target.closest('.node');
+    if (nodeDiv) {
+      const wrapper = nodeDiv.closest('.node-wrapper');
+      if (wrapper) {
+        const nodeId = wrapper.dataset.id;
+        const node = careerDatabase[nodeId];
+        if (node && node.type === 'career') {
+          e.stopPropagation();
+          showCareerDetails(nodeId);
+        }
+      }
+    }
+  });
+
+  // Initialize
+  renderRoot();
+</script>
+</body>
+</html>
