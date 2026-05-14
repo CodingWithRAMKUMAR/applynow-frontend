@@ -4,372 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Job Details – ApplyMore</title>
-  <meta name="description" content="View complete job details, requirements, and apply link for freshers jobs in India.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f0fdf4;
-      color: #166534;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
-    }
-
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      padding: 0.8rem 1.5rem;
-      background: #ffffff;
-      border-radius: 3rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      margin-bottom: 2rem;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #15803d, #22c55e);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: #166534;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: #22c55e;
-    }
-
-    /* Breadcrumb */
-    .breadcrumb {
-      margin-bottom: 1.5rem;
-      font-size: 0.8rem;
-    }
-
-    .breadcrumb a {
-      color: #22c55e;
-      text-decoration: none;
-    }
-
-    .breadcrumb span {
-      color: #166534;
-    }
-
-    /* Job Detail Card */
-    .job-detail-card {
-      background: white;
-      border-radius: 1.5rem;
-      padding: 2rem;
-      border: 1px solid #dcfce7;
-      margin-bottom: 2rem;
-    }
-
-    .job-header {
-      border-bottom: 1px solid #dcfce7;
-      padding-bottom: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .job-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #14532d;
-      margin-bottom: 0.5rem;
-    }
-
-    .job-company {
-      font-size: 1.2rem;
-      color: #22c55e;
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
-
-    .job-meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      background: #f0fdf4;
-      padding: 1rem;
-      border-radius: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .meta-item i {
-      width: 24px;
-      color: #22c55e;
-      font-size: 1rem;
-    }
-
-    .meta-item strong {
-      font-size: 0.7rem;
-      color: #14532d;
-      display: block;
-    }
-
-    .meta-item span {
-      font-size: 0.85rem;
-      color: #166534;
-    }
-
-    .job-badge {
-      display: inline-block;
-      background: #dcfce7;
-      color: #15803d;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    /* Sections */
-    .job-section {
-      margin-bottom: 1.5rem;
-    }
-
-    .job-section h3 {
-      font-size: 1.1rem;
-      color: #14532d;
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .job-section h3 i {
-      color: #22c55e;
-    }
-
-    .job-section p {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: #166534;
-    }
-
-    .job-section ul {
-      margin-left: 1.5rem;
-    }
-
-    .job-section li {
-      font-size: 0.9rem;
-      color: #166534;
-      margin-bottom: 0.3rem;
-    }
-
-    /* Apply Section */
-    .apply-section {
-      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      text-align: center;
-      margin-top: 1.5rem;
-    }
-
-    .apply-btn-large {
-      display: inline-block;
-      background: #22c55e;
-      color: white;
-      padding: 0.8rem 2rem;
-      border-radius: 3rem;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.2s;
-      margin-bottom: 1rem;
-    }
-
-    .apply-btn-large:hover {
-      background: #15803d;
-      transform: scale(1.02);
-    }
-
-    .apply-note {
-      font-size: 0.7rem;
-      color: #166534;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      background: white;
-      border-radius: 1.5rem;
-      padding: 1.5rem;
-      border: 1px solid #dcfce7;
-      margin-bottom: 1.5rem;
-    }
-
-    .sidebar h3 {
-      font-size: 1rem;
-      color: #14532d;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid #dcfce7;
-    }
-
-    .similar-job-item {
-      padding: 0.8rem 0;
-      border-bottom: 1px solid #dcfce7;
-    }
-
-    .similar-job-item:last-child {
-      border-bottom: none;
-    }
-
-    .similar-job-title {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: #14532d;
-      margin-bottom: 0.2rem;
-    }
-
-    .similar-job-company {
-      font-size: 0.7rem;
-      color: #22c55e;
-    }
-
-    .similar-job-link {
-      text-decoration: none;
-      display: block;
-      transition: all 0.2s;
-    }
-
-    .similar-job-link:hover .similar-job-title {
-      color: #22c55e;
-    }
-
-    /* Two column layout */
-    .two-column {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 2rem;
-    }
-
-    /* Loading & Error */
-    .loading, .error {
-      text-align: center;
-      padding: 3rem;
-      background: white;
-      border-radius: 1rem;
-      border: 1px solid #dcfce7;
-    }
-
-    .error i {
-      font-size: 2rem;
-      color: #ef4444;
-      margin-bottom: 1rem;
-    }
-
-    /* Footer */
-    footer {
-      background: #ffffff;
-      border-radius: 1.5rem;
-      padding: 2rem;
-      margin-top: 2rem;
-      border: 1px solid #dcfce7;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-col h3 {
-      font-size: 1rem;
-      color: #14532d;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-col p,
-    .footer-col a {
-      font-size: 0.75rem;
-      color: #166534;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-
-    .footer-col a:hover {
-      color: #22c55e;
-    }
-
-    .subscribe {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .subscribe input {
-      flex: 1;
-      padding: 0.4rem 0.8rem;
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      border-radius: 2rem;
-      color: #14532d;
-    }
-
-    .subscribe button {
-      background: #22c55e;
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 2rem;
-      color: white;
-      cursor: pointer;
-    }
-
-    .copyright {
-      text-align: center;
-      font-size: 0.7rem;
-      color: #166534;
-      padding-top: 1rem;
-      border-top: 1px solid #dcfce7;
-    }
-
-    @media (max-width: 768px) {
-      .two-column {
-        grid-template-columns: 1fr;
-      }
-      .job-title {
-        font-size: 1.4rem;
-      }
-    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#f0fdf4;color:#166534}
+    .container{max-width:1200px;margin:0 auto;padding:1rem}
+    .navbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:0.8rem 1.5rem;background:#fff;border-radius:3rem;box-shadow:0 4px 12px rgba(0,0,0,0.05);margin-bottom:2rem}
+    .logo{font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#15803d,#22c55e);background-clip:text;-webkit-background-clip:text;color:transparent}
+    .nav-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+    .nav-links a{color:#166534;text-decoration:none;font-size:0.9rem;font-weight:500}
+    .nav-links a:hover{color:#22c55e}
+    .breadcrumb{margin-bottom:1.5rem;font-size:0.8rem}
+    .breadcrumb a{color:#22c55e;text-decoration:none}
+    .job-detail-card{background:white;border-radius:1.5rem;padding:2rem;border:1px solid #dcfce7;margin-bottom:2rem}
+    .job-title{font-size:1.8rem;font-weight:700;color:#14532d;margin-bottom:0.5rem}
+    .job-company{font-size:1.2rem;color:#22c55e;margin-bottom:1rem}
+    .job-meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;background:#f0fdf4;padding:1rem;border-radius:1rem;margin-bottom:1.5rem}
+    .meta-item{display:flex;align-items:center;gap:0.5rem}
+    .meta-item i{width:24px;color:#22c55e}
+    .meta-item strong{font-size:0.7rem;color:#14532d;display:block}
+    .job-section{margin-bottom:1.5rem}
+    .job-section h3{font-size:1.1rem;color:#14532d;margin-bottom:0.8rem}
+    .job-section h3 i{color:#22c55e;margin-right:0.5rem}
+    .job-section p{font-size:0.9rem;line-height:1.6}
+    .job-section ul{margin-left:1.5rem}
+    .job-section li{font-size:0.9rem;margin-bottom:0.3rem}
+    .apply-section{background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-radius:1rem;padding:1.5rem;text-align:center;margin-top:1.5rem}
+    .apply-btn-large{display:inline-block;background:#22c55e;color:white;padding:0.8rem 2rem;border-radius:3rem;text-decoration:none;font-weight:600;margin-bottom:1rem}
+    .apply-btn-large:hover{background:#15803d}
+    .sidebar{background:white;border-radius:1.5rem;padding:1.5rem;border:1px solid #dcfce7;margin-bottom:1.5rem}
+    .sidebar h3{font-size:1rem;color:#14532d;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid #dcfce7}
+    .two-column{display:grid;grid-template-columns:2fr 1fr;gap:2rem}
+    .similar-job-item{padding:0.8rem 0;border-bottom:1px solid #dcfce7}
+    .similar-job-title{font-weight:600;font-size:0.85rem;color:#14532d}
+    .similar-job-company{font-size:0.7rem;color:#22c55e}
+    .similar-job-link{text-decoration:none}
+    footer{background:#fff;border-radius:1.5rem;padding:2rem;margin-top:2rem;border:1px solid #dcfce7}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:1.5rem}
+    .footer-col h3{font-size:1rem;color:#14532d;margin-bottom:0.5rem}
+    .footer-col p,.footer-col a{font-size:0.75rem;color:#166534;text-decoration:none;display:block;margin-bottom:0.3rem}
+    .footer-col a:hover{color:#22c55e}
+    .subscribe{display:flex;gap:0.5rem;margin-top:0.5rem}
+    .subscribe input{flex:1;padding:0.4rem 0.8rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:2rem}
+    .subscribe button{background:#22c55e;border:none;padding:0.4rem 1rem;border-radius:2rem;color:white;cursor:pointer}
+    .copyright{text-align:center;font-size:0.7rem;color:#166534;padding-top:1rem;border-top:1px solid #dcfce7}
+    @media (max-width:768px){.two-column{grid-template-columns:1fr}.job-title{font-size:1.4rem}}
   </style>
 </head>
 <body>
 <div class="container">
-  <!-- Navbar -->
   <div class="navbar">
     <div class="logo">ApplyMore</div>
     <div class="nav-links">
@@ -382,318 +66,80 @@
     </div>
   </div>
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <a href="index.html">Home</a> / <span id="breadcrumbCategory">Jobs</span> / <span id="breadcrumbTitle">Job Details</span>
-  </div>
+  <div class="breadcrumb"><a href="index.html">Home</a> / <span id="breadcrumbCat">Jobs</span> / <span id="breadcrumbTitle">Job Details</span></div>
 
-  <!-- Main Content -->
   <div class="two-column">
-    <!-- Left Column - Job Details -->
+    <div><div id="jobDetail" class="job-detail-card"><div style="text-align:center;padding:2rem;">Loading job details...</div></div></div>
     <div>
-      <div id="jobDetail" class="job-detail-card">
-        <div class="loading">Loading job details...</div>
-      </div>
-    </div>
-
-    <!-- Right Column - Sidebar -->
-    <div>
-      <div class="sidebar">
-        <h3><i class="fas fa-share-alt"></i> Share this Job</h3>
-        <div style="display: flex; gap: 1rem; justify-content: center;">
-          <a href="#" id="shareTwitter" style="color: #1DA1F2; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
-          <a href="#" id="shareLinkedin" style="color: #0077B5; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
-          <a href="#" id="shareWhatsapp" style="color: #25D366; font-size: 1.5rem;"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-
-      <div class="sidebar">
-        <h3><i class="fas fa-bell"></i> Job Alerts</h3>
-        <p style="font-size: 0.8rem; margin-bottom: 0.8rem;">Get similar jobs delivered to your inbox</p>
-        <div class="subscribe" style="flex-direction: column;">
-          <input type="email" id="alertEmail" placeholder="Your email address">
-          <button id="alertBtn" style="width: 100%;">Subscribe to Alerts</button>
-        </div>
-      </div>
-
-      <div class="sidebar">
-        <h3><i class="fas fa-clock"></i> Similar Jobs</h3>
-        <div id="similarJobs">
-          <div class="loading" style="padding: 0.5rem;">Loading similar jobs...</div>
-        </div>
-      </div>
+      <div class="sidebar"><h3><i class="fas fa-share-alt"></i> Share this Job</h3><div style="display:flex;gap:1rem;justify-content:center;"><a href="#" id="shareTwitter" style="color:#1DA1F2;font-size:1.5rem;"><i class="fab fa-twitter"></i></a><a href="#" id="shareLinkedin" style="color:#0077B5;font-size:1.5rem;"><i class="fab fa-linkedin"></i></a><a href="#" id="shareWhatsapp" style="color:#25D366;font-size:1.5rem;"><i class="fab fa-whatsapp"></i></a></div></div>
+      <div class="sidebar"><h3><i class="fas fa-clock"></i> Similar Jobs</h3><div id="similarJobs"><div style="font-size:0.8rem;">Loading...</div></div></div>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-grid">
-      <div class="footer-col">
-        <h3>ApplyMore</h3>
-        <p>Helping freshers land their dream job since 2026</p>
-      </div>
-      <div class="footer-col">
-        <h3>Quick Links</h3>
-        <a href="it-jobs.html">IT Jobs</a>
-        <a href="government-jobs.html">Government Jobs</a>
-        <a href="non-it-jobs.html">Non-IT Jobs</a>
-      </div>
-      <div class="footer-col">
-        <h3>Resources</h3>
-        <a href="#">Resume Builder</a>
-        <a href="#">Interview Prep</a>
-        <a href="#">Blog</a>
-      </div>
-      <div class="footer-col">
-        <h3>Get Alerts</h3>
-        <div class="subscribe">
-          <input type="email" id="footerEmail" placeholder="Your email">
-          <button id="footerSubscribeBtn">Subscribe</button>
-        </div>
-      </div>
+      <div class="footer-col"><h3>ApplyMore</h3><p>Helping freshers land their dream job since 2026</p></div>
+      <div class="footer-col"><h3>Quick Links</h3><a href="it-jobs.html">IT Jobs</a><a href="government-jobs.html">Government Jobs</a><a href="non-it-jobs.html">Non-IT Jobs</a></div>
+      <div class="footer-col"><h3>Resources</h3><a href="#">Resume Builder</a><a href="#">Interview Prep</a><a href="#">Blog</a></div>
+      <div class="footer-col"><h3>Get Alerts</h3><div class="subscribe"><input type="email" id="emailSubscribe" placeholder="Your email"><button id="subscribeBtn">Subscribe</button></div></div>
     </div>
     <div class="copyright">© 2026 ApplyMore – All rights reserved. Freshers first.</div>
   </footer>
 </div>
 
 <script>
-  const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
-  let currentJob = null;
-  let allJobs = [];
+  const allJobsData = {
+    1: { title: "Software Engineer Trainee", company: "Infosys", location: "Bangalore", category: "IT", description: "Join Infosys as a software engineer trainee. Work on cutting-edge technologies including cloud computing and AI. Excellent learning opportunities with experienced mentors.", apply_link: "https://infosys.com/careers", created_at: "2026-05-14" },
+    2: { title: "System Engineer", company: "TCS", location: "Chennai", category: "IT", description: "TCS hiring freshers for system engineer role. B.E/B.Tech graduates with 60% above eligible. Training provided on latest technologies.", apply_link: "https://tcs.com/careers", created_at: "2026-05-13" },
+    3: { title: "Frontend Developer", company: "Google", location: "Hyderabad", category: "IT", description: "Google is hiring frontend developers. Strong knowledge of React, JavaScript, and HTML/CSS required. Competitive salary.", apply_link: "https://google.com/careers", created_at: "2026-05-12" },
+    101: { title: "SSC CGL 2026", company: "Staff Selection Commission", location: "Delhi", category: "Government", description: "Combined Graduate Level examination. Graduates from any discipline can apply. Last date: Dec 2026", apply_link: "https://ssc.nic.in", created_at: "2026-05-14" },
+    201: { title: "Customer Support Executive", company: "Amazon", location: "Hyderabad", category: "Non-IT", description: "Handle customer queries via phone, chat and email. Freshers welcome. Excellent communication skills required.", apply_link: "#", created_at: "2026-05-14" }
+  };
 
-  // Get job ID from URL
-  function getJobId() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('id');
-  }
+  function getJobId() { return new URLSearchParams(window.location.search).get('id'); }
 
-  async function fetchJobDetails() {
+  function renderJobDetails() {
     const jobId = getJobId();
-    if (!jobId) {
-      document.getElementById('jobDetail').innerHTML = `
-        <div class="error">
-          <i class="fas fa-exclamation-triangle"></i>
-          <h3>No job ID specified</h3>
-          <p>Please go back to the <a href="index.html" style="color: #22c55e;">homepage</a> and select a job.</p>
-        </div>
-      `;
+    const job = allJobsData[jobId];
+    if (!job) {
+      document.getElementById('jobDetail').innerHTML = '<div style="text-align:center;padding:2rem;"><h3>Job not found</h3><a href="index.html">Back to Home</a></div>';
       return;
     }
-
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&id=eq.${jobId}`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-        }
-      });
-      const jobs = await res.json();
-      
-      if (!jobs || jobs.length === 0) {
-        document.getElementById('jobDetail').innerHTML = `
-          <div class="error">
-            <i class="fas fa-search"></i>
-            <h3>Job not found</h3>
-            <p>The job you're looking for doesn't exist or has been removed.</p>
-            <a href="index.html" style="color: #22c55e;">Browse all jobs →</a>
-          </div>
-        `;
-        return;
-      }
-      
-      currentJob = jobs[0];
-      renderJobDetails(currentJob);
-      await fetchAllJobsForSimilar();
-    } catch (e) {
-      console.error(e);
-      document.getElementById('jobDetail').innerHTML = `
-        <div class="error">
-          <i class="fas fa-exclamation-triangle"></i>
-          <h3>Error loading job</h3>
-          <p>Please try again later.</p>
-        </div>
-      `;
-    }
-  }
-
-  function renderJobDetails(job) {
-    // Update breadcrumb
-    document.getElementById('breadcrumbCategory').textContent = job.category || 'Jobs';
-    document.getElementById('breadcrumbTitle').textContent = job.title.substring(0, 50);
-
-    const category = job.category || 'General';
-    const categoryClass = category === 'IT' ? 'IT' : (category === 'Government' ? 'Government' : 'Non-IT');
-    
-    const html = `
-      <div class="job-header">
-        <div class="job-title">${escapeHtml(job.title)}</div>
-        <div class="job-company">${escapeHtml(job.company)} <span class="job-badge">${categoryClass}</span></div>
-      </div>
-      
-      <div class="job-meta-grid">
-        <div class="meta-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <div><strong>LOCATION</strong><span>${escapeHtml(job.location || 'India')}</span></div>
-        </div>
-        <div class="meta-item">
-          <i class="fas fa-calendar-alt"></i>
-          <div><strong>POSTED DATE</strong><span>${formatDate(job.created_at)}</span></div>
-        </div>
-        <div class="meta-item">
-          <i class="fas fa-briefcase"></i>
-          <div><strong>EXPERIENCE</strong><span>Fresher / Entry Level</span></div>
-        </div>
-        <div class="meta-item">
-          <i class="fas fa-clock"></i>
-          <div><strong>JOB TYPE</strong><span>Full Time</span></div>
-        </div>
-      </div>
-
-      ${job.description ? `
-        <div class="job-section">
-          <h3><i class="fas fa-info-circle"></i> Job Description</h3>
-          <p>${escapeHtml(job.description)}</p>
-        </div>
-      ` : ''}
-
-      <div class="job-section">
-        <h3><i class="fas fa-tasks"></i> Key Responsibilities</h3>
-        <ul>
-          <li>Handle day-to-day operations as per company standards</li>
-          <li>Collaborate with team members to achieve targets</li>
-          <li>Learn and implement new skills as required</li>
-          <li>Maintain quality and productivity standards</li>
-        </ul>
-      </div>
-
-      <div class="job-section">
-        <h3><i class="fas fa-graduation-cap"></i> Eligibility Criteria</h3>
-        <ul>
-          <li>Any Graduate (BSc, BCom, BA, BBA, BCA, BE/BTech)</li>
-          <li>2024, 2025, 2026 passing out batches</li>
-          <li>Good communication and analytical skills</li>
-          <li>Basic computer knowledge</li>
-        </ul>
-      </div>
-
-      <div class="job-section">
-        <h3><i class="fas fa-rupee-sign"></i> Salary & Benefits</h3>
-        <p>Competitive salary package as per industry standards. Additional benefits include health insurance, performance bonuses, and learning opportunities.</p>
-      </div>
-
-      <div class="apply-section">
-        <a href="${job.apply_link || '#'}" target="_blank" class="apply-btn-large" rel="noopener noreferrer">
-          <i class="fas fa-external-link-alt"></i> Apply Now
-        </a>
-        <div class="apply-note">
-          <i class="fas fa-shield-alt"></i> You will be redirected to the official company website
-        </div>
-      </div>
+    document.getElementById('breadcrumbCat').innerText = job.category;
+    document.getElementById('breadcrumbTitle').innerText = job.title.substring(0, 40);
+    document.getElementById('jobDetail').innerHTML = `
+      <div><div class="job-title">${job.title}</div><div class="job-company">${job.company}</div></div>
+      <div class="job-meta-grid"><div class="meta-item"><i class="fas fa-map-marker-alt"></i><div><strong>LOCATION</strong><span>${job.location}</span></div></div><div class="meta-item"><i class="fas fa-calendar-alt"></i><div><strong>POSTED</strong><span>Recently</span></div></div><div class="meta-item"><i class="fas fa-briefcase"></i><div><strong>EXPERIENCE</strong><span>Fresher</span></div></div></div>
+      <div class="job-section"><h3><i class="fas fa-info-circle"></i> Job Description</h3><p>${job.description}</p></div>
+      <div class="job-section"><h3><i class="fas fa-graduation-cap"></i> Eligibility</h3><ul><li>Any Graduate (BSc, BCom, BA, BBA, BCA, BE/BTech)</li><li>2024, 2025, 2026 passing out batches</li><li>Good communication skills</li></ul></div>
+      <div class="apply-section"><a href="${job.apply_link}" target="_blank" class="apply-btn-large">Apply Now <i class="fas fa-external-link-alt"></i></a><div class="apply-note"><i class="fas fa-shield-alt"></i> You will be redirected to official website</div></div>
     `;
-    
-    document.getElementById('jobDetail').innerHTML = html;
-    
-    // Setup share links
     setupShareLinks(job);
+    renderSimilarJobs(job);
   }
 
   function setupShareLinks(job) {
     const url = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(`${job.title} at ${job.company} - Apply Now!`);
-    
+    const title = encodeURIComponent(`${job.title} at ${job.company}`);
     document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
     document.getElementById('shareLinkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
     document.getElementById('shareWhatsapp').href = `https://wa.me/?text=${title}%20${url}`;
   }
 
-  async function fetchAllJobsForSimilar() {
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=id,title,company,category,location&order=created_at.desc&limit=50`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-        }
-      });
-      allJobs = await res.json();
-      renderSimilarJobs();
-    } catch (e) {
-      console.error(e);
-      document.getElementById('similarJobs').innerHTML = '<div style="font-size: 0.8rem; color: #166534;">Unable to load similar jobs</div>';
-    }
+  function renderSimilarJobs(currentJob) {
+    const similar = Object.entries(allJobsData).filter(([id, job]) => id != getJobId() && job.category === currentJob.category).slice(0, 3);
+    const container = document.getElementById('similarJobs');
+    if (similar.length === 0) { container.innerHTML = '<div style="font-size:0.8rem;">No similar jobs found</div>'; return; }
+    container.innerHTML = similar.map(([id, job]) => `<div class="similar-job-item"><a href="job.html?id=${id}" class="similar-job-link"><div class="similar-job-title">${job.title}</div><div class="similar-job-company">${job.company} • ${job.location}</div></a></div>`).join('');
   }
 
-  function renderSimilarJobs() {
-    if (!currentJob || !allJobs.length) return;
-    
-    const similar = allJobs
-      .filter(job => job.id !== currentJob.id && job.category === currentJob.category)
-      .slice(0, 4);
-    
-    if (similar.length === 0) {
-      document.getElementById('similarJobs').innerHTML = '<div style="font-size: 0.8rem; color: #166534;">No similar jobs found</div>';
-      return;
-    }
-    
-    document.getElementById('similarJobs').innerHTML = similar.map(job => `
-      <div class="similar-job-item">
-        <a href="job.html?id=${job.id}" class="similar-job-link">
-          <div class="similar-job-title">${escapeHtml(job.title)}</div>
-          <div class="similar-job-company">${escapeHtml(job.company)} • ${escapeHtml(job.location || 'India')}</div>
-        </a>
-      </div>
-    `).join('');
-  }
+  document.getElementById('subscribeBtn')?.addEventListener('click', () => {
+    const email = document.getElementById('emailSubscribe')?.value;
+    if(email && email.includes('@')) alert('✅ Subscribed!');
+    else alert('Please enter valid email');
+  });
 
-  function formatDate(dateStr) {
-    if (!dateStr) return 'Recently';
-    const date = new Date(dateStr);
-    const now = new Date();
-    const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
-    if (diffDays === 0) return 'Today';
-    if (diffDays === 1) return 'Yesterday';
-    if (diffDays < 7) return `${diffDays} days ago`;
-    return date.toLocaleDateString();
-  }
-
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, m => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;'
-    })[m]);
-  }
-
-  // Subscribe alerts
-  function setupAlerts() {
-    const alertBtn = document.getElementById('alertBtn');
-    const footerSubscribeBtn = document.getElementById('footerSubscribeBtn');
-    
-    const handleSubscribe = (emailInput) => {
-      const email = emailInput.value.trim();
-      if (email && email.includes('@')) {
-        alert('✅ Subscribed! You will receive job alerts at ' + email);
-        emailInput.value = '';
-      } else {
-        alert('Please enter a valid email address');
-      }
-    };
-    
-    if (alertBtn) {
-      const alertEmail = document.getElementById('alertEmail');
-      alertBtn.addEventListener('click', () => handleSubscribe(alertEmail));
-    }
-    
-    if (footerSubscribeBtn) {
-      const footerEmail = document.getElementById('footerEmail');
-      footerSubscribeBtn.addEventListener('click', () => handleSubscribe(footerEmail));
-    }
-  }
-
-  // Initialize
-  fetchJobDetails();
-  setupAlerts();
+  renderJobDetails();
 </script>
 </body>
 </html>
