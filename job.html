@@ -3,341 +3,697 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ApplyMore – Job Details & Career Guidance</title>
-  <meta name="description" id="dynamicMeta" content="Loading job details...">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
+  <title>Job Details – ApplyMore</title>
+  <meta name="description" content="View complete job details, requirements, and apply link for freshers jobs in India.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{--bg:#0a0a2a;--card-bg:rgba(20,20,50,0.65);--text:#f0f3ff;--text-muted:#9ca3cf;--border:rgba(255,255,255,0.1);--accent:#3b82f6;--accent-dark:#2563eb;--purple:#8b5cf6}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding:2rem;line-height:1.6}
-    .container{max-width:1000px;margin:0 auto}
-    .progress-container{position:fixed;top:0;left:0;width:100%;height:4px;background:rgba(0,0,0,0.2);z-index:1001}
-    .progress-bar{height:4px;background:var(--accent);width:0%;transition:width 0.2s}
-    .reading-time{font-size:0.7rem;color:var(--text-muted);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
-    .job-card{background:var(--card-bg);backdrop-filter:blur(10px);border-radius:1.5rem;padding:2rem;border:1px solid var(--border)}
-    .nav-links{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
-    .nav-links a{color:var(--text-muted);text-decoration:none}
-    .job-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
-    .company-logo{width:70px;height:70px;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.8rem;color:white}
-    .job-title h1{font-size:1.8rem;color:var(--accent);margin-bottom:0.2rem}
-    .job-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;font-size:0.8rem;color:var(--text-muted);border-bottom:1px solid var(--border);padding-bottom:1rem}
-    .section{margin-bottom:2rem}
-    .section h2{font-size:1.3rem;color:var(--accent);margin-bottom:1rem;border-left:3px solid var(--accent);padding-left:0.8rem}
-    .quick-facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;background:rgba(0,0,0,0.2);border-radius:1rem;padding:1rem;margin-bottom:1rem}
-    .fact-item{display:flex;align-items:center;gap:0.5rem;font-size:0.85rem}
-    .fact-item i{width:1.2rem;color:var(--accent)}
-    .skill-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem}
-    .skill-tag{background:rgba(59,130,246,0.15);border-radius:2rem;padding:0.2rem 0.8rem;font-size:0.75rem;color:var(--accent)}
-    .skill-level{font-size:0.7rem;color:var(--text-muted);margin-left:0.3rem}
-    .rating-stars{color:#fbbf24;font-size:0.8rem;margin-left:0.5rem}
-    .checklist{list-style:none;margin:0.5rem 0}
-    .checklist li{margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
-    .checklist li input{cursor:pointer}
-    .success-story{background:rgba(59,130,246,0.1);border-radius:1rem;padding:1rem;margin-bottom:1rem;border-left:3px solid var(--accent)}
-    .similar-job-card{background:rgba(255,255,255,0.03);border-radius:1rem;padding:1rem;margin-bottom:0.5rem;cursor:pointer;transition:0.2s}
-    .similar-job-card:hover{background:rgba(59,130,246,0.1);transform:translateX(5px)}
-    .apply-sticky{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(10px);padding:1rem;text-align:center;z-index:1000;transform:translateY(100%);transition:transform 0.3s;border-top:1px solid var(--border)}
-    .apply-sticky.show{transform:translateY(0)}
-    .apply-btn{display:inline-block;background:var(--accent);color:white;padding:0.6rem 2rem;border-radius:3rem;font-weight:700;text-decoration:none;font-size:1rem}
-    .apply-btn:hover{background:var(--accent-dark)}
-    .apply-sticky .apply-btn{margin:0 auto}
-    .share-save{display:flex;gap:0.5rem;justify-content:flex-end;margin-bottom:1rem}
-    .icon-btn{background:rgba(255,255,255,0.1);border:none;border-radius:2rem;padding:0.3rem 0.8rem;cursor:pointer;color:var(--text);font-size:0.7rem;display:inline-flex;align-items:center;gap:0.3rem}
-    .icon-btn:hover{background:var(--accent)}
-    footer{margin-top:2rem;text-align:center;font-size:0.7rem;color:var(--text-muted)}
-    @media (max-width:640px){
-      .job-header{flex-direction:column;text-align:center}
-      .company-logo{width:50px;height:50px;font-size:1.2rem}
-      .job-title h1{font-size:1.4rem}
-      .section h2{font-size:1.1rem}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: #ffffff;
+      border-radius: 3rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #15803d, #22c55e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #166534;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #22c55e;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      margin-bottom: 1.5rem;
+      font-size: 0.8rem;
+    }
+
+    .breadcrumb a {
+      color: #22c55e;
+      text-decoration: none;
+    }
+
+    .breadcrumb span {
+      color: #166534;
+    }
+
+    /* Job Detail Card */
+    .job-detail-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      border: 1px solid #dcfce7;
+      margin-bottom: 2rem;
+    }
+
+    .job-header {
+      border-bottom: 1px solid #dcfce7;
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .job-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+    }
+
+    .job-company {
+      font-size: 1.2rem;
+      color: #22c55e;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .job-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      background: #f0fdf4;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .meta-item i {
+      width: 24px;
+      color: #22c55e;
+      font-size: 1rem;
+    }
+
+    .meta-item strong {
+      font-size: 0.7rem;
+      color: #14532d;
+      display: block;
+    }
+
+    .meta-item span {
+      font-size: 0.85rem;
+      color: #166534;
+    }
+
+    .job-badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* Sections */
+    .job-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .job-section h3 {
+      font-size: 1.1rem;
+      color: #14532d;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .job-section h3 i {
+      color: #22c55e;
+    }
+
+    .job-section p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #166534;
+    }
+
+    .job-section ul {
+      margin-left: 1.5rem;
+    }
+
+    .job-section li {
+      font-size: 0.9rem;
+      color: #166534;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Apply Section */
+    .apply-section {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .apply-btn-large {
+      display: inline-block;
+      background: #22c55e;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+      margin-bottom: 1rem;
+    }
+
+    .apply-btn-large:hover {
+      background: #15803d;
+      transform: scale(1.02);
+    }
+
+    .apply-note {
+      font-size: 0.7rem;
+      color: #166534;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid #dcfce7;
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar h3 {
+      font-size: 1rem;
+      color: #14532d;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #dcfce7;
+    }
+
+    .similar-job-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #dcfce7;
+    }
+
+    .similar-job-item:last-child {
+      border-bottom: none;
+    }
+
+    .similar-job-title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #14532d;
+      margin-bottom: 0.2rem;
+    }
+
+    .similar-job-company {
+      font-size: 0.7rem;
+      color: #22c55e;
+    }
+
+    .similar-job-link {
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .similar-job-link:hover .similar-job-title {
+      color: #22c55e;
+    }
+
+    /* Two column layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    /* Loading & Error */
+    .loading, .error {
+      text-align: center;
+      padding: 3rem;
+      background: white;
+      border-radius: 1rem;
+      border: 1px solid #dcfce7;
+    }
+
+    .error i {
+      font-size: 2rem;
+      color: #ef4444;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-top: 2rem;
+      border: 1px solid #dcfce7;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col h3 {
+      font-size: 1rem;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.75rem;
+      color: #166534;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .footer-col a:hover {
+      color: #22c55e;
+    }
+
+    .subscribe {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .subscribe input {
+      flex: 1;
+      padding: 0.4rem 0.8rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 2rem;
+      color: #14532d;
+    }
+
+    .subscribe button {
+      background: #22c55e;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #166534;
+      padding-top: 1rem;
+      border-top: 1px solid #dcfce7;
+    }
+
+    @media (max-width: 768px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+      .job-title {
+        font-size: 1.4rem;
+      }
     }
   </style>
-  <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
-  <link rel="apple-touch-icon" href="/logo.png">
-  <meta property="og:image" content="https://applymore.vercel.app/logo.png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
-  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
-<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
 <div class="container">
-  <div class="nav-links">
-    <a href="index.html">🏠 Home</a>
-    <a href="about.html">📖 About</a>
-    <a href="blog.html">✍️ Blog</a>
-    <a href="contact.html">📧 Contact</a>
-    <a href="privacy.html">🔒 Privacy</a>
-    <a href="terms.html">⚖️ Terms</a>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">ApplyMore</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="it-jobs.html">IT Jobs</a>
+      <a href="government-jobs.html">Govt Jobs</a>
+      <a href="non-it-jobs.html">Non-IT</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Login</a>
+    </div>
   </div>
-  <div id="jobContent"><div class="loading" style="text-align:center;padding:2rem;">Loading job details...</div></div>
-  <footer>© 2026 ApplyMore – Helping freshers land their dream job</footer>
-</div>
-<div id="stickyApply" class="apply-sticky">
-  <a href="#" id="stickyApplyBtn" target="_blank" class="apply-btn">Apply Now →</a>
-</div>
-<script>
-  // No theme switcher – default dark theme is used
 
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> / <span id="breadcrumbCategory">Jobs</span> / <span id="breadcrumbTitle">Job Details</span>
+  </div>
+
+  <!-- Main Content -->
+  <div class="two-column">
+    <!-- Left Column - Job Details -->
+    <div>
+      <div id="jobDetail" class="job-detail-card">
+        <div class="loading">Loading job details...</div>
+      </div>
+    </div>
+
+    <!-- Right Column - Sidebar -->
+    <div>
+      <div class="sidebar">
+        <h3><i class="fas fa-share-alt"></i> Share this Job</h3>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+          <a href="#" id="shareTwitter" style="color: #1DA1F2; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+          <a href="#" id="shareLinkedin" style="color: #0077B5; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+          <a href="#" id="shareWhatsapp" style="color: #25D366; font-size: 1.5rem;"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <h3><i class="fas fa-bell"></i> Job Alerts</h3>
+        <p style="font-size: 0.8rem; margin-bottom: 0.8rem;">Get similar jobs delivered to your inbox</p>
+        <div class="subscribe" style="flex-direction: column;">
+          <input type="email" id="alertEmail" placeholder="Your email address">
+          <button id="alertBtn" style="width: 100%;">Subscribe to Alerts</button>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <h3><i class="fas fa-clock"></i> Similar Jobs</h3>
+        <div id="similarJobs">
+          <div class="loading" style="padding: 0.5rem;">Loading similar jobs...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>ApplyMore</h3>
+        <p>Helping freshers land their dream job since 2026</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <a href="it-jobs.html">IT Jobs</a>
+        <a href="government-jobs.html">Government Jobs</a>
+        <a href="non-it-jobs.html">Non-IT Jobs</a>
+      </div>
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <a href="#">Resume Builder</a>
+        <a href="#">Interview Prep</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h3>Get Alerts</h3>
+        <div class="subscribe">
+          <input type="email" id="footerEmail" placeholder="Your email">
+          <button id="footerSubscribeBtn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© 2026 ApplyMore – All rights reserved. Freshers first.</div>
+  </footer>
+</div>
+
+<script>
   const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
   let currentJob = null;
-  let similarJobs = [];
+  let allJobs = [];
 
-  function getQueryParam(p) { return new URLSearchParams(window.location.search).get(p); }
-  function escapeHtml(s){ return s? s.replace(/[&<>]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]):''; }
-  function decodeHtmlEntities(str) { if (!str) return ''; const t = document.createElement('textarea'); t.innerHTML = str; return t.value; }
-  function formatDate(d) { if (!d) return ''; const diff = Math.ceil(Math.abs(new Date() - new Date(d)) / (1000*60*60*24)); if (diff===0) return 'Today'; if (diff===1) return 'Yesterday'; if (diff<7) return `${diff} days ago`; return new Date(d).toLocaleDateString('en-IN',{day:'numeric',month:'short'}); }
-
-  function getExperienceLevel(job) {
-    const text = (job.title + ' ' + (job.description || '')).toLowerCase();
-    if (/(senior|lead|principal|architect|manager|director|head)/i.test(text)) return 'Senior (3+ years)';
-    const match = text.match(/(\d+(?:\.\d+)?)\s*years?/i);
-    if (match) { let y = parseFloat(match[1]); if (y>=3) return 'Senior (3+ years)'; if (y>=1) return 'Mid (1-2 years)'; }
-    if (/(fresher|entry level|entry-level|junior|graduate|trainee|0 years|zero years|no experience)/i.test(text)) return 'Fresher (0 years)';
-    return 'Entry Level (0-2 years)';
+  // Get job ID from URL
+  function getJobId() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
   }
 
-  function extractSkills(title, description) {
-    const text = (title + ' ' + description).toLowerCase();
-    const skillsList = ['python','sql','java','javascript','react','angular','node.js','pandas','numpy','tableau','power bi','aws','azure','git','docker','kubernetes','django','flask','spring','html','css','c++','c#','typescript','mongodb','postgresql','mysql','excel','linux','rest api','graphql','tensorflow','pytorch','scikit-learn','selenium','jenkins','ansible','terraform'];
-    const found = skillsList.filter(s => text.includes(s));
-    return found.slice(0,8);
-  }
+  async function fetchJobDetails() {
+    const jobId = getJobId();
+    if (!jobId) {
+      document.getElementById('jobDetail').innerHTML = `
+        <div class="error">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>No job ID specified</h3>
+          <p>Please go back to the <a href="index.html" style="color: #22c55e;">homepage</a> and select a job.</p>
+        </div>
+      `;
+      return;
+    }
 
-  async function fetchSimilarJobs(excludeId) {
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc&limit=5`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } });
-      if (!res.ok) throw new Error();
-      let jobs = await res.json();
-      jobs = jobs.filter(j => j.id != excludeId).slice(0,4);
-      similarJobs = jobs;
-      renderSimilarJobs();
-    } catch(e) { console.error('Similar jobs error',e); }
-  }
-
-  function renderSimilarJobs() {
-    const container = document.getElementById('similarJobsList');
-    if (!container) return;
-    if (!similarJobs.length) { container.innerHTML = '<p>No similar jobs found.</p>'; return; }
-    container.innerHTML = similarJobs.map(job => `
-      <div class="similar-job-card" data-id="${job.id}">
-        <div><strong>${escapeHtml(job.title)}</strong> at ${escapeHtml(job.company)}</div>
-        <div style="font-size:0.7rem;color:var(--text-muted)">${escapeHtml(job.location || 'India')}</div>
-      </div>
-    `).join('');
-    document.querySelectorAll('.similar-job-card').forEach(card => {
-      card.addEventListener('click', () => { window.location.href = `job.html?id=${card.getAttribute('data-id')}`; });
-    });
-  }
-
-  function saveJobToLocalStorage(jobId) {
-    let saved = JSON.parse(localStorage.getItem('savedJobs') || '[]');
-    if (!saved.includes(jobId)) { saved.push(jobId); localStorage.setItem('savedJobs', JSON.stringify(saved)); alert('Job saved!'); }
-    else { alert('Already saved'); }
-  }
-
-  function updateMetaDescription(job) {
-    const metaTag = document.getElementById('dynamicMeta');
-    if (metaTag && job) {
-      const desc = `Apply for ${job.title} at ${job.company} in ${job.location || 'India'}. ${job.description ? job.description.substring(0, 120) : 'Fresher-friendly IT role.'} Apply now on ApplyMore.`;
-      metaTag.setAttribute('content', desc);
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&id=eq.${jobId}`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      const jobs = await res.json();
+      
+      if (!jobs || jobs.length === 0) {
+        document.getElementById('jobDetail').innerHTML = `
+          <div class="error">
+            <i class="fas fa-search"></i>
+            <h3>Job not found</h3>
+            <p>The job you're looking for doesn't exist or has been removed.</p>
+            <a href="index.html" style="color: #22c55e;">Browse all jobs →</a>
+          </div>
+        `;
+        return;
+      }
+      
+      currentJob = jobs[0];
+      renderJobDetails(currentJob);
+      await fetchAllJobsForSimilar();
+    } catch (e) {
+      console.error(e);
+      document.getElementById('jobDetail').innerHTML = `
+        <div class="error">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>Error loading job</h3>
+          <p>Please try again later.</p>
+        </div>
+      `;
     }
   }
 
-  async function fetchJob() {
-    const id = getQueryParam('id');
-    if (!id) { document.getElementById('jobContent').innerHTML = '<div class="error">No job ID specified.</div>'; return; }
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?id=eq.${id}`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } });
-      if (!res.ok) throw new Error();
-      const jobs = await res.json();
-      if (!jobs.length) throw new Error();
-      currentJob = jobs[0];
-      updateMetaDescription(currentJob);
-      displayJob(currentJob);
-      fetchSimilarJobs(id);
-    } catch(e) { document.getElementById('jobContent').innerHTML = '<div class="error">Failed to load job. Please try again later.</div>'; }
-  }
+  function renderJobDetails(job) {
+    // Update breadcrumb
+    document.getElementById('breadcrumbCategory').textContent = job.category || 'Jobs';
+    document.getElementById('breadcrumbTitle').textContent = job.title.substring(0, 50);
 
-  function displayJob(job) {
-    const cleanDesc = decodeHtmlEntities(job.description || 'No description provided.');
-    const skills = extractSkills(job.title, cleanDesc);
-    const companyInitial = job.company?.trim()[0]?.toUpperCase() || '?';
-    const applyUrl = job.url ? job.url.trim() : '';
-    const isValidUrl = applyUrl && (applyUrl.startsWith('http://') || applyUrl.startsWith('https://'));
-    const expLevel = getExperienceLevel(job);
-    const readingTime = Math.ceil(cleanDesc.length / 1000) + 3;
-    const salaryRange = 'Not disclosed';
-    const workMode = (job.location || '').toLowerCase().includes('remote') ? 'Remote' : (job.location || '').toLowerCase().includes('hybrid') ? 'Hybrid' : 'On-site';
-
+    const category = job.category || 'General';
+    const categoryClass = category === 'IT' ? 'IT' : (category === 'Government' ? 'Government' : 'Non-IT');
+    
     const html = `
-      <div class="job-card">
-        <div class="share-save">
-          <button class="icon-btn" id="saveJobBtn"><i class="fas fa-heart"></i> Save</button>
-          <button class="icon-btn" id="shareJobBtn"><i class="fas fa-share-alt"></i> Share</button>
+      <div class="job-header">
+        <div class="job-title">${escapeHtml(job.title)}</div>
+        <div class="job-company">${escapeHtml(job.company)} <span class="job-badge">${categoryClass}</span></div>
+      </div>
+      
+      <div class="job-meta-grid">
+        <div class="meta-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div><strong>LOCATION</strong><span>${escapeHtml(job.location || 'India')}</span></div>
         </div>
-        <div class="job-header">
-          <div class="company-logo">${escapeHtml(companyInitial)}</div>
-          <div class="job-title">
-            <h1>${escapeHtml(job.title)}</h1>
-            <div style="font-size:1rem;">${escapeHtml(job.company)}</div>
-          </div>
+        <div class="meta-item">
+          <i class="fas fa-calendar-alt"></i>
+          <div><strong>POSTED DATE</strong><span>${formatDate(job.created_at)}</span></div>
         </div>
-        <div class="job-meta">
-          <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'Not specified')}</span>
-          <span><i class="fas fa-calendar-alt"></i> Posted: ${formatDate(job.posted_date||job.created_at)}</span>
-          <span><i class="fas fa-briefcase"></i> ${expLevel}</span>
-          <span><i class="fas fa-clock"></i> ${readingTime} min read</span>
+        <div class="meta-item">
+          <i class="fas fa-briefcase"></i>
+          <div><strong>EXPERIENCE</strong><span>Fresher / Entry Level</span></div>
         </div>
+        <div class="meta-item">
+          <i class="fas fa-clock"></i>
+          <div><strong>JOB TYPE</strong><span>Full Time</span></div>
+        </div>
+      </div>
 
-        <div class="reading-time"><i class="fas fa-hourglass-half"></i> Estimated reading time: ${readingTime} minutes</div>
-
-        <div class="quick-facts">
-          <div class="fact-item"><i class="fas fa-chart-line"></i> Experience: ${expLevel}</div>
-          <div class="fact-item"><i class="fas fa-building"></i> Work Mode: ${workMode}</div>
-          <div class="fact-item"><i class="fas fa-rupee-sign"></i> Salary: ${salaryRange}</div>
-          <div class="fact-item"><i class="fas fa-users"></i> Department: Engineering/IT</div>
+      ${job.description ? `
+        <div class="job-section">
+          <h3><i class="fas fa-info-circle"></i> Job Description</h3>
+          <p>${escapeHtml(job.description)}</p>
         </div>
+      ` : ''}
 
-        <div class="section">
-          <h2>📋 Job Description</h2>
-          <div style="white-space:pre-wrap">${escapeHtml(cleanDesc)}</div>
-        </div>
+      <div class="job-section">
+        <h3><i class="fas fa-tasks"></i> Key Responsibilities</h3>
+        <ul>
+          <li>Handle day-to-day operations as per company standards</li>
+          <li>Collaborate with team members to achieve targets</li>
+          <li>Learn and implement new skills as required</li>
+          <li>Maintain quality and productivity standards</li>
+        </ul>
+      </div>
 
-        <div class="section">
-          <h2>🎯 Skills & Requirements</h2>
-          <div class="skill-tags">
-            ${skills.length ? skills.map(s => `<span class="skill-tag">${escapeHtml(s)} <span class="skill-level">(Beginner-Intermediate)</span></span>`).join('') : '<span>No specific skills listed.</span>'}
-          </div>
-          <p style="margin-top:0.5rem;font-size:0.8rem;">⭐ Rate your proficiency in these skills (click stars):</p>
-          <div id="skillRating"></div>
-        </div>
+      <div class="job-section">
+        <h3><i class="fas fa-graduation-cap"></i> Eligibility Criteria</h3>
+        <ul>
+          <li>Any Graduate (BSc, BCom, BA, BBA, BCA, BE/BTech)</li>
+          <li>2024, 2025, 2026 passing out batches</li>
+          <li>Good communication and analytical skills</li>
+          <li>Basic computer knowledge</li>
+        </ul>
+      </div>
 
-        <div class="section">
-          <h2>🏢 About ${escapeHtml(job.company)}</h2>
-          <p>${escapeHtml(job.company)} is a leading company in the IT sector, known for innovation and employee growth. They have a strong engineering culture and offer mentorship programs for freshers.</p>
-          <p>Industry: Information Technology | Headquarters: India | Founded: 2000s | Tech Stack: Modern cloud-based technologies.</p>
-        </div>
+      <div class="job-section">
+        <h3><i class="fas fa-rupee-sign"></i> Salary & Benefits</h3>
+        <p>Competitive salary package as per industry standards. Additional benefits include health insurance, performance bonuses, and learning opportunities.</p>
+      </div>
 
-        <div class="section">
-          <h2>📈 Career Growth Path</h2>
-          <p><strong>What you'll learn in first 6 months:</strong> Core technologies, team collaboration, code reviews, and project lifecycle.</p>
-          <p><strong>Potential advancement:</strong> Within 1-2 years, you can grow into a Senior Engineer or Team Lead role with performance.</p>
-          <p><strong>Mentorship:</strong> Dedicated mentors will guide you through your initial projects.</p>
-        </div>
-
-        <div class="section">
-          <h2>💰 Compensation & Benefits</h2>
-          <ul style="margin-left:1.2rem">
-            <li>Competitive salary as per industry standards</li>
-            <li>Health insurance for you and family</li>
-            <li>Learning & development budget</li>
-            <li>Flexible working hours</li>
-            <li>Work from home options</li>
-            <li>Performance-based bonuses</li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h2>🎓 Preparation Guide</h2>
-          <p><strong>Resume tips:</strong> Highlight projects relevant to ${escapeHtml(job.title)}. Use keywords from the job description.</p>
-          <p><strong>Common interview questions:</strong> "Tell me about a challenging project", "Explain your experience with ${skills[0]||'relevant technologies'}", "Why do you want to work here?"</p>
-          <p><strong>Technical prep:</strong> Practice coding problems on LeetCode, revise SQL queries, and prepare to discuss your projects in depth.</p>
-          <p><strong>Behavioral prep:</strong> Use STAR method to answer situational questions.</p>
-        </div>
-
-        <div class="section">
-          <h2>🌟 Fresher Success Stories</h2>
-          <div class="success-story">✨ Rahul got hired as a Software Engineer at TCS after using ApplyMore's resume tips. Now he leads a team of 5!</div>
-          <div class="success-story">✨ Priya started as an intern at this company and became a Senior Developer within 2 years.</div>
-        </div>
-
-        <div class="section">
-          <h2>✅ Application Checklist</h2>
-          <ul class="checklist" id="checklist">
-            <li><input type="checkbox"> Resume updated with relevant projects</li>
-            <li><input type="checkbox"> LinkedIn profile optimized</li>
-            <li><input type="checkbox"> Portfolio/GitHub ready (if applicable)</li>
-            <li><input type="checkbox"> Cover letter customized for this role</li>
-            <li><input type="checkbox"> Company research completed</li>
-            <li><input type="checkbox"> References prepared</li>
-          </ul>
-          <p id="checklistProgress" style="font-size:0.7rem;">Progress: 0/6 complete</p>
-        </div>
-
-        <div class="section">
-          <h2>🔍 Similar Jobs You Might Like</h2>
-          <div id="similarJobsList">Loading...</div>
-        </div>
-
-        <div style="text-align:center; margin-top:1rem;">
-          ${isValidUrl ? `<a href="${escapeHtml(applyUrl)}" target="_blank" rel="noopener noreferrer" class="apply-btn" id="inlineApplyBtn">Apply Now →</a>` : '<div class="missing-url">⚠️ No valid application link available.</div>'}
+      <div class="apply-section">
+        <a href="${job.apply_link || '#'}" target="_blank" class="apply-btn-large" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i> Apply Now
+        </a>
+        <div class="apply-note">
+          <i class="fas fa-shield-alt"></i> You will be redirected to the official company website
         </div>
       </div>
     `;
-
-    document.getElementById('jobContent').innerHTML = html;
-
-    const stickyBtn = document.getElementById('stickyApplyBtn');
-    const inlineApplyBtn = document.getElementById('inlineApplyBtn');
-    if (stickyBtn && isValidUrl) stickyBtn.href = applyUrl;
-    if (inlineApplyBtn) inlineApplyBtn.href = applyUrl;
-
-    document.getElementById('saveJobBtn')?.addEventListener('click', () => saveJobToLocalStorage(job.id));
-    document.getElementById('shareJobBtn')?.addEventListener('click', () => {
-      navigator.share ? navigator.share({ title: job.title, text: `Check out this job: ${job.title} at ${job.company}`, url: window.location.href }) : alert('Share this link: ' + window.location.href);
-    });
-
-    const ratingDiv = document.getElementById('skillRating');
-    if (ratingDiv && skills.length) {
-      let starsHtml = '';
-      for (let i=1; i<=5; i++) {
-        starsHtml += `<span class="rating-stars" data-rating="${i}">★</span> `;
-      }
-      ratingDiv.innerHTML = `<div style="font-size:0.8rem;">Rate yourself: ${starsHtml} <span id="ratingValue"></span></div>`;
-      document.querySelectorAll('.rating-stars').forEach(star => {
-        star.addEventListener('click', (e) => {
-          const rating = e.target.getAttribute('data-rating');
-          document.getElementById('ratingValue').innerText = ` (${rating}/5)`;
-          localStorage.setItem(`skillRating_${job.id}`, rating);
-        });
-        const saved = localStorage.getItem(`skillRating_${job.id}`);
-        if (saved) document.getElementById('ratingValue').innerText = ` (${saved}/5)`;
-      });
-    }
-
-    const checkboxes = document.querySelectorAll('#checklist input');
-    const updateProgress = () => {
-      const checked = document.querySelectorAll('#checklist input:checked').length;
-      document.getElementById('checklistProgress').innerText = `Progress: ${checked}/${checkboxes.length} complete`;
-      localStorage.setItem(`checklist_${job.id}`, JSON.stringify(Array.from(checkboxes).map(cb => cb.checked)));
-    };
-    checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
-    const savedChecklist = localStorage.getItem(`checklist_${job.id}`);
-    if (savedChecklist) {
-      const states = JSON.parse(savedChecklist);
-      checkboxes.forEach((cb, idx) => cb.checked = states[idx]);
-      updateProgress();
-    } else updateProgress();
+    
+    document.getElementById('jobDetail').innerHTML = html;
+    
+    // Setup share links
+    setupShareLinks(job);
   }
 
-  window.addEventListener('scroll', () => {
-    const winScroll = document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById('progressBar').style.width = scrolled + '%';
-    const sticky = document.getElementById('stickyApply');
-    if (sticky && currentJob && currentJob.url) {
-      const scrollPercent = (winScroll / height) * 100;
-      if (scrollPercent > 70) sticky.classList.add('show');
-      else sticky.classList.remove('show');
-    }
-  });
+  function setupShareLinks(job) {
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(`${job.title} at ${job.company} - Apply Now!`);
+    
+    document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+    document.getElementById('shareLinkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+    document.getElementById('shareWhatsapp').href = `https://wa.me/?text=${title}%20${url}`;
+  }
 
-  fetchJob();
+  async function fetchAllJobsForSimilar() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=id,title,company,category,location&order=created_at.desc&limit=50`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      allJobs = await res.json();
+      renderSimilarJobs();
+    } catch (e) {
+      console.error(e);
+      document.getElementById('similarJobs').innerHTML = '<div style="font-size: 0.8rem; color: #166534;">Unable to load similar jobs</div>';
+    }
+  }
+
+  function renderSimilarJobs() {
+    if (!currentJob || !allJobs.length) return;
+    
+    const similar = allJobs
+      .filter(job => job.id !== currentJob.id && job.category === currentJob.category)
+      .slice(0, 4);
+    
+    if (similar.length === 0) {
+      document.getElementById('similarJobs').innerHTML = '<div style="font-size: 0.8rem; color: #166534;">No similar jobs found</div>';
+      return;
+    }
+    
+    document.getElementById('similarJobs').innerHTML = similar.map(job => `
+      <div class="similar-job-item">
+        <a href="job.html?id=${job.id}" class="similar-job-link">
+          <div class="similar-job-title">${escapeHtml(job.title)}</div>
+          <div class="similar-job-company">${escapeHtml(job.company)} • ${escapeHtml(job.location || 'India')}</div>
+        </a>
+      </div>
+    `).join('');
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return 'Recently';
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 7) return `${diffDays} days ago`;
+    return date.toLocaleDateString();
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, m => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;'
+    })[m]);
+  }
+
+  // Subscribe alerts
+  function setupAlerts() {
+    const alertBtn = document.getElementById('alertBtn');
+    const footerSubscribeBtn = document.getElementById('footerSubscribeBtn');
+    
+    const handleSubscribe = (emailInput) => {
+      const email = emailInput.value.trim();
+      if (email && email.includes('@')) {
+        alert('✅ Subscribed! You will receive job alerts at ' + email);
+        emailInput.value = '';
+      } else {
+        alert('Please enter a valid email address');
+      }
+    };
+    
+    if (alertBtn) {
+      const alertEmail = document.getElementById('alertEmail');
+      alertBtn.addEventListener('click', () => handleSubscribe(alertEmail));
+    }
+    
+    if (footerSubscribeBtn) {
+      const footerEmail = document.getElementById('footerEmail');
+      footerSubscribeBtn.addEventListener('click', () => handleSubscribe(footerEmail));
+    }
+  }
+
+  // Initialize
+  fetchJobDetails();
+  setupAlerts();
 </script>
 </body>
 </html>
