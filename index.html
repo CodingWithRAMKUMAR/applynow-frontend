@@ -2,319 +2,219 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ApplyMore – India’s IT Fresher Job Board</title>
-  <meta name="description" content="ApplyMore – free job board for IT freshers in India. Find genuine entry-level jobs in Hyderabad, Bangalore, Chennai. Updated daily. Resume builder & interview prep included. Join our community on Telegram, WhatsApp, and LinkedIn.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ApplyMore – IT, Government & Non‑IT Jobs for Freshers</title>
+  <meta name="description" content="Find the latest IT, Government, and Non‑IT jobs for freshers in India. Free, updated daily, no sign‑up required.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    :root{--bg:#0a0a2a;--card-bg:rgba(20,20,50,0.65);--text:#f0f3ff;--text-muted:#9ca3cf;--border:rgba(255,255,255,0.1);--accent:#3b82f6;--purple:#8b5cf6}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-    .container{max-width:1400px;margin:0 auto;padding:1.5rem}
-    .nav-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
-    .nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.9rem}
-    .nav-links a:hover{color:var(--accent)}
-    .hero{text-align:center;margin-bottom:2rem}
-    .hero h1{font-size:2.5rem;background:linear-gradient(135deg,var(--accent),var(--purple));background-clip:text;-webkit-background-clip:text;color:transparent}
-    .hero p{color:var(--text-muted);max-width:600px;margin:0.5rem auto}
-    .stats{display:flex;justify-content:center;gap:2rem;margin-bottom:2rem}
-    .stat-card{background:var(--card-bg);padding:1rem 2rem;border-radius:1rem;text-align:center}
-    .stat-number{font-size:2rem;font-weight:700;color:var(--accent)}
-    /* Community section */
-    .community-section{background:linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));border-radius:1.5rem;padding:1.5rem;margin-bottom:2rem;text-align:center}
-    .community-section h2{color:var(--accent);margin-bottom:0.5rem}
-    .community-section p{color:var(--text-muted);margin-bottom:1rem}
-    .community-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
-    .community-btn{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:2rem;padding:0.6rem 1.2rem;color:var(--text);text-decoration:none;transition:0.2s}
-    .community-btn:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
-    .community-btn i{font-size:1.2rem}
-    /* Filters */
-    .filters{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;align-items:center;justify-content:center}
-    .filter-group select,.search-box input{padding:0.5rem 1rem;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:2rem;color:var(--text)}
-    .search-box{position:relative}
-    .search-box i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--text-muted)}
-    .search-box input{padding-left:2rem;width:260px}
-    /* Two column main layout */
-    .main-layout{display:flex;flex-wrap:wrap;gap:2rem}
-    .jobs-column{flex:2;min-width:300px}
-    .resources-column{flex:1;min-width:250px}
-    /* Resource cards */
-    .resource-card{background:var(--card-bg);border-radius:1rem;padding:1rem;margin-bottom:1rem}
-    .resource-card h3{color:var(--accent);margin-bottom:0.5rem}
-    .resource-card p{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem}
-    .resource-card a{color:var(--accent);text-decoration:none}
-    /* Job cards */
-    .jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem}
-    .job-card{background:var(--card-bg);border-radius:1rem;padding:1.2rem;border:1px solid var(--border);transition:0.2s;cursor:pointer}
-    .job-card:hover{transform:translateY(-3px);border-color:var(--accent)}
-    .job-title{font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--accent)}
-    .company{font-size:0.8rem;margin-bottom:0.3rem}
-    .job-meta{display:flex;gap:0.8rem;font-size:0.7rem;color:var(--text-muted);margin-bottom:0.5rem}
-    .job-meta span{display:flex;align-items:center;gap:0.2rem}
-    .experience-tag{background:rgba(59,130,246,0.2);padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.7rem;width:fit-content}
-    .new-badge{background:#dc2626;color:white;padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.6rem;margin-left:0.5rem;display:inline-block}
-    .load-more{text-align:center;margin:2rem 0}
-    .load-more button{background:var(--accent);color:white;border:none;padding:0.6rem 1.5rem;border-radius:2rem;cursor:pointer}
-    .skeleton{background:rgba(255,255,255,0.05);border-radius:1rem;height:200px;animation:pulse 1.5s infinite}
-    @keyframes pulse{0%{opacity:0.6}50%{opacity:1}100%{opacity:0.6}}
-    .message-box{background:var(--card-bg);border-radius:1rem;padding:1.5rem;text-align:center;color:var(--text-muted)}
-    .section-title{color:var(--accent);margin:1rem 0 0.5rem;font-size:1.3rem}
-    footer{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.7rem}
-    .footer-links{display:flex;justify-content:center;gap:1rem;margin-bottom:0.5rem}
-    .footer-links a{color:var(--text-muted);text-decoration:none;font-size:0.7rem}
-    @media (max-width:840px){.main-layout{flex-direction:column}.resources-column{order:2}.jobs-column{order:1}}
+    body{font-family:'Inter',sans-serif;background:#f0fdf4;color:#166534}
+    .container{max-width:1400px;margin:0 auto;padding:1rem}
+    /* Navbar */
+    .navbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:0.8rem 1.5rem;background:#ffffff;border-radius:3rem;box-shadow:0 4px 12px rgba(0,0,0,0.05);margin-bottom:2rem}
+    .logo{font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#15803d,#22c55e);background-clip:text;-webkit-background-clip:text;color:transparent}
+    .nav-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+    .nav-links a{color:#166534;text-decoration:none;font-size:0.9rem;font-weight:500}
+    .nav-links a:hover{color:#22c55e}
+    /* Hero */
+    .hero{text-align:center;margin-bottom:2.5rem;padding:2rem;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-radius:2rem}
+    .hero h1{font-size:2.5rem;color:#14532d;margin-bottom:0.5rem}
+    .hero p{color:#166534;margin-bottom:1rem}
+    .search-bar{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:1rem}
+    .search-bar input,.search-bar select{padding:0.6rem 1rem;background:white;border:1px solid #bbf7d0;border-radius:2rem;color:#14532d;min-width:140px}
+    .search-bar button{background:#22c55e;border:none;padding:0.6rem 1.5rem;border-radius:2rem;color:white;font-weight:600;cursor:pointer}
+    /* Stats */
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem}
+    .stat-card{background:white;border-radius:1rem;padding:1rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.03);border:1px solid #bbf7d0}
+    .stat-number{font-size:2rem;font-weight:800;color:#22c55e}
+    .stat-label{font-size:0.8rem;color:#166534}
+    /* Section titles */
+    .section-title{font-size:1.5rem;font-weight:700;color:#14532d;margin:2rem 0 1rem}
+    /* Latest jobs */
+    .jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin-bottom:1.5rem}
+    .job-card{background:white;border-radius:1rem;padding:1rem;border:1px solid #dcfce7;transition:0.2s;box-shadow:0 2px 4px rgba(0,0,0,0.02)}
+    .job-card:hover{transform:translateY(-3px);border-color:#22c55e;box-shadow:0 8px 20px rgba(34,197,94,0.1)}
+    .job-title{font-weight:700;color:#14532d;margin-bottom:0.3rem}
+    .job-company{font-size:0.85rem;color:#22c55e;font-weight:500;margin-bottom:0.3rem}
+    .job-location{font-size:0.75rem;color:#166534;margin-bottom:0.5rem}
+    .apply-btn{background:#22c55e;color:white;padding:0.2rem 0.8rem;border-radius:2rem;text-decoration:none;font-size:0.75rem;display:inline-block}
+    .view-all{text-align:right;margin-bottom:0.5rem}
+    .view-all a{color:#22c55e;text-decoration:none;font-weight:500}
+    /* Two column layout */
+    .two-column{display:grid;grid-template-columns:2fr 1fr;gap:2rem;margin-bottom:2rem}
+    .city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.8rem}
+    .city-card{background:white;border-radius:0.8rem;padding:0.6rem;text-align:center;border:1px solid #dcfce7}
+    .city-name{font-weight:500;color:#14532d;font-size:0.85rem}
+    .city-count{font-size:0.7rem;color:#22c55e}
+    .community-feed{background:white;border-radius:1rem;padding:1rem;border:1px solid #dcfce7;max-height:400px;overflow-y:auto}
+    .feed-item{margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid #dcfce7}
+    .feed-text{font-size:0.8rem;color:#166534}
+    .feed-time{font-size:0.6rem;color:#22c55e}
+    /* Batch & job type grids */
+    .batch-grid,.jobtype-grid,.company-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.8rem;margin-bottom:2rem}
+    .batch-card,.jobtype-card,.company-card{background:white;border-radius:0.8rem;padding:0.6rem;text-align:center;border:1px solid #dcfce7;cursor:pointer}
+    .batch-name,.jobtype-name,.company-name{font-weight:500;font-size:0.8rem;color:#14532d}
+    .batch-count,.jobtype-count,.company-count{font-size:0.65rem;color:#22c55e}
+    /* Career advice */
+    .advice-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:2rem}
+    .advice-card{background:white;border-radius:1rem;padding:1rem;border:1px solid #dcfce7;transition:0.2s}
+    .advice-card:hover{transform:translateY(-3px);border-color:#22c55e}
+    .advice-icon{font-size:1.8rem;color:#22c55e;margin-bottom:0.5rem}
+    .advice-title{font-weight:700;color:#14532d;margin-bottom:0.3rem}
+    .advice-desc{font-size:0.75rem;color:#166534}
+    /* Footer */
+    footer{background:#ffffff;border-radius:1.5rem;padding:2rem;margin-top:2rem;border:1px solid #dcfce7}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:1.5rem}
+    .footer-col h3{font-size:1rem;color:#14532d;margin-bottom:0.5rem}
+    .footer-col p,.footer-col a{font-size:0.75rem;color:#166534;text-decoration:none;display:block;margin-bottom:0.3rem}
+    .footer-col a:hover{color:#22c55e}
+    .subscribe{display:flex;gap:0.5rem;margin-top:0.5rem}
+    .subscribe input{flex:1;padding:0.4rem 0.8rem;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:2rem;color:#14532d}
+    .subscribe button{background:#22c55e;border:none;padding:0.4rem 1rem;border-radius:2rem;color:white;cursor:pointer}
+    .copyright{text-align:center;font-size:0.7rem;color:#166534;padding-top:1rem;border-top:1px solid #dcfce7}
+    @media (max-width:768px){.two-column{grid-template-columns:1fr}}
+    .loading{color:#166534;padding:1rem;text-align:center}
   </style>
-  <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
-  <link rel="apple-touch-icon" href="/logo.png">
-  <meta property="og:image" content="https://applymore.vercel.app/logo.png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
-  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 <div class="container">
-  <div class="nav-links">
-    <a href="index.html">🏠 Home</a>
-    <a href="about.html">📖 About</a>
-    <a href="blog.html">✍️ Blog</a>
-    <a href="contact.html">📧 Contact</a>
-    <a href="privacy.html">🔒 Privacy</a>
-    <a href="terms.html">⚖️ Terms</a>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">ApplyMore</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="it-jobs.html">IT Jobs</a>
+      <a href="government-jobs.html">Govt Jobs</a>
+      <a href="non-it-jobs.html">Non‑IT</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Login</a>
+    </div>
   </div>
+
+  <!-- Hero Section -->
   <div class="hero">
-    <h1>ApplyMore</h1>
-    <p>India’s most trusted IT fresher job board – genuine jobs, updated daily.</p>
-  </div>
-  <div class="stats" id="stats">
-    <div class="stat-card"><div class="stat-number" id="totalJobs">0</div><div>Total Jobs</div></div>
-    <div class="stat-card"><div class="stat-number" id="newJobs">0</div><div>New Today</div></div>
-  </div>
-
-  <!-- Community Section -->
-  <div class="community-section">
-    <h2>🚀 Join Our Community</h2>
-    <p>Get daily job alerts, interview tips, and support from fellow freshers.</p>
-    <div class="community-icons">
-      <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="community-btn"><i class="fab fa-telegram"></i> Telegram</a>
-      <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="community-btn"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
-      <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank" class="community-btn"><i class="fab fa-whatsapp"></i> WhatsApp Community</a>
-      <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="community-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <h1>Latest Off‑Campus Drives</h1>
+    <p>Find your dream job – IT, Government, Non‑IT – all in one place</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Job title, company...">
+      <select id="locationFilter"><option value="all">All Locations</option></select>
+      <select id="categoryFilter"><option value="all">All Categories</option><option value="IT">IT</option><option value="Government">Government</option><option value="Non-IT">Non‑IT</option></select>
+      <select id="jobTypeFilter"><option value="all">All Job Types</option><option value="Off Campus">Off Campus</option><option value="Internship">Internship</option><option value="WFH">WFH</option><option value="Walk-in">Walk‑in</option><option value="Experienced">Experienced</option><option value="Hybrid">Hybrid</option></select>
+      <button id="searchBtn">Search</button>
     </div>
   </div>
 
-  <div class="filters">
-    <div class="search-box"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Search jobs..."></div>
-    <div class="filter-group"><select id="locationFilter"><option value="">All Cities</option><option value="Hyderabad">Hyderabad</option><option value="Bangalore">Bangalore</option><option value="Chennai">Chennai</option></select></div>
-    <div class="filter-group"><select id="expFilter"><option value="">All Experience</option><option value="Fresher">Fresher (0-2 years)</option><option value="1-2">1-2 years</option><option value="3+">3+ years</option></select></div>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card"><div class="stat-number" id="statVisitors">50,000+</div><div class="stat-label">Monthly Visitors</div></div>
+    <div class="stat-card"><div class="stat-number" id="statShares">10,000+</div><div class="stat-label">Shares</div></div>
+    <div class="stat-card"><div class="stat-number" id="statCompanies">500+</div><div class="stat-label">Companies</div></div>
   </div>
 
-  <!-- Main two‑column layout: jobs left, resources right -->
-  <div class="main-layout">
-    <div class="jobs-column">
-      <div id="jobsGrid" class="jobs-grid"></div>
-      <div id="loadMoreContainer" class="load-more" style="display:none"><button id="loadMoreBtn">Load More</button></div>
-    </div>
-    <div class="resources-column">
-      <h2 class="section-title">📘 Interview Ready PDFs</h2>
-      <div id="pdfsContainer"></div>
-      <h2 class="section-title" style="margin-top:1.5rem;">🎓 Recommended Certifications</h2>
-      <div id="certsContainer"></div>
-    </div>
+  <!-- Latest Jobs -->
+  <div class="view-all"><a href="it-jobs.html">View All Drives →</a></div>
+  <div class="section-title">🔥 Latest Off‑Campus Jobs</div>
+  <div id="latestJobs" class="jobs-grid"><div class="loading">Loading jobs...</div></div>
+
+  <!-- Two column layout -->
+  <div class="two-column">
+    <div><div class="section-title">📍 Jobs by Location</div><div id="cityGrid" class="city-grid"><div class="loading">Loading...</div></div></div>
+    <div><div class="section-title">💬 Community Updates</div><div id="communityFeed" class="community-feed"><div class="feed-item"><div class="feed-text">Welcome to ApplyMore community!</div><div class="feed-time">Just now</div></div></div></div>
   </div>
 
+  <!-- Jobs by Graduation Batch -->
+  <div class="section-title">🎓 Jobs by Graduation Batch</div>
+  <div id="batchGrid" class="batch-grid"><div class="loading">Loading...</div></div>
+
+  <!-- Browse by Job Type -->
+  <div class="section-title">🔍 Browse by Job Type</div>
+  <div id="jobTypeGrid" class="jobtype-grid"><div class="loading">Loading...</div></div>
+
+  <!-- Top Hiring Companies -->
+  <div class="section-title">🏢 Top Hiring Companies</div>
+  <div id="companyGrid" class="company-grid"><div class="loading">Loading...</div></div>
+
+  <!-- Career Advice -->
+  <div class="section-title">📚 Career Path Advice & Placement Prep</div>
+  <div class="advice-grid">
+    <div class="advice-card"><div class="advice-icon"><i class="fas fa-file-alt"></i></div><div class="advice-title">Resume Tips</div><div class="advice-desc">ATS-friendly templates & keywords</div></div>
+    <div class="advice-card"><div class="advice-icon"><i class="fas fa-chalkboard-user"></i></div><div class="advice-title">Interview Prep</div><div class="advice-desc">Common questions & STAR method</div></div>
+    <div class="advice-card"><div class="advice-icon"><i class="fas fa-certificate"></i></div><div class="advice-title">Free Courses</div><div class="advice-desc">Upskill with certification courses</div></div>
+    <div class="advice-card"><div class="advice-icon"><i class="fas fa-chart-line"></i></div><div class="advice-title">Salary Guide</div><div class="advice-desc">Negotiation tips & market rates</div></div>
+  </div>
+
+  <!-- Footer -->
   <footer>
-    <div class="footer-links">
-      <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank">Telegram</a>
-      <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank">WhatsApp Group</a>
-      <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank">WhatsApp Community</a>
-      <a href="https://www.linkedin.com/company/applymore/" target="_blank">LinkedIn</a>
+    <div class="footer-grid">
+      <div class="footer-col"><h3>ApplyMore</h3><p>Helping freshers land their dream job since 2026</p></div>
+      <div class="footer-col"><h3>Quick Links</h3><a href="it-jobs.html">IT Jobs</a><a href="government-jobs.html">Government Jobs</a><a href="non-it-jobs.html">Non‑IT Jobs</a></div>
+      <div class="footer-col"><h3>Resources</h3><a href="#">Resume Builder</a><a href="#">Interview Prep</a><a href="#">Blog</a></div>
+      <div class="footer-col"><h3>Get Alerts</h3><div class="subscribe"><input type="email" id="emailSubscribe" placeholder="Your email"><button id="subscribeBtn">Subscribe</button></div></div>
     </div>
-    <p>© 2026 ApplyMore – Helping IT freshers land their dream job</p>
+    <div class="copyright">© 2026 ApplyMore – All rights reserved. Freshers first.</div>
   </footer>
 </div>
 
 <script>
-  (function() {
-    const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
-    let allJobs = [];
-    let filteredJobs = [];
-    let currentPage = 1;
-    const jobsPerPage = 20;
+  const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
+  let allJobs = [];
 
-    function escapeHtml(str) {
-      if (!str) return '';
-      return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : (m === '<' ? '&lt;' : '&gt;'));
-    }
-
-    function formatDate(d) {
-      if (!d) return '';
-      const diff = Math.ceil((new Date() - new Date(d)) / (1000 * 60 * 60 * 24));
-      if (diff === 0) return 'Today';
-      if (diff === 1) return 'Yesterday';
-      if (diff < 7) return `${diff} days ago`;
-      return new Date(d).toLocaleDateString('en-IN');
-    }
-
-    function getExperienceLevel(job) {
-      const text = (job.title + ' ' + (job.description || '')).toLowerCase();
-      if (/(senior|lead|principal|architect|manager|director|head)/i.test(text)) return '3+';
-      if (/(fresher|entry level|graduate|trainee|junior)/i.test(text)) return 'Fresher';
-      const match = text.match(/(\d+)\s*years?/i);
-      if (match) {
-        const y = parseInt(match[1]);
-        if (y >= 3) return '3+';
-        if (y >= 1) return '1-2';
-      }
-      return 'Fresher';
-    }
-
-    function isNewJob(postedDate) {
-      if (!postedDate) return false;
-      return (new Date() - new Date(postedDate)) / (1000 * 60 * 60 * 24) <= 1;
-    }
-
-    function showSkeletons(show) {
-      const grid = document.getElementById('jobsGrid');
-      if (show) grid.innerHTML = Array(6).fill().map(() => '<div class="skeleton" style="height:180px"></div>').join('');
-    }
-
-    async function fetchJobs() {
-      showSkeletons(true);
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc`, {
-          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const jobs = await res.json();
-        allJobs = jobs;
-        document.getElementById('totalJobs').innerText = allJobs.length;
-        const todayStr = new Date().toDateString();
-        const newToday = allJobs.filter(j => j.created_at && new Date(j.created_at).toDateString() === todayStr).length;
-        document.getElementById('newJobs').innerText = newToday;
-        applyFilters();
-      } catch (err) {
-        console.error('Job fetch error:', err);
-        showSkeletons(false);
-        document.getElementById('jobsGrid').innerHTML = '<div class="message-box">⚠️ Unable to load jobs. Please refresh.</div>';
-      }
-    }
-
-    function applyFilters() {
-      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      const location = document.getElementById('locationFilter').value;
-      const exp = document.getElementById('expFilter').value;
-      filteredJobs = allJobs.filter(job => {
-        if (searchTerm && !(job.title.toLowerCase().includes(searchTerm) || job.company.toLowerCase().includes(searchTerm))) return false;
-        if (location && job.location !== location) return false;
-        if (exp) {
-          const jobExp = getExperienceLevel(job);
-          if (exp === 'Fresher' && jobExp !== 'Fresher') return false;
-          if (exp === '1-2' && jobExp !== '1-2') return false;
-          if (exp === '3+' && jobExp !== '3+') return false;
-        }
-        return true;
+  async function fetchAllJobs() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=id,title,company,location,category,created_at&order=created_at.desc&limit=100`, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
       });
-      currentPage = 1;
-      renderJobs();
-    }
+      allJobs = await res.json();
+      renderLatestJobs(allJobs.slice(0,12));
+      renderCityJobs(allJobs);
+      renderBatchJobs(allJobs);
+      renderJobTypeJobs(allJobs);
+      renderCompanies(allJobs);
+    } catch(e) { console.error(e); document.querySelectorAll('.loading').forEach(el => el.innerHTML = 'Unable to load data'); }
+  }
 
-    function renderJobs() {
-      const start = (currentPage - 1) * jobsPerPage;
-      const paginated = filteredJobs.slice(start, start + jobsPerPage);
-      const grid = document.getElementById('jobsGrid');
-      if (paginated.length === 0) {
-        grid.innerHTML = '<div class="message-box">📭 No jobs found. Try different filters.</div>';
-        document.getElementById('loadMoreContainer').style.display = 'none';
-        return;
-      }
-      grid.innerHTML = paginated.map(job => `
-        <div class="job-card" onclick="window.location.href='job.html?id=${job.id}'">
-          <div class="job-title">${escapeHtml(job.title)}</div>
-          <div class="company">🏢 ${escapeHtml(job.company)}</div>
-          <div class="job-meta">
-            <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</span>
-            <span><i class="fas fa-calendar-alt"></i> ${formatDate(job.created_at)}</span>
-          </div>
-          <div class="experience-tag">📅 ${getExperienceLevel(job)} years</div>
-          ${isNewJob(job.created_at) ? '<div class="new-badge">✨ New</div>' : ''}
-        </div>
-      `).join('');
-      const hasMore = start + jobsPerPage < filteredJobs.length;
-      document.getElementById('loadMoreContainer').style.display = hasMore ? 'block' : 'none';
-    }
+  function renderLatestJobs(jobs) {
+    const container = document.getElementById('latestJobs');
+    if (!jobs.length) { container.innerHTML = '<div class="loading">No jobs found.</div>'; return; }
+    container.innerHTML = jobs.map(job => `
+      <div class="job-card">
+        <div class="job-title">${escapeHtml(job.title)}</div>
+        <div class="job-company">${escapeHtml(job.company)}</div>
+        <div class="job-location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</div>
+        <a href="job.html?id=${job.id}" class="apply-btn">View Details →</a>
+      </div>
+    `).join('');
+  }
 
-    async function pdfExists(url) {
-      try {
-        const res = await fetch(url, { method: 'HEAD' });
-        return res.ok;
-      } catch {
-        return false;
-      }
-    }
+  function renderCityJobs(jobs) {
+    const cityCount = {};
+    jobs.forEach(job => { let c = (job.location || 'India').split(',')[0]; cityCount[c] = (cityCount[c] || 0) + 1; });
+    const cities = Object.entries(cityCount).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    document.getElementById('cityGrid').innerHTML = cities.map(([name,count]) => `<div class="city-card"><div class="city-name">${escapeHtml(name)}</div><div class="city-count">${count} jobs</div></div>`).join('');
+  }
 
-    async function loadResources() {
-      try {
-        const res = await fetch('/data/resources.json');
-        if (!res.ok) throw new Error('Resources not found');
-        const data = await res.json();
+  function renderBatchJobs(jobs) {
+    const batches = {'2027 New':0,'2026 Current':0,'2025 Recent':0,'2024 & before':0};
+    document.getElementById('batchGrid').innerHTML = Object.entries(batches).map(([batch,count]) => `<div class="batch-card"><div class="batch-name">${batch}</div><div class="batch-count">${count} jobs</div></div>`).join('');
+  }
 
-        const pdfsContainer = document.getElementById('pdfsContainer');
-        if (data.pdfs && data.pdfs.length > 0) {
-          const pdfItems = await Promise.all(data.pdfs.map(async (pdf) => {
-            const exists = await pdfExists(pdf.url);
-            if (exists) {
-              return `
-                <div class="resource-card">
-                  <h3>📄 ${escapeHtml(pdf.title)}</h3>
-                  <p>${escapeHtml(pdf.description)}</p>
-                  <a href="${pdf.url}" target="_blank">📥 Download PDF →</a>
-                </div>
-              `;
-            } else {
-              return `
-                <div class="resource-card coming-soon">
-                  <h3>📄 ${escapeHtml(pdf.title)}</h3>
-                  <p>${escapeHtml(pdf.description)}</p>
-                  <p><em>Coming soon (file not yet uploaded)</em></p>
-                </div>
-              `;
-            }
-          }));
-          pdfsContainer.innerHTML = pdfItems.join('');
-        } else {
-          pdfsContainer.innerHTML = '<div class="message-box">📚 No PDF resources at the moment. Check back later.</div>';
-        }
+  function renderJobTypeJobs(jobs) {
+    const types = {'Off Campus':0,'Internship':0,'WFH':0,'Walk-in':0,'Experienced':0,'Hybrid':0};
+    document.getElementById('jobTypeGrid').innerHTML = Object.entries(types).map(([type,count]) => `<div class="jobtype-card"><div class="jobtype-name">${type}</div><div class="jobtype-count">${count} jobs</div></div>`).join('');
+  }
 
-        const certsContainer = document.getElementById('certsContainer');
-        if (data.certifications && data.certifications.length > 0) {
-          certsContainer.innerHTML = data.certifications.map(cert => `
-            <div class="resource-card">
-              <h3>🎓 ${escapeHtml(cert.title)}</h3>
-              <p>${escapeHtml(cert.description)}</p>
-              <a href="${cert.url}" target="_blank">🔗 View Course →</a>
-            </div>
-          `).join('');
-        } else {
-          certsContainer.innerHTML = '<div class="message-box">🎓 No certifications added yet. Check back later.</div>';
-        }
-      } catch (e) {
-        console.error('Resources error:', e);
-        document.getElementById('pdfsContainer').innerHTML = '<div class="message-box">📚 PDF resources will appear soon.</div>';
-        document.getElementById('certsContainer').innerHTML = '<div class="message-box">🎓 Certification links will appear soon.</div>';
-      }
-    }
+  function renderCompanies(jobs) {
+    const companyCount = {};
+    jobs.forEach(job => { companyCount[job.company] = (companyCount[job.company] || 0) + 1; });
+    const topCompanies = Object.entries(companyCount).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    document.getElementById('companyGrid').innerHTML = topCompanies.map(([name,count]) => `<div class="company-card"><div class="company-name">${escapeHtml(name)}</div><div class="company-count">${count} jobs</div></div>`).join('');
+  }
 
-    document.getElementById('searchInput').addEventListener('input', applyFilters);
-    document.getElementById('locationFilter').addEventListener('change', applyFilters);
-    document.getElementById('expFilter').addEventListener('change', applyFilters);
-    document.getElementById('loadMoreBtn').addEventListener('click', () => { currentPage++; renderJobs(); });
+  function escapeHtml(str) { return str ? str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]) : ''; }
 
-    fetchJobs();
-    loadResources();
-  })();
+  fetchAllJobs();
 </script>
 </body>
 </html>
