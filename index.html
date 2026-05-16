@@ -3,168 +3,415 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ApplyMore – India’s IT Fresher Job Board</title>
-  <meta name="description" content="ApplyMore – free job board for IT freshers in India. Find genuine entry-level jobs in Hyderabad, Bangalore, Chennai. Updated daily. Resume builder & interview prep included. Join our community on Telegram, WhatsApp, and LinkedIn.">
+  <title>ApplyMore – India's IT Fresher Job Board</title>
+  <meta name="description" content="ApplyMore – free job board for IT freshers in India. Find genuine entry-level jobs in Hyderabad, Bangalore, Chennai.">
+  
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6599003415562086" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom styles -->
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{--bg:#0a0a2a;--card-bg:rgba(20,20,50,0.65);--text:#f0f3ff;--text-muted:#9ca3cf;--border:rgba(255,255,255,0.1);--accent:#3b82f6;--purple:#8b5cf6}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-    .container{max-width:1400px;margin:0 auto;padding:1.5rem}
-    .nav-links{display:flex;justify-content:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
-    .nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.9rem}
-    .nav-links a:hover{color:var(--accent)}
-    .hero{text-align:center;margin-bottom:2rem}
-    .hero h1{font-size:2.5rem;background:linear-gradient(135deg,var(--accent),var(--purple));background-clip:text;-webkit-background-clip:text;color:transparent}
-    .hero p{color:var(--text-muted);max-width:600px;margin:0.5rem auto}
-    .stats{display:flex;justify-content:center;gap:2rem;margin-bottom:2rem}
-    .stat-card{background:var(--card-bg);padding:1rem 2rem;border-radius:1rem;text-align:center}
-    .stat-number{font-size:2rem;font-weight:700;color:var(--accent)}
-    /* Community section */
-    .community-section{background:linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));border-radius:1.5rem;padding:1.5rem;margin-bottom:2rem;text-align:center}
-    .community-section h2{color:var(--accent);margin-bottom:0.5rem}
-    .community-section p{color:var(--text-muted);margin-bottom:1rem}
-    .community-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
-    .community-btn{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:2rem;padding:0.6rem 1.2rem;color:var(--text);text-decoration:none;transition:0.2s}
-    .community-btn:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
-    .community-btn i{font-size:1.2rem}
-    /* Filters */
-    .filters{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;align-items:center;justify-content:center}
-    .filter-group select,.search-box input{padding:0.5rem 1rem;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:2rem;color:var(--text)}
-    .search-box{position:relative}
-    .search-box i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--text-muted)}
-    .search-box input{padding-left:2rem;width:260px}
-    /* Two column main layout */
-    .main-layout{display:flex;flex-wrap:wrap;gap:2rem}
-    .jobs-column{flex:2;min-width:300px}
-    .resources-column{flex:1;min-width:250px}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; }
+    
+    /* Animated gradient background */
+    .gradient-bg {
+      background: linear-gradient(-45deg, #0a0a2a, #1a1a4a, #0a0a2a, #2a1a4a);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Glowing card effect */
+    .glow-card {
+      background: rgba(20, 20, 50, 0.65);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .glow-card:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+    }
+    
+    /* 3D tilt effect on job cards */
+    .tilt-card {
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+    }
+    .tilt-card:hover {
+      transform: perspective(1000px) rotateX(2deg) rotateY(2deg) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    
+    /* Sparkle button */
+    .sparkle-btn {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .sparkle-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+    }
+    .sparkle-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      animation: sparkle 3s infinite;
+    }
+    @keyframes sparkle {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+    
+    /* Floating particles */
+    .particle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: rgba(59, 130, 246, 0.3);
+      border-radius: 50%;
+      animation: float 20s infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+    
+    /* Stats counter animation */
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Animated counter */
+    .counter {
+      display: inline-block;
+      animation: countUp 2s ease-out;
+    }
+    
+    /* Job card styling */
+    .job-card {
+      background: rgba(20, 20, 50, 0.65);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.2rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .job-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(59,130,246,0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .job-card:hover::before {
+      opacity: 1;
+    }
+    .job-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: #3b82f6;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+    }
+    
+    .job-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #3b82f6;
+      margin-bottom: 0.3rem;
+    }
+    
+    .new-badge {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.6rem;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
     /* Resource cards */
-    .resource-card{background:var(--card-bg);border-radius:1rem;padding:1rem;margin-bottom:1rem}
-    .resource-card h3{color:var(--accent);margin-bottom:0.5rem}
-    .resource-card p{font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem}
-    .resource-card a{color:var(--accent);text-decoration:none}
-    /* Job cards */
-    .jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem}
-    .job-card{background:var(--card-bg);border-radius:1rem;padding:1.2rem;border:1px solid var(--border);transition:0.2s;cursor:pointer}
-    .job-card:hover{transform:translateY(-3px);border-color:var(--accent)}
-    .job-title{font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--accent)}
-    .company{font-size:0.8rem;margin-bottom:0.3rem}
-    .job-meta{display:flex;gap:0.8rem;font-size:0.7rem;color:var(--text-muted);margin-bottom:0.5rem}
-    .job-meta span{display:flex;align-items:center;gap:0.2rem}
-    .experience-tag{background:rgba(59,130,246,0.2);padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.7rem;width:fit-content}
-    .new-badge{background:#dc2626;color:white;padding:0.2rem 0.5rem;border-radius:2rem;font-size:0.6rem;margin-left:0.5rem;display:inline-block}
-    .load-more{text-align:center;margin:2rem 0}
-    .load-more button{background:var(--accent);color:white;border:none;padding:0.6rem 1.5rem;border-radius:2rem;cursor:pointer}
-    .skeleton{background:rgba(255,255,255,0.05);border-radius:1rem;height:200px;animation:pulse 1.5s infinite}
-    @keyframes pulse{0%{opacity:0.6}50%{opacity:1}100%{opacity:0.6}}
-    .message-box{background:var(--card-bg);border-radius:1rem;padding:1.5rem;text-align:center;color:var(--text-muted)}
-    .section-title{color:var(--accent);margin:1rem 0 0.5rem;font-size:1.3rem}
-    footer{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.7rem}
-    .footer-links{display:flex;justify-content:center;gap:1rem;margin-bottom:0.5rem}
-    .footer-links a{color:var(--text-muted);text-decoration:none;font-size:0.7rem}
-    @media (max-width:840px){.main-layout{flex-direction:column}.resources-column{order:2}.jobs-column{order:1}}
+    .resource-card {
+      background: rgba(20, 20, 50, 0.65);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    .resource-card:hover {
+      transform: translateX(5px);
+      border-color: #8b5cf6;
+    }
+    
+    /* Shimmer effect for loading */
+    .shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    /* Responsive */
+    @media (max-width: 840px) {
+      .main-layout { flex-direction: column; }
+      .resources-column { order: 2; }
+      .jobs-column { order: 1; }
+    }
+    
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Glass morphism */
+    .glass {
+      background: rgba(20, 20, 50, 0.5);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
   </style>
+  
   <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
   <link rel="apple-touch-icon" href="/logo.png">
   <meta property="og:image" content="https://applymore.vercel.app/logo.png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
   <meta name="twitter:card" content="summary_large_image">
 </head>
-<body>
-<div class="container">
-  <div class="nav-links">
-    <a href="index.html">🏠 Home</a>
-    <a href="about.html">📖 About</a>
-    <a href="blog.html">✍️ Blog</a>
-    <a href="contact.html">📧 Contact</a>
-    <a href="privacy.html">🔒 Privacy</a>
-    <a href="terms.html">⚖️ Terms</a>
-  </div>
-  <div class="hero">
-    <h1>ApplyMore</h1>
-    <p>India’s most trusted IT fresher job board – genuine jobs, updated daily.</p>
-  </div>
-  <div class="stats" id="stats">
-    <div class="stat-card"><div class="stat-number" id="totalJobs">0</div><div>Total Jobs</div></div>
-    <div class="stat-card"><div class="stat-number" id="newJobs">0</div><div>New Today</div></div>
-  </div>
+<body class="gradient-bg min-h-screen text-white">
 
-  <!-- Community Section -->
-  <div class="community-section">
-    <h2>🚀 Join Our Community</h2>
-    <p>Get daily job alerts, interview tips, and support from fellow freshers.</p>
-    <div class="community-icons">
-      <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="community-btn"><i class="fab fa-telegram"></i> Telegram</a>
-      <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="community-btn"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
-      <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank" class="community-btn"><i class="fab fa-whatsapp"></i> WhatsApp Community</a>
-      <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="community-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
-    </div>
-  </div>
+  <!-- Floating particles -->
+  <div id="particles"></div>
 
-  <div class="filters">
-    <div class="search-box"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Search jobs..."></div>
-    <div class="filter-group"><select id="locationFilter"><option value="">All Cities</option><option value="Hyderabad">Hyderabad</option><option value="Bangalore">Bangalore</option><option value="Chennai">Chennai</option></select></div>
-    <div class="filter-group"><select id="expFilter"><option value="">All Experience</option><option value="Fresher">Fresher (0-2 years)</option><option value="1-2">1-2 years</option><option value="3+">3+ years</option></select></div>
-  </div>
-
-  <!-- Main two‑column layout: jobs left, resources right -->
-  <div class="main-layout">
-    <div class="jobs-column">
-  <!-- ⬇️ PAID JOB AD STARTS HERE ⬇️ -->
-  <div style="border: 2px solid #ffd700; border-radius: 12px; padding: 20px; margin-bottom: 20px; background: rgba(255, 215, 0, 0.08);">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-      <span style="background: #ffd700; color: #0a0a2a; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem;">📢 SPONSORED AD</span>
-      <span style="color: #9ca3cf; font-size: 0.7rem;">Placement Opportunity</span>
-    </div>
+  <div class="container mx-auto px-4 py-6 relative z-10">
     
-    <!--COMPANY NAME-->
-    <h3 style="color: #ffd700; margin-bottom: 5px;">🏢 Our Known Company is Hiring!</h3>
-    
-    <!-- JOB TITLE & DESCRIPTION==> 
-    <p style="color: #f0f3ff; margin-bottom: 8px;">
-      <strong>Update:</strong> We have a job opening from a trusted company. 
-      If you're <strong>interested</strong>, you can apply directly.
-    </p>
-    
-    <!-- APPLY LINK -->
-    <a href="https://applymore.vercel.app" 
-       style="display: inline-block; background: #3b82f6; color: white; padding: 8px 24px; border-radius: 20px; text-decoration: none; font-weight: 600; margin-top: 5px;">
-      Apply Now →
-    </a>
-    <p style="color: #666; font-size: 0.7rem; margin-top: 8px;">* This is a job advertisement</p>
+    <!-- Navigation -->
+    <nav class="flex justify-center gap-4 mb-8 flex-wrap glass rounded-full px-6 py-3 max-w-3xl mx-auto">
+      <a href="index.html" class="text-gray-400 hover:text-blue-400 transition">🏠 Home</a>
+      <a href="about.html" class="text-gray-400 hover:text-blue-400 transition">📖 About</a>
+      <a href="blog.html" class="text-gray-400 hover:text-blue-400 transition">✍️ Blog</a>
+      <a href="contact.html" class="text-gray-400 hover:text-blue-400 transition">📧 Contact</a>
+      <a href="privacy.html" class="text-gray-400 hover:text-blue-400 transition">🔒 Privacy</a>
+      <a href="terms.html" class="text-gray-400 hover:text-blue-400 transition">⚖️ Terms</a>
+    </nav>
+
+    <!-- Hero -->
+    <div class="text-center mb-8">
+      <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 animate-pulse">
+        ApplyMore
+      </h1>
+      <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+        India's most trusted IT fresher job board – genuine jobs, updated daily.
+      </p>
+      <div class="mt-4 flex justify-center gap-3">
+        <span class="inline-block px-3 py-1 bg-blue-500/20 rounded-full text-xs text-blue-300">🔥 1000+ Jobs</span>
+        <span class="inline-block px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-300">⚡ Updated Daily</span>
+        <span class="inline-block px-3 py-1 bg-pink-500/20 rounded-full text-xs text-pink-300">🎯 Fresher Focused</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex justify-center gap-6 mb-8 flex-wrap">
+      <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
+        <div class="stat-number counter" id="totalJobs" data-target="0">0</div>
+        <div class="text-gray-400 text-sm">Total Jobs</div>
+      </div>
+      <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
+        <div class="stat-number counter" id="newJobs" data-target="0">0</div>
+        <div class="text-gray-400 text-sm">New Today</div>
+      </div>
+      <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
+        <div class="stat-number counter" id="activeCompanies" data-target="0">0</div>
+        <div class="text-gray-400 text-sm">Active Companies</div>
+      </div>
+    </div>
+
+    <!-- Community -->
+    <div class="glass rounded-2xl p-6 mb-8 text-center border border-white/5 relative overflow-hidden group">
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+      <h2 class="text-2xl font-bold text-blue-400 mb-2 relative z-10">🚀 Join Our Community</h2>
+      <p class="text-gray-400 mb-4 relative z-10">Get daily job alerts, interview tips, and support from fellow freshers.</p>
+      <div class="flex flex-wrap justify-center gap-3 relative z-10">
+        <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-white hover:bg-blue-500 hover:border-blue-500 transition">
+          <i class="fab fa-telegram"></i> Telegram
+        </a>
+        <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-white hover:bg-green-500 hover:border-green-500 transition">
+          <i class="fab fa-whatsapp"></i> WhatsApp Group
+        </a>
+        <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank" class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-white hover:bg-green-500 hover:border-green-500 transition">
+          <i class="fab fa-whatsapp"></i> WhatsApp Community
+        </a>
+        <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-white hover:bg-blue-600 hover:border-blue-600 transition">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-3 mb-6 justify-center glass rounded-full px-4 py-3 max-w-2xl mx-auto">
+      <div class="relative flex-1 min-w-[150px]">
+        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+        <input type="text" id="searchInput" placeholder="Search jobs..." class="w-full pl-10 pr-4 py-1.5 bg-black/30 border border-white/10 rounded-full text-white focus:outline-none focus:border-blue-400 transition text-sm">
+      </div>
+      <select id="locationFilter" class="px-3 py-1.5 bg-black/30 border border-white/10 rounded-full text-white focus:outline-none focus:border-blue-400 transition text-sm">
+        <option value="">All Cities</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Chennai">Chennai</option>
+      </select>
+      <select id="expFilter" class="px-3 py-1.5 bg-black/30 border border-white/10 rounded-full text-white focus:outline-none focus:border-blue-400 transition text-sm">
+        <option value="">All Experience</option>
+        <option value="Fresher">Fresher (0-2 years)</option>
+        <option value="1-2">1-2 years</option>
+        <option value="3+">3+ years</option>
+      </select>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="flex flex-wrap gap-6 main-layout">
+      
+      <!-- Jobs Column -->
+      <div class="flex-1 min-w-[300px] jobs-column">
+        
+        <!-- Sponsored Ad -->
+        <div class="border-2 border-yellow-400 rounded-xl p-5 mb-5 bg-yellow-400/5 relative overflow-hidden group">
+          <div class="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+          <div class="flex justify-between items-center mb-2 relative z-10">
+            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">📢 SPONSORED</span>
+            <span class="text-gray-500 text-xs">Placement Opportunity</span>
+          </div>
+          <h3 class="text-yellow-400 text-xl font-bold mb-1 relative z-10">🏢 Our Known Company is Hiring!</h3>
+          <p class="text-gray-300 mb-3 relative z-10">
+            <strong>Update:</strong> We have a job opening from a trusted company. 
+            If you're <strong>interested</strong>, you can apply directly.
+          </p>
+          <a href="https://applymore.vercel.app" class="sparkle-btn inline-block text-white px-6 py-2 rounded-full font-semibold relative z-10">
+            Apply Now →
+          </a>
+          <p class="text-gray-600 text-xs mt-2 relative z-10">* This is a job advertisement</p>
+        </div>
+
+        <!-- Jobs Grid -->
+        <div id="jobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        
+        <!-- Load More -->
+        <div id="loadMoreContainer" class="text-center mt-6 hidden">
+          <button id="loadMoreBtn" class="sparkle-btn text-white px-8 py-3 rounded-full font-semibold">
+            <i class="fas fa-sync-alt mr-2"></i> Load More
+          </button>
+        </div>
+      </div>
+
+      <!-- Resources Column -->
+      <div class="w-full md:w-72 resources-column">
+        <div class="glass rounded-xl p-4 mb-4">
+          <h2 class="text-xl font-bold text-blue-400 mb-3">📘 Interview Ready PDFs</h2>
+          <div id="pdfsContainer"></div>
+        </div>
+        
+        <div class="glass rounded-xl p-4">
+          <h2 class="text-xl font-bold text-blue-400 mb-3">🎓 Recommended Certifications</h2>
+          <div id="certsContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-8 pt-4 border-t border-white/10 text-center">
+      <div class="flex justify-center gap-4 mb-2 flex-wrap">
+        <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="text-gray-500 hover:text-blue-400 text-sm">Telegram</a>
+        <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="text-gray-500 hover:text-green-400 text-sm">WhatsApp Group</a>
+        <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank" class="text-gray-500 hover:text-green-400 text-sm">WhatsApp Community</a>
+        <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="text-gray-500 hover:text-blue-600 text-sm">LinkedIn</a>
+      </div>
+      <p class="text-gray-600 text-xs">© 2026 ApplyMore – Helping IT freshers land their dream job</p>
+    </footer>
   </div>
-  <!-- ⬆️ PAID JOB AD ENDS HERE ⬆️ -->
 
-  <div id="jobsGrid" class="jobs-grid"></div>
-  <div id="loadMoreContainer" class="load-more" style="display:none"><button id="loadMoreBtn">Load More</button></div>
-</div>
-      <div id="jobsGrid" class="jobs-grid"></div>
-      <div id="loadMoreContainer" class="load-more" style="display:none"><button id="loadMoreBtn">Load More</button></div>
-    </div>
-    <div class="resources-column">
-      <h2 class="section-title">📘 Interview Ready PDFs</h2>
-      <div id="pdfsContainer"></div>
-      <h2 class="section-title" style="margin-top:1.5rem;">🎓 Recommended Certifications</h2>
-      <div id="certsContainer"></div>
-    </div>
-  </div>
+  <script>
+    // Generate floating particles
+    (function() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (15 + Math.random() * 20) + 's';
+        particle.style.animationDelay = (Math.random() * 20) + 's';
+        particle.style.width = (2 + Math.random() * 4) + 'px';
+        particle.style.height = particle.style.width;
+        container.appendChild(particle);
+      }
+    })();
 
-  <footer>
-    <div class="footer-links">
-      <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank">Telegram</a>
-      <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank">WhatsApp Group</a>
-      <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank">WhatsApp Community</a>
-      <a href="https://www.linkedin.com/company/applymore/" target="_blank">LinkedIn</a>
-    </div>
-    <p>© 2026 ApplyMore – Helping IT freshers land their dream job</p>
-  </footer>
-</div>
+    // Animated counter function
+    function animateCounter(element, target) {
+      let current = 0;
+      const increment = target / 60;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        element.textContent = Math.floor(current).toLocaleString();
+      }, 20);
+    }
 
-<script>
-  (function() {
+    // Intersection Observer for counters
+    function setupCounters() {
+      const counters = document.querySelectorAll('.counter');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const target = parseInt(entry.target.getAttribute('data-target'));
+            animateCounter(entry.target, target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      counters.forEach(counter => observer.observe(counter));
+    }
+
     const SUPABASE_URL = 'https://qmljqckhhdmvcbomydhf.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h';
     let allJobs = [];
@@ -206,7 +453,15 @@
 
     function showSkeletons(show) {
       const grid = document.getElementById('jobsGrid');
-      if (show) grid.innerHTML = Array(6).fill().map(() => '<div class="skeleton" style="height:180px"></div>').join('');
+      if (show) {
+        grid.innerHTML = Array(6).fill().map(() => `
+          <div class="glow-card rounded-xl p-4 shimmer" style="height:180px;">
+            <div class="h-4 bg-white/5 rounded w-3/4 mb-2 shimmer"></div>
+            <div class="h-3 bg-white/5 rounded w-1/2 mb-2 shimmer"></div>
+            <div class="h-3 bg-white/5 rounded w-2/3 shimmer"></div>
+          </div>
+        `).join('');
+      }
     }
 
     async function fetchJobs() {
@@ -218,15 +473,25 @@
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const jobs = await res.json();
         allJobs = jobs;
-        document.getElementById('totalJobs').innerText = allJobs.length;
+        
+        // Set counter targets
+        document.getElementById('totalJobs').setAttribute('data-target', allJobs.length);
         const todayStr = new Date().toDateString();
         const newToday = allJobs.filter(j => j.created_at && new Date(j.created_at).toDateString() === todayStr).length;
-        document.getElementById('newJobs').innerText = newToday;
+        document.getElementById('newJobs').setAttribute('data-target', newToday);
+        
+        // Get unique companies
+        const uniqueCompanies = [...new Set(allJobs.map(j => j.company))];
+        document.getElementById('activeCompanies').setAttribute('data-target', uniqueCompanies.length);
+        
+        // Start counters
+        setupCounters();
+        
         applyFilters();
       } catch (err) {
         console.error('Job fetch error:', err);
         showSkeletons(false);
-        document.getElementById('jobsGrid').innerHTML = '<div class="message-box">⚠️ Unable to load jobs. Please refresh.</div>';
+        document.getElementById('jobsGrid').innerHTML = '<div class="glow-card rounded-xl p-6 text-center text-gray-400">⚠️ Unable to load jobs. Please refresh.</div>';
       }
     }
 
@@ -254,20 +519,22 @@
       const paginated = filteredJobs.slice(start, start + jobsPerPage);
       const grid = document.getElementById('jobsGrid');
       if (paginated.length === 0) {
-        grid.innerHTML = '<div class="message-box">📭 No jobs found. Try different filters.</div>';
+        grid.innerHTML = '<div class="glow-card rounded-xl p-6 text-center text-gray-400">📭 No jobs found. Try different filters.</div>';
         document.getElementById('loadMoreContainer').style.display = 'none';
         return;
       }
       grid.innerHTML = paginated.map(job => `
-        <div class="job-card" onclick="window.location.href='job.html?id=${job.id}'">
+        <div class="job-card tilt-card" onclick="window.location.href='job.html?id=${job.id}'">
           <div class="job-title">${escapeHtml(job.title)}</div>
-          <div class="company">🏢 ${escapeHtml(job.company)}</div>
-          <div class="job-meta">
+          <div class="text-gray-400 text-sm mb-1">🏢 ${escapeHtml(job.company)}</div>
+          <div class="flex gap-3 text-xs text-gray-500 mb-2">
             <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</span>
             <span><i class="fas fa-calendar-alt"></i> ${formatDate(job.created_at)}</span>
           </div>
-          <div class="experience-tag">📅 ${getExperienceLevel(job)} years</div>
-          ${isNewJob(job.created_at) ? '<div class="new-badge">✨ New</div>' : ''}
+          <div class="flex items-center gap-2">
+            <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs">📅 ${getExperienceLevel(job)} years</span>
+            ${isNewJob(job.created_at) ? '<span class="new-badge">✨ New</span>' : ''}
+          </div>
         </div>
       `).join('');
       const hasMore = start + jobsPerPage < filteredJobs.length;
@@ -296,53 +563,59 @@
             if (exists) {
               return `
                 <div class="resource-card">
-                  <h3>📄 ${escapeHtml(pdf.title)}</h3>
-                  <p>${escapeHtml(pdf.description)}</p>
-                  <a href="${pdf.url}" target="_blank">📥 Download PDF →</a>
+                  <h3 class="text-blue-400 font-semibold mb-1">📄 ${escapeHtml(pdf.title)}</h3>
+                  <p class="text-gray-400 text-sm mb-2">${escapeHtml(pdf.description)}</p>
+                  <a href="${pdf.url}" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm">📥 Download PDF →</a>
                 </div>
               `;
             } else {
               return `
-                <div class="resource-card coming-soon">
-                  <h3>📄 ${escapeHtml(pdf.title)}</h3>
-                  <p>${escapeHtml(pdf.description)}</p>
-                  <p><em>Coming soon (file not yet uploaded)</em></p>
+                <div class="resource-card">
+                  <h3 class="text-blue-400 font-semibold mb-1">📄 ${escapeHtml(pdf.title)}</h3>
+                  <p class="text-gray-400 text-sm mb-2">${escapeHtml(pdf.description)}</p>
+                  <p class="text-yellow-400 text-xs"><em>Coming soon (file not yet uploaded)</em></p>
                 </div>
               `;
             }
           }));
           pdfsContainer.innerHTML = pdfItems.join('');
         } else {
-          pdfsContainer.innerHTML = '<div class="message-box">📚 No PDF resources at the moment. Check back later.</div>';
+          pdfsContainer.innerHTML = '<div class="glow-card rounded-xl p-4 text-center text-gray-400">📚 No PDF resources at the moment.</div>';
         }
 
         const certsContainer = document.getElementById('certsContainer');
         if (data.certifications && data.certifications.length > 0) {
           certsContainer.innerHTML = data.certifications.map(cert => `
             <div class="resource-card">
-              <h3>🎓 ${escapeHtml(cert.title)}</h3>
-              <p>${escapeHtml(cert.description)}</p>
-              <a href="${cert.url}" target="_blank">🔗 View Course →</a>
+              <h3 class="text-blue-400 font-semibold mb-1">🎓 ${escapeHtml(cert.title)}</h3>
+              <p class="text-gray-400 text-sm mb-2">${escapeHtml(cert.description)}</p>
+              <a href="${cert.url}" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm">🔗 View Course →</a>
             </div>
           `).join('');
         } else {
-          certsContainer.innerHTML = '<div class="message-box">🎓 No certifications added yet. Check back later.</div>';
+          certsContainer.innerHTML = '<div class="glow-card rounded-xl p-4 text-center text-gray-400">🎓 No certifications added yet.</div>';
         }
       } catch (e) {
         console.error('Resources error:', e);
-        document.getElementById('pdfsContainer').innerHTML = '<div class="message-box">📚 PDF resources will appear soon.</div>';
-        document.getElementById('certsContainer').innerHTML = '<div class="message-box">🎓 Certification links will appear soon.</div>';
+        document.getElementById('pdfsContainer').innerHTML = '<div class="glow-card rounded-xl p-4 text-center text-gray-400">📚 PDF resources will appear soon.</div>';
+        document.getElementById('certsContainer').innerHTML = '<div class="glow-card rounded-xl p-4 text-center text-gray-400">🎓 Certification links will appear soon.</div>';
       }
     }
 
-    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    // Debounce search for better performance
+    let searchTimeout;
+    document.getElementById('searchInput').addEventListener('input', () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(applyFilters, 300);
+    });
+    
     document.getElementById('locationFilter').addEventListener('change', applyFilters);
     document.getElementById('expFilter').addEventListener('change', applyFilters);
     document.getElementById('loadMoreBtn').addEventListener('click', () => { currentPage++; renderJobs(); });
 
+    // Load everything
     fetchJobs();
     loadResources();
-  })();
-</script>
+  </script>
 </body>
 </html>
