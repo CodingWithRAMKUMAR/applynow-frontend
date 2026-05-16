@@ -1,7 +1,7 @@
 {
   "pdfs": [
     {
-      "title": "AI Tools",
+      "title": "AI Tools 2026",
       "url": "/pdfs/AI Tools Master Guide 2026.pdf",
       "description": "Deep dive into Ai Tools."
     },
@@ -9,7 +9,7 @@
       "title": "Advanced Data & AI Interview Prep",
       "url": "/pdfs/Advanced_Data_AI_Interview_Prep.pdf",
       "description": "Deep dive into data science and AI interview questions for freshers – real case studies and answers."
-    },
+    }
   ],
   "certifications": [
     {
