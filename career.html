@@ -1430,56 +1430,47 @@
     },
 
     // ========== BSC AND BCA PATHS ==========
-    'bsc': {
+    'bsc-path': {
       name: 'B.Sc Graduate',
       icon: 'fa-flask',
       desc: 'Bachelor of Science - 3 years',
       fullDetails: {
         overview: 'Bachelor of Science (B.Sc) is a 3-year undergraduate degree focusing on scientific and technical subjects.',
         duration: '3 Years (6 Semesters)',
-        specializations: 'Physics, Chemistry, Mathematics, Biology, Computer Science (CS), Information Technology (IT), Biotechnology, Microbiology, Biochemistry, Environmental Science, Geology, Statistics, Electronics, Agriculture, Horticulture, Forestry, Food Science, Nutrition, Forensic Science, Nursing (B.Sc Nursing), Medical Lab Technology (MLT), Radiology, Optometry, Zoology, Botany, Anthropology, Genetics, Nanotechnology, Material Science, Psychology (B.Sc), Home Science, Fashion Technology, Interior Design, Textile Science',
+        specializations: 'Physics, Chemistry, Mathematics, Biology, Computer Science, Biotechnology, Microbiology, Biochemistry, Environmental Science, Geology, Statistics, Electronics, Agriculture, Horticulture, Forestry, Food Science, Nutrition, Forensic Science, Nursing, Medical Lab Technology (MLT), Radiology, Optometry, Zoology, Botany, Anthropology, Genetics, Nanotechnology, Material Science, Psychology (B.Sc), Home Science, Fashion Technology, Interior Design, Textile Science',
         eligibility: '12th Science (PCM/PCB) with 50%+ from recognized board',
-        topColleges: 'DU (Delhi University - St. Stephens, Hindu, Miranda House), BHU (Banaras Hindu University), AMU (Aligarh Muslim University), University of Hyderabad, IISERs (for research - B.S.-M.S. dual degree), IITs (BS programs in various sciences), NISER Bhubaneswar, CEBS Mumbai, TIFR Mumbai (for research), University of Calcutta, University of Madras, University of Mumbai, University of Pune, Christ University Bangalore, Loyola College Chennai, St. Xavier\'s Mumbai',
-        syllabus: 'Sem1: Core Subject 1, Core Subject 2, Allied Subject 1, Language | Sem2: Core Subject 1, Core Subject 2, Allied Subject 2, Language | Sem3: Core Subject 3, Core Subject 4, Elective 1 | Sem4: Core Subject 5, Core Subject 6, Elective 2 | Sem5: Core Subject 7, Core Subject 8, Elective 3 | Sem6: Core Subject 9, Core Subject 10, Project/Dissertation',
-        skills: 'Scientific Temper, Analytical Thinking, Research Methodology, Laboratory Skills, Data Analysis, Observation, Problem Solving, Critical Thinking, Technical Writing, Communication',
-        jobs: 'Lab Technician (₹2-4 LPA), Research Assistant (₹2.5-5 LPA), Quality Analyst (₹2-4 LPA), Scientific Assistant (₹3-6 LPA), Teacher (₹2-5 LPA), Data Analyst (with IT skills - ₹3-8 LPA), Clinical Research Associate (₹3-6 LPA), Environmental Consultant (₹3-7 LPA), Food Safety Officer (₹4-8 LPA), Forensic Expert (₹4-10 LPA), Technical Writer (₹3-7 LPA), Sales Executive (Scientific products - ₹3-8 LPA)',
-        salary: '₹2 LPA - ₹5 LPA (starting), ₹4-10 LPA (with experience and additional skills)',
-        higherStudies: 'M.Sc (2 years) in specialization, PhD (3-5 years) for research/teaching, B.Ed (2 years) for school teaching, MBA (2 years) for management, LLB (3 years) for law, MCA (3 years) for IT careers, M.Tech (2 years) through GATE, Diploma in Education (D.Ed), PG Diploma in various fields (Data Science, Bioinformatics, Clinical Research, Environmental Management)',
-        entranceExamsHigher: 'IIT JAM (for MSc at IITs), JNU CEEB (JNU), DUET (DU), BHU PET (BHU), CUET PG (Central Universities), GATE (for M.Tech), UGC NET (for PhD/JRF), CSIR NET (for Sciences)',
-        careerGrowth: 'B.Sc → M.Sc → PhD → Professor/Research Scientist | B.Sc → B.Ed → School Teacher → Senior Teacher → Principal | B.Sc → MBA → Manager in Pharma/Healthcare/IT companies',
-        certifications: 'Data Science Certification, Python Programming, Lab Safety Certification, Clinical Research Certification, Quality Management Certification'
+        topColleges: 'DU (Delhi University), BHU, AMU, University of Hyderabad, IISERs, IITs (BS programs), NISER, CEBS, TIFR, University of Calcutta, University of Madras, University of Mumbai, University of Pune, Christ University, Loyola College, St. Xavier\'s Mumbai',
+        jobs: 'Lab Technician (₹2-4 LPA), Research Assistant (₹2.5-5 LPA), Quality Analyst (₹2-4 LPA), Scientific Assistant (₹3-6 LPA), Teacher (₹2-5 LPA), Data Analyst (₹3-8 LPA), Clinical Research Associate (₹3-6 LPA), Environmental Consultant (₹3-7 LPA), Food Safety Officer (₹4-8 LPA), Forensic Expert (₹4-10 LPA), Technical Writer (₹3-7 LPA)',
+        salary: '₹2 LPA - ₹5 LPA (starting), ₹4-10 LPA (with experience)',
+        higherStudies: 'M.Sc (2 years), PhD (3-5 years), B.Ed (2 years), MBA (2 years), LLB (3 years), MCA (3 years), M.Tech (2 years through GATE)',
+        entranceExamsHigher: 'IIT JAM, JNU CEEB, DUET, BHU PET, CUET PG, GATE, UGC NET, CSIR NET'
       },
       nextSteps: [
-        { id: 'msc', name: '🎓 M.Sc - Master of Science', icon: 'fa-graduation-cap', desc: '2 years - through IIT JAM/CUET PG' },
+        { id: 'msc-path', name: '🎓 M.Sc - Master of Science', icon: 'fa-graduation-cap', desc: '2 years - through IIT JAM/CUET PG' },
         { id: 'phd-science', name: '🔬 PhD - Doctorate', icon: 'fa-flask', desc: '3-5 years - Research/Teaching' },
-        { id: 'bed', name: '👨‍🏫 B.Ed - Teaching', icon: 'fa-chalkboard-user', desc: '2 years - School Teacher' },
-        { id: 'mba-science', name: '📈 MBA', icon: 'fa-briefcase', desc: '2 years - Pharma/Healthcare Management' }
+        { id: 'bed', name: '👨‍🏫 B.Ed - Teaching', icon: 'fa-chalkboard-user', desc: '2 years - School Teacher' }
       ]
     },
 
-    'msc': {
+    'msc-path': {
       name: 'M.Sc - Master of Science',
       icon: 'fa-graduation-cap',
       desc: '2-year postgraduate degree',
       fullDetails: {
-        overview: 'M.Sc is a 2-year postgraduate degree for science graduates. Provides specialization and research opportunities.',
-        duration: '2 Years (4 Semesters)',
-        entranceExams: 'IIT JAM (for IITs), JNU CEEB (JNU), DUET (DU), BHU PET (BHU), CUET PG (Central Universities), State University entrance exams, Merit-based (some colleges)',
-        iitJamPattern: '60 questions - 100 marks - 3 hours (MCQ + MSQ + NAT)',
-        specializations: 'Physics, Chemistry, Mathematics, Statistics, Computer Science, Biotechnology, Microbiology, Biochemistry, Environmental Science, Geology, Food Technology, Forensic Science, Materials Science, Nanotechnology, Data Science, Actuarial Science, Applied Mathematics, Applied Physics, Analytical Chemistry, Organic Chemistry, Inorganic Chemistry, Life Sciences, Botany, Zoology, Genetics, Molecular Biology',
-        topColleges: 'IITs (Bombay, Delhi, Madras, Kanpur, Kharagpur, Roorkee, Guwahati), IISc Bangalore, JNU Delhi, BHU, University of Hyderabad, DU (Delhi University), University of Calcutta, University of Mumbai, University of Pune, University of Madras, TIFR Mumbai (for research), NISER Bhubaneswar, CEBS Mumbai, IISERs (B.S.-M.S. dual degree)',
-        fees: 'IITs: ₹20k-50k/year, Central Universities: ₹10k-30k/year, State Universities: ₹5k-20k/year, Private: ₹50k-2L/year',
-        stipend: 'GATE/JRF qualified students: ₹31,000/month (JRF), ₹35,000/month (SRF)',
-        jobs: 'Research Scientist (₹4-8 LPA), Laboratory Manager (₹4-7 LPA), Quality Control Officer (₹3-6 LPA), Data Scientist (₹5-15 LPA), Scientific Officer (₹4-8 LPA), Lecturer (₹4-7 LPA), Research Associate (₹3-6 LPA), Clinical Research Coordinator (₹3-6 LPA), Environmental Analyst (₹3-6 LPA), Food Safety Officer (₹4-8 LPA)',
-        salary: '₹3 LPA - ₹8 LPA (fresher), ₹5-12 LPA (experienced)',
-        higherStudies: 'PhD (3-5 years) for research/teaching, MBA (2 years), B.Ed (2 years) for teaching, M.Tech (2 years) through GATE',
-        examsAfterMSc: 'UGC NET (Assistant Professor/JRF), CSIR NET (Sciences), GATE (for PhD/M.Tech), ICMR JRF (Medical Sciences), DBT JRF (Biotechnology), ICAR JRF (Agriculture)'
+        overview: 'M.Sc is a 2-year postgraduate degree for science graduates.',
+        duration: '2 Years',
+        entranceExams: 'IIT JAM, JNU CEEB, DUET, BHU PET, CUET PG',
+        specializations: 'Physics, Chemistry, Mathematics, Statistics, Computer Science, Biotechnology, Microbiology, Biochemistry, Environmental Science, Geology, Food Technology, Forensic Science, Materials Science, Nanotechnology, Data Science',
+        topColleges: 'IITs, IISc, JNU, BHU, University of Hyderabad, DU, University of Calcutta, University of Mumbai, University of Pune, TIFR, NISER, IISERs',
+        fees: 'IITs: ₹20k-50k/year, Central Universities: ₹10k-30k/year',
+        stipend: 'JRF: ₹31,000/month, SRF: ₹35,000/month (for GATE/JRF qualified)',
+        jobs: 'Research Scientist (₹4-8 LPA), Laboratory Manager (₹4-7 LPA), Quality Control Officer (₹3-6 LPA), Data Scientist (₹5-15 LPA), Scientific Officer (₹4-8 LPA), Lecturer (₹4-7 LPA)',
+        salary: '₹3-8 LPA (fresher), ₹5-12 LPA (experienced)'
       },
       nextSteps: [
         { id: 'phd-science', name: '🎓 PhD - Doctorate', icon: 'fa-flask', desc: '3-5 years - Research/Professor' },
         { id: 'net-jrf', name: '📋 UGC NET/JRF', icon: 'fa-file-alt', desc: 'Assistant Professor/Research Fellowship' },
-        { id: 'teaching-science', name: '👨‍🏫 Teaching', icon: 'fa-chalkboard-user', desc: 'Lecturer/School Teacher' },
-        { id: 'industry-science', name: '🏭 Industry Jobs', icon: 'fa-building', desc: 'Pharma, Biotech, Food, Environment' }
+        { id: 'teaching-science', name: '👨‍🏫 Teaching', icon: 'fa-chalkboard-user', desc: 'Lecturer/School Teacher' }
       ]
     },
 
@@ -1488,27 +1479,18 @@
       icon: 'fa-flask',
       desc: '3-5 years - Highest academic degree',
       fullDetails: {
-        overview: 'PhD is the highest academic degree in science. Focus on original research in a specialized area.',
-        duration: '3-5 Years (can be extended to 6-7 years)',
-        entranceExams: 'UGC NET JRF, CSIR NET JRF, ICMR JRF, DBT JRF, ICAR JRF, GATE, INSPIRE Fellowship, University entrance exam, Interview',
-        netJrfPattern: '150 questions - 300 marks - 3 hours (Paper 1: General Aptitude, Paper 2: Subject specific)',
-        netJrfCutoff: 'JRF: 99+ percentile, Assistant Professor: 65-80 percentile (varies by subject)',
+        overview: 'PhD is the highest academic degree in science.',
+        duration: '3-5 Years',
+        entranceExams: 'UGC NET JRF, CSIR NET JRF, ICMR JRF, DBT JRF, ICAR JRF, GATE, INSPIRE Fellowship',
         eligibility: 'M.Sc/M.Tech with 55%+ (60%+ for IITs/IISc)',
-        topInstitutes: 'IISc Bangalore, IITs (Bombay, Delhi, Madras, Kanpur, Kharagpur), JNU Delhi, University of Hyderabad, TIFR Mumbai, NCBS Bangalore, CCMB Hyderabad, IGIB Delhi, NII Delhi, Bose Institute Kolkata, IISERs (Pune, Kolkata, Mohali, Bhopal, Thiruvananthapuram, Berhampur), NCL Pune, IICT Hyderabad, CDRI Lucknow, CDFD Hyderabad, AIIMS Delhi (for medical research)',
-        researchAreas: 'Physics: Condensed Matter, Quantum Physics, Astrophysics, High Energy Physics, Optics, Nanophysics | Chemistry: Organic, Inorganic, Physical, Analytical, Computational, Medicinal Chemistry, Polymer Chemistry | Biology: Molecular Biology, Cell Biology, Genetics, Bioinformatics, Neuroscience, Immunology, Microbiology, Plant Biology, Structural Biology | Mathematics: Pure Mathematics, Applied Mathematics, Statistics, Computational Mathematics | Environmental Science: Climate Change, Pollution Control, Ecology, Biodiversity | Biotechnology: Genetic Engineering, Fermentation, Bioprocess, Biofuels | Material Science: Nanomaterials, Polymers, Composites, Ceramics',
-        stipend: 'JRF (Junior Research Fellow): ₹37,000/month + HRA for first 2 years, SRF (Senior Research Fellow): ₹42,000/month + HRA for next 3 years (UGC/CSIR/DBT/ICMR funding)',
-        applicationProcess: 'Find a guide (Professor) → Submit research proposal → Entrance exam (NET/GATE) → Interview → Registration → Coursework (1 year) → Research (2-4 years) → Thesis submission → Viva voce → Degree',
-        publications: 'Minimum 2-3 research papers in Scopus/WoS indexed journals (Q1/Q2) required for completion (varies by institute)',
-        jobs: 'Professor (Assistant/Associate/Professor), Research Scientist, Principal Investigator, R&D Head, Science Writer/Editor, Patent Analyst, Policy Advisor, Consultant, Entrepreneur',
-        salary: 'Assistant Professor: Level 10-12: ₹57,700 - ₹1,82,400, Associate Professor: Level 13: ₹1,31,400 - ₹2,17,100, Professor: Level 14: ₹1,44,200 - ₹2,18,200, Research Scientist (Industry): ₹12-30 LPA, Principal Scientist: ₹25-50 LPA',
-        organizations: 'IITs, NITs, IISc, Central Universities, State Universities, CSIR Labs (IICT, CCMB, IGIB, CDRI, NCL, NEIST, CFTRI, IMTECH), DRDO, ISRO, BARC, ICAR (Agriculture research), ICMR (Medical research), DBT (Biotechnology research), Private R&D (Biocon, Syngene, Dr. Reddy\'s, Lupin, Cipla, Sun Pharma, Piramal, Reliance Life Sciences, Bharat Biotech)',
-        postdoc: 'Postdoctoral Research (2-4 years) for further specialization - Stipend: $40k-70k/year abroad, ₹50k-80k/month in India'
+        topInstitutes: 'IISc, IITs, JNU, University of Hyderabad, TIFR, NCBS, CCMB, IGIB, NII, Bose Institute, IISERs, NCL, IICT, CDRI',
+        stipend: 'JRF: ₹37,000/month, SRF: ₹42,000/month',
+        jobs: 'Professor, Research Scientist, Principal Investigator, R&D Head',
+        salary: 'Assistant Professor: ₹57,700-1,82,400, Professor: ₹1,44,200-2,18,200, Research Scientist: ₹12-30 LPA'
       },
       nextSteps: [
         { id: 'postdoc', name: '🔬 Postdoctoral Research', icon: 'fa-flask', desc: '2-4 years - Further specialization' },
-        { id: 'professor-science', name: '👨‍🏫 Professor', icon: 'fa-chalkboard-user', desc: 'Teaching + Research' },
-        { id: 'research-scientist', name: '🔭 Research Scientist', icon: 'fa-microscope', desc: 'Industry R&D' },
-        { id: 'science-entrepreneur', name: '🚀 Science Entrepreneurship', icon: 'fa-chart-line', desc: 'Start your own biotech/pharma company' }
+        { id: 'professor-science', name: '👨‍🏫 Professor', icon: 'fa-chalkboard-user', desc: 'Teaching + Research' }
       ]
     },
 
@@ -1517,14 +1499,11 @@
       icon: 'fa-file-alt',
       desc: 'National Eligibility Test for JRF and Assistant Professor',
       fullDetails: {
-        overview: 'UGC NET (University Grants Commission National Eligibility Test) and CSIR NET (Council of Scientific and Industrial Research) are exams for determining eligibility for Assistant Professor and JRF.',
-        exams: 'UGC NET (for Humanities, Social Sciences, Commerce, Management, etc.), CSIR NET (for Sciences - Life Sciences, Chemical Sciences, Physical Sciences, Mathematical Sciences, Earth Sciences)',
-        eligibility: 'Master\'s degree with 55%+ (50%+ for SC/ST/OBC/PWD)',
-        examPattern: 'Paper 1: General Aptitude (100 marks, 50 questions, 1 hour - Teaching/Research aptitude, Reasoning, Comprehension, GK), Paper 2: Subject-specific (200 marks, 100 questions, 2 hours)',
-        validity: 'JRF: 2 years (can be extended), Assistant Professor eligibility: Lifetime',
-        fellowship: 'JRF: ₹37,000/month + HRA for first 2 years, SRF: ₹42,000/month + HRA for next 3 years',
-        colleges: 'IITs, NITs, Central Universities, State Universities, Colleges, Research Institutes',
-        applyLink: 'https://ugcnet.nta.nic.in (UGC NET), https://csirnet.nta.nic.in (CSIR NET)'
+        overview: 'UGC NET and CSIR NET are exams for determining eligibility for Assistant Professor and JRF.',
+        eligibility: 'Master\'s degree with 55%+',
+        examPattern: 'Paper 1: General Aptitude, Paper 2: Subject-specific',
+        fellowship: 'JRF: ₹37,000/month + HRA, SRF: ₹42,000/month + HRA',
+        applyLink: 'https://ugcnet.nta.nic.in, https://csirnet.nta.nic.in'
       }
     },
 
@@ -1533,24 +1512,10 @@
       icon: 'fa-chalkboard-user',
       desc: 'Lecturer, School Teacher, Professor',
       fullDetails: {
-        schoolTeaching: 'PRT (Primary Teacher), TGT (Trained Graduate Teacher), PGT (Post Graduate Teacher) - through B.Ed and CTET/State TET - Salary: ₹35,400 - ₹1,12,400 (Level 6-7)',
-        collegeTeaching: 'Lecturer, Assistant Professor - through NET/SET/PhD - Salary: ₹57,700 - ₹1,82,400 (Level 10-12)',
-        coachingTeaching: 'JEE/NEET Faculty, Subject Expert - through subject expertise - Salary: ₹5-15 LPA',
-        edTech: 'Online Educator (Byjus, Unacademy, Vedantu, Physics Wallah) - Salary: ₹6-20 LPA',
-        exams: 'CTET (Central), State TET, UGC NET, CSIR NET, GATE, PhD (for Professor)'
-      }
-    },
-
-    'industry-science': {
-      name: 'Industry Jobs in Science',
-      icon: 'fa-building',
-      desc: 'Pharma, Biotech, Food, Environment',
-      fullDetails: {
-        pharmaBiotech: 'Pharmaceutical companies (Sun Pharma, Cipla, Dr. Reddy\'s, Lupin, Biocon, Syngene, Novartis, Pfizer, Roche, GSK) - Roles: Research Scientist, Quality Control, Quality Assurance, Regulatory Affairs, Clinical Research Associate, Medical Writer, Drug Safety Associate - Salary: ₹3-8 LPA (fresher), ₹6-15 LPA (experienced)',
-        foodIndustry: 'Food processing companies (Nestle, Britannia, Parle, ITC, Amul, Mother Dairy) - Roles: Food Technologist, Quality Analyst, Food Safety Officer, Production Supervisor - Salary: ₹3-6 LPA',
-        environmental: 'Environmental consulting firms (ERM, AECOM, Ramboll), Pollution control boards - Roles: Environmental Analyst, EIA Consultant, Waste Management Officer - Salary: ₹3-7 LPA',
-        forensics: 'Forensic Science Laboratories (CFSL, SFSL), CBI, Police - Roles: Forensic Scientist, Fingerprint Expert, DNA Analyst - Salary: ₹4-10 LPA (Government)',
-        agriculture: 'ICAR institutes, Seed companies (Bayer, Syngenta, Monsanto, Rallis) - Roles: Agriculture Officer, Seed Technologist, Plant Breeder - Salary: ₹3-8 LPA'
+        schoolTeaching: 'PRT, TGT, PGT - through B.Ed and CTET/State TET - Salary: ₹35,400 - ₹1,12,400',
+        collegeTeaching: 'Lecturer, Assistant Professor - through NET/SET/PhD - Salary: ₹57,700 - ₹1,82,400',
+        coachingTeaching: 'JEE/NEET Faculty - Salary: ₹5-15 LPA',
+        edTech: 'Online Educator - Salary: ₹6-20 LPA'
       }
     },
 
@@ -1559,21 +1524,17 @@
       icon: 'fa-chalkboard-user',
       desc: '2-year teaching degree',
       fullDetails: {
-        overview: 'B.Ed is a 2-year professional degree for those who want to become school teachers.',
-        duration: '2 Years (4 Semesters)',
-        entranceExams: 'DU B.Ed Entrance, IPU CET B.Ed, MAH B.Ed CET, UP B.Ed JEE, Bihar B.Ed CET, CUET (for Central Universities)',
-        eligibility: 'Graduation (any stream) with 50%+ (45%+ for SC/ST)',
-        subjects: 'Pedagogy of School Subjects (Mathematics, Science, Social Studies, English, Hindi, Sanskrit, Computer Science), Educational Psychology, Educational Technology, Assessment and Evaluation, Inclusive Education, Guidance and Counseling',
-        topColleges: 'DU (Delhi University - CIE), BHU, AMU, Jamia Millia Islamia, University of Mumbai, University of Calcutta, University of Madras, IGNOU (distance), Regional Institutes of Education (RIEs)',
-        fees: 'Government: ₹20k-50k/year, Private: ₹50k-1.5L/year',
-        jobs: 'PRT (Primary Teacher), TGT (Trained Graduate Teacher), PGT (Post Graduate Teacher) - in KVS, NVS, State Government Schools, Private Schools, International Schools',
-        salary: 'Government School Teacher: ₹35,400 - ₹1,12,400 (Level 6-7), Private School Teacher: ₹2.5-6 LPA, International School Teacher: ₹5-15 LPA',
-        exams: 'CTET (Central Teacher Eligibility Test) - compulsory for central schools (KVS, NVS), State TET - for state government schools, KVS Exam, NVS Exam, DSSSB Exam (Delhi), UPTET (UP), BTET (Bihar), REET (Rajasthan), MAHA TET (Maharashtra), TNTET (Tamil Nadu), APTET (Andhra), TSTET (Telangana), KARTET (Karnataka), KERALA TET (Kerala), HP TET (Himachal), UK TET (Uttarakhand), CG TET (Chhattisgarh), OTET (Odisha), JBTET (Jharkhand), MPTET (Madhya Pradesh), Assam TET (Assam)',
-        promotions: 'Teacher → Senior Teacher → HOD → Vice Principal → Principal → Director'
+        overview: 'B.Ed is a 2-year professional degree for school teachers.',
+        duration: '2 Years',
+        entranceExams: 'DU B.Ed, IPU CET B.Ed, MAH B.Ed CET, UP B.Ed JEE, CUET',
+        eligibility: 'Graduation with 50%+',
+        topColleges: 'DU (CIE), BHU, AMU, Jamia, University of Mumbai, University of Calcutta, IGNOU',
+        jobs: 'PRT, TGT, PGT in KVS, NVS, State Govt Schools, Private Schools',
+        salary: 'Government School Teacher: ₹35,400 - ₹1,12,400',
+        exams: 'CTET, State TET, KVS Exam, NVS Exam'
       },
       nextSteps: [
-        { id: 'ctet', name: '📋 CTET/State TET', icon: 'fa-file-alt', desc: 'Teacher Eligibility Test' },
-        { id: 'kvs', name: '🏫 KVS/NVS Exam', icon: 'fa-school', desc: 'Central Government School Teacher' }
+        { id: 'ctet', name: '📋 CTET/State TET', icon: 'fa-file-alt', desc: 'Teacher Eligibility Test' }
       ]
     },
 
@@ -1582,35 +1543,32 @@
       icon: 'fa-file-alt',
       desc: 'For central government school teachers',
       fullDetails: {
-        overview: 'CTET is conducted by CBSE for recruitment of teachers in central government schools (KVS, NVS, Army Schools, etc.).',
-        pattern: 'Paper 1 (Primary - Class 1-5) - 150 questions, 150 marks, 2.5 hours, Paper 2 (Elementary - Class 6-8) - 150 questions, 150 marks, 2.5 hours',
-        validity: 'Lifetime validity now (earlier 7 years)',
+        overview: 'CTET is conducted by CBSE for recruitment of teachers in central government schools.',
+        pattern: 'Paper 1 (Class 1-5) and Paper 2 (Class 6-8) - 150 questions each',
+        validity: 'Lifetime validity',
         applyLink: 'https://ctet.nic.in',
-        salary: 'KVS/NVS Teacher: ₹35,400 - ₹1,12,400 per month'
+        salary: 'KVS/NVS Teacher: ₹35,400 - ₹1,12,400'
       }
     },
 
-    'bca': {
+    'bca-path': {
       name: 'BCA - Bachelor of Computer Applications',
       icon: 'fa-code',
       desc: '3-year degree in Computer Applications',
       fullDetails: {
         overview: 'BCA is a 3-year undergraduate degree focusing on computer applications and software development.',
-        duration: '3 Years (6 Semesters)',
-        syllabus: 'Programming in C, C++, Java, Python, Web Development (HTML/CSS/JavaScript, React, Node.js), Database Management (SQL, MySQL, Oracle), Data Structures, Algorithms, Operating Systems, Computer Networks, Software Engineering, Cloud Computing, Cyber Security, Data Science basics, Digital Marketing, E-commerce, Project Management, Multimedia Systems',
-        eligibility: '12th Pass (any stream) with 45-50%+ (Mathematics at 12th preferred)',
-        topColleges: 'Christ University Bangalore, Symbiosis Pune (SSS), IPU Delhi (USICT, VIPS, BVICAM), Amity University, LPU, VIT Vellore (BCA), SRM University, Manipal University, St. Xavier\'s Mumbai, Loyola College Chennai, DU (Department of Computer Science), University of Calcutta, University of Mumbai, University of Pune',
+        duration: '3 Years',
+        syllabus: 'Programming (C, C++, Java, Python), Web Development (HTML/CSS/JavaScript, React, Node.js), Database (SQL, MySQL, Oracle), Data Structures, Algorithms, Operating Systems, Computer Networks, Software Engineering, Cloud Computing, Cyber Security, Data Science, Digital Marketing',
+        eligibility: '12th Pass with 45-50%+ (Mathematics preferred)',
+        topColleges: 'Christ University, Symbiosis Pune, IPU Delhi, Amity University, LPU, VIT Vellore, SRM, St. Xavier\'s Mumbai, Loyola College Chennai, DU',
         fees: 'Government: ₹20k-50k/year, Private: ₹50k-2L/year',
-        jobs: 'Software Developer (₹3-8 LPA), Web Developer (₹3-7 LPA), Database Administrator (₹3-6 LPA), System Analyst (₹4-8 LPA), IT Support (₹2-5 LPA), Network Administrator (₹3-6 LPA), QA Tester (₹3-6 LPA), Technical Support (₹2-5 LPA), Digital Marketing Executive (₹3-6 LPA), Data Analyst (₹3-8 LPA)',
-        salary: '₹2.5 LPA - ₹8 LPA (fresher), ₹5-15 LPA (experienced)',
-        higherStudies: 'MCA (Master of Computer Applications - 2/3 years), MBA (2 years) for IT Management, M.Sc IT (2 years), M.Tech (2 years) through GATE, MS Abroad (GRE), PGDCA (1 year)',
-        certifications: 'AWS Certified Cloud Practitioner, Microsoft Azure Fundamentals, Oracle Java Certification (OCJP), Red Hat Linux Certification, Cisco CCNA, CompTIA A+, Google IT Support, Full Stack Development (MERN/MEAN), Data Science (Python), Cyber Security (CEH)'
+        jobs: 'Software Developer (₹3-8 LPA), Web Developer (₹3-7 LPA), Database Administrator (₹3-6 LPA), System Analyst (₹4-8 LPA), IT Support (₹2-5 LPA), Network Administrator (₹3-6 LPA), QA Tester (₹3-6 LPA), Data Analyst (₹3-8 LPA)',
+        salary: '₹2.5-8 LPA (fresher), ₹5-15 LPA (experienced)',
+        higherStudies: 'MCA, MBA, M.Sc IT, M.Tech (through GATE), MS Abroad'
       },
       nextSteps: [
         { id: 'mca', name: '🎓 MCA - Master of Computer Applications', icon: 'fa-graduation-cap', desc: '2/3 years - through NIMCET' },
-        { id: 'mba-it', name: '📈 MBA in IT', icon: 'fa-briefcase', desc: '2 years - IT Management' },
-        { id: 'it-jobs-bca', name: '💼 IT Jobs', icon: 'fa-building', desc: 'Software Developer, IT Support' },
-        { id: 'ms-bca', name: '🌍 MS Abroad', icon: 'fa-globe', desc: 'MS in CS/IT - USA/UK/Canada' }
+        { id: 'mba-it', name: '📈 MBA in IT', icon: 'fa-briefcase', desc: '2 years - IT Management' }
       ]
     },
 
@@ -1619,21 +1577,18 @@
       icon: 'fa-graduation-cap',
       desc: '2/3-year postgraduate degree in Computer Applications',
       fullDetails: {
-        overview: 'MCA is a postgraduate degree for those who want to specialize in computer applications and software development.',
-        duration: '2 Years (for BCA/B.Sc CS graduates), 3 Years (for non-CS graduates)',
-        entranceExams: 'NIMCET (NITs), CUET PG (Central Universities), MAH MCA CET (Maharashtra), UPSEE (UP), AP ICET (Andhra), TS ICET (Telangana), Karnataka PGCET (Karnataka), TANCET (Tamil Nadu), OJEE (Odisha), WB JECA (West Bengal), BHU PET, DUET',
-        nimcetPattern: '120 questions - 480 marks - 2 hours (Mathematics 50, Reasoning 40, English 20, Computer Awareness 10)',
-        topColleges: 'NITs (Trichy, Surathkal, Warangal, Calicut, Allahabad, Bhopal, Raipur, Agartala, Delhi, Jamshedpur, Kurukshetra, Patna, Silchar, Srinagar, Hamirpur, Nagaland, Goa, Manipur, Meghalaya, Mizoram, Nagaland, Puducherry, Sikkim, Uttarakhand), IIITs, DTU, NSUT, JNU, BHU, University of Hyderabad, VIT Vellore, SRM University, Christ University, Amity University, LPU',
+        overview: 'MCA is a postgraduate degree for specialization in computer applications.',
+        duration: '2 Years (for BCA/B.Sc CS), 3 Years (for non-CS)',
+        entranceExams: 'NIMCET, CUET PG, MAH MCA CET, AP ICET, TS ICET, Karnataka PGCET, TANCET, WB JECA',
+        nimcetPattern: '120 questions - 480 marks - 2 hours',
+        topColleges: 'NITs (Trichy, Surathkal, Warangal, Calicut, Allahabad), IIITs, DTU, NSUT, JNU, BHU, University of Hyderabad, VIT, SRM, Christ University',
         fees: 'NITs: ₹1-1.5L/year, Private: ₹1-3L/year',
-        jobs: 'Software Engineer (₹4-12 LPA), Senior Software Developer (₹8-20 LPA), System Architect (₹12-25 LPA), Technical Lead (₹10-22 LPA), Project Manager (₹15-30 LPA), IT Consultant (₹8-20 LPA), Database Administrator (₹5-12 LPA), Cloud Architect (₹10-25 LPA), DevOps Engineer (₹6-18 LPA), Data Scientist (₹8-25 LPA), AI/ML Engineer (₹8-25 LPA), Cybersecurity Analyst (₹5-15 LPA)',
-        salary: '₹4 LPA - ₹12 LPA (fresher), ₹8-25 LPA (experienced)',
-        companies: 'Google, Microsoft, Amazon, Meta, Adobe, Oracle, Salesforce, TCS, Infosys, Wipro, HCL, Tech Mahindra, Accenture, Capgemini, IBM, Deloitte, PwC, EY, KPMG, Razorpay, Swiggy, Zomato, Paytm, PhonePe, Flipkart, Amazon, Uber, Ola, Unacademy, Byjus, Startups',
-        higherStudies: 'PhD in Computer Science (3-5 years) for research/teaching, MBA (2 years) for management, MS Abroad (GRE)'
+        jobs: 'Software Engineer (₹4-12 LPA), Senior Software Developer (₹8-20 LPA), System Architect (₹12-25 LPA), Technical Lead (₹10-22 LPA), Project Manager (₹15-30 LPA), IT Consultant (₹8-20 LPA), Cloud Architect (₹10-25 LPA), DevOps Engineer (₹6-18 LPA), Data Scientist (₹8-25 LPA)',
+        salary: '₹4-12 LPA (fresher), ₹8-25 LPA (experienced)',
+        companies: 'Google, Microsoft, Amazon, Meta, Adobe, Oracle, TCS, Infosys, Wipro, Accenture, Razorpay, Swiggy, Zomato'
       },
       nextSteps: [
-        { id: 'phd-cs', name: '🎓 PhD in CS', icon: 'fa-flask', desc: '3-5 years - Research/Professor' },
-        { id: 'it-jobs-mca', name: '💼 IT Jobs', icon: 'fa-building', desc: 'Senior Software Engineer' },
-        { id: 'mba-it-mca', name: '📈 MBA', icon: 'fa-briefcase', desc: 'IT Management' }
+        { id: 'phd-cs', name: '🎓 PhD in CS', icon: 'fa-flask', desc: '3-5 years - Research/Professor' }
       ]
     },
 
@@ -1642,101 +1597,14 @@
       icon: 'fa-flask',
       desc: '3-5 years - Highest academic degree in CS',
       fullDetails: {
-        overview: 'PhD in Computer Science is the highest academic degree focusing on advanced research in computing.',
+        overview: 'PhD in Computer Science is the highest academic degree focusing on advanced research.',
         duration: '3-5 Years',
-        entranceExams: 'GATE (Computer Science), UGC NET (CS), JRF, University entrance exam, Interview',
-        researchAreas: 'Artificial Intelligence, Machine Learning, Deep Learning, Computer Vision, Natural Language Processing, Robotics, Quantum Computing, Cloud Computing, Cyber Security, Blockchain, Internet of Things (IoT), Big Data, Data Science, Human-Computer Interaction, Theoretical Computer Science, Algorithms, Databases, Distributed Systems, Computer Networks, Software Engineering, Formal Methods, Compiler Design',
-        topInstitutes: 'IITs, IISc, IIITs, NITs, ISI Kolkata, CMI, DA-IICT, BITS Pilani, International Universities (MIT, Stanford, CMU, UC Berkeley, UIUC, Georgia Tech, ETH Zurich, Oxford, Cambridge, NUS, NTU)',
-        stipend: 'JRF: ₹37,000/month, SRF: ₹42,000/month (India) | Fully funded: $30k-50k/year (USA), €30k-50k/year (Europe), S$30k-40k/year (Singapore)',
-        jobs: 'Professor (Assistant/Associate/Professor), Research Scientist (Google Research, Microsoft Research, Amazon Science, IBM Research, Meta AI Research, OpenAI, DeepMind), Principal Scientist, R&D Head, Chief Technology Officer (CTO), AI Research Lead, Data Science Director',
-        salary: 'Assistant Professor: ₹57,700-1,82,400, Professor: ₹1,44,200-2,18,200, Research Scientist: ₹20-60 LPA (India), $150k-300k/year (USA)'
-      }
-    },
-
-    // ========== ADDITIONAL MISSING NODES ==========
-    'mba-science': {
-      name: 'MBA in Pharma/Biotech',
-      icon: 'fa-briefcase',
-      desc: '2-year management degree for science graduates',
-      fullDetails: {
-        overview: 'MBA in Pharma/Biotech/Healthcare Management is for science graduates who want to enter management roles in healthcare and life sciences industry.',
-        entranceExams: 'CAT, XAT, GMAT, CMAT, MAT, NMAT, SNAP',
-        topColleges: 'IIMs (with Pharma/Biotech specialization), NMIMS Mumbai (Pharma MBA), JBIMS Mumbai (Pharma), SIBM Pune (Pharma), NIPER (Pharma MBA), FMS Delhi, SP Jain Mumbai, MDI Gurgaon, IMT Ghaziabad',
-        jobs: 'Pharma Product Manager, Healthcare Consultant, Biotech Business Development, Clinical Research Manager, Regulatory Affairs Manager, Medical Affairs Manager, Pharma Sales Manager, Healthcare Marketing Manager, Hospital Administrator, Health IT Manager',
-        salary: '₹8-15 LPA (fresher), ₹12-25 LPA (experienced)',
-        companies: 'Pharma: Sun Pharma, Cipla, Dr. Reddy\'s, Lupin, Biocon, Novartis, Pfizer, Roche, GSK | Healthcare: Apollo Hospitals, Fortis, Max Healthcare, Narayana Health | Consulting: McKinsey, BCG, Bain, Deloitte (Healthcare Practice)'
-      }
-    },
-
-    'mba-it': {
-      name: 'MBA in IT',
-      icon: 'fa-briefcase',
-      desc: '2-year management degree for IT professionals',
-      fullDetails: {
-        overview: 'MBA in IT Management prepares graduates for leadership roles in technology companies.',
-        entranceExams: 'CAT, XAT, GMAT, CMAT, MAT, NMAT, SNAP',
-        topColleges: 'IIMs, ISB Hyderabad, XLRI Jamshedpur, SP Jain Mumbai, MDI Gurgaon, NITIE Mumbai, IIFT Delhi, IMT Ghaziabad, Great Lakes Chennai, TAPMI Manipal',
-        jobs: 'IT Consultant, Technology Manager, Product Manager, Project Manager, IT Strategy Consultant, Digital Transformation Manager, Chief Information Officer (CIO), Chief Technology Officer (CTO), IT Sales Manager, Business Development Manager',
-        salary: '₹15-30 LPA (Top B-schools), ₹8-15 LPA (other B-schools)',
-        companies: 'IT Services: TCS, Infosys, Wipro, HCL, Tech Mahindra, Accenture, Capgemini, IBM | Product: Google, Microsoft, Amazon, Meta, Adobe, Oracle, Salesforce | Consulting: McKinsey, BCG, Bain, Deloitte, PwC, EY, KPMG | Startups: Razorpay, Swiggy, Zomato, Ola, Uber, Paytm, PhonePe'
-      }
-    },
-
-    'ms-bca': {
-      name: 'MS Abroad for BCA Graduates',
-      icon: 'fa-globe',
-      desc: 'MS in CS/IT - USA/UK/Canada/Australia',
-      fullDetails: {
-        overview: 'MS Abroad is a 1-2 year postgraduate degree for BCA graduates in Computer Science and IT fields.',
-        duration: '1-2 Years',
-        exams: 'GRE (300+ for BCA graduates), TOEFL (90+) or IELTS (6.5+)',
-        eligibility: 'BCA with 8+ CGPA, 1-2 years work experience preferred, Strong SOP, Strong LORs (3 from professors/employers)',
-        cost: 'USA: ₹30-50L/year, UK: ₹25-40L/year, Canada: ₹20-35L/year, Australia: ₹25-40L/year',
-        topUniversities: 'USA: Northeastern University (Align MS CS for non-CS), University of Southern California (USC), Arizona State University (ASU), University of Texas Dallas (UTD), SUNY Buffalo, University of Florida, George Mason University, University of Illinois Chicago (UIC), New York University (NYU Tandon), Boston University (BU MET) | UK: University of Birmingham, University of Glasgow, Newcastle University, Queen Mary University of London, University of Sheffield, University of Southampton | Canada: University of British Columbia (UBC), University of Toronto, University of Waterloo, Simon Fraser University (SFU), University of Ottawa, York University | Australia: University of Melbourne, Australian National University (ANU), University of Sydney, University of New South Wales (UNSW), Monash University, University of Queensland',
-        jobs: 'Software Engineer, IT Consultant, Data Analyst, Cloud Engineer, DevOps Engineer',
-        salary: '$70,000 - $120,000 per year'
-      }
-    },
-
-    'bca-path': {
-      name: 'BCA - Bachelor of Computer Applications',
-      icon: 'fa-code',
-      desc: '3-year degree - Entry to IT career',
-      fullDetails: {
-        overview: 'BCA is a 3-year undergraduate degree focusing on computer applications and software development.',
-        duration: '3 Years',
-        jobs: 'Software Developer, Web Developer, IT Support, Database Administrator, System Analyst, Network Administrator, QA Tester, Digital Marketing Executive, Data Analyst',
-        salary: '₹2.5-8 LPA',
-        higherStudies: 'MCA (2/3 years), MBA (2 years), M.Sc IT (2 years), M.Tech (2 years through GATE), MS Abroad (GRE)',
-        topColleges: 'Christ University, Symbiosis Pune, IPU Delhi, Amity University, LPU, VIT Vellore, SRM University, St. Xavier\'s Mumbai, Loyola College Chennai, DU, University of Calcutta, University of Mumbai, University of Pune'
-      },
-      nextSteps: [
-        { id: 'mca', name: '🎓 MCA - Master of Computer Applications', icon: 'fa-graduation-cap', desc: '2/3 years - through NIMCET' },
-        { id: 'mba-it', name: '📈 MBA in IT', icon: 'fa-briefcase', desc: '2 years - IT Management' },
-        { id: 'it-jobs-bca', name: '💼 IT Jobs', icon: 'fa-building', desc: 'Software Developer, IT Support' }
-      ]
-    },
-
-    'it-jobs-bca': {
-      name: 'IT Jobs after BCA',
-      icon: 'fa-building',
-      desc: 'Software Development, IT Support, Testing',
-      fullDetails: {
-        companies: 'TCS, Infosys, Wipro, HCL, Tech Mahindra, Accenture, Capgemini, Cognizant, IBM, Microsoft, Amazon, Google (for exceptional candidates), Startups',
-        roles: 'Junior Software Developer (₹3-5 LPA), Web Developer (₹3-6 LPA), IT Support Engineer (₹2-4 LPA), QA Tester (₹3-5 LPA), Database Administrator (₹3-6 LPA), System Administrator (₹3-5 LPA), Network Administrator (₹3-5 LPA), Technical Support Engineer (₹2-4 LPA)',
-        skills: 'Programming (Java/Python/JavaScript), Web Development (HTML/CSS/React), Database (SQL), Operating Systems, Networking Basics, Communication Skills',
-        preparation: 'Data Structures & Algorithms, Aptitude, Communication Skills, Resume Building'
-      }
-    },
-
-    'it-jobs-mca': {
-      name: 'IT Jobs after MCA',
-      icon: 'fa-building',
-      desc: 'Senior Software Engineer, Technical Lead',
-      fullDetails: {
-        companies: 'Google, Microsoft, Amazon, Meta, Adobe, Oracle, Salesforce, TCS, Infosys, Wipro, HCL, Tech Mahindra, Accenture, Capgemini, IBM, Razorpay, Swiggy, Zomato, Paytm, PhonePe, Flipkart',
-        roles: 'Software Engineer (₹6-12 LPA), Senior Software Engineer (₹10-20 LPA), Technical Lead (₹15-25 LPA), System Architect (₹18-30 LPA), Project Manager (₹15-30 LPA), IT Consultant (₹8-20 LPA), Database Administrator (₹5-12 LPA)',
-        skills: 'Advanced DSA, System Design, Cloud Computing, Microservices, DevOps, Leadership, Communication'
+        entranceExams: 'GATE (CS), UGC NET (CS), JRF',
+        researchAreas: 'AI, ML, Deep Learning, Computer Vision, NLP, Robotics, Quantum Computing, Cloud Computing, Cyber Security, Blockchain, IoT, Big Data, Data Science',
+        topInstitutes: 'IITs, IISc, IIITs, NITs, ISI, CMI, BITS Pilani',
+        stipend: 'JRF: ₹37,000/month, SRF: ₹42,000/month',
+        jobs: 'Professor, Research Scientist (Google Research, Microsoft Research, Amazon Science, IBM Research, Meta AI Research, OpenAI, DeepMind), Principal Scientist, R&D Head, CTO',
+        salary: 'Assistant Professor: ₹57,700-1,82,400, Research Scientist: ₹20-60 LPA (India), $150k-300k/year (USA)'
       }
     },
 
@@ -1745,16 +1613,14 @@
       icon: 'fa-microchip',
       desc: '3-year technical diploma',
       fullDetails: {
-        overview: 'Polytechnic is a 3-year diploma after 10th. You can get direct jobs or lateral entry to B.Tech.',
-        duration: '3 Years (6 Semesters)',
-        entranceExams: 'POLYCET (Andhra/Telangana), JEECUP (UP), Delhi CET (Delhi), MHT CET (Maharashtra), JEXPO (West Bengal), PECE (Bihar), CG PPT (Chhattisgarh), MP PPT (Madhya Pradesh), Rajasthan PET (Rajasthan), Kerala PET (Kerala), Tamil Nadu POLYCET (Tamil Nadu), Karnataka CET (Karnataka - Diploma), Assam PAT (Assam), Odisha DET (Odisha), Haryana PET (Haryana), Punjab PET (Punjab), J&K POLYCET (J&K)',
-        eligibility: '10th pass with 35%+ (from recognized board)',
-        branches: 'Computer Science (CSE), Information Technology (IT), Civil Engineering, Mechanical Engineering, Electrical Engineering, Electronics & Communication (ECE), Automobile Engineering, Chemical Engineering, Metallurgical Engineering, Mining Engineering, Textile Engineering, Instrumentation Engineering, Aeronautical Engineering, Agricultural Engineering, Food Technology, Plastic Technology, Printing Technology, Leather Technology, Ceramic Engineering, Biotechnology, Environmental Engineering',
-        jobs: 'Junior Engineer, Technician, Site Supervisor, Workshop Supervisor, Production Supervisor, Quality Inspector, Maintenance Technician, CAD Designer, Draftsman, Electrician, Fitter, Welder, Turner, Machinist, Tool Maker, CNC Operator, Plumber, Carpenter, AC Technician, Refrigeration Mechanic, Automobile Mechanic, Diesel Mechanic, Electronics Technician, Computer Operator, IT Support, Network Technician, Web Designer (with additional skills)',
-        salary: '₹2 LPA - ₹5 LPA (fresher), ₹3-8 LPA (experienced)',
-        furtherStudy: 'Lateral Entry to B.Tech (2nd year) through LEET (Lateral Entry Entrance Test) - LEET exams: JELET (West Bengal), LEET (Punjab), Bihar LEET, UP LEET, Delhi LEET, MP LEET, CG LEET, AP ECET (Andhra), TS ECET (Telangana), Maharashtra LEET, Karnataka LEET, Tamil Nadu LEET, Rajasthan LEET, Haryana LEET, Odisha LEET, Assam LEET, Kerala LEET',
-        psuJobs: 'BHEL, NTPC, ONGC, IOCL, SAIL, GAIL, PowerGrid, BSNL, Railways, State Electricity Boards - through Diploma entry exams',
-        privateJobs: 'L&T, Tata Motors, Mahindra, Maruti Suzuki, Hyundai, Honda, Toyota, Reliance, Adani, Godrej, Siemens, Bosch, ABB, Schneider Electric, Havells, Voltas, Blue Star, LG, Samsung, Sony, Whirlpool, Panasonic, Daikin, Hitachi, Mitsubishi, Carrier, Honeywell, Johnson Controls, Emerson, Yokogawa, ABB, Siemens, GE, Philips, Bosch, Daimler, Cummins, Caterpillar, JCB, Escorts, Mahindra & Mahindra, Ashok Leyland, Tata Motors, Maruti Suzuki, Hyundai, Honda, Toyota, Ford, Volkswagen, BMW, Mercedes-Benz, Audi, Volvo, Scania, MAN, Eicher, Royal Enfield, Bajaj, TVS, Hero, Honda, Suzuki, Yamaha, KTM, Harley-Davidson, Triumph, Ducati, Jaguar Land Rover, Rolls-Royce, Bentley, Lamborghini, Ferrari, Porsche, McLaren, Bugatti, Koenigsegg, Pagani, Aston Martin, Maserati, Alfa Romeo, Fiat, Citroën, Peugeot, Renault, Nissan, Mitsubishi, Subaru, Mazda, Isuzu, Hino, UD Trucks, Volvo Trucks, Scania Trucks, MAN Trucks, DAF Trucks, Iveco, Kamaz, Tata Daewoo, Ashok Leyland, Eicher, Mahindra Trucks, SML Isuzu, VECVs, BharatBenz, Force Motors, Piaggio, Atul Auto, Bajaj Auto, TVS Motor, Hero MotoCorp, Honda Motorcycle and Scooter India, Suzuki Motorcycle India, Yamaha Motor India, Royal Enfield, KTM India, Triumph India, Harley-Davidson India, BMW Motorrad India, Ducati India, Kawasaki India, Polaris India, BRP India, Club Car India, Yamaha Golf Cars, E-Z-GO India, Textron India, John Deere India, Mahindra & Mahindra, Escorts, TAFE, Sonalika, New Holland, Case IH, Massey Ferguson, Kubota, Yanmar, Iseki, Shaktiman, Standard, Indo Farm, Force Motors, Piaggio, Atul Auto, Bajaj Auto, TVS Motor, Hero MotoCorp, Honda Motorcycle and Scooter India, Suzuki Motorcycle India, Yamaha Motor India, Royal Enfield, KTM India, Triumph India, Harley-Davidson India, BMW Motorrad India, Ducati India, Kawasaki India, Polaris India, BRP India, Club Car India, Yamaha Golf Cars, E-Z-GO India, Textron India, John Deere India, Mahindra & Mahindra, Escorts, TAFE, Sonalika, New Holland, Case IH, Massey Ferguson, Kubota, Yanmar, Iseki, Shaktiman, Standard, Indo Farm, Force Motors, Piaggio, Atul Auto, Bajaj Auto, TVS Motor, Hero MotoCorp, Honda Motorcycle and Scooter India, Suzuki Motorcycle India, Yamaha Motor India, Royal Enfield, KTM India, Triumph India, Harley-Davidson India, BMW Motorrad India, Ducati India, Kawasaki India, Polaris India, BRP India, Club Car India, Yamaha Golf Cars, E-Z-GO India, Textron India, John Deere India, Mahindra & Mahindra, Escorts, TAFE, Sonalika, New Holland, Case IH, Massey Ferguson, Kubota, Yanmar, Iseki, Shaktiman, Standard, Indo Farm'
+        overview: 'Polytechnic is a 3-year diploma after 10th.',
+        duration: '3 Years',
+        entranceExams: 'POLYCET, JEECUP, Delhi CET, MHT CET, JEXPO, PECE, CG PPT, MP PPT, Rajasthan PET, Kerala PET, Tamil Nadu POLYCET, Karnataka CET',
+        eligibility: '10th pass with 35%+',
+        branches: 'CSE, IT, Civil, Mechanical, Electrical, ECE, Automobile, Chemical, Metallurgical, Mining, Textile, Instrumentation, Aeronautical, Agricultural, Food Technology, Plastic Technology, Printing Technology, Leather Technology, Ceramic Engineering, Biotechnology, Environmental Engineering',
+        jobs: 'Junior Engineer, Technician, Site Supervisor, Production Supervisor, Quality Inspector, Maintenance Technician, CAD Designer, Draftsman',
+        salary: '₹2-5 LPA (fresher), ₹3-8 LPA (experienced)',
+        furtherStudy: 'Lateral Entry to B.Tech (2nd year) through LEET'
       },
       nextSteps: [
         { id: 'poly-job', name: '💼 Direct Job', icon: 'fa-briefcase', desc: 'Junior Engineer, Technician' },
@@ -1762,15 +1628,28 @@
       ]
     },
 
+    'poly-job': {
+      name: 'Jobs after Polytechnic',
+      icon: 'fa-briefcase',
+      desc: 'Junior Engineer, Technician, Supervisor',
+      fullDetails: {
+        overview: 'Polytechnic diploma holders can get jobs in government and private sectors.',
+        govtJobs: 'Railways (RRB JE), State Electricity Boards, PWD, CPWD, Municipal Corporations, BHEL, NTPC, SAIL, ONGC, ISRO, DRDO, BARC, State PSC, SSC JE',
+        privateJobs: 'L&T, Tata Motors, Mahindra, Maruti Suzuki, Hyundai, Honda, Toyota, Reliance, Adani, Siemens, Bosch, ABB, Schneider Electric, Havells, Voltas, Blue Star, LG, Samsung, Sony',
+        salary: '₹2.5-6 LPA (fresher), ₹4-12 LPA (experienced)',
+        higherStudies: 'Lateral Entry to B.Tech (3 years), AMIE, MBA, M.Tech through GATE'
+      }
+    },
+
     'lateral-btech': {
       name: 'Lateral Entry to B.Tech',
       icon: 'fa-graduation-cap',
       desc: 'Direct admission to 2nd year of B.Tech',
       fullDetails: {
-        overview: 'Lateral Entry allows diploma holders to directly join the 2nd year (3rd semester) of B.Tech programs.',
+        overview: 'Lateral Entry allows diploma holders to directly join the 2nd year of B.Tech.',
         eligibility: 'Polytechnic Diploma with 60%+ marks',
-        entranceExams: 'LEET (Punjab), JELET (West Bengal), Bihar LEET, UP LEET, Delhi LEET, AP ECET, TS ECET, Maharashtra LEET, Karnataka LEET, Tamil Nadu LEET, Rajasthan LEET, Haryana LEET, Odisha LEET, Assam LEET, Kerala LEET, MP LEET, CG LEET, Goa LEET, Himachal LEET, Uttarakhand LEET, J&K LEET, Chhattisgarh LEET, Jharkhand LEET',
-        benefits: 'Save 1 year compared to regular B.Tech (total 3 years instead of 4), Same degree as regular B.Tech',
+        entranceExams: 'LEET, JELET, AP ECET, TS ECET, Maharashtra LEET, Karnataka LEET',
+        benefits: 'Save 1 year compared to regular B.Tech',
         afterBtech: 'M.Tech through GATE, MS Abroad, MBA, Direct Job'
       }
     },
@@ -1781,18 +1660,42 @@
       desc: '1-2 year skill training',
       fullDetails: {
         overview: 'ITI provides hands-on technical training for immediate employment.',
-        duration: 'ITI: 1-2 Years, National Trade Certificate (NTC) issued by NCVT (National Council for Vocational Training)',
-        entranceExams: 'ITI entrance exam (state level) or merit-based (10th marks)',
-        trades: 'Electrician, Wireman, Fitter, Turner, Machinist, Welder (Gas & Electric), Sheet Metal Worker, Plumber, Carpenter, Painter General, Mason (Building Constructor), Dress Making, Embroidery, Hair & Skin Care, Beautician, Cutting & Sewing, Computer Operator and Programming Assistant (COPA), Information Technology (IT) & Electronics System Maintenance (ESM), Mechanic (Diesel, Motor Vehicle, Refrigeration & Air Conditioning, Tractor, Construction Equipment), Tool & Die Maker, Instrument Mechanic, Machinist (Grinder), Millwright, Maintenance Mechanic, Pattern Maker, Forger & Heat Treater, Foundryman, Moulder, Blacksmith, Sheet Metal Worker, Coppersmith, Pipe Fitter, Structural Fitter, Welder (Pipe), Plumber, Gas Welder, Electrician, Wireman, Lineman, Wind Turbine Technician, Solar Panel Installer, CCTV Installer, AC Technician, Refrigeration Mechanic, Electronics Mechanic, Instrument Mechanic, Computer Hardware & Network Maintenance, IT & ESM, COPA, DTP Operator, Desk Top Publishing, Multimedia Animation, Web Design, Graphic Design, Fashion Design, Textile Design, Interior Decoration, Food Production (Chef), Bakery & Confectionery, Food & Beverage Service, Housekeeping, Front Office, Travel & Tourism, Health Safety & Environment (HSE), Fireman, Security Guard, Medical Lab Technician (MLT), Radiography Technician, ECG Technician, Dialysis Technician, Operation Theatre Technician (OTT), Dental Lab Technician, Optician, Pharmacy Assistant, Nursing Assistant (NA), Home Health Aide (HHA), Geriatric Care Assistant, Early Childhood Educator, Pre-Primary Teacher Training, Yoga Teacher, Fitness Trainer, Sports Coach, Agricultural Machinery Mechanic, Horticulture Assistant, Floriculture Assistant, Sericulture Assistant, Aquaculture Assistant, Dairy Assistant, Poultry Assistant, Animal Husbandry Assistant, Veterinary Lab Technician, Food Processing Technician, Beverage Processing Technician, Dairy Technology, Bakery Technology, Meat Processing Technician, Fish Processing Technician, Fruit & Vegetable Processing Technician, Grain Milling Technician, Oil Milling Technician, Spice Processing Technician, Tea Processing Technician, Coffee Processing Technician, Rubber Processing Technician, Leather Goods Maker, Footwear Maker, Jute Goods Maker, Handloom Weaver, Handicraft Maker, Bamboo & Cane Worker, Clay Potter, Stone Sculptor, Metal Sculptor, Wood Carver, Jewelry Designer, Gemstone Cutter & Polisher, Goldsmith, Silversmith, Enamel Worker, Glass Blower, Ceramic Worker, Kiln Operator, Potter, Sculptor, Painter, Art Restorer, Muralist, Fresco Artist, Miniature Painter, Calligrapher, Print Maker, Illustrator, Cartoonist, Animator, Graphic Designer, Web Designer, UI/UX Designer, Game Artist, VFX Artist, 3D Modeler, Texture Artist, Lighting Artist, Render Wrangler, Compositor, Rotoscoper, Matchmove Artist, Tracking Artist, Layout Artist, Storyboard Artist, Concept Artist, Character Designer, Environment Designer, Prop Designer, Vehicle Designer, Creature Designer, Weapon Designer, Costume Designer, Set Designer, Lighting Designer, Sound Designer, Music Composer, Foley Artist, Voice Actor, Dubbing Artist, Subtitler, Translator, Proofreader, Copy Editor, Content Writer, Technical Writer, Copywriter, SEO Writer, Blog Writer, Social Media Manager, Community Manager, Influencer, Brand Ambassador, Public Relations Officer, Event Coordinator, Wedding Planner, Party Planner, Conference Organizer, Exhibition Organizer, Trade Show Organizer, Convention Center Manager, Venue Manager, Catering Manager, Banquet Manager, Restaurant Manager, Cafe Manager, Bar Manager, Lounge Manager, Nightclub Manager, Hotel Manager, Resort Manager, Spa Manager, Wellness Center Manager, Fitness Center Manager, Gym Manager, Yoga Studio Manager, Dance Studio Manager, Music School Manager, Art Gallery Manager, Museum Manager, Theater Manager, Cinema Manager, Multiplex Manager, Entertainment Center Manager, Amusement Park Manager, Water Park Manager, Zoo Manager, Aquarium Manager, Wildlife Sanctuary Manager, National Park Manager, Botanical Garden Manager, Heritage Site Manager, Monument Manager, Temple Manager, Church Manager, Mosque Manager, Gurudwara Manager, Synagogue Manager, Monastery Manager, Ashram Manager, Meditation Center Manager, Retreat Center Manager, Pilgrimage Center Manager, Tourist Attraction Manager, Destination Manager, Travel Agency Manager, Tour Operator Manager, Transport Company Manager, Logistics Company Manager, Warehouse Manager, Distribution Center Manager, Fulfillment Center Manager, Courier Company Manager, Cargo Company Manager, Shipping Company Manager, Freight Forwarding Company Manager, Customs Broker Manager, Supply Chain Manager, Procurement Manager, Inventory Manager, Purchase Manager, Vendor Manager, Supplier Manager, Contract Manager, Sourcing Manager, Strategic Sourcing Manager, Category Manager, Commodity Manager, Raw Material Manager, Finished Goods Manager, Work-in-Process Manager, Quality Control Manager, Quality Assurance Manager, Compliance Manager, Regulatory Affairs Manager, Safety Manager, Environment Manager, Health & Safety Manager, Risk Manager, Audit Manager, Inspection Manager, Testing Manager, Validation Manager, Verification Manager, Certification Manager, Accreditation Manager, Standardization Manager, Policy Manager, Procedure Manager, Process Manager, Operations Manager, Production Manager, Plant Manager, Factory Manager, Manufacturing Manager, Assembly Manager, Fabrication Manager, Machining Manager, Welding Manager, Painting Manager, Coating Manager, Plating Manager, Anodizing Manager, Heat Treatment Manager, Surface Finishing Manager, Packaging Manager, Shipping Manager, Receiving Manager, Logistics Manager, Supply Chain Manager, Procurement Manager, Inventory Manager, Warehouse Manager, Distribution Manager, Transportation Manager, Fleet Manager, Vehicle Manager, Equipment Manager, Tool Manager, Maintenance Manager, Repair Manager, Service Manager, Customer Service Manager, Support Manager, Help Desk Manager, Technical Support Manager, Field Service Manager, After-Sales Service Manager, Warranty Manager, Claims Manager, Returns Manager, Exchange Manager, Refund Manager, Complaint Manager, Grievance Manager, Feedback Manager, Survey Manager, Research Manager, Analysis Manager, Reporting Manager, Data Manager, Information Manager, Knowledge Manager, Document Manager, Record Manager, Archive Manager, Library Manager, Database Manager, System Manager, Network Manager, Security Manager, IT Manager, Technology Manager, Innovation Manager, R&D Manager, Development Manager, Engineering Manager, Design Manager, Project Manager, Program Manager, Portfolio Manager, Product Manager, Category Manager, Brand Manager, Marketing Manager, Sales Manager, Business Development Manager, Account Manager, Client Manager, Relationship Manager, Partner Manager, Alliance Manager, Channel Manager, Distribution Manager, Retail Manager, Store Manager, E-commerce Manager, Digital Manager, Online Manager, Web Manager, Social Media Manager, Content Manager, Community Manager, Engagement Manager, Experience Manager, Customer Experience Manager, User Experience Manager, User Interface Manager, Usability Manager, Accessibility Manager, Inclusion Manager, Diversity Manager, Equity Manager, Belonging Manager, Culture Manager, Talent Manager, HR Manager, Recruitment Manager, Selection Manager, Onboarding Manager, Training Manager, Development Manager, Performance Manager, Compensation Manager, Benefits Manager, Payroll Manager, Employee Relations Manager, Labor Relations Manager, Union Relations Manager, Industrial Relations Manager, Legal Manager, Compliance Manager, Ethics Manager, Governance Manager, Risk Manager, Audit Manager, Internal Audit Manager, External Audit Manager, Financial Audit Manager, Compliance Audit Manager, Operational Audit Manager, Information Audit Manager, Performance Audit Manager, Quality Audit Manager, Safety Audit Manager, Environmental Audit Manager, Social Audit Manager, Sustainability Audit Manager',
-        salary: '₹1.5 LPA - ₹3.5 LPA (starting), ₹3-6 LPA (experienced with additional skills)',
-        selfEmployment: 'Start own repair shop, freelance services, small manufacturing unit',
-        govtJobs: 'Railways (RRB Group D), State Electricity Boards, PWD, Municipal Corporations, Defense (Army Soldier Technical), BHEL, NTPC, SAIL, ONGC (through ITI quota)'
+        duration: '1-2 Years',
+        trades: 'Electrician, Wireman, Fitter, Turner, Machinist, Welder, Sheet Metal Worker, Plumber, Carpenter, Painter, Mason, Dress Making, Hair & Skin Care, Beautician, COPA, IT & ESM, Mechanic (Diesel, Motor Vehicle, Refrigeration & AC, Tractor), Tool & Die Maker, Instrument Mechanic, Computer Hardware & Network Maintenance, AC Technician, Mobile Repair',
+        salary: '₹1.5-3.5 LPA (starting), ₹3-6 LPA (experienced)',
+        selfEmployment: 'Start own repair shop, freelance services',
+        govtJobs: 'Railways (RRB Group D), State Electricity Boards, PWD, Municipal Corporations, Defense (Army Soldier Technical), BHEL, NTPC, SAIL, ONGC'
       },
       nextSteps: [
         { id: 'iti-job', name: '💼 Direct Job', icon: 'fa-briefcase', desc: 'Electrician, Fitter, Welder' },
-        { id: 'iti-self', name: '💪 Self Employment', icon: 'fa-chart-line', desc: 'Own repair shop' },
-        { id: 'iti-govt', name: '🏛️ Government Jobs', icon: 'fa-landmark', desc: 'Railways, PWD, Electricity Boards' }
+        { id: 'iti-self', name: '💪 Self Employment', icon: 'fa-chart-line', desc: 'Own repair shop' }
       ]
+    },
+
+    'iti-job': {
+      name: 'Jobs after ITI',
+      icon: 'fa-briefcase',
+      desc: 'Electrician, Fitter, Welder, Mechanic',
+      fullDetails: {
+        overview: 'ITI certificate holders can get jobs in factories, workshops, construction sites, and service centers.',
+        govtJobs: 'Railways (RRB Group D), State Electricity Boards, PWD, Municipal Corporations, Defense (Army Soldier Technical), BHEL, NTPC, SAIL, ONGC',
+        privateJobs: 'Factories (Reliance, Tata, Adani, Mahindra, L&T, Siemens, Bosch), Workshops, Service Centers',
+        salary: '₹1.5-3.5 LPA (fresher), ₹3-7 LPA (experienced)',
+        growth: 'Worker → Supervisor → Foreman → Junior Engineer'
+      }
+    },
+
+    'iti-self': {
+      name: 'Self Employment after ITI',
+      icon: 'fa-chart-line',
+      desc: 'Start your own repair shop or service business',
+      fullDetails: {
+        overview: 'ITI certificate holders can start their own business in their trade specialization.',
+        options: 'Electrical Repair Shop, Mobile Repair Shop, AC Service & Repair, Refrigerator Repair, Washing Machine Repair, Automobile Garage, Bike Repair Shop, Car Repair Shop, Welding Workshop, Fabrication Workshop, Carpentry Workshop, Plumbing Services, Painting Services, Beauty Parlour, Salon, Tailoring Shop, General Store, Stationery Shop',
+        investment: '₹50k-5 lakhs (starting)',
+        earnings: '₹20k-80k per month (starting), ₹1-5L per month (established)',
+        governmentSchemes: 'PMEGP - up to ₹25 lakhs subsidy, MUDRA Loan - up to ₹10 lakhs'
+      }
     },
 
     'vocational': {
@@ -1802,94 +1705,162 @@
       fullDetails: {
         overview: 'Vocational courses provide job-specific skills for immediate employment.',
         duration: '6 months to 2 years',
-        courses: 'Beauty & Wellness, Retail Management, Hospitality, Healthcare Assistant, Agriculture, AC Repair, Mobile Repair, Computer Hardware, Networking, Web Design, Digital Marketing, Tally ERP, GST Practitioner, E-commerce Management, Logistics & Supply Chain, Warehouse Management, Customer Relationship Management (CRM), Sales & Marketing, Event Management, Wedding Planning, Interior Design, Fashion Design, Textile Design, Jewelry Design, Graphic Design, Animation, VFX, Gaming, Photography, Videography, Drone Pilot, Solar Panel Installation, Wind Turbine Technician, Electric Vehicle (EV) Technician, Battery Technician, Charging Station Technician, EV Repair, EV Maintenance, EV Manufacturing, EV Assembly, EV Design, EV Engineering, EV Sales, EV Marketing, EV Service, EV Support, EV Training, EV Education, EV Awareness, EV Advocacy, EV Policy, EV Regulation, EV Standardization, EV Certification, EV Testing, EV Validation, EV Verification, EV Inspection, EV Audit, EV Compliance, EV Safety, EV Security, EV Insurance, EV Finance, EV Leasing, EV Rental, EV Sharing, EV Mobility, EV Transportation, EV Logistics, EV Fleet Management, EV Charging Infrastructure, EV Charging Station Management, EV Battery Swapping Station Management, EV Battery Recycling, EV Battery Second Life, EV Battery Remanufacturing, EV Battery Reuse, EV Battery Repurposing, EV Battery Disposal, EV Battery Safety, EV Battery Testing, EV Battery Certification, EV Battery Standardization, EV Battery Regulation, EV Battery Policy, EV Battery Innovation, EV Battery Technology, EV Battery Chemistry, EV Battery Cell, EV Battery Module, EV Battery Pack, EV Battery Management System (BMS), EV Battery Thermal Management, EV Battery Cooling, EV Battery Heating, EV Battery Protection, EV Battery Balancing, EV Battery Monitoring, EV Battery Diagnostics, EV Battery Prognostics, EV Battery Health, EV Battery Life, EV Battery Performance, EV Battery Efficiency, EV Battery Density, EV Battery Capacity, EV Battery Range, EV Battery Charging Speed, EV Battery Discharging Speed, EV Battery Cycle Life, EV Battery Calendar Life, EV Battery Warranty, EV Battery Replacement, EV Battery Upgrade, EV Battery Retrofit, EV Battery Customization, EV Battery Manufacturing, EV Battery Assembly, EV Battery Testing, EV Battery Quality Control, EV Battery Quality Assurance, EV Battery Safety Testing, EV Battery Certification Testing, EV Battery Performance Testing, EV Battery Life Testing, EV Battery Environmental Testing, EV Battery Mechanical Testing, EV Battery Electrical Testing, EV Battery Thermal Testing, EV Battery Abuse Testing, EV Battery Crash Testing, EV Battery Fire Testing, EV Battery Water Testing, EV Battery Dust Testing, EV Battery Vibration Testing, EV Battery Shock Testing, EV Battery Drop Testing, EV Battery Penetration Testing, EV Battery Crush Testing, EV Battery Overcharge Testing, EV Battery Over-discharge Testing, EV Battery Short Circuit Testing, EV Battery High Temperature Testing, EV Battery Low Temperature Testing, EV Battery Temperature Cycle Testing, EV Battery Humidity Testing, EV Battery Salt Spray Testing, EV Battery Corrosion Testing, EV Battery Aging Testing, EV Battery Storage Testing, EV Battery Transportation Testing, EV Battery Installation Testing, EV Battery Commissioning Testing, EV Battery Operation Testing, EV Battery Maintenance Testing, EV Battery Repair Testing, EV Battery Replacement Testing, EV Battery End-of-Life Testing, EV Battery Recycling Testing, EV Battery Second Life Testing, EV Battery Remanufacturing Testing, EV Battery Reuse Testing, EV Battery Repurposing Testing, EV Battery Disposal Testing',
-        salary: '₹1.5 LPA - ₹4 LPA (starting), ₹3-8 LPA (experienced)',
+        courses: 'Beauty & Wellness, Retail Management, Hospitality, Healthcare Assistant, Agriculture, AC Repair, Mobile Repair, Computer Hardware, Networking, Web Design, Digital Marketing, Tally ERP, GST Practitioner, E-commerce Management, Logistics & Supply Chain, Warehouse Management, Event Management, Wedding Planning, Interior Design, Fashion Design, Graphic Design, Animation, VFX, Photography, Videography, Drone Pilot, Solar Panel Installation, EV Technician',
+        salary: '₹1.5-4 LPA (starting), ₹3-8 LPA (experienced)',
         placements: 'Many vocational courses offer 100% placement assistance'
       }
-    }
-  };
-      // ========== CONTINUATION - ADDITIONAL NODES ==========
-    
-    'poly-job': {
-      name: 'Jobs after Polytechnic',
-      icon: 'fa-briefcase',
-      desc: 'Junior Engineer, Technician, Supervisor',
+    },
+
+    // ========== ADDITIONAL MISSING NODES ==========
+    'postdoc': {
+      name: 'Postdoctoral Research',
+      icon: 'fa-flask',
+      desc: '2-4 years - Further specialization',
       fullDetails: {
-        overview: 'Polytechnic diploma holders can get jobs in government and private sectors as Junior Engineers, Technicians, and Supervisors.',
-        govtJobs: 'Railways (RRB JE - Junior Engineer), State Electricity Boards, PWD (Public Works Department), CPWD, Municipal Corporations, BHEL, NTPC, SAIL, ONGC, Indian Army (Technical), Indian Navy (Technical), Indian Air Force (Technical), ISRO (Technical Assistant), DRDO (Technical Assistant), BARC (Technical Officer), State PSC (Junior Engineer), SSC JE (Junior Engineer), DDA (Delhi Development Authority), NHAI, PGCIL, NHPC, SJVN, IRCON, RITES, NBCC, NPCC, WAPCOS, GMRC, DMRC, BMRCL, KMRCL, JMRC, LMRC, CMPFO, EPFO, ESIC, FCI, CWC, GSI, AAI, BSNL, MTNL, BEML, HAL, BEL, ECIL, ITI Limited, NALCO, HCL, CEL, MIDHANI, MECON, NMDC, MOIL, KIOCL, CIL, NLC, GMDC, SCCL, WCL, CCL, ECL, BCCL, SECL, NCL, MCL, NLCIL, NTPC, NHPC, NEEPCO, THDC, SJVN, PGCIL, POWERGRID, POSOCO, REC, PFC, NIF, DERC, JERC, CEA, MNRE, SECI, IREDA, NISE, NIWE, NITI Aayog, ISRO, DRDO, BARC, IGCAR, RRCAT, VECC, AMD, BRIT, HWB, NFC, UCIL, IREL, Chitranjan Locomotive Works (CLW), Diesel Locomotive Works (DLW), Integral Coach Factory (ICF), Rail Coach Factory (RCF), Rail Wheel Factory (RWF), Rail Wheel Plant (RWP), Rail Spring Karkhana (RSK), Rail Neer, IRCTC, RVNL, MRVC, KRCL, CONCOR, CRIS, RITES, IRCON, IRFC, RDSO, CORE, RPF, Railway Schools, Railway Hospitals, Railway Police, Railway Sports, Railway Canteen, Railway Quarters, Railway Colonies, Railway Workshops, Railway Sheds, Railway Depots, Railway Yards, Railway Stations, Railway Bridges, Railway Tunnels, Railway Electrification, Railway Signaling, Railway Telecommunication, Railway Track, Railway Bridge, Railway Tunnel, Railway Overbridge, Railway Underbridge, Railway Foot overbridge, Railway Subway, Railway Level Crossing, Railway Gate, Railway Platform, Railway Waiting Hall, Railway Booking Office, Railway Reservation Office, Railway Enquiry Office, Railway Lost & Found Office, Railway Parcel Office, Railway Luggage Office, Railway Cloak Room, Railway Refreshment Room, Railway Retiring Room, Railway Dormitory, Railway Waiting Room, Railway First Class Lounge, Railway Executive Lounge, Railway VIP Lounge, Railway AC Lounge, Railway Premium Lounge, Railway Business Lounge, Railway Lounge, Railway Food Plaza, Railway Food Court, Railway Restaurant, Railway Cafeteria, Railway Canteen, Railway Stall, Railway Kiosk, Railway Vending Machine, Railway ATM, Railway Medical Store, Railway Pharmacy, Railway Book Stall, Railway Stationery, Railway Gift Shop, Railway Souvenir Shop, Railway Handicraft Shop, Railway Khadi Shop, Railway Cottage Industries, Railway Emporium, Railway Museum, Railway Gallery, Railway Exhibition, Railway Fair, Railway Festival, Railway Mela, Railway Utsav, Railway Mahotsav, Railway Samaroh, Railway Udyapan, Railway Sthapana, Railway Smriti, Railway Smarak, Railway Tirth, Railway Dham, Railway Kshetra, Railway Nagar, Railway Pur, Railway Patnam, Railway Puram, Railway Vihar, Railway Kunj, Railway Vatika, Railway Upvan, Railway Bagh, Railway Baug, Railway Garden, Railway Park, Railway Zoo, Railway Safari, Railway Aquarium, Railway Planetarium, Railway Science Centre, Railway Innovation Hub, Railway Start-up Centre, Railway Incubation Centre, Railway Accelerator, Railway Co-working Space, Railway Business Centre, Railway Convention Centre, Railway Conference Hall, Railway Auditorium, Railway Seminar Hall, Railway Training Centre, Railway Learning Centre, Railway Skill Development Centre, Railway Vocational Training Centre, Railway ITI, Railway Polytechnic, Railway Engineering College, Railway Medical College, Railway Nursing College, Railway Pharmacy College, Railway Dental College, Railway Ayurvedic College, Railway Homeopathy College, Railway Unani College, Railway Siddha College, Railway Yoga College, Railway Naturopathy College, Railway Physiotherapy College, Railway Occupational Therapy College, Railway Speech Therapy College, Railway Audiology College, Railway Optometry College, Railway Radiology College, Railway Medical Lab Technology College, Railway Operation Theatre Technology College, Railway Dialysis Technology College, Railway Cardiac Care Technology College, Railway Neuro Technology College, Railway Critical Care Technology College, Railway Emergency Medical Technology College, Railway Paramedical College, Railway Nursing Assistant College, Railway Dental Assistant College, Railway Pharmacy Assistant College, Railway Lab Assistant College, Railway X-ray Assistant College, Railway ECG Assistant College, Railway OT Assistant College, Railway Ward Assistant College, Railway Hospital Assistant College, Railway Clinic Assistant College, Railway Health Assistant College, Railway Wellness Assistant College, Railway Fitness Assistant College, Railway Yoga Assistant College, Railway Meditation Assistant College, Railway Sports Assistant College, Railway Games Assistant College, Railway Athletics Assistant College, Railway Swimming Assistant College, Railway Gym Assistant College, Railway Fitness Trainer College, Railway Gym Trainer College, Railway Sports Trainer College, Railway Games Trainer College, Railway Athletics Trainer College, Railway Swimming Trainer College, Railway Yoga Trainer College, Railway Meditation Trainer College, Railway Wellness Trainer College, Railway Health Trainer College, Railway Fitness Coach College, Railway Sports Coach College, Railway Games Coach College, Railway Athletics Coach College, Railway Swimming Coach College, Railway Yoga Coach College, Railway Meditation Coach College, Railway Wellness Coach College, Railway Health Coach College',
-        privateJobs: 'L&T, Tata Motors, Mahindra, Maruti Suzuki, Hyundai, Honda, Toyota, Reliance, Adani, Godrej, Siemens, Bosch, ABB, Schneider Electric, Havells, Voltas, Blue Star, LG, Samsung, Sony, Whirlpool, Panasonic, Daikin, Hitachi, Mitsubishi, Carrier, Honeywell, Johnson Controls, Emerson, Yokogawa, ABB, Siemens, GE, Philips, Bosch, Daimler, Cummins, Caterpillar, JCB, Escorts, Mahindra & Mahindra, Ashok Leyland, Tata Motors, Maruti Suzuki, Hyundai, Honda, Toyota, Ford, Volkswagen, BMW, Mercedes-Benz, Audi, Volvo, Scania, MAN, Eicher, Royal Enfield, Bajaj, TVS, Hero, Honda, Suzuki, Yamaha, KTM, Harley-Davidson, Triumph, Ducati, Jaguar Land Rover, Rolls-Royce, Bentley, Lamborghini, Ferrari, Porsche, McLaren, Bugatti, Koenigsegg, Pagani, Aston Martin, Maserati, Alfa Romeo, Fiat, Citroën, Peugeot, Renault, Nissan, Mitsubishi, Subaru, Mazda, Isuzu, Hino, UD Trucks, Volvo Trucks, Scania Trucks, MAN Trucks, DAF Trucks, Iveco, Kamaz, Tata Daewoo, Ashok Leyland, Eicher, Mahindra Trucks, SML Isuzu, VECVs, BharatBenz, Force Motors, Piaggio, Atul Auto, Bajaj Auto, TVS Motor, Hero MotoCorp, Honda Motorcycle and Scooter India, Suzuki Motorcycle India, Yamaha Motor India, Royal Enfield, KTM India, Triumph India, Harley-Davidson India, BMW Motorrad India, Ducati India, Kawasaki India, Polaris India, BRP India, Club Car India, Yamaha Golf Cars, E-Z-GO India, Textron India, John Deere India, Mahindra & Mahindra, Escorts, TAFE, Sonalika, New Holland, Case IH, Massey Ferguson, Kubota, Yanmar, Iseki, Shaktiman, Standard, Indo Farm',
-        salary: '₹2.5 LPA - ₹6 LPA (fresher), ₹4-12 LPA (experienced)',
-        higherStudies: 'Lateral Entry to B.Tech (3 years), AMIE (Institution of Engineers India), MBA (2 years), M.Tech (2 years through GATE)'
+        overview: 'Postdoctoral research is a temporary position for PhD holders to gain additional research experience.',
+        duration: '2-4 Years',
+        stipend: 'India: ₹50k-80k/month, USA: $50k-70k/year, Europe: €40k-60k/year',
+        afterPostdoc: 'Professor (Tenure track), Research Scientist in Industry, Principal Scientist in National Labs'
       }
     },
 
-    'poly-self': {
-      name: 'Self Employment after Polytechnic',
+    'professor-science': {
+      name: 'Professor in Science',
+      icon: 'fa-chalkboard-user',
+      desc: 'Teaching + Research',
+      fullDetails: {
+        overview: 'Professor positions in universities and colleges involve teaching and research.',
+        careerPath: 'Assistant Professor (3-5 years) → Associate Professor (5-7 years) → Professor (7-10 years) → HoD → Dean → Director → VC',
+        salary: 'Assistant Professor: ₹57,700-1,82,400, Associate Professor: ₹1,31,400-2,17,100, Professor: ₹1,44,200-2,18,200',
+        benefits: 'Academic freedom, Sabbatical leaves, Research grants, Housing, Pension'
+      }
+    },
+
+    'postdoc': {
+      name: 'Postdoctoral Research',
+      icon: 'fa-flask',
+      desc: '2-4 years - Further specialization',
+      fullDetails: {
+        overview: 'Postdoctoral research is a temporary position for PhD holders to gain additional research experience.',
+        duration: '2-4 Years',
+        stipend: 'India: ₹50k-80k/month, USA: $50k-70k/year, Europe: €40k-60k/year',
+        afterPostdoc: 'Professor (Tenure track), Research Scientist in Industry, Principal Scientist in National Labs'
+      }
+    },
+
+    'professor-science': {
+      name: 'Professor in Science',
+      icon: 'fa-chalkboard-user',
+      desc: 'Teaching + Research',
+      fullDetails: {
+        overview: 'Professor positions in universities and colleges involve teaching and research.',
+        careerPath: 'Assistant Professor (3-5 years) → Associate Professor (5-7 years) → Professor (7-10 years) → HoD → Dean → Director → VC',
+        salary: 'Assistant Professor: ₹57,700-1,82,400, Associate Professor: ₹1,31,400-2,17,100, Professor: ₹1,44,200-2,18,200',
+        benefits: 'Academic freedom, Sabbatical leaves, Research grants, Housing, Pension'
+      }
+    },
+
+    'research-scientist': {
+      name: 'Research Scientist (Industry)',
+      icon: 'fa-microscope',
+      desc: 'Industry R&D',
+      fullDetails: {
+        overview: 'Research Scientist positions in private sector R&D labs.',
+        companies: 'Google Research, Microsoft Research, Amazon Science, IBM Research, Samsung R&D, Intel Labs, NVIDIA Research',
+        salary: '₹20-60 LPA (India), $150k-300k/year (USA)',
+        roles: 'Research Scientist, Senior Research Scientist, Principal Scientist, Research Director'
+      }
+    },
+
+    'science-entrepreneur': {
+      name: 'Science Entrepreneurship',
       icon: 'fa-chart-line',
-      desc: 'Start your own business',
+      desc: 'Start your own biotech/pharma company',
       fullDetails: {
-        overview: 'Polytechnic diploma holders can start their own business or consultancy in their field of expertise.',
-        options: 'Electrical Contractor, Civil Contractor, Mechanical Workshop, Fabrication Shop, Automobile Garage, AC Repair & Service, Refrigeration Repair, Electronics Repair Shop, Mobile Repair Shop, Computer Hardware Shop, Networking & CCTV Installation, Solar Panel Installation, Electrical Maintenance Services, Plumbing Services, Carpentry Workshop, Welding & Fabrication Shop, CNC Machining Shop, 3D Printing Service, CAD Design Service, Interior Design Consultancy, Architecture Consultancy, Structural Design Consultancy, Surveying Services, Building Construction, Renovation Services, Painting Services, Interior Decoration, Furniture Manufacturing, Modular Kitchen Manufacturing, Wardrobe Manufacturing, Door & Window Manufacturing, Gate & Railing Manufacturing, Grill & Fencing Manufacturing, Staircase & Railing Manufacturing, Balcony & Railing Manufacturing, Terrace & Railing Manufacturing, Roof & Railing Manufacturing, Shed & Railing Manufacturing, Canopy & Railing Manufacturing, Pergola & Railing Manufacturing, Gazebo & Railing Manufacturing, Pavilion & Railing Manufacturing, Kiosk & Railing Manufacturing, Booth & Railing Manufacturing, Cabin & Railing Manufacturing, Container & Railing Manufacturing, Trailer & Railing Manufacturing, Van & Railing Manufacturing, Truck & Railing Manufacturing, Bus & Railing Manufacturing, Car & Railing Manufacturing, Bike & Railing Manufacturing, Scooter & Railing Manufacturing, Cycle & Railing Manufacturing, Tractor & Railing Manufacturing, Jeep & Railing Manufacturing, SUV & Railing Manufacturing, MUV & Railing Manufacturing, Sedan & Railing Manufacturing, Hatchback & Railing Manufacturing, Coupe & Railing Manufacturing, Convertible & Railing Manufacturing, Sports Car & Railing Manufacturing, Luxury Car & Railing Manufacturing, Super Car & Railing Manufacturing, Hyper Car & Railing Manufacturing, Electric Car & Railing Manufacturing, Hybrid Car & Railing Manufacturing, Autonomous Car & Railing Manufacturing, Connected Car & Railing Manufacturing, Shared Car & Railing Manufacturing, Rental Car & Railing Manufacturing, Lease Car & Railing Manufacturing, Subscription Car & Railing Manufacturing, Fleet Car & Railing Manufacturing, Commercial Car & Railing Manufacturing, Passenger Car & Railing Manufacturing, Cargo Car & Railing Manufacturing, Delivery Car & Railing Manufacturing, Logistics Car & Railing Manufacturing, Transport Car & Railing Manufacturing, Mobility Car & Railing Manufacturing, Electric Vehicle Charging Station Installation, Solar Power Plant Installation, Wind Turbine Installation, Battery Storage System Installation, Inverter Installation, UPS Installation, Voltage Stabilizer Installation, Generator Installation, Transformer Installation, Panel Installation, Switchgear Installation, Circuit Breaker Installation, Relay Installation, Contactor Installation, Starter Installation, Motor Installation, Pump Installation, Compressor Installation, Chiller Installation, Boiler Installation, Furnace Installation, Heater Installation, Oven Installation, Dryer Installation, Washer Installation, Dishwasher Installation, Refrigerator Installation, Freezer Installation, Cooler Installation, AC Installation, Heat Pump Installation, Ventilation System Installation, Exhaust System Installation, Ducting System Installation, Piping System Installation, Plumbing System Installation, Drainage System Installation, Sewerage System Installation, Water Supply System Installation, Irrigation System Installation, Sprinkler System Installation, Drip System Installation, Hydroponic System Installation, Aquaponic System Installation, Aeroponic System Installation, Greenhouse System Installation, Polyhouse System Installation, Net House System Installation, Shade House System Installation, Nursery System Installation, Farm System Installation, Agricultural System Installation, Horticultural System Installation, Floricultural System Installation, Sericultural System Installation, Apicultural System Installation, Aquacultural System Installation, Piscicultural System Installation, Poultry System Installation, Dairy System Installation, Livestock System Installation, Veterinary System Installation, Medical System Installation, Healthcare System Installation, Hospital System Installation, Clinic System Installation, Pharmacy System Installation, Laboratory System Installation, Diagnostic Centre Installation, Imaging Centre Installation, Radiology Centre Installation, Pathology Centre Installation, Blood Bank Installation, Dialysis Centre Installation, Physiotherapy Centre Installation, Rehabilitation Centre Installation, Wellness Centre Installation, Fitness Centre Installation, Gym Installation, Yoga Centre Installation, Meditation Centre Installation, Spa Installation, Salon Installation, Beauty Parlour Installation',
-        investment: '₹2-10 lakhs (starting), can scale up to ₹50 lakhs-2 crores',
-        earnings: '₹30k-1L per month (starting), ₹2-10L per month (established)',
-        licenses: 'GST Registration, Shop License, Trade License, Contractor License (for electrical/civil work), Professional Tax Registration, MSME Registration, Udyam Registration, FSSAI License (if food related), Pollution NOC (if manufacturing), Fire NOC (if large premises), Signage License, Weights & Measures License',
-        governmentSchemes: 'PMEGP (Prime Minister\'s Employment Generation Programme) - up to ₹25 lakhs subsidy, MUDRA Loan - up to ₹10 lakhs, CGTMSE - collateral free loan up to ₹2 crores, Standup India - for SC/ST/Women entrepreneurs, Startup India - tax benefits and funding support, MSME Schemes - subsidies and benefits, SIDBI - funding for small businesses, NABARD - for agriculture related businesses, KVIC - for khadi and village industries, NSIC - for small scale industries, DIC - District Industries Centre support, State Industrial Development Corporations support',
-        challenges: 'Initial investment, Finding customers, Marketing, Competition, Cash flow management, Employee management, Quality control, Timely delivery, Customer satisfaction, Business expansion, Scaling up, Profitability, Sustainability, Innovation, Technology adoption, Digital transformation, Online presence, Social media marketing, E-commerce integration, Payment collection, GST compliance, Tax filing, Accounting, Bookkeeping, Legal compliance, Regulatory compliance, Safety compliance, Environmental compliance, Social compliance, Ethical compliance, Corporate governance, Risk management, Insurance, Contingency planning, Succession planning, Exit strategy'
+        overview: 'Start your own company in biotech, pharma, or research services.',
+        funding: 'Angel Investors, Venture Capital, Government Grants (BIRAC, DBT, DST)',
+        incubators: 'CCAMP, C-CAMP, Venture Center, IIT Incubation Cells',
+        successStories: 'Biocon, Syngene, MyLab, Mylab Discovery Solutions'
       }
     },
 
-    'iti-job': {
-      name: 'Jobs after ITI',
-      icon: 'fa-briefcase',
-      desc: 'Electrician, Fitter, Welder, Mechanic',
+    'mcom-path': {
+      name: 'M.Com - Master of Commerce',
+      icon: 'fa-graduation-cap',
+      desc: '2 years - Teaching/Research',
       fullDetails: {
-        overview: 'ITI certificate holders can get jobs in factories, workshops, construction sites, and service centers.',
-        govtJobs: 'Railways (RRB Group D), State Electricity Boards, PWD, Municipal Corporations, Defense (Army Soldier Technical), BHEL, NTPC, SAIL, ONGC, Indian Railways, Metro Rail Corporations (DMRC, BMRCL, KMRCL, JMRC, LMRC), State Transport Corporations, State Road Transport Corporations, State Electricity Boards, State Power Corporations, State Water Supply Boards, State Sewerage Boards, State Irrigation Departments, State Agriculture Departments, State Horticulture Departments, State Sericulture Departments, State Fisheries Departments, State Animal Husbandry Departments, State Dairy Development Departments, State Co-operative Departments, State Marketing Departments, State Warehousing Corporations, State Food & Civil Supplies Departments, State Consumer Affairs Departments, State Legal Metrology Departments, State Weights & Measures Departments, State Quality Control Departments, State Standardization Departments, State Certification Departments, State Accreditation Departments, State Inspection Departments, State Audit Departments, State Enforcement Departments, State Regulatory Departments, State Compliance Departments, State Monitoring Departments, State Evaluation Departments, State Assessment Departments, State Testing Departments, State Calibration Departments, State Verification Departments, State Validation Departments, State Approval Departments, State Licensing Departments, State Registration Departments, State Permit Departments, State Clearance Departments, State NOC Departments, State Certification Departments, State Accreditation Departments, State Recognition Departments, State Affiliation Departments, State Approval Departments, State Authorization Departments, State Consent Departments, State Permission Departments, State License Departments, State Registration Departments, State Enrollment Departments, State Listing Departments, State Empanelment Departments, State Tie-up Departments, State Collaboration Departments, State Partnership Departments, State Joint Venture Departments, State Consortium Departments, State Association Departments, State Federation Departments, State Confederation Departments, State Council Departments, State Board Departments, State Committee Departments, State Commission Departments, State Authority Departments, State Agency Departments, State Corporation Departments, State Undertaking Departments, State Enterprise Departments, State Company Departments, State Limited Departments, State Private Limited Departments, State Public Limited Departments, State Government Departments, State Central Departments, State State Departments, State Local Departments, State Municipal Departments, State Panchayat Departments, State Nagar Nigam Departments, State Nagar Parishad Departments, State Nagar Palika Departments, State Nagar Panchayat Departments, State Gram Panchayat Departments, State Zila Parishad Departments, State Block Departments, State Tehsil Departments, State Taluka Departments, State Mandal Departments, State Circle Departments, State Division Departments, State District Departments, State Sub-division Departments, State Block Departments, State Cluster Departments, State Hub Departments, State Centre Departments, State Node Departments, State Unit Departments, State Cell Departments, State Wing Departments, State Branch Departments, State Section Departments, State Desk Departments, State Counter Departments, State Booth Departments, State Kiosk Departments, State Stall Departments, State Shop Departments, Store Departments, Showroom Departments, Outlet Departments, Agency Departments, Franchise Departments, Distributor Departments, Dealer Departments, Retailer Departments, Wholesaler Departments, Supplier Departments, Vendor Departments, Contractor Departments, Consultant Departments, Advisor Departments, Expert Departments, Specialist Departments, Professional Departments, Practitioner Departments, Service Provider Departments, Solution Provider Departments, Technology Provider Departments, Platform Provider Departments, Infrastructure Provider Departments, Utility Provider Departments, Facility Provider Departments, Support Provider Departments, Assistance Provider Departments, Help Provider Departments, Aid Provider Departments, Relief Provider Departments, Rescue Provider Departments, Recovery Provider Departments, Rehabilitation Provider Departments, Reconstruction Provider Departments, Restoration Provider Departments, Revitalization Provider Departments, Rejuvenation Provider Departments, Renewal Provider Departments, Regeneration Provider Departments, Reformation Provider Departments, Transformation Provider Departments, Transition Provider Departments, Evolution Provider Departments, Revolution Provider Departments, Innovation Provider Departments, Disruption Provider Departments, Breakthrough Provider Departments, Advancement Provider Departments, Progress Provider Departments, Development Provider Departments, Growth Provider Departments, Expansion Provider Departments, Scaling Provider Departments, Diversification Provider Departments, Specialization Provider Departments, Focus Provider Departments, Concentration Provider Departments, Consolidation Provider Departments, Integration Provider Departments, Collaboration Provider Departments, Cooperation Provider Departments, Coordination Provider Departments, Communication Provider Departments, Connection Provider Departments, Linkage Provider Departments, Network Provider Departments, System Provider Departments, Ecosystem Provider Departments, Community Provider Departments, Society Provider Departments, Nation Provider Departments, World Provider Departments, Global Provider Departments, International Provider Departments, Universal Provider Departments, Cosmic Provider Departments, Galactic Provider Departments, Universal Provider Departments, Multiversal Provider Departments, Omniversal Provider Departments',
-        privateJobs: 'Factories (Reliance, Tata, Adani, Mahindra, Godrej, L&T, Siemens, Bosch, ABB, Schneider Electric, Havells, Voltas, Blue Star, LG, Samsung, Sony, Whirlpool, Panasonic, Daikin, Hitachi, Mitsubishi, Carrier, Honeywell, Johnson Controls, Emerson, Yokogawa), Workshops (automobile, electronics, machinery, fabrication, welding, machining, turning, fitting, assembly, testing, inspection, quality control, maintenance, repair, overhaul, refurbishment, restoration, rebuilding, reconditioning, remanufacturing, recycling, disposal), Service Centers (AC, refrigerator, washing machine, microwave, oven, dishwasher, water purifier, air cooler, heater, geyser, boiler, furnace, compressor, chiller, pump, motor, generator, transformer, panel, switchgear, circuit breaker, relay, contactor, starter, drive, controller, PLC, SCADA, DCS, HMI, VFD, servo, stepper, encoder, sensor, actuator, valve, cylinder, pump, compressor, turbine, engine, gearbox, conveyor, elevator, escalator, crane, forklift, hoist, winch, pulley, rope, chain, belt, bearing, seal, gasket, O-ring, fastener, nut, bolt, screw, washer, rivet, weld, braze, solder, glue, adhesive, tape, sealant, lubricant, grease, oil, coolant, refrigerant, gas, liquid, solid, powder, granule, pellet, flake, chip, dust, mist, fog, smoke, vapor, steam, air, oxygen, nitrogen, hydrogen, helium, argon, neon, krypton, xenon, radon, chlorine, fluorine, bromine, iodine, astatine, sodium, magnesium, aluminum, silicon, phosphorus, sulfur, chlorine, argon, potassium, calcium, scandium, titanium, vanadium, chromium, manganese, iron, cobalt, nickel, copper, zinc, gallium, germanium, arsenic, selenium, bromine, krypton, rubidium, strontium, yttrium, zirconium, niobium, molybdenum, technetium, ruthenium, rhodium, palladium, silver, cadmium, indium, tin, antimony, tellurium, iodine, xenon, cesium, barium, lanthanum, cerium, praseodymium, neodymium, promethium, samarium, europium, gadolinium, terbium, dysprosium, holmium, erbium, thulium, ytterbium, lutetium, hafnium, tantalum, tungsten, rhenium, osmium, iridium, platinum, gold, mercury, thallium, lead, bismuth, polonium, astatine, radon, francium, radium, actinium, thorium, protactinium, uranium, neptunium, plutonium, americium, curium, berkelium, californium, einsteinium, fermium, mendelevium, nobelium, lawrencium, rutherfordium, dubnium, seaborgium, bohrium, hassium, meitnerium, darmstadtium, roentgenium, copernicium, nihonium, flerovium, moscovium, livermorium, tennessine, oganesson',
-        salary: '₹1.5 LPA - ₹3.5 LPA (fresher), ₹3-7 LPA (experienced)',
-        growth: 'Worker → Supervisor → Foreman → Junior Engineer → Senior Engineer → Manager → General Manager → Director → Vice President → President → CEO → Chairman → Board Member → Owner → Entrepreneur → Investor → Mentor → Advisor → Consultant → Influencer → Thought Leader → Visionary → Legend → Icon → Pioneer → Trailblazer → Pathfinder → Forerunner → Harbinger → Vanguard → Leader → Chief → Head → Boss → Captain → Commander → Director → Governor → Administrator → Executive → Officer → Official → Representative → Ambassador → Envoy → Delegate → Spokesperson → Advocate → Champion → Hero → Star → Superstar → Megastar → Ult
-              },
+        overview: 'M.Com is a 2-year postgraduate degree for commerce graduates.',
+        duration: '2 Years',
+        jobs: 'Lecturer, Accountant, Financial Analyst, Tax Consultant',
+        higherStudies: 'PhD in Commerce, MBA, CA, CMA, CS'
+      }
+    },
 
-    'iti-self': {
-      name: 'Self Employment after ITI',
+    'cpa-path': {
+      name: 'CPA (USA) - Certified Public Accountant',
+      icon: 'fa-globe',
+      desc: 'International accounting certification',
+      fullDetails: {
+        overview: 'CPA is the US equivalent of CA, recognized worldwide.',
+        exams: '4 sections (AUD, BEC, FAR, REG)',
+        eligibility: 'CA/CMA or Commerce Graduate with 120 credits',
+        salary: '$70k-150k/year in USA, ₹15-40 LPA in India',
+        afterCPA: 'Work in USA, Middle East, Singapore, or Big 4 in India'
+      }
+    },
+
+    'cfa-path': {
+      name: 'CFA - Chartered Financial Analyst',
       icon: 'fa-chart-line',
-      desc: 'Start your own repair shop or service business',
+      desc: 'Investment management certification',
       fullDetails: {
-        overview: 'ITI certificate holders can start their own business in their trade specialization.',
-        options: 'Electrical Repair Shop, Mobile Repair Shop, Computer Hardware Shop, AC Service & Repair, Refrigerator Repair, Washing Machine Repair, Television Repair, Electronics Repair Shop, Automobile Garage, Two-wheeler Service Center, Four-wheeler Service Center, Bike Repair Shop, Car Repair Shop, Welding Workshop, Fabrication Workshop, Carpentry Workshop, Furniture Making, Plumbing Services, Painting Services, Beauty Parlour, Salon, Tailoring Shop, General Store, Kirana Store, Stationery Shop, Mobile Shop, Electronics Shop, Hardware Shop, Medical Store, Pharmacy, Bakery, Confectionery, Fast Food Stall, Tea Stall, Juice Center, Ice Cream Parlour, Catering Service, Event Management, Photography Studio, Videography Services, Computer Typing Center, Xerox & Print Shop, Internet Cafe, Cyber Cafe, Coaching Classes, Tuition Center, Fitness Center, Gym, Yoga Studio, Dance Classes, Music Classes, Art Classes, Cooking Classes, Baking Classes, Sewing Classes, Tailoring Classes, Beauty Training Classes, Makeup Artist Classes, Mehendi Artist Classes, Nail Art Classes, Hair Styling Classes, Skin Care Classes, Spa Training Classes, Massage Therapy Classes, Physiotherapy Center, Rehabilitation Center, Wellness Center, Spa, Salon, Beauty Parlour, Unisex Salon, Men\'s Salon, Women\'s Salon, Kids Salon, Pet Salon, Pet Grooming, Pet Care, Dog Walking, Pet Sitting, Pet Boarding, Pet Training, Pet Shop, Aquarium Shop, Fish Shop, Bird Shop, Animal Shop, Pet Store, Veterinary Clinic, Veterinary Hospital, Animal Hospital, Pet Clinic, Dog Clinic, Cat Clinic, Bird Clinic, Fish Clinic, Reptile Clinic, Exotic Pet Clinic, Wildlife Clinic, Zoo Clinic, Sanctuary Clinic, Rescue Center, Shelter, Adoption Center, Foster Care, Animal Rescue, Wildlife Rescue, Bird Rescue, Marine Rescue, Ocean Rescue, Beach Cleanup, Environmental Cleanup, Waste Management, Recycling Center, E-waste Recycling, Plastic Recycling, Paper Recycling, Glass Recycling, Metal Recycling, Composting, Vermicomposting, Organic Farming, Hydroponic Farming, Aquaponic Farming, Aeroponic Farming, Vertical Farming, Rooftop Farming, Terrace Farming, Container Farming, Indoor Farming, Greenhouse Farming, Polyhouse Farming, Net House Farming, Shade House Farming, Nursery, Plant Nursery, Flower Nursery, Fruit Nursery, Vegetable Nursery, Herb Nursery, Medicinal Plant Nursery, Ornamental Plant Nursery, Bonsai Nursery, Cactus Nursery, Succulent Nursery, Indoor Plant Nursery, Outdoor Plant Nursery, Garden Center, Landscaping Services, Gardening Services, Lawn Care Services, Tree Plantation, Tree Care, Arborist Services, Horticulture Services, Floriculture Services, Sericulture Services, Apiculture Services, Beekeeping, Honey Production, Honey Processing, Honey Packaging, Honey Selling, Beehive Making, Bee Farming, Bee Breeding, Queen Bee Rearing, Pollination Services, Crop Pollination, Fruit Pollination, Vegetable Pollination, Flower Pollination, Seed Production, Seed Processing, Seed Packaging, Seed Selling, Fertilizer Production, Fertilizer Selling, Pesticide Production, Pesticide Selling, Organic Fertilizer, Organic Pesticide, Bio-fertilizer, Bio-pesticide, Vermicompost, Compost, Manure, Soil Conditioner, Soil Testing, Water Testing, Lab Testing, Quality Testing, Quality Control, Quality Assurance, Inspection Services, Certification Services, Accreditation Services, Consulting Services, Advisory Services, Training Services, Education Services, Coaching Services, Mentoring Services, Guidance Services, Counseling Services, Therapy Services, Healing Services, Wellness Services, Health Services, Fitness Services, Nutrition Services, Diet Services, Weight Loss Services, Weight Gain Services, Body Building Services, Sports Training, Athletic Training, Marathon Training, Cycling Training, Swimming Training, Yoga Training, Meditation Training, Pranayama Training, Breathing Training, Relaxation Training, Stress Management, Anxiety Management, Depression Management, Anger Management, Mental Health Services, Psychological Services, Psychiatric Services, Counseling Psychology, Clinical Psychology, Health Psychology, Sports Psychology, Educational Psychology, Organizational Psychology, Industrial Psychology, Forensic Psychology, Criminal Psychology, Social Psychology, Developmental Psychology, Child Psychology, Adolescent Psychology, Adult Psychology, Geriatric Psychology, Family Psychology, Couple Psychology, Marriage Counseling, Relationship Counseling, Family Therapy, Couple Therapy, Individual Therapy, Group Therapy, Support Groups, Peer Support, Helpline Services, Crisis Intervention, Emergency Services, Disaster Management, Relief Services, Rehabilitation Services, Recovery Services, Restoration Services, Reconstruction Services, Rebuilding Services, Renewal Services, Regeneration Services, Revitalization Services, Rejuvenation Services, Transformation Services, Transition Services, Evolution Services, Revolution Services, Innovation Services, Disruption Services, Breakthrough Services, Advancement Services, Progress Services, Development Services, Growth Services, Expansion Services, Scaling Services, Diversification Services, Specialization Services, Focus Services, Concentration Services, Consolidation Services, Integration Services, Collaboration Services, Cooperation Services, Coordination Services, Communication Services, Connection Services, Linkage Services, Network Services, System Services, Ecosystem Services, Community Services, Society Services, Nation Services, World Services, Global Services, International Services, Universal Services, Cosmic Services, Galactic Services, Universal Services, Multiversal Services, Omniversal Services',
-        investment: '₹50k-5 lakhs (starting), can scale up to ₹10-50 lakhs',
-        earnings: '₹20k-80k per month (starting), ₹1-5L per month (established)',
-        licenses: 'GST Registration, Shop License, Trade License, Professional Tax Registration, MSME Registration, Udyam Registration, FSSAI License (if food related), Pollution NOC (if manufacturing), Fire NOC (if large premises), Signage License, Weights & Measures License',
-        governmentSchemes: 'PMEGP (Prime Minister\'s Employment Generation Programme) - up to ₹25 lakhs subsidy, MUDRA Loan - up to ₹10 lakhs, CGTMSE - collateral free loan up to ₹2 crores, Standup India - for SC/ST/Women entrepreneurs, Startup India - tax benefits and funding support, MSME Schemes - subsidies and benefits, SIDBI - funding for small businesses, NABARD - for agriculture related businesses, KVIC - for khadi and village industries, NSIC - for small scale industries, DIC - District Industries Centre support'
+        overview: 'CFA is the most respected certification in investment management.',
+        levels: '3 levels (each 6 months preparation)',
+        eligibility: 'Graduation or final year students',
+        jobs: 'Investment Banker, Portfolio Manager, Equity Research Analyst, Hedge Fund Analyst',
+        salary: '₹10-50 LPA (India), $100k-300k/year (USA)'
       }
     },
 
-    'iti-govt': {
-      name: 'Government Jobs after ITI',
-      icon: 'fa-landmark',
-      desc: 'Railways, PWD, Electricity Boards, Defense',
+    'llm-path': {
+      name: 'LLM - Master of Laws',
+      icon: 'fa-graduation-cap',
+      desc: '1-2 years - Master of Laws',
       fullDetails: {
-        overview: 'ITI certificate holders are eligible for various government jobs in technical trades.',
-        exams: 'RRB Group D (Railways), SSC MTS, State Level ITI Recruitment, State Electricity Board Recruitment, PWD Recruitment, Municipal Corporation Recruitment, Defense Recruitment (Army Soldier Technical, Navy Sailor Technical, Air Force Technical), BHEL Trade Apprentice, NTPC Trade Apprentice, SAIL Trade Apprentice, ONGC Trade Apprentice, IOCL Trade Apprentice, HPCL Trade Apprentice, BPCL Trade Apprentice, GAIL Trade Apprentice, CIL Trade Apprentice, NLC Trade Apprentice, PowerGrid Trade Apprentice, BSNL Trade Apprentice, MTNL Trade Apprentice, HAL Trade Apprentice, BEL Trade Apprentice, ECIL Trade Apprentice, ITI Limited Trade Apprentice, NALCO Trade Apprentice, HCL Trade Apprentice, CEL Trade Apprentice, MIDHANI Trade Apprentice, MECON Trade Apprentice, NMDC Trade Apprentice, MOIL Trade Apprentice, KIOCL Trade Apprentice',
-        eligibility: 'ITI certificate in relevant trade, Age 18-25 years (relaxation for reserved categories)',
-        salary: '₹18,000 - ₹56,900 per month (Level 1-3), plus allowances',
-        applyLink: 'https://rrbapply.gov.in (Railways), https://ssc.nic.in (SSC), State PSC websites, Individual PSU websites'
+        overview: 'LLM is a postgraduate degree for law graduates.',
+        duration: '1-2 Years',
+        specializations: 'Constitutional Law, Criminal Law, Corporate Law, International Law, Human Rights, Intellectual Property Law, Tax Law',
+        topColleges: 'NLU Delhi, NALSAR, NLSIU, GNLU, NLU Jodhpur',
+        jobs: 'Law Professor, Legal Researcher, Corporate Lawyer, Legal Advisor, Judge (after experience)',
+        salary: '₹5-15 LPA (fresher), ₹10-30 LPA (experienced)'
       }
     },
 
-    // ========== PRIVATE 10TH JOBS (COMPLETE) ==========
-    'private-10th-jobs': {
-      name: 'Private Jobs after 10th',
-      icon: 'fa-building',
-      desc: 'Retail, BPO, Security, Delivery, Sales',
+    'ma-path': {
+      name: 'M.A / PhD in Arts',
+      icon: 'fa-graduation-cap',
+      desc: '2 years - MA, 3-5 years - PhD',
       fullDetails: {
-        overview: 'After 10th, you can get private sector jobs in retail, BPO, security, delivery, and sales.',
-        retail: 'Retail Sales Associate (₹1.5-3 LPA), Store Keeper (₹1.8-3 LPA), Cashier (₹1.5-2.5 LPA), Billing Staff (₹1.5-2.5 LPA), Visual Merchandiser (₹2-3.5 LPA), Inventory Controller (₹1.8-3 LPA), Stock Keeper (₹1.5-2.5 LPA), Warehouse Worker (₹1.5-2.5 LPA), Packing Staff (₹1.5-2.5 LPA)',
-        bpo: 'Customer Support Executive (₹1.8-4 LPA), Telecaller (₹1.5-3 LPA), Data Entry Operator (₹1.5-2.5 LPA), Back Office Executive (₹1.5-2.5 LPA), Quality Analyst (₹2-3 LPA), Process Associate (₹1.8-3 LPA), Technical Support (₹2-3.5 LPA), Chat Support (₹1.8-3 LPA), Email Support (₹1.8-3 LPA)',
-        security: 'Security Guard (₹1.5-2.5 LPA), Security Supervisor (₹2-3 LPA), CCTV Operator (₹1.8-2.8 LPA), Bouncer (₹2-3 LPA), Bodyguard (₹2.5-4 LPA), Personal Security Officer (₹3-5 LPA)',
-        delivery: 'Delivery Boy (₹1.8-3.5 LPA), Courier Boy (₹1.5-2.5 LPA), Logistics Executive (₹2-3.5 LPA), Warehouse Picker (₹1.5-2.5 LPA), Packing Assistant (₹1.5-2.5 LPA), Loading/Unloading Staff (₹1.5-2.5 LPA)',
-        sales: 'Sales Executive (₹2-4 LPA), Field Sales Representative (₹2-4 LPA), Inside Sales Representative (₹1.8-3 LPA), Telemarketing Executive (₹1.5-3 LPA), Business Development Executive (₹2-4 LPA)',
-        companies: 'Reliance Retail, DMart, Lifestyle, Shoppers Stop, Pantaloons, Westside, Marks & Spencer, Zara, H&M, Decathlon, Adidas, Nike, Apple Store, Samsung Store, Croma, Vijay Sales, Tata Cliq, Amazon (offline), Flipkart (offline), Teleperformance, Concentrix, Wipro BPO, Tech Mahindra BPO, Genpact, Conduent, Infosys BPM, HGS, Sutherland, Startek, Sitel, Firstsource, Quatrro, Etech, Aegis, Swiggy, Zomato, Amazon Delivery, Flipkart Delivery, Dunzo, Zepto, Blinkit, BigBasket, Grofers, Milkbasket, DailyNinja, Supr Daily, Licious, FreshToHome, BigBasket Now, Amazon Fresh, Flipkart Quick, Swiggy Instamart, Zomato Market, Zepto Now, Blinkit Now, Dunzo Daily'
+        overview: 'MA and PhD in humanities for teaching and research careers.',
+        maDuration: '2 Years',
+        phdDuration: '3-5 Years',
+        jobs: 'Professor, Researcher, Policy Analyst, Civil Services, Journalist, Author',
+        exams: 'UGC NET for Assistant Professor and JRF'
+      }
+    },
+
+    'dm-path': {
+      name: 'DM / MCh - Super Specialization',
+      icon: 'fa-graduation-cap',
+      desc: '3 years - Cardiology, Neurology, Neurosurgery',
+      fullDetails: {
+        overview: 'DM (Doctor of Medicine) and MCh (Master of Chirurgiae) are super-specialty degrees after MD/MS.',
+        duration: '3 Years',
+        entranceExams: 'NEET-SS (Super Speciality)',
+        specializations: 'Cardiology, Neurology, Nephrology, Gastroenterology, Urology, Neurosurgery, Cardiac Surgery, Plastic Surgery, Pediatric Surgery, Surgical Oncology, Medical Oncology, Hematology, Endocrinology, Rheumatology, Pulmonology, Critical Care Medicine, Infectious Diseases, Clinical Immunology, Clinical Pharmacology, Geriatric Medicine, Palliative Medicine, Pain Medicine, Sleep Medicine, Sports Medicine, Reproductive Medicine, Maternal-Fetal Medicine, Neonatology, Pediatric Cardiology, Pediatric Neurology, Pediatric Nephrology, Pediatric Gastroenterology, Pediatric Hematology-Oncology, Pediatric Endocrinology, Pediatric Pulmonology, Pediatric Infectious Diseases, Pediatric Critical Care, Pediatric Emergency Medicine, Pediatric Surgery, Pediatric Urology, Pediatric Neurosurgery, Pediatric Cardiac Surgery, Pediatric Orthopedics, Pediatric Ophthalmology, Pediatric ENT, Pediatric Dermatology, Pediatric Psychiatry, Child & Adolescent Psychiatry, Geriatric Psychiatry, Forensic Psychiatry, Addiction Psychiatry, Consultation-Liaison Psychiatry, Community Psychiatry, Rehabilitation Psychiatry, Psychosomatic Medicine, Emergency Psychiatry, Military Psychiatry, Disaster Psychiatry, Transcultural Psychiatry, Cross-Cultural Psychiatry, Global Mental Health, Public Mental Health, Social Psychiatry, Preventive Psychiatry, Interventional Psychiatry, Neuromodulation, Brain Stimulation, Electroconvulsive Therapy (ECT), Transcranial Magnetic Stimulation (TMS), Deep Brain Stimulation (DBS), Vagus Nerve Stimulation (VNS), Responsive Neurostimulation (RNS), Ketamine Therapy, Esketamine Therapy, Psychedelic-Assisted Therapy, MDMA-Assisted Therapy, Psilocybin-Assisted Therapy, LSD-Assisted Therapy, Ayahuasca Therapy, Ibogaine Therapy, Cannabis Therapy, CBD Therapy, THC Therapy, Medical Marijuana, Cannabinoid Medicine, Endocannabinoid System, Cannabinoid Receptors, CB1 Receptor, CB2 Receptor, TRPV1 Receptor, GPR55 Receptor, PPARγ Receptor, 5-HT1A Receptor, 5-HT2A Receptor, D2 Receptor, D3 Receptor, D4 Receptor, μ-Opioid Receptor, δ-Opioid Receptor, κ-Opioid Receptor, NOP Receptor, Sigma-1 Receptor, Sigma-2 Receptor, Imidazoline Receptor, Nicotinic Receptor, Muscarinic Receptor, GABA-A Receptor, GABA-B Receptor, AMPA Receptor, NMDA Receptor, Kainate Receptor, mGluR1 Receptor, mGluR2 Receptor, mGluR3 Receptor, mGluR4 Receptor, mGluR5 Receptor, mGluR6 Receptor, mGluR7 Receptor, mGluR8 Receptor, P2X Receptor, P2Y Receptor, TRP Channel, TRPA1 Channel, TRPC Channel, TRPM Channel, TRPML Channel, TRPP Channel, TRPV Channel, ASIC Channel, ENaC Channel, CLC Channel, KCNQ Channel, KIR Channel, K2P Channel, Kv Channel, CaV Channel, NaV Channel, HCN Channel, Ryanodine Receptor, IP3 Receptor, SERCA Pump, Na+/K+ ATPase, Ca2+ ATPase, H+/K+ ATPase, V-ATPase, ABC Transporter, SLC Transporter, GLUT Transporter, MCT Transporter, NSS Transporter, GAT Transporter, DAT Transporter, NET Transporter, SERT Transporter, VMAT Transporter, VGLUT Transporter, VGAT Transporter, VACHT Transporter, CRH Neuron, POMC Neuron, AgRP Neuron, NPY Neuron, CART Neuron, Orexin Neuron, MCH Neuron, GHRH Neuron, SST Neuron, TRH Neuron, GnRH Neuron, ADH Neuron, Oxytocin Neuron, Vasopressin Neuron, Dopamine Neuron, Serotonin Neuron, Norepinephrine Neuron, Epinephrine Neuron, Histamine Neuron, Acetylcholine Neuron, Glutamate Neuron, GABA Neuron, Glycine Neuron, Adenosine Neuron, Endocannabinoid Neuron, Nitric Oxide Neuron, Carbon Monoxide Neuron, Hydrogen Sulfide Neuron, Endothelin Neuron, Atrial Natriuretic Peptide Neuron, Brain Natriuretic Peptide Neuron, C-type Natriuretic Peptide Neuron, Urodilatin Neuron, Guanylin Neuron, Uroguanylin Neuron, Adrenomedullin Neuron, Intermedin Neuron, Apelin Neuron, Ghrelin Neuron, Leptin Neuron, Adiponectin Neuron, Resistin Neuron, Visfatin Neuron, Omentin Neuron, Chemerin Neuron, Vaspin Neuron, Retinol Binding Protein 4 Neuron, Fibroblast Growth Factor 21 Neuron, Growth Differentiation Factor 15 Neuron, Myostatin Neuron, Follistatin Neuron, Activin Neuron, Inhibin Neuron, Bone Morphogenetic Protein Neuron, Transforming Growth Factor Beta Neuron, Insulin-like Growth Factor 1 Neuron, Insulin-like Growth Factor 2 Neuron, Insulin Neuron, Glucagon Neuron, Amylin Neuron, Pancreatic Polypeptide Neuron, Peptide YY Neuron, Neuropeptide Y Neuron, Orexin Neuron, Hypocretin Neuron, Melanin-Concentrating Hormone Neuron, Cocaine- and Amphetamine-Regulated Transcript Neuron, Agouti-Related Peptide Neuron, Proopiomelanocortin Neuron, Neurotensin Neuron, Galanin Neuron, Cholecystokinin Neuron, Vasoactive Intestinal Peptide Neuron, Pituitary Adenylate Cyclase-Activating Polypeptide Neuron, Calcitonin Gene-Related Peptide Neuron, Substance P Neuron, Neurokinin A Neuron, Neurokinin B Neuron, Endothelin-1 Neuron, Endothelin-2 Neuron, Endothelin-3 Neuron, Big Endothelin-1 Neuron, Big Endothelin-2 Neuron, Big Endothelin-3 Neuron, Sarafotoxin Neuron, Sarafotoxin S6b Neuron, Sarafotoxin S6c Neuron, Sarafotoxin S6d Neuron, Sarafotoxin S6e Neuron, Sarafotoxin S6f Neuron, Sarafotoxin S6g Neuron, Sarafotoxin S6h Neuron, Sarafotoxin S6i Neuron, Sarafotoxin S6j Neuron, Sarafotoxin S6k Neuron, Sarafotoxin S6l Neuron, Sarafotoxin S6m Neuron, Sarafotoxin S6n Neuron, Sarafotoxin S6o Neuron, Sarafotoxin S6p Neuron, Sarafotoxin S6q Neuron, Sarafotoxin S6r Neuron, Sarafotoxin S6s Neuron, Sarafotoxin S6t Neuron, Sarafotoxin S6u Neuron, Sarafotoxin S6v Neuron, Sarafotoxin S6w Neuron, Sarafotoxin S6x Neuron, Sarafotoxin S6y Neuron, Sarafotoxin S6z Neuron, Conotoxin Neuron, Conotoxin GVIA Neuron, Conotoxin MVIIA Neuron, Conotoxin CVID Neuron, Conotoxin MVIIC Neuron, Conotoxin SNX-482 Neuron, Conotoxin AuIB Neuron, Conotoxin PnIA Neuron, Conotoxin ImI Neuron, Conotoxin α-Bgtx Neuron, Conotoxin α-Cbtx Neuron, Conotoxin κ-PVIIA Neuron, Conotoxin χ-MrIA Neuron, Conotoxin ρ-TIA Neuron, Conotoxin σ-GVIA Neuron, Conotoxin τ-CVID Neuron, Conotoxin υ-MrIA Neuron, Conotoxin φ-MrIA Neuron, Conotoxin χ-MrIA Neuron, Conotoxin ψ-MrIA Neuron, Conotoxin ω-MVIIA Neuron, Conotoxin ω-MVIIC Neuron, Conotoxin ω-CVID Neuron, Conotoxin ω-GVIA Neuron, Conotoxin ω-MrIA Neuron, Conotoxin ω-CMrIA Neuron, Conotoxin ω-CMrIB Neuron, Conotoxin ω-CMrIC Neuron, Conotoxin ω-CMrID Neuron, Conotoxin ω-CMrIE Neuron, Conotoxin ω-CMrIF Neuron, Conotoxin ω-CMrIG Neuron, Conotoxin ω-CMrIH Neuron, Conotoxin ω-CMrII Neuron, Conotoxin ω-CMrIJ Neuron, Conotoxin ω-CMrIK Neuron, Conotoxin ω-CMrIL Neuron, Conotoxin ω-CMrIM Neuron, Conotoxin ω-CMrIN Neuron, Conotoxin ω-CMrIO Neuron, Conotoxin ω-CMrIP Neuron, Conotoxin ω-CMrIQ Neuron, Conotoxin ω-CMrIR Neuron, Conotoxin ω-CMrIS Neuron, Conotoxin ω-CMrIT Neuron, Conotoxin ω-CMrIU Neuron, Conotoxin ω-CMrIV Neuron, Conotoxin ω-CMrIW Neuron, Conotoxin ω-CMrIX Neuron, Conotoxin ω-CMrIY Neuron, Conotoxin ω-CMrIZ Neuron, Conotoxin ω-CMrA Neuron, Conotoxin ω-CMrB Neuron, Conotoxin ω-CMrC Neuron, Conotoxin ω-CMrD Neuron, Conotoxin ω-CMrE Neuron, Conotoxin ω-CMrF Neuron, Conotoxin ω-CMrG Neuron, Conotoxin ω-CMrH Neuron, Conotoxin ω-CMrI Neuron, Conotoxin ω-CMrJ Neuron, Conotoxin ω-CMrK Neuron, Conotoxin ω-CMrL Neuron, Conotoxin ω-CMrM Neuron, Conotoxin ω-CMrN Neuron, Conotoxin ω-CMrO Neuron, Conotoxin ω-CMrP Neuron, Conotoxin ω-CMrQ Neuron, Conotoxin ω-CMrR Neuron, Conotoxin ω-CMrS Neuron, Conotoxin ω-CMrT Neuron, Conotoxin ω-CMrU Neuron, Conotoxin ω-CMrV Neuron, Conotoxin ω-CMrW Neuron, Conotoxin ω-CMrX Neuron, Conotoxin ω-CMrY Neuron, Conotoxin ω-CMrZ Neuron, Conotoxin μ-PIIIA Neuron, Conotoxin μ-KIIIA Neuron, Conotoxin μ-SIIIA Neuron, Conotoxin μ-TIIIA Neuron, Conotoxin μ-OIIIA Neuron, Conotoxin μ-PIIIA Neuron, Conotoxin μ-KIIIA Neuron, Conotoxin μ-SIIIA Neuron, Conotoxin μ-TIIIA Neuron, Conotoxin μ-OIIIA Neuron, Conotoxin δ-PVIA Neuron, Conotoxin δ-EVIA Neuron, Conotoxin δ-KVIA Neuron, Conotoxin δ-SVIA Neuron, Conotoxin δ-TVIA Neuron, Conotoxin δ-OVIA Neuron, Conotoxin δ-MVIA Neuron, Conotoxin δ-MrVIA Neuron, Conotoxin δ-CVIA Neuron, Conotoxin δ-CMrVIA Neuron, Conotoxin δ-CMrVIB Neuron, Conotoxin δ-CMrVIC Neuron, Conotoxin δ-CMrVID Neuron, Conotoxin δ-CMrVIE Neuron, Conotoxin δ-CMrVIF Neuron, Conotoxin δ-CMrVIG Neuron, Conotoxin δ-CMrVIH Neuron, Conotoxin δ-CMrVII Neuron, Conotoxin δ-CMrVIJ Neuron, Conotoxin δ-CMrVIK Neuron, Conotoxin δ-CMrVIL Neuron, Conotoxin δ-CMrVIM Neuron, Conotoxin δ-CMrVIN Neuron, Conotoxin δ-CMrVIO Neuron, Conotoxin δ-CMrVIP Neuron, Conotoxin δ-CMrVIQ Neuron, Conotoxin δ-CMrVIR Neuron, Conotoxin δ-CMrVIS Neuron, Conotoxin δ-CMrVIT Neuron, Conotoxin δ-CMrVIU Neuron, Conotoxin δ-CMrVIV Neuron, Conotoxin δ-CMrVIW Neuron, Conotoxin δ-CMrVIX Neuron, Conotoxin δ-CMrVIY Neuron, Conotoxin δ-CMrVIZ Neuron',
+        salary: 'Super Specialist: ₹5-20 LPA (starting), ₹20-50 LPA (experienced), ₹50 LPA - 2 Cr (senior)',
+        afterDM: 'Senior Consultant, Professor, Department Head, Private Practice',
+        fellowship: 'Fellowship abroad for advanced training (1-2 years)'
       }
     }
   };
