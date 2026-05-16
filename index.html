@@ -264,6 +264,37 @@
       </div>
     </div>
 
+    <!-- ⬇️ ONE-LINE FIX STARTS HERE ⬇️ -->
+    <script>
+      (async function() {
+        try {
+          const response = await fetch('https://qmljqckhhdmvcbomydhf.supabase.co/rest/v1/ApplyMore?select=*', {
+            headers: {
+              'apikey': 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h',
+              'Authorization': 'Bearer sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h'
+            }
+          });
+          const jobs = await response.json();
+          
+          const total = jobs.length;
+          const todayStr = new Date().toDateString();
+          const newToday = jobs.filter(j => j.created_at && new Date(j.created_at).toDateString() === todayStr).length;
+          const companies = [...new Set(jobs.map(j => j.company))].length;
+          
+          document.getElementById('totalJobs').textContent = total;
+          document.getElementById('newJobs').textContent = newToday;
+          document.getElementById('activeCompanies').textContent = companies;
+          
+          document.getElementById('totalJobs').setAttribute('data-target', total);
+          document.getElementById('newJobs').setAttribute('data-target', newToday);
+          document.getElementById('activeCompanies').setAttribute('data-target', companies);
+        } catch (error) {
+          console.log('Stats will load via main fetch');
+        }
+      })();
+    </script>
+    <!-- ⬆️ ONE-LINE FIX ENDS HERE ⬆️ -->
+
     <!-- Community -->
     <div class="glass rounded-2xl p-6 mb-8 text-center border border-white/5 relative overflow-hidden group">
       <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
