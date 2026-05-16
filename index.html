@@ -191,6 +191,53 @@
       100% { background-position: -200% 0; }
     }
     
+    /* Google-style ad styling */
+    .google-ad {
+      position: relative;
+    }
+    .google-ad .ad-container {
+      background: rgba(20, 20, 50, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      padding: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    .google-ad .ad-container:hover {
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.05);
+    }
+    .google-ad .ad-label {
+      font-size: 10px;
+      color: #6b7280;
+      letter-spacing: 0.5px;
+    }
+    .google-ad .ad-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #60a5fa;
+      transition: color 0.3s;
+    }
+    .google-ad .ad-title:hover {
+      color: #93bbfc;
+    }
+    .google-ad .ad-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1.2rem;
+      border-radius: 9999px;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .google-ad .ad-cta:hover {
+      background: rgba(59, 130, 246, 0.25);
+      transform: translateX(3px);
+    }
+    
     /* Responsive */
     @media (max-width: 840px) {
       .main-layout { flex-direction: column; }
@@ -208,6 +255,15 @@
       background: rgba(20, 20, 50, 0.5);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Ad glow pulse */
+    @keyframes adPulse {
+      0%, 100% { border-color: rgba(255, 255, 255, 0.08); }
+      50% { border-color: rgba(59, 130, 246, 0.2); }
+    }
+    .ad-pulse {
+      animation: adPulse 3s ease-in-out infinite;
     }
   </style>
   
@@ -264,7 +320,7 @@
       </div>
     </div>
 
-    <!-- ⬇️ ONE-LINE FIX STARTS HERE ⬇️ -->
+    <!-- ⬇️ ONE-LINE FIX FOR STATS ⬇️ -->
     <script>
       (async function() {
         try {
@@ -293,7 +349,7 @@
         }
       })();
     </script>
-    <!-- ⬆️ ONE-LINE FIX ENDS HERE ⬆️ -->
+    <!-- ⬆️ END OF ONE-LINE FIX ⬆️ -->
 
     <!-- Community -->
     <div class="glass rounded-2xl p-6 mb-8 text-center border border-white/5 relative overflow-hidden group">
@@ -342,23 +398,59 @@
       <!-- Jobs Column -->
       <div class="flex-1 min-w-[300px] jobs-column">
         
-        <!-- Sponsored Ad -->
-        <div class="border-2 border-yellow-400 rounded-xl p-5 mb-5 bg-yellow-400/5 relative overflow-hidden group">
-          <div class="absolute inset-0 bg-gradient-to-r from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
-          <div class="flex justify-between items-center mb-2 relative z-10">
-            <span class="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">📢 SPONSORED</span>
-            <span class="text-gray-500 text-xs">Placement Opportunity</span>
+        <!-- ⬇️ GOOGLE-STYLE SPONSORED AD ⬇️ -->
+        <div class="google-ad mb-5">
+          <div class="ad-container ad-pulse">
+            <!-- Ad label -->
+            <div class="flex items-center gap-2 mb-2">
+              <span class="ad-label">📢 Ad</span>
+              <span class="ad-label">·</span>
+              <span class="ad-label">Placement Opportunity</span>
+            </div>
+
+            <!-- Ad content -->
+            <div class="flex flex-col sm:flex-row gap-4">
+              <!-- Company logo -->
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                🏢
+              </div>
+              
+              <div class="flex-1">
+                <!-- Company name -->
+                <div class="text-sm font-medium text-gray-300">Our Known Company</div>
+                
+                <!-- Job title -->
+                <h4 class="ad-title">
+                  We're Hiring!
+                </h4>
+                
+                <!-- Job details -->
+                <div class="flex flex-wrap gap-2 mt-1 text-xs text-gray-400">
+                  <span>📍 Hyderabad</span>
+                  <span>💼 0-2 years</span>
+                  <span>💰 Competitive</span>
+                </div>
+                
+                <!-- CTA -->
+                <div class="mt-3">
+                  <a href="https://applymore.vercel.app" class="ad-cta">
+                    Apply Now <i class="fas fa-arrow-right text-xs"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="mt-2 pt-2 border-t border-gray-700/50">
+              <div class="flex items-center gap-1 text-[10px] text-gray-500">
+                <span>🔍 Sponsored</span>
+                <span>·</span>
+                <span>www.company.com</span>
+              </div>
+            </div>
           </div>
-          <h3 class="text-yellow-400 text-xl font-bold mb-1 relative z-10">🏢 Our Known Company is Hiring!</h3>
-          <p class="text-gray-300 mb-3 relative z-10">
-            <strong>Update:</strong> We have a job opening from a trusted company. 
-            If you're <strong>interested</strong>, you can apply directly.
-          </p>
-          <a href="https://applymore.vercel.app" class="sparkle-btn inline-block text-white px-6 py-2 rounded-full font-semibold relative z-10">
-            Apply Now →
-          </a>
-          <p class="text-gray-600 text-xs mt-2 relative z-10">* This is a job advertisement</p>
         </div>
+        <!-- ⬆️ END OF GOOGLE-STYLE AD ⬆️ -->
 
         <!-- Jobs Grid -->
         <div id="jobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
