@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Career Path - ApplyMore | Smart Career Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      color: #166534;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #15803d, #22c55e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #166534;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #22c55e;
+    }
+
+    /* Search Section */
+    .search-section {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #dcfce7;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .search-subtitle {
+      text-align: center;
+      color: #166534;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .search-group {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .search-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #14532d;
+      margin-bottom: 0.3rem;
+    }
+
+    .search-group input, .search-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 2rem;
+      color: #14532d;
+      font-size: 0.9rem;
+    }
+
+    .search-btn {
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      align-self: flex-end;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+    }
+
+    /* Path Display */
+    .path-breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(5px);
+      border-radius: 3rem;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .path-item {
+      background: #f0fdf4;
+      border-radius: 2rem;
+      padding: 0.3rem 1rem;
+      font-size: 0.8rem;
+      color: #14532d;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .path-item:hover {
+      background: #22c55e;
+      color: white;
+    }
+
+    .path-arrow {
+      color: #22c55e;
+      font-size: 0.7rem;
+    }
+
+    /* Current Node */
+    .current-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .current-card {
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      border-radius: 2rem;
+      padding: 1.8rem 2.5rem;
+      display: inline-block;
+      color: white;
+      box-shadow: 0 15px 35px rgba(34, 197, 94, 0.3);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 15px 35px rgba(34, 197, 94, 0.3); }
+      to { box-shadow: 0 15px 45px rgba(34, 197, 94, 0.5); }
+    }
+
+    .current-icon {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .current-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .current-desc {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+      max-width: 500px;
+    }
+
+    /* Options Grid */
+    .options-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .option-card {
+      background: white;
+      border: 2px solid #dcfce7;
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+      width: 240px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .option-card:hover::before {
+      left: 100%;
+    }
+
+    .option-card:hover {
+      border-color: #22c55e;
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(34, 197, 94, 0.15);
+    }
+
+    .option-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .option-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 0.3rem;
+    }
+
+    .option-desc {
+      font-size: 0.7rem;
+      color: #166534;
+      line-height: 1.3;
+    }
+
+    /* Detail Panel */
+    .detail-panel {
+      margin-top: 2rem;
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      border: 1px solid #22c55e;
+      animation: fadeInUp 0.4s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .detail-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #22c55e;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .detail-card {
+      background: #f0fdf4;
+      border-radius: 0.8rem;
+      padding: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .detail-card:hover {
+      transform: translateX(5px);
+      background: #dcfce7;
+    }
+
+    .detail-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #22c55e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .detail-value {
+      font-size: 0.85rem;
+      color: #166534;
+      line-height: 1.5;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      background: white;
+      border: 1px solid #22c55e;
+      padding: 0.2rem 0.6rem;
+      border-radius: 1rem;
+      font-size: 0.7rem;
+      margin: 0.2rem;
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: #22c55e;
+      color: white;
+    }
+
+    /* Next Steps */
+    .next-steps-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px dashed #dcfce7;
+    }
+
+    .next-steps-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .next-steps-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .next-step-btn {
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .next-step-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
+    }
+
+    /* Button Group */
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .btn-reset {
+      background: #e2e8f0;
+      color: #166534;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-reset:hover {
+      background: #cbd5e1;
+      transform: translateY(-2px);
+    }
+
+    /* Search Result Panel */
+    .search-result {
+      margin-top: 2rem;
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 2px solid #22c55e;
+      animation: fadeInUp 0.4s ease;
+    }
+
+    .result-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #14532d;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-top: 2rem;
+      border: 1px solid #dcfce7;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col h3 {
+      font-size: 1rem;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col p, .footer-col a {
+      font-size: 0.75rem;
+      color: #166534;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.3rem;
+      cursor: pointer;
+    }
+
+    .footer-col a:hover {
+      color: #22c55e;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #166534;
+      padding-top: 1rem;
+      border-top: 1px solid #dcfce7;
+    }
+
+    @media (max-width: 768px) {
+      .option-card {
+        width: 160px;
+        padding: 0.8rem;
+      }
+      .option-icon {
+        font-size: 1.5rem;
+      }
+      .option-title {
+        font-size: 0.8rem;
+      }
+      .current-title {
+        font-size: 1.1rem;
+      }
+      .current-card {
+        padding: 1rem 1.5rem;
+      }
+      .search-form {
+        flex-direction: column;
+      }
+      .search-btn {
+        align-self: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="navbar">
+    <div class="logo" onclick="location.href='index.html'">ApplyMore</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="career.html" style="color:#22c55e;font-weight:600">Career Path</a>
+      <a href="#" onclick="alert('📚 Learning Hub Coming Soon!')">Learning Hub</a>
+      <a href="#" onclick="alert('🎯 Interview Prep Coming Soon!')">Interview Prep</a>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section" id="searchSection">
+    <div class="search-title"><i class="fas fa-search"></i> Find Your Career Path</div>
+    <div class="search-subtitle">Tell us what you want to become and your current education level</div>
+    <div class="search-form">
+      <div class="search-group">
+        <label><i class="fas fa-bullseye"></i> What do you want to become?</label>
+        <input type="text" id="careerGoal" placeholder="e.g., Software Engineer, Doctor, IAS Officer, Teacher">
+      </div>
+      <div class="search-group">
+        <label><i class="fas fa-graduation-cap"></i> Your Current Education Level</label>
+        <select id="educationLevel">
+          <option value="10th">10th Pass / Studying</option>
+          <option value="12th">12th Pass / Studying</option>
+          <option value="graduate">Graduate / Pursuing Graduation</option>
+          <option value="postgraduate">Post Graduate</option>
+          <option value="working">Working Professional</option>
+        </select>
+      </div>
+      <button class="search-btn" onclick="searchCareer()"><i class="fas fa-arrow-right"></i> Find My Path</button>
+    </div>
+    <div id="searchResult"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="mainContent"></div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col"><h3>ApplyMore</h3><p>Complete career guidance platform</p></div>
+      <div class="footer-col"><h3>Quick Links</h3><a href="index.html">Jobs</a><a href="career.html">Career Path</a></div>
+      <div class="footer-col"><h3>Resources</h3><a href="#" onclick="alert('Free Courses Coming Soon!')">Free Courses</a><a href="#" onclick="alert('Interview Q&A Coming Soon!')">Interview Q&A</a></div>
+    </div>
+    <div class="copyright">© 2026 ApplyMore – Smart career guidance. Click any option to continue your journey.</div>
+  </footer>
+</div>
+
+<script>
+  // ============================================
+  // COMPLETE CAREER DATABASE - EVERY NODE DETAILED
+  // ============================================
+  
+  const careerDB = {
+    // ========== ROOT ==========
+    '10th': {
+      name: '🎓 10th Class Completed',
+      icon: 'fa-graduation-cap',
+      desc: 'Your career journey starts here',
+      info: 'After 10th standard, you have multiple career paths. Choose based on your interest.',
+      options: [
+        { id: 'study-path', name: '📚 Continue Studies', icon: 'fa-book', desc: 'Pursue higher education' },
+        { id: 'direct-jobs', name: '💼 Direct Jobs', icon: 'fa-briefcase', desc: 'Start working after 10th' },
+        { id: 'skill-jobs', name: '🔧 Skilled Jobs', icon: 'fa-tools', desc: 'Technical & vocational' },
+        { id: 'govt-jobs', name: '🏛️ Government Jobs', icon: 'fa-landmark', desc: 'SSC, Railway, Banking, UPSC, PSU' },
+        { id: 'private-jobs', name: '🏢 Private Jobs', icon: 'fa-building', desc: 'IT, Corporate, Retail, BPO' },
+        { id: 'self-employment', name: '💪 Self Employment', icon: 'fa-chart-line', desc: 'Business, Freelance' }
+      ]
+    },
+
+    // ========== STUDY PATH ==========
+    'study-path': {
+      name: '📚 Continue Studies',
+      icon: 'fa-book',
+      desc: 'Pursue higher education after 10th',
+      options: [
+        { id: 'intermediate', name: '📖 Intermediate (11th-12th)', icon: 'fa-layer-group', desc: '2 years academic' },
+        { id: 'polytechnic', name: '🔧 Polytechnic Diploma', icon: 'fa-microchip', desc: '3-year technical diploma' },
+        { id: 'iti', name: '⚙️ ITI Course', icon: 'fa-tools', desc: '1-2 year skill training' },
+        { id: 'vocational', name: '💼 Vocational Courses', icon: 'fa-certificate', desc: '6 months-2 years' }
+      ]
+    },
+
+    'intermediate': {
+      name: '📖 Intermediate (11th-12th)',
+      icon: 'fa-layer-group',
+      desc: 'Choose your stream',
+      options: [
+        { id: 'science-stream', name: '🔬 Science (PCM/PCB)', icon: 'fa-atom', desc: 'Engineering, Medical' },
+        { id: 'commerce-stream', name: '💰 Commerce', icon: 'fa-chart-line', desc: 'Business, Finance' },
+        { id: 'arts-stream', name: '🎨 Arts/Humanities', icon: 'fa-palette', desc: 'Law, Design, Journalism' }
+      ]
+    },
+
+    'science-stream': {
+      name: '🔬 Science Stream',
+      icon: 'fa-atom',
+      desc: 'Choose your path after 12th Science',
+      options: [
+        { id: 'engineering-full', name: '🏗️ B.Tech/B.E Engineering', icon: 'fa-microchip', desc: '4 years - through JEE' },
+        { id: 'medical-full', name: '🩺 MBBS/BDS', icon: 'fa-heartbeat', desc: '5.5 years - through NEET' },
+        { id: 'bsc-full', name: '🔬 B.Sc (General)', icon: 'fa-flask', desc: '3 years - Research/Teaching' },
+        { id: 'bca-full', name: '💻 BCA/B.Sc IT', icon: 'fa-code', desc: '3 years - Computer Applications' }
+      ]
+    },
+
+    'commerce-stream': {
+      name: '💰 Commerce Stream',
+      icon: 'fa-chart-line',
+      desc: 'Business and Finance careers',
+      options: [
+        { id: 'bcom-full', name: '📊 B.Com', icon: 'fa-chart-simple', desc: '3 years' },
+        { id: 'ca-full', name: '🧮 Chartered Accountant (CA)', icon: 'fa-calculator', desc: '4-5 years' },
+        { id: 'cs-full', name: '📋 Company Secretary (CS)', icon: 'fa-file-signature', desc: '3-4 years' },
+        { id: 'bba-full', name: '📈 BBA', icon: 'fa-briefcase', desc: '3 years' }
+      ]
+    },
+
+    'arts-stream': {
+      name: '🎨 Arts/Humanities Stream',
+      icon: 'fa-palette',
+      desc: 'Creative and social careers',
+      options: [
+        { id: 'ba-full', name: '📖 B.A (Humanities)', icon: 'fa-book', desc: '3 years' },
+        { id: 'law-full', name: '⚖️ Law (BA LLB/LLB)', icon: 'fa-gavel', desc: '5/3 years' },
+        { id: 'masscom-full', name: '📺 Mass Communication', icon: 'fa-tv', desc: '3 years' },
+        { id: 'psychology-full', name: '🧠 Psychology', icon: 'fa-brain', desc: '3 years' }
+      ]
+    },
+
+    // ========== ENGINEERING BRANCHES ==========
+    'engineering-full': {
+      name: '🏗️ B.Tech / B.E Engineering',
+      icon: 'fa-microchip',
+      desc: '4-year degree - Choose specialization',
+      info: 'B.Tech is a 4-year engineering degree. After B.Tech: M.Tech (GATE), MS Abroad (GRE), MBA (CAT), Government Jobs (IES/PSU), or Direct Job.',
+      options: [
+        { id: 'cse-full', name: '💻 Computer Science Engg', icon: 'fa-laptop-code', desc: 'Highest paying - AI/ML/Cloud' },
+        { id: 'ece-full', name: '📡 Electronics & Comm', icon: 'fa-microchip', desc: 'Circuits, VLSI, Telecom' },
+        { id: 'mech-full', name: '⚙️ Mechanical Engg', icon: 'fa-cogs', desc: 'Manufacturing, Automobile' },
+        { id: 'civil-full', name: '🏗️ Civil Engg', icon: 'fa-city', desc: 'Construction, Infrastructure' }
+      ]
+    },
+
+    'cse-full': {
+      name: 'Computer Science Engineering',
+      icon: 'fa-laptop-code',
+      desc: 'B.Tech CSE - 4 Years',
+      fullDetails: {
+        overview: 'Computer Science Engineering is the most sought-after branch. Learn programming, AI/ML, cloud computing, and software development.',
+        duration: '4 Years',
+        entranceExams: 'JEE Main, JEE Advanced, BITSAT, VITEEE, SRMJEEE, COMEDK, MHT-CET, WBJEE',
+        syllabus: 'Programming, Data Structures, Algorithms, DBMS, OS, Networks, AI/ML, Cloud, Web Development',
+        skills: 'Problem Solving, Programming (C/C++/Java/Python), DSA, Logical Thinking',
+        jobs: 'Software Engineer, Full Stack Developer, Data Scientist, AI/ML Engineer, Cloud Architect, DevOps Engineer',
+        salary: 'Fresher: ₹4-12 LPA, 2-4 years: ₹8-20 LPA, 5-8 years: ₹20-40 LPA, 10+ years: ₹50 LPA - ₹1 Cr+',
+        companies: 'Google, Microsoft, Amazon, Meta, Apple, Netflix, Adobe, Oracle, TCS, Infosys, Wipro'
+      },
+      nextSteps: [
+        { id: 'mtech-full', name: '🎓 M.Tech through GATE', icon: 'fa-graduation-cap', desc: '2 years - IITs/NITs' },
+        { id: 'ms-full', name: '🌍 MS Abroad', icon: 'fa-globe', desc: 'GRE 320+ TOEFL 100+' },
+        { id: 'mba-full', name: '📈 MBA', icon: 'fa-briefcase', desc: 'IIMs, ISB, XLRI' },
+        { id: 'govt-full-engg', name: '🏛️ Government Jobs', icon: 'fa-landmark', desc: 'IES, PSU through GATE' },
+        { id: 'job-full', name: '💼 Direct Job', icon: 'fa-building', desc: 'Campus placement' }
+      ]
+    },
+
+    'mtech-full': {
+      name: 'M.Tech - Master of Technology',
+      icon: 'fa-graduation-cap',
+      desc: '2-year postgraduate degree',
+      fullDetails: {
+        overview: 'M.Tech is a 2-year postgraduate degree for engineering graduates. Provides specialization and research opportunities.',
+        duration: '2 Years',
+        entranceExams: 'GATE (Graduate Aptitude Test in Engineering) - Score 600+ for IITs/NITs',
+        gateScoreVsColleges: 'IITs: 600-800, NITs: 500-700, IIITs: 450-650',
+        specializations: 'AI/ML, Cloud Computing, Cyber Security, Data Science, VLSI, Embedded Systems',
+        topColleges: 'IITs, NITs, IIITs, BITS Pilani, DTU, NSUT',
+        fees: 'IITs: ₹1-1.5L/year, NITs: ₹80k-1L/year, Stipend: ₹12,400/month',
+        jobs: 'Senior Software Engineer, Research Scientist, R&D Engineer, Data Scientist, AI Engineer',
+        salary: '₹8-15 LPA (Fresher), ₹15-25 LPA (2-4 years), ₹25-40 LPA (5-8 years)',
+        companies: 'Google Research, Microsoft Research, Amazon Science, IBM Research, ISRO, DRDO, BARC'
+      },
+      nextSteps: [
+        { id: 'phd-full', name: '🎓 PhD - Doctorate', icon: 'fa-flask', desc: '3-5 years - Research/Teaching' },
+        { id: 'research-full', name: '🔬 Research Jobs', icon: 'fa-microscope', desc: 'ISRO, DRDO, CSIR Labs' },
+        { id: 'teaching-full', name: '👨‍🏫 Teaching', icon: 'fa-chalkboard-user', desc: 'Assistant Professor in colleges' }
+      ]
+    },
+
+    'phd-full': {
+      name: 'PhD - Doctor of Philosophy',
+      icon: 'fa-flask',
+      desc: '3-5 years - Highest academic degree',
+      fullDetails: {
+        overview: 'PhD is the highest academic degree. Focus on original research in a specialized area.',
+        duration: '3-5 Years',
+        entranceExams: 'GATE/NET/JRF score, University entrance exam, Interview',
+        eligibility: 'M.Tech/M.Sc with 55%+ (60%+ for IITs)',
+        topInstitutes: 'IITs, IISc Bangalore, IIITs, Top Central Universities',
+        researchAreas: 'Artificial Intelligence, Machine Learning, Deep Learning, Computer Vision, NLP, Robotics, Quantum Computing',
+        stipend: 'JRF: ₹37,000/month, SRF: ₹42,000/month (UGC/CSIR/DBT funding)',
+        jobs: 'Professor (Assistant/Associate/Professor), Research Scientist, Principal Engineer, R&D Head',
+        salary: 'Assistant Professor: ₹57,700-1,82,400, Professor: ₹1,44,200-2,18,200, Research Scientist: ₹20-60 LPA'
+      }
+    },
+
+    'ms-full': {
+      name: 'MS Abroad - Master of Science',
+      icon: 'fa-globe',
+      desc: '1-2 years - USA/UK/Canada/Germany/Australia',
+      fullDetails: {
+        overview: 'MS Abroad offers global opportunities, higher salaries, and potential PR pathways.',
+        duration: 'USA: 2 years, UK: 1 year, Canada: 1.5-2 years, Germany: 2 years, Australia: 1.5-2 years',
+        exams: 'GRE (320+), TOEFL (100+) or IELTS (7.5+)',
+        cost: 'USA: ₹30-50L/year, Canada: ₹20-35L/year, UK: ₹25-40L/year, Germany: ₹10-20L/year, Australia: ₹25-40L/year',
+        scholarships: 'Merit-based, TA/RA, Fulbright, DAAD, Commonwealth',
+        topUniversities: 'USA: MIT, Stanford, CMU, UC Berkeley, UIUC, Georgia Tech | UK: Oxford, Cambridge, Imperial, UCL | Canada: Toronto, UBC, Waterloo | Germany: TU Munich, RWTH Aachen | Australia: Melbourne, ANU, UNSW',
+        visaProcess: 'USA: F-1 Visa → OPT (36 months) → H1-B → Green Card | Canada: Study Permit → PGWP (3 years) → PR | Germany: Student Visa → Job Seeker (18 months) → PR',
+        salaries: 'USA: $80k-150k/year, Canada: CAD 60k-100k/year, UK: £40k-80k/year, Germany: €50k-80k/year'
+      },
+      nextSteps: [
+        { id: 'opt-full', name: '💼 OPT/Work Visa', icon: 'fa-briefcase', desc: 'USA 36 months work permit' },
+        { id: 'pr-full', name: '🛂 PR Pathways', icon: 'fa-passport', desc: 'Canada/Germany/Australia PR' }
+      ]
+    },
+
+    'mba-full': {
+      name: 'MBA - Master of Business Administration',
+      icon: 'fa-briefcase',
+      desc: '2-year management degree',
+      fullDetails: {
+        overview: 'MBA is a 2-year postgraduate degree. Opens leadership and managerial roles.',
+        duration: '2 Years',
+        entranceExams: 'CAT (99+ percentile for IIMs), XAT, GMAT',
+        catScoreVsColleges: '99.5+ percentile: IIM A/B/C/L/K/I, 99+ percentile: IIM M/S, MDI, IIFT, 98+ percentile: IIM R/Shillong, SP Jain, 95+ percentile: IIM U/T/V, IMT Ghaziabad',
+        topColleges: 'IIMs, ISB Hyderabad, XLRI, SP Jain, FMS Delhi, MDI, NITIE, IIFT',
+        specializations: 'Marketing, Finance, HR, Operations, Business Analytics, IT Management',
+        fees: 'IIMs: ₹25-30L, ISB: ₹35-40L, FMS: ₹2-3L (best ROI)',
+        placements: 'Consulting: McKinsey, BCG, Bain | Finance: Goldman Sachs, JP Morgan | Marketing: HUL, P&G, Nestle | Product: Google, Microsoft, Amazon',
+        salary: 'IIMs: ₹25-35 LPA, ISB: ₹30-40 LPA, FMS: ₹25-30 LPA'
+      },
+      nextSteps: [
+        { id: 'corporate-full', name: '💼 Corporate Jobs', icon: 'fa-building', desc: 'Consulting, Finance, Marketing' },
+        { id: 'entrepreneurship-full', name: '🚀 Entrepreneurship', icon: 'fa-chart-line', desc: 'Start your own venture' }
+      ]
+    },
+
+    'govt-full-engg': {
+      name: 'Government Jobs for Engineers',
+      icon: 'fa-landmark',
+      desc: 'IES, PSU, SSC CGL, Banking',
+      fullDetails: {
+        upscIES: 'Indian Engineering Services (IES/ESE) - Class 1 Gazetted Officer - Salary: ₹56,100 - ₹1,77,500 - Exam: UPSC ESE - Apply: https://upsc.gov.in',
+        psuJobs: 'ONGC, IOCL, NTPC, BHEL, SAIL, GAIL, POWERGRID - Through GATE score (60-80 percentile) - Salary: ₹60,000 - ₹1,80,000 - Perks: Housing, Medical, Vehicle, Pension',
+        sscCGL: 'SSC CGL - Income Tax Inspector, CBI SI, Auditor - Salary: ₹47,600 - ₹2,08,700',
+        banking: 'SBI PO, IBPS PO - Salary: ₹52,000 - ₹1,20,000 + Allowances',
+        drdo: 'DRDO Scientist - Through GATE/DRDO Exam - Salary: ₹80,000 - ₹2,00,000',
+        isro: 'ISRO Scientist - Through ISRO Written Exam - Salary: ₹1,20,000 - ₹1,50,000'
+      }
+    },
+
+    'job-full': {
+      name: 'Direct Jobs after B.Tech',
+      icon: 'fa-building',
+      desc: 'Campus placements',
+      fullDetails: {
+        companies: 'Google, Microsoft, Amazon, TCS, Infosys, Wipro, Accenture, Razorpay, Swiggy, Zomato',
+        roles: 'Software Engineer, System Engineer, IT Consultant, DevOps Engineer, Cloud Engineer',
+        salary: 'IITs: ₹20-50 LPA, NITs: ₹10-20 LPA, Other Colleges: ₹3-8 LPA',
+        preparation: 'Data Structures & Algorithms (LeetCode), Aptitude, Communication Skills, Resume Building'
+      }
+    },
+
+    // ========== MEDICAL PATH ==========
+    'medical-full': {
+      name: '🩺 Medical Courses',
+      icon: 'fa-heartbeat',
+      desc: 'Through NEET - Choose your path',
+      options: [
+        { id: 'mbbs-full', name: 'MBBS Doctor', icon: 'fa-stethoscope', desc: '5.5 years' },
+        { id: 'bds-full', name: 'BDS Dentist', icon: 'fa-tooth', desc: '5 years' },
+        { id: 'bpt-full', name: 'BPT Physiotherapy', icon: 'fa-person-walking', desc: '4.5 years' },
+        { id: 'nursing-full', name: 'B.Sc Nursing', icon: 'fa-hospital-user', desc: '4 years' }
+      ]
+    },
+
+    'mbbs-full': {
+      name: 'MBBS Doctor',
+      icon: 'fa-stethoscope',
+      desc: '5.5 years',
+      fullDetails: {
+        overview: 'MBBS is the most prestigious medical degree. Become a doctor, diagnose diseases, treat patients.',
+        duration: '5.5 Years',
+        entranceExams: 'NEET-UG (compulsory) - Score 600+ for top colleges',
+        eligibility: '12th Science (PCB) with 50%+ (40% for reserved)',
+        topColleges: 'AIIMS Delhi, JIPMER, CMC Vellore, AFMC Pune, Maulana Azad Medical College',
+        syllabus: 'Anatomy, Physiology, Biochemistry, Pharmacology, Pathology, Medicine, Surgery',
+        fees: 'AIIMS: ₹10k/year, Government: ₹50k-1L/year, Private: ₹10-25L/year',
+        jobs: 'Doctor, Surgeon, Physician, Medical Officer, Researcher',
+        salary: '₹6 LPA - ₹30 LPA'
+      },
+      nextSteps: [
+        { id: 'md-full', name: 'MD/MS Specialization', icon: 'fa-graduation-cap', desc: '3 years - through NEET-PG' },
+        { id: 'govt-doctor-full', name: 'Government Doctor', icon: 'fa-landmark', desc: 'UPSC CMS, State PSC' },
+        { id: 'abroad-doctor-full', name: 'Practice Abroad', icon: 'fa-globe', desc: 'USMLE, PLAB, AMC' }
+      ]
+    },
+
+    // ========== COMMERCE ==========
+    'ca-full': {
+      name: 'Chartered Accountant (CA)',
+      icon: 'fa-calculator',
+      desc: 'Premier finance & accounting course',
+      fullDetails: {
+        overview: 'CA is the most respected finance professional course in India. Regulated by ICAI.',
+        duration: '4-5 Years',
+        levels: 'CA Foundation → Intermediate → Final + 3 years Articleship',
+        eligibility: '12th Pass with 50%+ for Foundation',
+        fees: 'Foundation: ₹11,500, Intermediate: ₹25,000, Final: ₹35,000',
+        jobs: 'Auditor, Tax Consultant, Financial Analyst, CFO',
+        salary: 'CA Fresher: ₹6-12 LPA, 2-5 years: ₹12-25 LPA, Partner: ₹50 LPA - ₹2 Cr',
+        companies: 'Deloitte, KPMG, PwC, EY, Goldman Sachs, JP Morgan, HDFC Bank'
+      },
+      nextSteps: [
+        { id: 'cpa-full', name: 'CPA (USA)', icon: 'fa-globe', desc: 'International accounting certification' },
+        { id: 'cfa-full', name: 'CFA', icon: 'fa-chart-line', desc: 'Investment management' }
+      ]
+    },
+
+    // ========== ARTS - UPSC ==========
+    'ba-full': {
+      name: 'B.A Graduate',
+      icon: 'fa-book',
+      desc: 'Bachelor of Arts - 3 years',
+      fullDetails: {
+        duration: '3 Years',
+        subjects: 'History, Political Science, Sociology, Psychology, Economics',
+        jobs: 'Civil Services, Teacher, Social Worker, Journalist',
+        salary: '₹2 LPA - ₹8 LPA',
+        higherStudies: 'MA, PhD, B.Ed, Law'
+      },
+      nextSteps: [
+        { id: 'upsc-full', name: 'UPSC Civil Services', icon: 'fa-crown', desc: 'IAS, IPS, IFS' },
+        { id: 'ma-full', name: 'M.A / PhD', icon: 'fa-graduation-cap', desc: 'Teaching, Research' }
+      ]
+    },
+
+    'upsc-full': {
+      name: 'UPSC Civil Services',
+      icon: 'fa-crown',
+      desc: 'IAS, IPS, IFS, IRS',
+      fullDetails: {
+        overview: 'UPSC Civil Services is the most prestigious exam in India.',
+        exams: 'IAS, IPS, IFS, IRS, IAAS, IPoS, IRAS, IRTS, DANICS, DANIPS',
+        eligibility: 'Graduation, Age 21-32 years, 6 attempts',
+        examPattern: 'Prelims (2 papers) → Mains (9 papers) → Interview (275 marks)',
+        salary: '₹56,100 - ₹2,50,000 per month',
+        training: 'IAS: LBSNAA, IPS: SVPNA, IFS: FSI',
+        perks: 'Government bungalow, Car with driver, Security, Pension'
+      }
+    },
+
+    // ========== GOVERNMENT JOBS SECTION ==========
+    'govt-jobs': {
+      name: '🏛️ Government Jobs - Complete Guide',
+      icon: 'fa-landmark',
+      desc: 'All government job categories - UPSC, SSC, Railway, Banking, Defence, PSU',
+      info: 'Government jobs offer job security, pension, medical benefits, and social respect.',
+      options: [
+        { id: 'upsc-jobs', name: '👑 UPSC Civil Services', icon: 'fa-crown', desc: 'IAS, IPS, IFS, IRS' },
+        { id: 'ssc-jobs', name: '📋 SSC Jobs', icon: 'fa-file-alt', desc: 'CGL, CHSL, GD, MTS' },
+        { id: 'railway-jobs', name: '🚆 Railway Jobs', icon: 'fa-train', desc: 'ALP, JE, NTPC, Group D' },
+        { id: 'bank-jobs', name: '🏦 Banking Jobs', icon: 'fa-university', desc: 'SBI PO, IBPS PO, Clerk, RBI' },
+        { id: 'defence-jobs', name: '🎖️ Defence Jobs', icon: 'fa-shield-alt', desc: 'Army, Navy, Air Force' },
+        { id: 'psu-jobs', name: '🏭 PSU Jobs', icon: 'fa-industry', desc: 'ONGC, IOCL, NTPC, BHEL' },
+        { id: 'teaching-jobs', name: '👩‍🏫 Teaching Jobs', icon: 'fa-chalkboard-user', desc: 'KVS, NVS, State Teachers' },
+        { id: 'police-jobs', name: '👮 Police Jobs', icon: 'fa-user-shield', desc: 'Constable, SI, DSP' },
+        { id: 'state-psc', name: '🏛️ State PSC', icon: 'fa-building', desc: 'Deputy Collector, DSP, BDO' },
+        { id: 'medical-govt', name: '🩺 Govt Medical Jobs', icon: 'fa-stethoscope', desc: 'Doctor, Nurse, Pharmacist' },
+        { id: 'judiciary', name: '⚖️ Judiciary Jobs', icon: 'fa-gavel', desc: 'Judge, Magistrate, Clerk' },
+        { id: 'scientific', name: '🔬 Scientific Jobs', icon: 'fa-flask', desc: 'ISRO, DRDO, BARC, CSIR' }
+      ]
+    },
+
+    'upsc-jobs': {
+      name: 'UPSC Civil Services',
+      icon: 'fa-crown',
+      desc: 'IAS, IPS, IFS, IRS',
+      fullDetails: {
+        overview: 'UPSC Civil Services Examination is the most prestigious exam in India.',
+        exams: 'IAS (Indian Administrative Service), IPS (Indian Police Service), IFS (Indian Foreign Service), IRS (Indian Revenue Service)',
+        eligibility: 'Graduation, Age 21-32 years, 6 attempts',
+        examPattern: 'Prelims (2 papers) → Mains (9 papers) → Interview (275 marks)',
+        salary: '₹56,100 - ₹2,50,000 per month',
+        training: 'IAS: LBSNAA Mussoorie, IPS: SVPNA Hyderabad, IFS: FSI Delhi',
+        perks: 'Government bungalow, Car with driver, Security guards, Pension',
+        applyLink: 'https://upsc.gov.in'
+      }
+    },
+
+    'ssc-jobs': {
+      name: 'SSC Jobs',
+      icon: 'fa-file-alt',
+      desc: 'CGL, CHSL, GD, MTS',
+      fullDetails: {
+        graduatePosts: 'Income Tax Inspector (₹47,600-1,51,100), CBI SI (₹47,600-1,51,100), Auditor (₹47,600-1,51,100), ASO (₹47,600-1,51,100)',
+        twelvePassPosts: 'LDC (₹19,900-63,200), DEO (₹25,500-81,100), Postal Assistant (₹25,500-81,100)',
+        tenPassPosts: 'MTS (₹18,000-56,900), Havaldar (₹18,000-56,900), Peon (₹18,000-56,900)',
+        policePosts: 'GD Constable (₹21,700-69,100) in CISF, BSF, CRPF, ITBP, SSB',
+        applyLink: 'https://ssc.nic.in'
+      }
+    },
+
+    'railway-jobs': {
+      name: 'Railway Jobs',
+      icon: 'fa-train',
+      desc: 'ALP, JE, NTPC, Group D',
+      fullDetails: {
+        technicalPosts: 'ALP (₹35,400-1,12,400), JE (₹35,400-1,12,400), SSE (₹44,900-1,42,400), Technician (₹35,400-1,12,400)',
+        nonTechnicalPosts: 'Station Master (₹35,400-1,12,400), TC (₹29,200-92,300), Goods Guard (₹35,400-1,12,400)',
+        groupDPosts: 'Trackman (₹18,000-56,900), Helper (₹18,000-56,900), Porter (₹18,000-56,900)',
+        rpfPosts: 'RPF Constable (₹21,700-69,100), RPF SI (₹35,400-1,12,400)',
+        perks: 'Railway Pass for free travel, Railway quarters, Medical facilities, Pension',
+        applyLink: 'https://rrbapply.gov.in'
+      }
+    },
+
+    'bank-jobs': {
+      name: 'Banking Jobs',
+      icon: 'fa-university',
+      desc: 'SBI PO, IBPS PO, Clerk, RBI',
+      fullDetails: {
+        govtPosts: 'SBI PO (₹52,000-1,20,000), IBPS PO (₹52,000-1,20,000), SBI Clerk (₹28,000-65,000), IBPS Clerk (₹28,000-65,000), RBI Grade B (₹77,000-1,50,000)',
+        insurancePosts: 'LIC AAO (₹50,000-1,20,000), LIC Agent, Insurance Advisor',
+        eligibility: 'Graduation with 60%+ for PO, 50%+ for Clerk, Age 20-30 years',
+        examPattern: 'Prelims → Mains → Interview (for PO/RBI Grade B)',
+        applyLink: 'https://ibps.in, https://sbi.co.in, https://rbi.org.in'
+      }
+    },
+
+    'defence-jobs': {
+      name: 'Defence Jobs',
+      icon: 'fa-shield-alt',
+      desc: 'Army, Navy, Air Force',
+      fullDetails: {
+        armyPosts: 'Soldier GD (₹25,000-50,000), Agniveer (₹30,000 + ₹11.71L severance), Officer (₹70,000-1,50,000)',
+        navyPosts: 'Sailor (₹25,000-50,000), SSR (₹25,000-50,000), Navy Officer (₹70,000-1,50,000)',
+        airForcePosts: 'Airman (₹25,000-50,000), AFCAT Officer (₹70,000-1,50,000)',
+        paramilitary: 'BSF, CRPF, CISF, ITBP, SSB (₹21,700-69,100)',
+        exams: 'NDA (12th pass), CDS (Graduates), AFCAT, INET',
+        applyLink: 'https://joinindianarmy.nic.in, https://afcat.cdac.in'
+      }
+    },
+
+    'psu-jobs': {
+      name: 'PSU Jobs',
+      icon: 'fa-industry',
+      desc: 'ONGC, IOCL, NTPC, BHEL, SAIL, GAIL',
+      fullDetails: {
+        majorPSUs: 'ONGC, IOCL, BPCL, HPCL, NTPC, BHEL, SAIL, GAIL, CIL, POWERGRID',
+        posts: 'Graduate Engineer Trainee (GET), Management Trainee (MT), Technician, Operator',
+        selection: 'Through GATE score (60-80 percentile required) + Interview',
+        salary: '₹60,000 - ₹1,80,000 per month + DA, HRA, TA, Medical',
+        perks: 'Government quarters, Vehicle allowance, Free medical, Pension',
+        applyLink: 'Individual PSU websites'
+      }
+    },
+
+    'teaching-jobs': {
+      name: 'Teaching Jobs',
+      icon: 'fa-chalkboard-user',
+      desc: 'KVS, NVS, State Teachers',
+      fullDetails: {
+        schoolPosts: 'PRT (Class 1-5), TGT (Class 6-10), PGT (Class 11-12)',
+        govtInstitutions: 'KVS (₹35,400-1,12,400), NVS (₹35,400-1,12,400), State Government Schools (₹30,000-80,000)',
+        eligibility: 'PRT: 12th + D.Ed, TGT: Graduation + B.Ed, PGT: Post Graduation + B.Ed',
+        exams: 'CTET, State TET, KVS Exam, NVS Exam, UGC NET (for Assistant Professor)',
+        applyLink: 'https://kvsangathan.nic.in, https://ctet.nic.in'
+      }
+    },
+
+    'police-jobs': {
+      name: 'Police Jobs',
+      icon: 'fa-user-shield',
+      desc: 'Constable, SI, DSP',
+      fullDetails: {
+        posts: 'Constable (₹25,000-80,000), SI (₹35,400-1,12,400), DSP (₹56,100-1,77,500)',
+        physicalStandards: 'Height: 168cm (Male), 155cm (Female) | Run: 2.4km in 12 minutes',
+        applyLink: 'State Police Recruitment Websites'
+      }
+    },
+
+    'state-psc': {
+      name: 'State PSC Jobs',
+      icon: 'fa-building',
+      desc: 'Deputy Collector, DSP, BDO, Tehsildar',
+      fullDetails: {
+        adminPosts: 'Deputy Collector (₹56,100-1,77,500), Tahsildar (₹44,900-1,42,400), BDO (₹44,900-1,42,400)',
+        exams: 'UPPCS (UP), BPSC (Bihar), MPPSC (MP), RPSC (Rajasthan), MPSC (Maharashtra), TNPSC (Tamil Nadu), KPSC (Karnataka)',
+        eligibility: 'Graduation, Age 21-40 years',
+        examPattern: 'Prelims → Mains → Interview',
+        applyLink: 'State PSC websites'
+      }
+    },
+
+    'medical-govt': {
+      name: 'Government Medical Jobs',
+      icon: 'fa-stethoscope',
+      desc: 'Doctor, Nurse, Pharmacist, Lab Technician',
+      fullDetails: {
+        posts: 'Doctor (₹80,000-2,00,000), Nurse (₹35,000-80,000), Pharmacist (₹30,000-60,000), Lab Technician (₹25,000-50,000)',
+        exams: 'UPSC CMS, State PSC Medical Officer, AIIMS Recruitment',
+        applyLink: 'https://upsc.gov.in (CMS), State PSC websites'
+      }
+    },
+
+    'judiciary': {
+      name: 'Judiciary Jobs',
+      icon: 'fa-gavel',
+      desc: 'Judge, Magistrate, Public Prosecutor',
+      fullDetails: {
+        posts: 'Civil Judge (₹80k-1.5L/month), District Judge (₹1.5-2.5L/month), High Court Judge (₹2.5L/month)',
+        eligibility: 'LLB degree, Age 21-35 years',
+        examPattern: 'Prelims (MCQs) → Mains (Descriptive) → Interview',
+        applyLink: 'State High Court websites'
+      }
+    },
+
+    'scientific': {
+      name: 'Scientific & Research Jobs',
+      icon: 'fa-flask',
+      desc: 'ISRO, DRDO, BARC, CSIR',
+      fullDetails: {
+        organizations: 'ISRO, DRDO, BARC, CSIR',
+        posts: 'Scientist (₹1,20,000-2,00,000), Research Associate (₹40,000-60,000), JRF (₹31,000), SRF (₹35,000)',
+        eligibility: 'M.Tech/PhD for Scientist, M.Sc/B.Tech for Research Associate',
+        selection: 'GATE score for DRDO, Written exam for ISRO/BARC',
+        applyLink: 'https://isro.gov.in, https://drdo.gov.in, https://barc.gov.in'
+      }
+    },
+
+    // ========== DIRECT JOBS AFTER 10TH ==========
+    'direct-jobs': {
+      name: '💼 Direct Jobs After 10th',
+      icon: 'fa-briefcase',
+      desc: 'Start working immediately',
+      options: [
+        { id: 'govt-10th', name: '🏛️ Govt Jobs (10th Pass)', icon: 'fa-landmark', desc: 'SSC MTS, Postman, Peon' },
+        { id: 'railway-10th', name: '🚆 Railway Group D', icon: 'fa-train', desc: 'Trackman, Helper, Porter' },
+        { id: 'private-10th', name: '🏢 Private Jobs', icon: 'fa-building', desc: 'Retail, BPO, Security' },
+        { id: 'defence-10th', name: '🎖️ Defence Jobs', icon: 'fa-shield-alt', desc: 'Army Soldier, Agniveer' }
+      ]
+    },
+
+    'govt-10th': {
+      name: '10th Pass Government Jobs',
+      icon: 'fa-landmark',
+      desc: 'SSC MTS, Postman, Peon, Driver',
+      fullDetails: {
+        sscMTS: 'SSC MTS - ₹18,000 - ₹56,900 - 10th Pass, Age 18-25',
+        postman: 'Postman - ₹21,700 - ₹69,100 - 10th Pass, Age 18-27',
+        peon: 'Office Attendant - ₹18,000 - ₹56,900 - 10th Pass',
+        driver: 'Government Driver - ₹19,900 - ₹63,200 - 10th Pass + Driving License',
+        benefits: 'Pension, Medical benefits, Job security'
+      }
+    },
+
+    'railway-10th': {
+      name: 'Railway Group D',
+      icon: 'fa-train',
+      desc: 'Trackman, Helper, Porter',
+      fullDetails: {
+        posts: 'Trackman, Helper, Porter, Gateman, Cleaner',
+        salary: '₹18,000 - ₹56,900 per month',
+        eligibility: '10th pass or ITI, Age 18-33 years',
+        perks: 'Railway Pass, Railway quarters, Medical facilities, Pension',
+        applyLink: 'https://rrbapply.gov.in'
+      }
+    },
+
+    'private-10th': {
+      name: '10th Pass Private Jobs',
+      icon: 'fa-building',
+      desc: 'Retail, BPO, Security, Delivery',
+      fullDetails: {
+        retail: 'Retail Associate - ₹1.5-3 LPA - Companies: Reliance Retail, DMart, Lifestyle',
+        bpo: 'BPO Executive - ₹1.8-4 LPA - Companies: Teleperformance, Wipro BPO',
+        security: 'Security Guard - ₹1.5-2.5 LPA',
+        delivery: 'Delivery Boy - ₹1.8-3.5 LPA - Companies: Swiggy, Zomato, Amazon, Flipkart'
+      }
+    },
+
+    'defence-10th': {
+      name: 'Defence Jobs (10th Pass)',
+      icon: 'fa-shield-alt',
+      desc: 'Army Soldier, Agniveer',
+      fullDetails: {
+        posts: 'Army Soldier GD, Agniveer, Clerk, Technical Soldier',
+        salary: '₹25,000 - ₹50,000 per month + Allowances',
+        eligibility: '10th/12th pass, Age 17.5-21 years',
+        physical: 'Height: 170cm, Run: 1.6km in 5.5 min',
+        applyLink: 'https://joinindianarmy.nic.in'
+      }
+    },
+
+    // ========== SKILLED JOBS ==========
+    'skill-jobs': {
+      name: '🔧 Skilled Worker Jobs',
+      icon: 'fa-tools',
+      desc: 'Technical and vocational careers',
+      options: [
+        { id: 'electrician-skill', name: '⚡ Electrician', icon: 'fa-bolt', desc: 'Wiring, motors, repair' },
+        { id: 'plumber-skill', name: '🚰 Plumber', icon: 'fa-wrench', desc: 'Pipe fitting, sanitation' },
+        { id: 'welder-skill', name: '🔥 Welder', icon: 'fa-fire', desc: 'Metal joining, fabrication' },
+        { id: 'carpenter-skill', name: '🪚 Carpenter', icon: 'fa-hammer', desc: 'Wood work, furniture' },
+        { id: 'mechanic-skill', name: '🔧 Mechanic', icon: 'fa-car', desc: 'Auto, bike repair' },
+        { id: 'ac-skill', name: '❄️ AC Technician', icon: 'fa-snowflake', desc: 'AC repair, installation' },
+        { id: 'mobile-skill', name: '📱 Mobile Repair', icon: 'fa-mobile-alt', desc: 'Phone repair' }
+      ]
+    },
+
+    'electrician-skill': { name: 'Electrician', icon: 'fa-bolt', isCareer: true, fullDetails: { salary: '₹1.5-3.5 LPA', training: 'ITI Electrician (1-2 years)', jobs: 'Electrician, Wireman, Maintenance Technician', selfEmployment: 'Own electrical repair shop' } },
+    'plumber-skill': { name: 'Plumber', icon: 'fa-wrench', isCareer: true, fullDetails: { salary: '₹1.5-3.5 LPA', training: 'ITI Plumber', jobs: 'Plumber, Pipe Fitter' } },
+    'welder-skill': { name: 'Welder', icon: 'fa-fire', isCareer: true, fullDetails: { salary: '₹1.5-3.5 LPA', training: 'ITI Welder', jobs: 'Welder, Fabricator' } },
+    'carpenter-skill': { name: 'Carpenter', icon: 'fa-hammer', isCareer: true, fullDetails: { salary: '₹1.5-3.5 LPA', training: 'ITI Carpenter', jobs: 'Carpenter, Furniture Maker' } },
+    'mechanic-skill': { name: 'Mechanic', icon: 'fa-car', isCareer: true, fullDetails: { salary: '₹1.5-4 LPA', training: 'ITI Mechanic', jobs: 'Auto Mechanic, Bike Mechanic' } },
+    'ac-skill': { name: 'AC Technician', icon: 'fa-snowflake', isCareer: true, fullDetails: { salary: '₹1.8-4 LPA', training: 'ITI Refrigeration', jobs: 'AC Technician, HVAC Technician' } },
+    'mobile-skill': { name: 'Mobile Repair', icon: 'fa-mobile-alt', isCareer: true, fullDetails: { salary: '₹1.5-3 LPA', training: 'Vocational Course', jobs: 'Mobile Repair Technician' } },
+
+    // ========== PRIVATE JOBS ==========
+    'private-jobs': {
+      name: '🏢 Private Sector Jobs',
+      icon: 'fa-building',
+      desc: 'IT, Corporate, Retail, Hospitality, Aviation, BPO',
+      options: [
+        { id: 'it-private', name: '💻 IT Jobs', icon: 'fa-code', desc: 'Software, Data Science, Cloud' },
+        { id: 'corporate-private', name: '📊 Corporate Jobs', icon: 'fa-briefcase', desc: 'HR, Finance, Marketing, Sales' },
+        { id: 'retail-private', name: '🛍️ Retail Jobs', icon: 'fa-store', desc: 'Store Manager, Cashier' },
+        { id: 'hospitality-private', name: '🏨 Hospitality', icon: 'fa-hotel', desc: 'Hotel, Restaurant' },
+        { id: 'aviation-private', name: '✈️ Aviation', icon: 'fa-plane', desc: 'Cabin Crew, Ground Staff' },
+        { id: 'bpo-private', name: '🎧 BPO Jobs', icon: 'fa-headset', desc: 'Customer Support' }
+      ]
+    },
+
+    'it-private': { name: 'IT Jobs', icon: 'fa-code', isCareer: true, fullDetails: { roles: 'Software Engineer, Full Stack Developer, Data Scientist, AI/ML Engineer', salary: '₹3-30 LPA', companies: 'TCS, Infosys, Wipro, Google, Microsoft, Amazon' } },
+    'corporate-private': { name: 'Corporate Jobs', icon: 'fa-briefcase', isCareer: true, fullDetails: { roles: 'HR Executive, Accountant, Sales Manager, Marketing Executive', salary: '₹2.5-15 LPA' } },
+    'retail-private': { name: 'Retail Jobs', icon: 'fa-store', isCareer: true, fullDetails: { roles: 'Store Manager, Cashier, Billing Staff', salary: '₹1.5-5 LPA', companies: 'Reliance Retail, DMart, Lifestyle' } },
+    'hospitality-private': { name: 'Hospitality Jobs', icon: 'fa-hotel', isCareer: true, fullDetails: { roles: 'Hotel Manager, Chef, Waiter, Housekeeping', salary: '₹1.8-8 LPA', companies: 'Taj, Oberoi, Marriott' } },
+    'aviation-private': { name: 'Aviation Jobs', icon: 'fa-plane', isCareer: true, fullDetails: { roles: 'Cabin Crew, Ground Staff, Pilot', salary: '₹3-20 LPA', companies: 'IndiGo, Air India, Vistara' } },
+    'bpo-private': { name: 'BPO Jobs', icon: 'fa-headset', isCareer: true, fullDetails: { roles: 'Customer Support Executive', salary: '₹1.8-4.5 LPA', companies: 'Teleperformance, Wipro BPO' } },
+
+    // ========== SELF EMPLOYMENT ==========
+    'self-employment': {
+      name: '💪 Self Employment',
+      icon: 'fa-chart-line',
+      desc: 'Business, Freelance, Online Work',
+      options: [
+        { id: 'freelance-self', name: '💻 Freelancing', icon: 'fa-laptop-code', desc: 'Upwork, Fiverr' },
+        { id: 'blogging-self', name: '📝 Blogging', icon: 'fa-blog', desc: 'WordPress, SEO' },
+        { id: 'youtube-self', name: '📹 YouTube', icon: 'fa-youtube', desc: 'Content creation' },
+        { id: 'ecommerce-self', name: '🛒 E-commerce', icon: 'fa-shopify', desc: 'Amazon, Flipkart seller' },
+        { id: 'tuition-self', name: '📚 Tuition', icon: 'fa-chalkboard-user', desc: 'Home tuition' },
+        { id: 'small-business-self', name: '🏪 Small Business', icon: 'fa-store', desc: 'Shop, Parlour' }
+      ]
+    },
+
+    'freelance-self': { name: 'Freelancing', icon: 'fa-laptop-code', isCareer: true, fullDetails: { platforms: 'Upwork, Fiverr, Freelancer', earning: '₹20k-2L/month' } },
+    'blogging-self': { name: 'Blogging', icon: 'fa-blog', isCareer: true, fullDetails: { monetization: 'AdSense, Affiliate, Sponsored', earning: '₹10k-1L/month' } },
+    'youtube-self': { name: 'YouTube', icon: 'fa-youtube', isCareer: true, fullDetails: { monetization: 'Ad Revenue, Sponsorships', earning: '₹20k-10L/month' } },
+    'ecommerce-self': { name: 'E-commerce Seller', icon: 'fa-shopify', isCareer: true, fullDetails: { platforms: 'Amazon, Flipkart, Meesho', earning: '₹30k-5L/month' } },
+    'tuition-self': { name: 'Tuition Teacher', icon: 'fa-chalkboard-user', isCareer: true, fullDetails: { earning: '₹10k-50k/month' } },
+    'small-business-self': { name: 'Small Business', icon: 'fa-store', isCareer: true, fullDetails: { types: 'Kirana Store, Parlour, Bakery, Stationery', investment: '₹50k-5L' } },
+
+    // ========== BSC AND BCA ==========
+    'bsc-full': { name: 'B.Sc Graduate', icon: 'fa-flask', isCareer: true, fullDetails: { duration: '3 Years', jobs: 'Lab Technician, Research Assistant, Teacher', salary: '₹2-5 LPA', higherStudies: 'M.Sc, PhD, B.Ed' } },
+    'bca-full': { name: 'BCA Graduate', icon: 'fa-code', isCareer: true, fullDetails: { duration: '3 Years', jobs: 'Software Developer, Web Developer, IT Support', salary: '₹2.5-8 LPA', higherStudies: 'MCA, MBA' } },
+    'bds-full': { name: 'BDS Dentist', icon: 'fa-tooth', isCareer: true, fullDetails: { salary: '₹4-12 LPA' } },
+    'bpt-full': { name: 'BPT Physiotherapist', icon: 'fa-person-walking', isCareer: true, fullDetails: { salary: '₹3-8 LPA' } },
+    'nursing-full': { name: 'B.Sc Nursing', icon: 'fa-hospital-user', isCareer: true, fullDetails: { salary: '₹2.5-6 LPA' } },
+    'bcom-full': { name: 'B.Com', icon: 'fa-chart-simple', isCareer: true, fullDetails: { salary: '₹2-6 LPA', higherStudies: 'M.Com, MBA, CA' } },
+    'cs-full': { name: 'CS', icon: 'fa-file-signature', isCareer: true, fullDetails: { salary: '₹5-20 LPA' } },
+    'bba-full': { name: 'BBA', icon: 'fa-briefcase', isCareer: true, fullDetails: { salary: '₹2.5-8 LPA', higherStudies: 'MBA' } },
+    'masscom-full': { name: 'Mass Comm', icon: 'fa-tv', isCareer: true, fullDetails: { salary: '₹2.5-10 LPA' } },
+    'psychology-full': { name: 'Psychology', icon: 'fa-brain', isCareer: true, fullDetails: { salary: '₹3-12 LPA' } },
+    'law-full': { name: 'Law', icon: 'fa-gavel', isCareer: true, fullDetails: { salary: '₹3-20 LPA', exams: 'CLAT, AILET' } },
+    'polytechnic': { name: 'Polytechnic', icon: 'fa-microchip', isCareer: true, fullDetails: { salary: '₹2-5 LPA' } },
+    'iti': { name: 'ITI', icon: 'fa-tools', isCareer: true, fullDetails: { salary: '₹1.5-3.5 LPA' } },
+    'vocational': { name: 'Vocational', icon: 'fa-certificate', isCareer: true, fullDetails: { salary: '₹1.5-4 LPA' } },
+
+    // Additional nodes for completeness
+    'ece-full': { name: 'Electronics & Comm', icon: 'fa-microchip', isCareer: true, fullDetails: { salary: '₹3.5-15 LPA', companies: 'Intel, Qualcomm, Samsung, ISRO' } },
+    'mech-full': { name: 'Mechanical Engg', icon: 'fa-cogs', isCareer: true, fullDetails: { salary: '₹3-12 LPA', companies: 'Maruti, Tata Motors, L&T' } },
+    'civil-full': { name: 'Civil Engg', icon: 'fa-city', isCareer: true, fullDetails: { salary: '₹3-12 LPA', companies: 'L&T, Shapoorji, NHAI' } },
+    'corporate-full': { name: 'Corporate Jobs', icon: 'fa-building', isCareer: true, fullDetails: { salary: '₹20-60 LPA', roles: 'Consultant, Investment Banker, Brand Manager' } },
+    'entrepreneurship-full': { name: 'Entrepreneurship', icon: 'fa-chart-line', isCareer: true, fullDetails: { funding: 'Angel Investors, Venture Capital', governmentSchemes: 'Startup India, Mudra Loan' } },
+    'opt-full': { name: 'OPT/Work Visa', icon: 'fa-briefcase', isCareer: true, fullDetails: { duration: '36 months work permit in USA' } },
+    'pr-full': { name: 'PR Pathways', icon: 'fa-passport', isCareer: true, fullDetails: { canada: 'Express Entry - CRS score', germany: 'Blue Card', australia: 'SkillSelect' } },
+    'md-full': { name: 'MD/MS', icon: 'fa-graduation-cap', isCareer: true, fullDetails: { specializations: 'Cardiology, Neurology, Pediatrics', salary: '₹12-30 LPA' } },
+    'govt-doctor-full': { name: 'Government Doctor', icon: 'fa-landmark', isCareer: true, fullDetails: { salary: '₹80k-2L/month', exams: 'UPSC CMS, State PSC' } },
+    'abroad-doctor-full': { name: 'Practice Abroad', icon: 'fa-globe', isCareer: true, fullDetails: { usa: 'USMLE', uk: 'PLAB', australia: 'AMC' } },
+    'cpa-full': { name: 'CPA (USA)', icon: 'fa-globe', isCareer: true, fullDetails: { exam: '4 sections', salary: '$70k-150k/year' } },
+    'cfa-full': { name: 'CFA', icon: 'fa-chart-line', isCareer: true, fullDetails: { levels: '3 levels', salary: '₹10-50 LPA' } },
+    'ma-full': { name: 'M.A / PhD', icon: 'fa-graduation-cap', isCareer: true, fullDetails: { duration: '2-5 Years' } },
+    'research-full': { name: 'Research Jobs', icon: 'fa-microscope', isCareer: true, fullDetails: { organizations: 'ISRO, DRDO, CSIR', salary: '₹8-20 LPA' } },
+    'teaching-full': { name: 'Teaching Jobs', icon: 'fa-chalkboard-user', isCareer: true, fullDetails: { eligibility: 'M.Tech/PhD with NET/SET', salary: '₹57,700-1,82,400' } }
+  };
+
+  // ============================================
+  // APPLICATION STATE - SINGLE PATH ONLY
+  // ============================================
+  
+  let currentPath = ['10th'];
+  let currentNodeId = '10th';
+  let searchResultShown = false;
+
+  function render() {
+    const node = careerDB[currentNodeId];
+    if (!node) {
+      console.error('Node not found:', currentNodeId);
+      return;
+    }
+
+    // Build breadcrumb
+    let breadcrumbHtml = '<div class="path-breadcrumb">';
+    for (let i = 0; i < currentPath.length; i++) {
+      const pathNode = careerDB[currentPath[i]];
+      if (pathNode) {
+        breadcrumbHtml += `<span class="path-item" onclick="goToPathItem(${i})">${pathNode.name.length > 25 ? pathNode.name.substring(0, 22) + '...' : pathNode.name}</span>`;
+        if (i < currentPath.length - 1) {
+          breadcrumbHtml += `<span class="path-arrow"><i class="fas fa-arrow-right"></i></span>`;
+        }
+      }
+    }
+    breadcrumbHtml += '</div>';
+
+    // Current node display
+    let html = breadcrumbHtml;
+    html += `
+      <div class="current-section">
+        <div class="current-card">
+          <div class="current-icon"><i class="fas ${node.icon}"></i></div>
+          <div class="current-title">${node.name}</div>
+          <div class="current-desc">${node.desc || ''}</div>
+        </div>
+      </div>
+    `;
+
+    // Info if available
+    if (node.info) {
+      html += `<div class="detail-panel"><div class="detail-title"><i class="fas fa-info-circle"></i> About This Path</div><div class="info-content">${node.info}</div></div>`;
+    }
+
+    // Options if junction
+    if (node.options && node.options.length > 0) {
+      html += `<div class="options-grid">`;
+      for (let opt of node.options) {
+        html += `
+          <div class="option-card" onclick="selectOption('${opt.id}')">
+            <div class="option-icon"><i class="fas ${opt.icon}"></i></div>
+            <div class="option-title">${opt.name}</div>
+            <div class="option-desc">${opt.desc}</div>
+          </div>
+        `;
+      }
+      html += `</div>`;
+    }
+
+    // Career details if career node
+    if (node.fullDetails) {
+      html += renderFullDetails(node);
+    }
+
+    // Next steps if available
+    if (node.nextSteps && node.nextSteps.length > 0) {
+      html += `
+        <div class="next-steps-section">
+          <div class="next-steps-title"><i class="fas fa-road"></i> What's Next? Click below to explore:</div>
+          <div class="next-steps-grid">
+      `;
+      for (let step of node.nextSteps) {
+        html += `<button class="next-step-btn" onclick="selectOption('${step.id}')"><i class="fas ${step.icon || 'fa-arrow-right'}"></i> ${step.name}</button>`;
+      }
+      html += `</div></div>`;
+    }
+
+    // Reset button
+    html += `<div class="button-group"><button class="btn-reset" onclick="resetToStart()"><i class="fas fa-home"></i> Start Over</button></div>`;
+    document.getElementById('mainContent').innerHTML = html;
+  }
+
+  function renderFullDetails(node) {
+    let html = `<div class="detail-panel"><div class="detail-title"><i class="fas fa-briefcase"></i> Complete Career Information</div><div class="detail-grid">`;
+    for (let [key, value] of Object.entries(node.fullDetails)) {
+      if (Array.isArray(value)) {
+        html += `<div class="detail-card"><div class="detail-label">${key.toUpperCase()}</div><div class="detail-value">${value.map(v => `<span class="skill-tag">${v}</span>`).join('')}</div></div>`;
+      } else if (typeof value === 'string') {
+        html += `<div class="detail-card"><div class="detail-label">${key.toUpperCase()}</div><div class="detail-value">${value}</div></div>`;
+      }
+    }
+    html += `</div></div>`;
+    return html;
+  }
+
+  function selectOption(optionId) {
+    currentPath.push(optionId);
+    currentNodeId = optionId;
+    render();
+    // Hide search result when user navigates manually
+    if (searchResultShown) {
+      document.getElementById('searchResult').innerHTML = '';
+      searchResultShown = false;
+    }
+  }
+
+  function goToPathItem(index) {
+    currentPath = currentPath.slice(0, index + 1);
+    currentNodeId = currentPath[currentPath.length - 1];
+    render();
+  }
+
+  function resetToStart() {
+    currentPath = ['10th'];
+    currentNodeId = '10th';
+    render();
+    document.getElementById('searchResult').innerHTML = '';
+    searchResultShown = false;
+    document.getElementById('careerGoal').value = '';
+    document.getElementById('educationLevel').value = '10th';
+  }
+
+  // ============================================
+  // SEARCH FUNCTION - AI-Powered Career Path Finder
+  // ============================================
+  
+  function searchCareer() {
+    const goal = document.getElementById('careerGoal').value.toLowerCase().trim();
+    const education = document.getElementById('educationLevel').value;
+    
+    if (!goal) {
+      alert('Please enter what you want to become (e.g., Software Engineer, Doctor, IAS Officer)');
+      return;
+    }
+    
+    // Map career goals to nodes
+    const careerMap = {
+      'software engineer': 'cse-full',
+      'software developer': 'cse-full',
+      'programmer': 'cse-full',
+      'coder': 'cse-full',
+      'data scientist': 'data-science',
+      'ai engineer': 'data-science',
+      'ml engineer': 'data-science',
+      'doctor': 'mbbs-full',
+      'physician': 'mbbs-full',
+      'surgeon': 'mbbs-full',
+      'dentist': 'bds-full',
+      'ca': 'ca-full',
+      'chartered accountant': 'ca-full',
+      'accountant': 'ca-full',
+      'ias': 'upsc-full',
+      'ias officer': 'upsc-full',
+      'ips': 'upsc-full',
+      'ips officer': 'upsc-full',
+      'ifs': 'upsc-full',
+      'irs': 'upsc-full',
+      'teacher': 'teaching-jobs',
+      'professor': 'teaching-full',
+      'lawyer': 'law-full',
+      'advocate': 'law-full',
+      'judge': 'judiciary',
+      'police': 'police-jobs',
+      'dsp': 'police-jobs',
+      'si': 'police-jobs',
+      'railway': 'railway-jobs',
+      'bank po': 'bank-jobs',
+      'banking': 'bank-jobs',
+      'ssc': 'ssc-jobs',
+      'cgl': 'ssc-jobs',
+      'defence': 'defence-jobs',
+      'army': 'defence-jobs',
+      'navy': 'defence-jobs',
+      'air force': 'defence-jobs',
+      'psu': 'psu-jobs',
+      'engineer': 'cse-full',
+      'civil engineer': 'civil-full',
+      'mechanical engineer': 'mech-full',
+      'electronics engineer': 'ece-full',
+      'business': 'mba-full',
+      'mba': 'mba-full',
+      'manager': 'mba-full',
+      'entrepreneur': 'entrepreneurship-full',
+      'businessman': 'entrepreneurship-full',
+      'freelancer': 'freelance-self',
+      'youtuber': 'youtube-self',
+      'blogger': 'blogging-self',
+      'designer': 'design-course',
+      'architect': 'design-course',
+      'nurse': 'nursing-full',
+      'pharmacist': 'pharmacy',
+      'scientist': 'scientific',
+      'researcher': 'research-full',
+      'isro': 'scientific',
+      'drdo': 'scientific',
+      'barc': 'scientific'
+    };
+    
+    let targetNodeId = null;
+    
+    // Find matching career
+    for (let [keyword, nodeId] of Object.entries(careerMap)) {
+      if (goal.includes(keyword)) {
+        targetNodeId = nodeId;
+        break;
+      }
+    }
+    
+    if (!targetNodeId) {
+      document.getElementById('searchResult').innerHTML = `
+        <div class="search-result">
+          <div class="result-title"><i class="fas fa-search"></i> Search Results</div>
+          <p>We couldn't find "${goal}" in our database. Please try:</p>
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li>Software Engineer / Developer / Programmer</li>
+            <li>Doctor / MBBS / Physician</li>
+            <li>IAS / IPS / UPSC</li>
+            <li>Teacher / Professor</li>
+            <li>Lawyer / Advocate</li>
+            <li>Bank PO / Banking</li>
+            <li>Railway / SSC / Defence</li>
+            <li>CA / Chartered Accountant</li>
+            <li>Engineer (CSE, Civil, Mechanical, ECE)</li>
+            <li>Entrepreneur / Business</li>
+            <li>Freelancer / YouTuber / Blogger</li>
+          </ul>
+          <button class="btn-reset" onclick="document.getElementById('searchResult').innerHTML = ''" style="margin-top: 1rem;">Clear Search</button>
+        </div>
+      `;
+      searchResultShown = true;
+      return;
+    }
+    
+    // Build the path based on education level
+    let pathNodes = [];
+    
+    switch(education) {
+      case '10th':
+        if (targetNodeId === 'cse-full' || targetNodeId === 'ece-full' || targetNodeId === 'mech-full' || targetNodeId === 'civil-full') {
+          pathNodes = ['10th', 'study-path', 'intermediate', 'science-stream', 'engineering-full', targetNodeId];
+        } else if (targetNodeId === 'mbbs-full' || targetNodeId === 'bds-full') {
+          pathNodes = ['10th', 'study-path', 'intermediate', 'science-stream', 'medical-full', targetNodeId];
+        } else if (targetNodeId === 'ca-full' || targetNodeId === 'bcom-full') {
+          pathNodes = ['10th', 'study-path', 'intermediate', 'commerce-stream', targetNodeId];
+        } else if (targetNodeId === 'upsc-full' || targetNodeId === 'law-full') {
+          pathNodes = ['10th', 'study-path', 'intermediate', 'arts-stream', 'ba-full', targetNodeId];
+        } else {
+          pathNodes = ['10th', targetNodeId];
+        }
+        break;
+      case '12th':
+        if (targetNodeId === 'cse-full' || targetNodeId === 'ece-full' || targetNodeId === 'mech-full' || targetNodeId === 'civil-full') {
+          pathNodes = ['10th', 'study-path', 'intermediate', 'science-stream', 'engineering-full', targetNodeId];
+        } else if (targetNodeId === 'mbbs-full' || targetNodeId === 'bds-full') {
+          pathNodes = ['10th', 'study-path', 'intermediate', 'science-stream', 'medical-full', targetNodeId];
+        } else {
+          pathNodes = ['10th', targetNodeId];
+        }
+        break;
+      case 'graduate':
+        pathNodes = ['10th', targetNodeId];
+        break;
+      default:
+        pathNodes = ['10th', targetNodeId];
+    }
+    
+    // Remove duplicates and ensure path exists
+    const uniquePath = [];
+    for (let node of pathNodes) {
+      if (!uniquePath.includes(node) && careerDB[node]) {
+        uniquePath.push(node);
+      }
+    }
+    
+    currentPath = uniquePath;
+    currentNodeId = uniquePath[uniquePath.length - 1];
+    render();
+    
+    // Show success message
+    document.getElementById('searchResult').innerHTML = `
+      <div class="search-result">
+        <div class="result-title"><i class="fas fa-check-circle"></i> Career Path Found!</div>
+        <p>We've created a personalized path for you to become <strong>${goal}</strong> based on your ${education} education level.</p>
+        <p style="margin-top: 0.5rem;">Click on the options below to explore your complete journey!</p>
+        <button class="btn-reset" onclick="document.getElementById('searchResult').innerHTML = ''" style="margin-top: 1rem;">Close</button>
+      </div>
+    `;
+    searchResultShown = true;
+    
+    // Scroll to content
+    document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Initialize
+  render();
+</script>
+</body>
+</html>
