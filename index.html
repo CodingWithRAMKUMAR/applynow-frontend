@@ -109,12 +109,6 @@
       -webkit-text-fill-color: transparent;
     }
     
-    /* Animated counter */
-    .counter {
-      display: inline-block;
-      animation: countUp 2s ease-out;
-    }
-    
     /* Job card styling */
     .job-card {
       background: rgba(20, 20, 50, 0.65);
@@ -290,10 +284,10 @@
       </div>
     </div>
 
-    <!-- Stats - Shows cached instantly -->
+    <!-- Stats - Will be replaced by pre-deploy script -->
     <div class="flex justify-center gap-6 mb-8 flex-wrap">
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="totalJobs">1000</div>
+        <div class="stat-number" id="totalJobs">0</div>
         <div class="text-gray-400 text-sm">Total Jobs</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
@@ -301,62 +295,60 @@
         <div class="text-gray-400 text-sm">New Today</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="activeCompanies">542</div>
+        <div class="stat-number" id="activeCompanies">0</div>
         <div class="text-gray-400 text-sm">Active Companies</div>
       </div>
     </div>
 
-    <!-- ⬇️ INSTANT STATS LOADER - FIXED ⬇️ -->
+    <!-- ⬇️ FALLBACK LOADER - Only runs if pre-render failed ⬇️ -->
     <script>
-      // Immediately show numbers on page load
       (function() {
-        // Check for cached stats
-        let cachedStats = localStorage.getItem('applymore_stats');
+        const totalEl = document.getElementById('totalJobs');
+        const newEl = document.getElementById('newJobs');
+        const companiesEl = document.getElementById('activeCompanies');
         
-        if (cachedStats) {
-          const stats = JSON.parse(cachedStats);
-          // Only update if not expired (24 hours)
-          if (stats.timestamp && (Date.now() - stats.timestamp < 86400000)) {
-            document.getElementById('totalJobs').textContent = stats.total;
-            document.getElementById('newJobs').textContent = stats.newToday;
-            document.getElementById('activeCompanies').textContent = stats.companies;
-          }
+        // If numbers are already showing real values, exit
+        if (totalEl.textContent !== '0') return;
+        
+        // Try to get cached stats
+        const cached = localStorage.getItem('applymore_stats');
+        if (cached) {
+          try {
+            const stats = JSON.parse(cached);
+            if (stats.timestamp && (Date.now() - stats.timestamp < 86400000)) {
+              totalEl.textContent = stats.total;
+              newEl.textContent = stats.newToday;
+              companiesEl.textContent = stats.companies;
+              return;
+            }
+          } catch (e) {}
         }
         
-        // Always fetch fresh data immediately
+        // If no cache, fetch fresh data
         fetch('https://qmljqckhhdmvcbomydhf.supabase.co/rest/v1/ApplyMore?select=*', {
           headers: {
             'apikey': 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h',
             'Authorization': 'Bearer sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h'
           }
         })
-        .then(response => response.json())
+        .then(r => r.json())
         .then(jobs => {
           const total = jobs.length;
           const todayStr = new Date().toDateString();
           const newToday = jobs.filter(j => j.created_at && new Date(j.created_at).toDateString() === todayStr).length;
           const companies = [...new Set(jobs.map(j => j.company))].length;
           
-          // Update DOM
-          document.getElementById('totalJobs').textContent = total;
-          document.getElementById('newJobs').textContent = newToday;
-          document.getElementById('activeCompanies').textContent = companies;
+          totalEl.textContent = total;
+          newEl.textContent = newToday;
+          companiesEl.textContent = companies;
           
-          // Save to localStorage with timestamp
           localStorage.setItem('applymore_stats', JSON.stringify({
-            total: total,
-            newToday: newToday,
-            companies: companies,
-            timestamp: Date.now()
+            total, newToday, companies, timestamp: Date.now()
           }));
-        })
-        .catch(error => {
-          console.log('Stats fetch failed:', error);
-          // If fetch fails, keep showing cached data
         });
       })();
     </script>
-    <!-- ⬆️ END OF INSTANT STATS LOADER ⬆️ -->
+    <!-- ⬆️ END OF FALLBACK LOADER ⬆️ -->
 
     <!-- Community -->
     <div class="glass rounded-2xl p-6 mb-8 text-center border border-white/5 relative overflow-hidden group">
