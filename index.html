@@ -2,21 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>ApplyMore – India's IT Fresher Job Board</title>
   <meta name="description" content="ApplyMore – free job board for IT freshers in India. Find genuine entry-level jobs in Hyderabad, Bangalore, Chennai.">
   
-  <!-- Cache control -->
   <meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate">
   
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Custom styles -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; }
@@ -33,7 +29,6 @@
       100% { background-position: 0% 50%; }
     }
     
-    /* Glowing card effect */
     .glow-card {
       background: rgba(20, 20, 50, 0.65);
       backdrop-filter: blur(10px);
@@ -46,7 +41,6 @@
       box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
     }
     
-    /* 3D tilt effect on job cards */
     .tilt-card {
       transition: all 0.3s ease;
       transform-style: preserve-3d;
@@ -56,7 +50,6 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
     
-    /* Sparkle button */
     .sparkle-btn {
       background: linear-gradient(135deg, #3b82f6, #8b5cf6);
       transition: all 0.3s ease;
@@ -83,7 +76,6 @@
       100% { transform: translateX(100%) rotate(45deg); }
     }
     
-    /* Floating particles */
     .particle {
       position: fixed;
       width: 3px;
@@ -100,7 +92,6 @@
       100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
     }
     
-    /* Stats counter animation */
     .stat-number {
       font-size: 2.5rem;
       font-weight: 700;
@@ -109,7 +100,6 @@
       -webkit-text-fill-color: transparent;
     }
     
-    /* Job card styling */
     .job-card {
       background: rgba(20, 20, 50, 0.65);
       backdrop-filter: blur(10px);
@@ -162,7 +152,6 @@
       50% { transform: scale(1.05); }
     }
     
-    /* Resource cards */
     .resource-card {
       background: rgba(20, 20, 50, 0.65);
       backdrop-filter: blur(10px);
@@ -177,7 +166,6 @@
       border-color: #8b5cf6;
     }
     
-    /* Shimmer effect for loading */
     .shimmer {
       background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
       background-size: 200% 100%;
@@ -188,7 +176,140 @@
       100% { background-position: -200% 0; }
     }
     
-    /* Google-style ad styling */
+    .glass {
+      background: rgba(20, 20, 50, 0.5);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    /* POPUP AD STYLES - Realistic Modal Popup */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .popup-container {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 20px;
+      width: 90%;
+      max-width: 520px;
+      position: relative;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .popup-overlay.active .popup-container {
+      transform: scale(1);
+    }
+    
+    .popup-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 10;
+      color: #9ca3af;
+      font-size: 18px;
+      border: none;
+      outline: none;
+    }
+    
+    .popup-close:hover {
+      background: rgba(239, 68, 68, 0.8);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .popup-ad-content {
+      padding: 24px 28px 28px 28px;
+      cursor: pointer;
+    }
+    
+    .popup-ad-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    
+    .popup-ad-label span {
+      font-size: 11px;
+      color: #6b7280;
+      letter-spacing: 0.5px;
+    }
+    
+    .popup-ad-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #60a5fa;
+      margin-bottom: 12px;
+      line-height: 1.4;
+      white-space: pre-line;
+    }
+    
+    .popup-ad-url {
+      font-size: 12px;
+      color: #34d399;
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+    
+    .popup-ad-desc {
+      font-size: 14px;
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+    
+    .popup-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, transparent);
+      margin: 16px 0 12px 0;
+    }
+    
+    .popup-company-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59, 130, 246, 0.15);
+      padding: 6px 12px;
+      border-radius: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .popup-company-badge i {
+      font-size: 14px;
+      color: #3b82f6;
+    }
+    
+    /* Inline Google Ad Style (original) */
     .google-ad {
       position: relative;
       padding: 0.5rem 0;
@@ -198,6 +319,7 @@
       font-weight: 500;
       color: #60a5fa;
       transition: color 0.2s;
+      white-space: pre-line;
     }
     .google-ad .ad-title:hover {
       color: #93bbfc;
@@ -214,49 +336,32 @@
       font-size: 13px;
       color: #9ca3af;
       line-height: 1.5;
-      transition: color 0.2s;
-    }
-    .google-ad .ad-desc:hover {
-      color: #d1d5db;
     }
     .google-ad .ad-label {
       font-size: 9px;
       color: #6b7280;
     }
     
-    /* Responsive */
     @media (max-width: 840px) {
       .main-layout { flex-direction: column; }
       .resources-column { order: 2; }
       .jobs-column { order: 1; }
     }
     
-    /* Smooth scroll */
     html {
       scroll-behavior: smooth;
-    }
-    
-    /* Glass morphism */
-    .glass {
-      background: rgba(20, 20, 50, 0.5);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
     }
   </style>
   
   <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
   <link rel="apple-touch-icon" href="/logo.png">
-  <meta property="og:image" content="https://applymore.vercel.app/logo.png">
-  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="gradient-bg min-h-screen text-white">
 
-  <!-- Floating particles -->
   <div id="particles"></div>
 
   <div class="container mx-auto px-4 py-6 relative z-10">
     
-    <!-- Navigation -->
     <nav class="flex justify-center gap-4 mb-8 flex-wrap glass rounded-full px-6 py-3 max-w-3xl mx-auto">
       <a href="index.html" class="text-gray-400 hover:text-blue-400 transition">🏠 Home</a>
       <a href="Career_Path.html" class="text-gray-400 hover:text-green-400 transition">🗺️ Career Path</a>
@@ -267,7 +372,6 @@
       <a href="terms.html" class="text-gray-400 hover:text-blue-400 transition">⚖️ Terms</a>
     </nav>
 
-    <!-- Hero -->
     <div class="text-center mb-8">
       <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 animate-pulse">
         ApplyMore
@@ -282,10 +386,9 @@
       </div>
     </div>
 
-    <!-- Stats - Will be replaced by pre-deploy script -->
     <div class="flex justify-center gap-6 mb-8 flex-wrap">
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="totalJobs">1000</div>
+        <div class="stat-number" id="totalJobs">0</div>
         <div class="text-gray-400 text-sm">Total Jobs</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
@@ -293,62 +396,11 @@
         <div class="text-gray-400 text-sm">New Today</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="activeCompanies">542</div>
+        <div class="stat-number" id="activeCompanies">0</div>
         <div class="text-gray-400 text-sm">Active Companies</div>
       </div>
     </div>
 
-    <!-- ⬇️ FALLBACK LOADER - Only runs if pre-render failed ⬇️ -->
-    <script>
-      (function() {
-        const totalEl = document.getElementById('totalJobs');
-        const newEl = document.getElementById('newJobs');
-        const companiesEl = document.getElementById('activeCompanies');
-        
-        // If numbers are already showing real values, exit
-        if (totalEl.textContent !== '0') return;
-        
-        // Try to get cached stats
-        const cached = localStorage.getItem('applymore_stats');
-        if (cached) {
-          try {
-            const stats = JSON.parse(cached);
-            if (stats.timestamp && (Date.now() - stats.timestamp < 86400000)) {
-              totalEl.textContent = stats.total;
-              newEl.textContent = stats.newToday;
-              companiesEl.textContent = stats.companies;
-              return;
-            }
-          } catch (e) {}
-        }
-        
-        // If no cache, fetch fresh data
-        fetch('https://qmljqckhhdmvcbomydhf.supabase.co/rest/v1/ApplyMore?select=*', {
-          headers: {
-            'apikey': 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h',
-            'Authorization': 'Bearer sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h'
-          }
-        })
-        .then(r => r.json())
-        .then(jobs => {
-          const total = jobs.length;
-          const todayStr = new Date().toDateString();
-          const newToday = jobs.filter(j => j.created_at && new Date(j.created_at).toDateString() === todayStr).length;
-          const companies = [...new Set(jobs.map(j => j.company))].length;
-          
-          totalEl.textContent = total;
-          newEl.textContent = newToday;
-          companiesEl.textContent = companies;
-          
-          localStorage.setItem('applymore_stats', JSON.stringify({
-            total, newToday, companies, timestamp: Date.now()
-          }));
-        });
-      })();
-    </script>
-    <!-- ⬆️ END OF FALLBACK LOADER ⬆️ -->
-
-    <!-- Community -->
     <div class="glass rounded-2xl p-6 mb-8 text-center border border-white/5 relative overflow-hidden group">
       <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
       <h2 class="text-2xl font-bold text-blue-400 mb-2 relative z-10">🚀 Join Our Community</h2>
@@ -369,7 +421,6 @@
       </div>
     </div>
 
-    <!-- Filters -->
     <div class="flex flex-wrap gap-3 mb-6 justify-center glass rounded-full px-4 py-3 max-w-2xl mx-auto">
       <div class="relative flex-1 min-w-[150px]">
         <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
@@ -389,42 +440,35 @@
       </select>
     </div>
 
-    <!-- Main Layout -->
     <div class="flex flex-wrap gap-6 main-layout">
       
-      <!-- Jobs Column -->
       <div class="flex-1 min-w-[300px] jobs-column">
         
-        <!-- ⬇️ REAL GOOGLE AD STYLE ⬇️ -->
+        <!-- Original inline Google Ad (kept as reference) -->
         <div class="google-ad mb-6 max-w-2xl mx-auto">
           <div class="flex items-center gap-1 mb-0.5">
             <span class="ad-label">Ad</span>
             <span class="ad-label">·</span>
-            <span class="ad-label">www.company.com</span>
+            <span class="ad-label">Sutherland</span>
           </div>
-          
-          <a href="https://applymore.vercel.app" target="_blank" class="block group">
+          <a href="https://jobs.smartrecruiters.com/oneclick-ui/company/Sutherland/publication/00540916-b8ff-4b5b-be8b-92746e74a2b8?dcr_ci=Sutherland" target="_blank" class="block group">
             <h4 class="ad-title">
-              Our Known Company - Software Engineer Fresher
+              Company : Sutherland 
+Branches : Btech Cse/IT , B.sc computers, BCA,MCA 
+year : 2022 to 2026 
+Percentage: 60% 
+Good communication skills must
+Salary : 3.5 to 4.5
             </h4>
-            
             <div class="ad-url mt-0.5">
-              www.company.com/careers
+              https://jobs.smartrecruiters.com/oneclick-ui/company/Sutherland
             </div>
-            
-            <p class="ad-desc mt-1">
-              Apply for Software Engineer Fresher role at Our Known Company. 
-              Competitive salary, great benefits, and growth opportunities. 
-              Join our team in Hyderabad today.
-            </p>
+            <p class="ad-desc mt-1"></p>
           </a>
         </div>
-        <!-- ⬆️ END OF REAL GOOGLE AD ⬆️ -->
 
-        <!-- Jobs Grid -->
         <div id="jobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         
-        <!-- Load More -->
         <div id="loadMoreContainer" class="text-center mt-6 hidden">
           <button id="loadMoreBtn" class="sparkle-btn text-white px-8 py-3 rounded-full font-semibold">
             <i class="fas fa-sync-alt mr-2"></i> Load More
@@ -432,7 +476,6 @@
         </div>
       </div>
 
-      <!-- Resources Column -->
       <div class="w-full md:w-72 resources-column">
         <div class="glass rounded-xl p-4 mb-4">
           <h2 class="text-xl font-bold text-blue-400 mb-3">📘 Interview Ready PDFs</h2>
@@ -446,7 +489,6 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <footer class="mt-8 pt-4 border-t border-white/10 text-center">
       <div class="flex justify-center gap-4 mb-2 flex-wrap">
         <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="text-gray-500 hover:text-blue-400 text-sm">Telegram</a>
@@ -458,8 +500,44 @@
     </footer>
   </div>
 
+  <!-- POPUP AD MODAL (Realistic Popup with Close Button) -->
+  <div id="adPopup" class="popup-overlay">
+    <div class="popup-container">
+      <button class="popup-close" id="closePopupBtn">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="popup-ad-content" id="popupAdLink">
+        <div class="popup-ad-label">
+          <span>Ad</span>
+          <span>·</span>
+          <span>Sutherland</span>
+        </div>
+        <div class="popup-company-badge">
+          <i class="fas fa-building"></i>
+          <span class="text-xs text-blue-300">Featured Opportunity</span>
+        </div>
+        <h4 class="popup-ad-title">
+          🚀 Company: Sutherland<br/>
+          🎓 Branches: Btech Cse/IT, B.sc computers, BCA, MCA<br/>
+          📅 Year: 2022 to 2026<br/>
+          📊 Percentage: 60%<br/>
+          🗣️ Good communication skills must<br/>
+          💰 Salary: 3.5 to 4.5 LPA
+        </h4>
+        <div class="popup-ad-url">
+          https://jobs.smartrecruiters.com/Sutherland
+        </div>
+        <div class="popup-divider"></div>
+        <p class="popup-ad-desc">
+          ⚡ Apply now for Sutherland recruitment drive! Excellent opportunity for IT freshers. 
+          Click to apply directly on official career portal. Limited vacancies available.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Generate floating particles
+    // Particles generation
     (function() {
       const container = document.getElementById('particles');
       for (let i = 0; i < 30; i++) {
@@ -510,7 +588,11 @@
 
     function isNewJob(postedDate) {
       if (!postedDate) return false;
-      return (new Date() - new Date(postedDate)) / (1000 * 60 * 60 * 24) <= 1;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const jobDate = new Date(postedDate);
+      jobDate.setHours(0, 0, 0, 0);
+      return jobDate.getTime() === today.getTime();
     }
 
     function showSkeletons(show) {
@@ -529,13 +611,27 @@
     async function fetchJobs() {
       showSkeletons(true);
       try {
-        // Only fetch 20 jobs initially - much faster
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc&limit=20`, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc&limit=50`, {
           headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const jobs = await res.json();
         allJobs = jobs;
+        
+        // Fix: Calculate Today's jobs correctly
+        const todayStr = new Date().toDateString();
+        const newTodayCount = allJobs.filter(job => {
+          if (!job.created_at) return false;
+          const jobDate = new Date(job.created_at);
+          return jobDate.toDateString() === todayStr;
+        }).length;
+        
+        const totalJobsCount = allJobs.length;
+        const uniqueCompanies = [...new Set(allJobs.map(j => j.company).filter(Boolean))].length;
+        
+        document.getElementById('totalJobs').textContent = totalJobsCount;
+        document.getElementById('newJobs').textContent = newTodayCount;
+        document.getElementById('activeCompanies').textContent = uniqueCompanies;
         
         applyFilters();
       } catch (err) {
@@ -550,7 +646,7 @@
       const location = document.getElementById('locationFilter').value;
       const exp = document.getElementById('expFilter').value;
       filteredJobs = allJobs.filter(job => {
-        if (searchTerm && !(job.title.toLowerCase().includes(searchTerm) || job.company.toLowerCase().includes(searchTerm))) return false;
+        if (searchTerm && !(job.title?.toLowerCase().includes(searchTerm) || job.company?.toLowerCase().includes(searchTerm))) return false;
         if (location && job.location !== location) return false;
         if (exp) {
           const jobExp = getExperienceLevel(job);
@@ -610,23 +706,13 @@
         if (data.pdfs && data.pdfs.length > 0) {
           const pdfItems = await Promise.all(data.pdfs.map(async (pdf) => {
             const exists = await pdfExists(pdf.url);
-            if (exists) {
-              return `
-                <div class="resource-card">
-                  <h3 class="text-blue-400 font-semibold mb-1">📄 ${escapeHtml(pdf.title)}</h3>
-                  <p class="text-gray-400 text-sm mb-2">${escapeHtml(pdf.description)}</p>
-                  <a href="${pdf.url}" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm">📥 Download PDF →</a>
-                </div>
-              `;
-            } else {
-              return `
-                <div class="resource-card">
-                  <h3 class="text-blue-400 font-semibold mb-1">📄 ${escapeHtml(pdf.title)}</h3>
-                  <p class="text-gray-400 text-sm mb-2">${escapeHtml(pdf.description)}</p>
-                  <p class="text-yellow-400 text-xs"><em>Coming soon (file not yet uploaded)</em></p>
-                </div>
-              `;
-            }
+            return `
+              <div class="resource-card">
+                <h3 class="text-blue-400 font-semibold mb-1">📄 ${escapeHtml(pdf.title)}</h3>
+                <p class="text-gray-400 text-sm mb-2">${escapeHtml(pdf.description)}</p>
+                ${exists ? `<a href="${pdf.url}" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm">📥 Download PDF →</a>` : `<p class="text-yellow-400 text-xs"><em>Coming soon</em></p>`}
+              </div>
+            `;
           }));
           pdfsContainer.innerHTML = pdfItems.join('');
         } else {
@@ -652,7 +738,36 @@
       }
     }
 
-    // Debounce search for better performance
+    // POPUP AD FUNCTIONALITY
+    function showPopupAd() {
+      const popup = document.getElementById('adPopup');
+      popup.classList.add('active');
+      // Store that popup was shown in session
+      sessionStorage.setItem('adPopupShown', 'true');
+    }
+
+    function closePopupAd() {
+      const popup = document.getElementById('adPopup');
+      popup.classList.remove('active');
+    }
+
+    // Redirect on click (popup content click)
+    function redirectToAdLink() {
+      window.open('https://jobs.smartrecruiters.com/oneclick-ui/company/Sutherland/publication/00540916-b8ff-4b5b-be8b-92746e74a2b8?dcr_ci=Sutherland', '_blank');
+      closePopupAd();
+    }
+
+    // Event listeners for popup
+    document.getElementById('closePopupBtn').addEventListener('click', closePopupAd);
+    document.getElementById('popupAdLink').addEventListener('click', redirectToAdLink);
+    
+    // Show popup after 2 seconds (only once per session)
+    setTimeout(() => {
+      if (!sessionStorage.getItem('adPopupShown')) {
+        showPopupAd();
+      }
+    }, 2000);
+
     let searchTimeout;
     document.getElementById('searchInput').addEventListener('input', () => {
       clearTimeout(searchTimeout);
@@ -663,7 +778,6 @@
     document.getElementById('expFilter').addEventListener('change', applyFilters);
     document.getElementById('loadMoreBtn').addEventListener('click', () => { currentPage++; renderJobs(); });
 
-    // Load everything
     fetchJobs();
     loadResources();
   </script>
