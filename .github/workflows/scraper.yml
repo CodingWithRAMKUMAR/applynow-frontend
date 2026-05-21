@@ -20,8 +20,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install jobspy aiohttp supabase pandas python-dotenv playwright
+          pip install setuptools wheel
+          pip install jobspy==1.9.0
+          pip install aiohttp supabase pandas python-dotenv beautifulsoup4 requests
+          pip install playwright
           playwright install chromium
+          pip list | grep jobspy
       
       - name: Run scraper
         env:
