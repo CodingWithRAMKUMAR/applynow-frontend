@@ -17,7 +17,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; }
     
-    /* Animated gradient background */
     .gradient-bg {
       background: linear-gradient(-45deg, #0a0a2a, #1a1a4a, #0a0a2a, #2a1a4a);
       background-size: 400% 400%;
@@ -182,134 +181,6 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
     
-    /* POPUP AD STYLES - Realistic Modal Popup */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(5px);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    
-    .popup-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .popup-container {
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      border-radius: 20px;
-      width: 90%;
-      max-width: 520px;
-      position: relative;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(59, 130, 246, 0.2);
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-      overflow: hidden;
-    }
-    
-    .popup-overlay.active .popup-container {
-      transform: scale(1);
-    }
-    
-    .popup-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 32px;
-      height: 32px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      z-index: 10;
-      color: #9ca3af;
-      font-size: 18px;
-      border: none;
-      outline: none;
-    }
-    
-    .popup-close:hover {
-      background: rgba(239, 68, 68, 0.8);
-      color: white;
-      transform: scale(1.1);
-    }
-    
-    .popup-ad-content {
-      padding: 24px 28px 28px 28px;
-      cursor: pointer;
-    }
-    
-    .popup-ad-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-    
-    .popup-ad-label span {
-      font-size: 11px;
-      color: #6b7280;
-      letter-spacing: 0.5px;
-    }
-    
-    .popup-ad-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #60a5fa;
-      margin-bottom: 12px;
-      line-height: 1.4;
-      white-space: pre-line;
-    }
-    
-    .popup-ad-url {
-      font-size: 12px;
-      color: #34d399;
-      margin-bottom: 12px;
-      word-break: break-all;
-    }
-    
-    .popup-ad-desc {
-      font-size: 14px;
-      color: #d1d5db;
-      line-height: 1.5;
-    }
-    
-    .popup-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, transparent);
-      margin: 16px 0 12px 0;
-    }
-    
-    .popup-company-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(59, 130, 246, 0.15);
-      padding: 6px 12px;
-      border-radius: 40px;
-      margin-bottom: 16px;
-    }
-    
-    .popup-company-badge i {
-      font-size: 14px;
-      color: #3b82f6;
-    }
-    
-    /* Inline Google Ad Style (original) */
     .google-ad {
       position: relative;
       padding: 0.5rem 0;
@@ -348,9 +219,7 @@
       .jobs-column { order: 1; }
     }
     
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
   </style>
   
   <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
@@ -362,6 +231,7 @@
 
   <div class="container mx-auto px-4 py-6 relative z-10">
     
+    <!-- Navigation -->
     <nav class="flex justify-center gap-4 mb-8 flex-wrap glass rounded-full px-6 py-3 max-w-3xl mx-auto">
       <a href="index.html" class="text-gray-400 hover:text-blue-400 transition">🏠 Home</a>
       <a href="Career_Path.html" class="text-gray-400 hover:text-green-400 transition">🗺️ Career Path</a>
@@ -372,6 +242,7 @@
       <a href="terms.html" class="text-gray-400 hover:text-blue-400 transition">⚖️ Terms</a>
     </nav>
 
+    <!-- Hero -->
     <div class="text-center mb-8">
       <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 animate-pulse">
         ApplyMore
@@ -386,17 +257,18 @@
       </div>
     </div>
 
+    <!-- Stats -->
     <div class="flex justify-center gap-6 mb-8 flex-wrap">
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="totalJobs">231</div>
+        <div class="stat-number" id="totalJobs">0</div>
         <div class="text-gray-400 text-sm">Total Jobs</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="newJobs">161</div>
+        <div class="stat-number" id="newJobs">0</div>
         <div class="text-gray-400 text-sm">New Today</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="activeCompanies">173</div>
+        <div class="stat-number" id="activeCompanies">0</div>
         <div class="text-gray-400 text-sm">Active Companies</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
@@ -405,12 +277,10 @@
       </div>
     </div>
 
-    <!-- ⬇️ FIXED STATS LOADER ⬇️ -->
+    <!-- Stats Loader -->
     <script>
       (function() {
-        // Clear cache to force fresh data
         localStorage.removeItem('applymore_stats');
-        
         fetch('https://qmljqckhhdmvcbomydhf.supabase.co/rest/v1/ApplyMore?select=*', {
           headers: {
             'apikey': 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h',
@@ -429,27 +299,12 @@
           document.getElementById('newJobs').textContent = newToday;
           document.getElementById('activeCompanies').textContent = companies;
           document.getElementById('remoteJobs').textContent = remote;
-          
-          localStorage.setItem('applymore_stats', JSON.stringify({
-            total, newToday, companies, remote, timestamp: Date.now()
-          }));
         })
-        .catch(err => {
-          console.error('Stats error:', err);
-          // Try cached data
-          const cached = localStorage.getItem('applymore_stats');
-          if (cached) {
-            const stats = JSON.parse(cached);
-            document.getElementById('totalJobs').textContent = stats.total;
-            document.getElementById('newJobs').textContent = stats.newToday;
-            document.getElementById('activeCompanies').textContent = stats.companies;
-            document.getElementById('remoteJobs').textContent = stats.remote || 0;
-          }
-        });
+        .catch(err => console.error('Stats error:', err));
       })();
     </script>
-    <!-- ⬆️ END OF FIXED STATS LOADER ⬆️ -->
 
+    <!-- Community -->
     <div class="glass rounded-2xl p-6 mb-8 text-center border border-white/5 relative overflow-hidden group">
       <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
       <h2 class="text-2xl font-bold text-blue-400 mb-2 relative z-10">🚀 Join Our Community</h2>
@@ -470,6 +325,7 @@
       </div>
     </div>
 
+    <!-- Filters -->
     <div class="flex flex-wrap gap-3 mb-6 justify-center glass rounded-full px-4 py-3 max-w-2xl mx-auto">
       <div class="relative flex-1 min-w-[150px]">
         <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
@@ -480,6 +336,9 @@
         <option value="Hyderabad">Hyderabad</option>
         <option value="Bangalore">Bangalore</option>
         <option value="Chennai">Chennai</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Pune">Pune</option>
       </select>
       <select id="expFilter" class="px-3 py-1.5 bg-black/30 border border-white/10 rounded-full text-white focus:outline-none focus:border-blue-400 transition text-sm">
         <option value="">All Experience</option>
@@ -487,20 +346,19 @@
         <option value="1-2">1-2 years</option>
         <option value="3+">3+ years</option>
       </select>
-      <!-- ⬇️ NEW REMOTE FILTER ⬇️ -->
       <select id="remoteFilter" class="px-3 py-1.5 bg-black/30 border border-white/10 rounded-full text-white focus:outline-none focus:border-blue-400 transition text-sm">
         <option value="">All Types</option>
         <option value="remote">🌐 Remote</option>
         <option value="on-site">📍 On-Site</option>
       </select>
-      <!-- ⬆️ END OF REMOTE FILTER ⬆️ -->
     </div>
 
+    <!-- Main Layout -->
     <div class="flex flex-wrap gap-6 main-layout">
       
       <div class="flex-1 min-w-[300px] jobs-column">
         
-        <!-- Original inline Google Ad (kept as reference) -->
+        <!-- Google Ad -->
         <div class="google-ad mb-6 max-w-2xl mx-auto">
           <div class="flex items-center gap-1 mb-0.5">
             <span class="ad-label">Ad</span>
@@ -545,55 +403,89 @@ Salary : 3.5 to 4.5
       </div>
     </div>
 
-    <footer class="mt-8 pt-4 border-t border-white/10 text-center">
-      <div class="flex justify-center gap-4 mb-2 flex-wrap">
-        <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="text-gray-500 hover:text-blue-400 text-sm">Telegram</a>
-        <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="text-gray-500 hover:text-green-400 text-sm">WhatsApp Group</a>
-        <a href="https://chat.whatsapp.com/GLoKj0wSOyC0Qw66QWMFvo" target="_blank" class="text-gray-500 hover:text-green-400 text-sm">WhatsApp Community</a>
-        <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="text-gray-500 hover:text-blue-600 text-sm">LinkedIn</a>
+    <!-- Clean Footer -->
+    <footer class="mt-12 pt-8 border-t border-white/10 bg-gradient-to-b from-transparent to-black/30">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          
+          <!-- Brand -->
+          <div>
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">AM</div>
+              <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">ApplyMore</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              India's most trusted IT fresher job board. Helping freshers land their dream jobs since 2026.
+            </p>
+            <div class="flex gap-3 mt-4">
+              <a href="https://t.me/+lBGo64nHYIgxMmU1" target="_blank" class="w-8 h-8 rounded-full bg-white/5 hover:bg-blue-500 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition">
+                <i class="fab fa-telegram text-sm"></i>
+              </a>
+              <a href="https://chat.whatsapp.com/Bv6fKn2VeJ4DZ3zBbONFzV" target="_blank" class="w-8 h-8 rounded-full bg-white/5 hover:bg-green-500 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition">
+                <i class="fab fa-whatsapp text-sm"></i>
+              </a>
+              <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="w-8 h-8 rounded-full bg-white/5 hover:bg-blue-600 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition">
+                <i class="fab fa-linkedin text-sm"></i>
+              </a>
+              <a href="mailto:applymore@gmail.com" class="w-8 h-8 rounded-full bg-white/5 hover:bg-purple-500 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition">
+                <i class="fas fa-envelope text-sm"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Quick Links</h3>
+            <ul class="space-y-2">
+              <li><a href="index.html" class="text-gray-400 hover:text-blue-400 text-sm transition">🏠 Home</a></li>
+              <li><a href="Career_Path.html" class="text-gray-400 hover:text-green-400 text-sm transition">🗺️ Career Path</a></li>
+              <li><a href="about.html" class="text-gray-400 hover:text-blue-400 text-sm transition">📖 About Us</a></li>
+              <li><a href="blog.html" class="text-gray-400 hover:text-blue-400 text-sm transition">✍️ Blog</a></li>
+              <li><a href="contact.html" class="text-gray-400 hover:text-blue-400 text-sm transition">📧 Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Resources</h3>
+            <ul class="space-y-2">
+              <li><a href="#" onclick="alert('📚 Learning Hub Coming Soon!')" class="text-gray-400 hover:text-blue-400 text-sm transition">📚 Learning Hub</a></li>
+              <li><a href="#" onclick="alert('🎯 Interview Prep Coming Soon!')" class="text-gray-400 hover:text-blue-400 text-sm transition">🎯 Interview Prep</a></li>
+              <li><a href="#" onclick="alert('📄 Resume Templates Coming Soon!')" class="text-gray-400 hover:text-blue-400 text-sm transition">📄 Resume Templates</a></li>
+              <li><a href="#" onclick="alert('📝 Interview Tips Coming Soon!')" class="text-gray-400 hover:text-blue-400 text-sm transition">📝 Interview Tips</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact & Legal -->
+          <div>
+            <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Contact & Legal</h3>
+            <ul class="space-y-2">
+              <li><a href="contact.html" class="text-gray-400 hover:text-blue-400 text-sm transition">📧 Get in Touch</a></li>
+              <li><a href="privacy.html" class="text-gray-400 hover:text-blue-400 text-sm transition">🔒 Privacy Policy</a></li>
+              <li><a href="terms.html" class="text-gray-400 hover:text-blue-400 text-sm transition">⚖️ Terms of Service</a></li>
+              <li><a href="mailto:applymore@gmail.com" class="text-gray-400 hover:text-blue-400 text-sm transition">📧 applymore@gmail.com</a></li>
+              <li><a href="#" onclick="alert('📍 Based in India')" class="text-gray-400 hover:text-blue-400 text-sm transition">📍 India</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center gap-3">
+          <p class="text-gray-500 text-xs">
+            © 2026 <span class="text-blue-400">ApplyMore</span> – Helping IT freshers land their dream job
+          </p>
+          <div class="flex gap-4 text-xs text-gray-500">
+            <span>Made with ❤️ in India</span>
+            <span>|</span>
+            <span>v2.0</span>
+          </div>
+        </div>
       </div>
-      <p class="text-gray-600 text-xs">© 2026 ApplyMore – Helping IT freshers land their dream job</p>
     </footer>
   </div>
 
-  <!-- POPUP AD MODAL -->
-  <div id="adPopup" class="popup-overlay">
-    <div class="popup-container">
-      <button class="popup-close" id="closePopupBtn">
-        <i class="fas fa-times"></i>
-      </button>
-      <div class="popup-ad-content" id="popupAdLink">
-        <div class="popup-ad-label">
-          <span>Ad</span>
-          <span>·</span>
-          <span>Sutherland</span>
-        </div>
-        <div class="popup-company-badge">
-          <i class="fas fa-building"></i>
-          <span class="text-xs text-blue-300">Featured Opportunity</span>
-        </div>
-        <h4 class="popup-ad-title">
-          🚀 Company: Sutherland<br/>
-          🎓 Branches: Btech Cse/IT, B.sc computers, BCA, MCA<br/>
-          📅 Year: 2022 to 2026<br/>
-          📊 Percentage: 60%<br/>
-          🗣️ Good communication skills must<br/>
-          💰 Salary: 3.5 to 4.5 LPA
-        </h4>
-        <div class="popup-ad-url">
-          https://jobs.smartrecruiters.com/Sutherland
-        </div>
-        <div class="popup-divider"></div>
-        <p class="popup-ad-desc">
-          ⚡ Apply now for Sutherland recruitment drive! Excellent opportunity for IT freshers. 
-          Click to apply directly on official career portal. Limited vacancies available.
-        </p>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // Particles generation
+    // Particles
     (function() {
       const container = document.getElementById('particles');
       for (let i = 0; i < 30; i++) {
@@ -625,16 +517,9 @@ Salary : 3.5 to 4.5
       const now = new Date();
       const date = new Date(d);
       const diff = Math.ceil((now - date) / (1000 * 60 * 60 * 24));
-      
-      if (now.toDateString() === date.toDateString()) {
-        return 'Today';
-      }
-      if (diff === 1) {
-        return 'Yesterday';
-      }
-      if (diff < 7) {
-        return `${diff} days ago`;
-      }
+      if (now.toDateString() === date.toDateString()) return 'Today';
+      if (diff === 1) return 'Yesterday';
+      if (diff < 7) return `${diff} days ago`;
       return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
     }
 
@@ -653,10 +538,8 @@ Salary : 3.5 to 4.5
 
     function isNewJob(postedDate) {
       if (!postedDate) return false;
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const jobDate = new Date(postedDate);
-      jobDate.setHours(0, 0, 0, 0);
+      const today = new Date(); today.setHours(0,0,0,0);
+      const jobDate = new Date(postedDate); jobDate.setHours(0,0,0,0);
       return jobDate.getTime() === today.getTime();
     }
 
@@ -676,30 +559,13 @@ Salary : 3.5 to 4.5
     async function fetchJobs() {
       showSkeletons(true);
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc&limit=50`, {
+        // Fetch ALL jobs (no limit) so filters work on complete dataset
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/ApplyMore?select=*&order=created_at.desc`, {
           headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const jobs = await res.json();
         allJobs = jobs;
-        
-        // Fix: Calculate Today's jobs correctly
-        const todayStr = new Date().toDateString();
-        const newTodayCount = allJobs.filter(job => {
-          if (!job.created_at) return false;
-          const jobDate = new Date(job.created_at);
-          return jobDate.toDateString() === todayStr;
-        }).length;
-        
-        const totalJobsCount = allJobs.length;
-        const uniqueCompanies = [...new Set(allJobs.map(j => j.company).filter(Boolean))].length;
-        const remoteCount = allJobs.filter(j => j.is_remote === true).length;
-        
-        document.getElementById('totalJobs').textContent = totalJobsCount;
-        document.getElementById('newJobs').textContent = newTodayCount;
-        document.getElementById('activeCompanies').textContent = uniqueCompanies;
-        document.getElementById('remoteJobs').textContent = remoteCount;
-        
         applyFilters();
       } catch (err) {
         console.error('Job fetch error:', err);
@@ -715,16 +581,28 @@ Salary : 3.5 to 4.5
       const remote = document.getElementById('remoteFilter').value;
       
       filteredJobs = allJobs.filter(job => {
-        if (searchTerm && !(job.title?.toLowerCase().includes(searchTerm) || job.company?.toLowerCase().includes(searchTerm))) return false;
-        if (location && job.location !== location) return false;
+        // Search filter
+        if (searchTerm && !(job.title?.toLowerCase().includes(searchTerm) || job.company?.toLowerCase().includes(searchTerm))) {
+          return false;
+        }
+        // Location filter
+        if (location && job.location !== location) {
+          return false;
+        }
+        // Experience filter
         if (exp) {
           const jobExp = getExperienceLevel(job);
           if (exp === 'Fresher' && jobExp !== 'Fresher') return false;
           if (exp === '1-2' && jobExp !== '1-2') return false;
           if (exp === '3+' && jobExp !== '3+') return false;
         }
-        if (remote === 'remote' && !job.is_remote) return false;
-        if (remote === 'on-site' && job.is_remote) return false;
+        // Remote filter - FIXED: Check is_remote properly
+        if (remote === 'remote' && job.is_remote !== true) {
+          return false;
+        }
+        if (remote === 'on-site' && job.is_remote === true) {
+          return false;
+        }
         return true;
       });
       currentPage = 1;
@@ -744,7 +622,6 @@ Salary : 3.5 to 4.5
         const remoteTag = job.is_remote ? ' 🌐 Remote' : '';
         const jobTypeTag = job.job_type === 'IT' ? '💻 IT' : (job.job_type === 'Non-IT' ? '📊 Non-IT' : '');
         const experienceTag = job.experience_level || 'Fresher';
-        
         return `
           <div class="job-card tilt-card" onclick="window.location.href='job.html?id=${job.id}'">
             <div class="job-title">${escapeHtml(job.title)}</div>
@@ -770,9 +647,7 @@ Salary : 3.5 to 4.5
       try {
         const res = await fetch(url, { method: 'HEAD' });
         return res.ok;
-      } catch {
-        return false;
-      }
+      } catch { return false; }
     }
 
     async function loadResources() {
@@ -780,7 +655,6 @@ Salary : 3.5 to 4.5
         const res = await fetch('/data/resources.json');
         if (!res.ok) throw new Error('Resources not found');
         const data = await res.json();
-
         const pdfsContainer = document.getElementById('pdfsContainer');
         if (data.pdfs && data.pdfs.length > 0) {
           const pdfItems = await Promise.all(data.pdfs.map(async (pdf) => {
@@ -797,7 +671,6 @@ Salary : 3.5 to 4.5
         } else {
           pdfsContainer.innerHTML = '<div class="glow-card rounded-xl p-4 text-center text-gray-400">📚 No PDF resources at the moment.</div>';
         }
-
         const certsContainer = document.getElementById('certsContainer');
         if (data.certifications && data.certifications.length > 0) {
           certsContainer.innerHTML = data.certifications.map(cert => `
@@ -817,16 +690,19 @@ Salary : 3.5 to 4.5
       }
     }
 
-    // POPUP AD FUNCTIONALITY
-    function showPopupAd() {
+    // Popup ad - Show after 10 seconds
+    setTimeout(() => {
       const popup = document.getElementById('adPopup');
-      popup.classList.add('active');
-      sessionStorage.setItem('adPopupShown', 'true');
-    }
+      if (popup) {
+        popup.classList.add('active');
+      }
+    }, 10000); // 10 seconds
 
     function closePopupAd() {
       const popup = document.getElementById('adPopup');
-      popup.classList.remove('active');
+      if (popup) {
+        popup.classList.remove('active');
+      }
     }
 
     function redirectToAdLink() {
@@ -834,21 +710,19 @@ Salary : 3.5 to 4.5
       closePopupAd();
     }
 
-    document.getElementById('closePopupBtn').addEventListener('click', closePopupAd);
-    document.getElementById('popupAdLink').addEventListener('click', redirectToAdLink);
-    
-    setTimeout(() => {
-      if (!sessionStorage.getItem('adPopupShown')) {
-        showPopupAd();
-      }
-    }, 2000);
+    // Add event listeners if popup exists
+    if (document.getElementById('closePopupBtn')) {
+      document.getElementById('closePopupBtn').addEventListener('click', closePopupAd);
+    }
+    if (document.getElementById('popupAdLink')) {
+      document.getElementById('popupAdLink').addEventListener('click', redirectToAdLink);
+    }
 
     let searchTimeout;
     document.getElementById('searchInput').addEventListener('input', () => {
       clearTimeout(searchTimeout);
       searchTimeout = setTimeout(applyFilters, 300);
     });
-    
     document.getElementById('locationFilter').addEventListener('change', applyFilters);
     document.getElementById('expFilter').addEventListener('change', applyFilters);
     document.getElementById('remoteFilter').addEventListener('change', applyFilters);
