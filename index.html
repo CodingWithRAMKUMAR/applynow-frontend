@@ -388,18 +388,67 @@
 
     <div class="flex justify-center gap-6 mb-8 flex-wrap">
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="totalJobs">1000</div>
+        <div class="stat-number" id="totalJobs">0</div>
         <div class="text-gray-400 text-sm">Total Jobs</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="newJobs">4</div>
+        <div class="stat-number" id="newJobs">0</div>
         <div class="text-gray-400 text-sm">New Today</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="activeCompanies">540</div>
+        <div class="stat-number" id="activeCompanies">0</div>
         <div class="text-gray-400 text-sm">Active Companies</div>
       </div>
+      <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
+        <div class="stat-number" id="remoteJobs">0</div>
+        <div class="text-gray-400 text-sm">Remote Jobs</div>
+      </div>
     </div>
+
+    <!-- ⬇️ FIXED STATS LOADER ⬇️ -->
+    <script>
+      (function() {
+        // Clear cache to force fresh data
+        localStorage.removeItem('applymore_stats');
+        
+        fetch('https://qmljqckhhdmvcbomydhf.supabase.co/rest/v1/ApplyMore?select=*', {
+          headers: {
+            'apikey': 'sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h',
+            'Authorization': 'Bearer sb_publishable_rmCQIW6Lw90zleW-lYZcFw_WZrcHw4h'
+          }
+        })
+        .then(r => r.json())
+        .then(jobs => {
+          const total = jobs.length;
+          const todayStr = new Date().toDateString();
+          const newToday = jobs.filter(j => j.created_at && new Date(j.created_at).toDateString() === todayStr).length;
+          const companies = [...new Set(jobs.map(j => j.company).filter(Boolean))].length;
+          const remote = jobs.filter(j => j.is_remote === true).length;
+          
+          document.getElementById('totalJobs').textContent = total;
+          document.getElementById('newJobs').textContent = newToday;
+          document.getElementById('activeCompanies').textContent = companies;
+          document.getElementById('remoteJobs').textContent = remote;
+          
+          localStorage.setItem('applymore_stats', JSON.stringify({
+            total, newToday, companies, remote, timestamp: Date.now()
+          }));
+        })
+        .catch(err => {
+          console.error('Stats error:', err);
+          // Try cached data
+          const cached = localStorage.getItem('applymore_stats');
+          if (cached) {
+            const stats = JSON.parse(cached);
+            document.getElementById('totalJobs').textContent = stats.total;
+            document.getElementById('newJobs').textContent = stats.newToday;
+            document.getElementById('activeCompanies').textContent = stats.companies;
+            document.getElementById('remoteJobs').textContent = stats.remote || 0;
+          }
+        });
+      })();
+    </script>
+    <!-- ⬆️ END OF FIXED STATS LOADER ⬆️ -->
 
     <div class="glass rounded-2xl p-6 mb-8 text-center border border-white/5 relative overflow-hidden group">
       <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition duration-500"></div>
@@ -438,6 +487,13 @@
         <option value="1-2">1-2 years</option>
         <option value="3+">3+ years</option>
       </select>
+      <!-- ⬇️ NEW REMOTE FILTER ⬇️ -->
+      <select id="remoteFilter" class="px-3 py-1.5 bg-black/30 border border-white/10 rounded-full text-white focus:outline-none focus:border-blue-400 transition text-sm">
+        <option value="">All Types</option>
+        <option value="remote">🌐 Remote</option>
+        <option value="on-site">📍 On-Site</option>
+      </select>
+      <!-- ⬆️ END OF REMOTE FILTER ⬆️ -->
     </div>
 
     <div class="flex flex-wrap gap-6 main-layout">
@@ -500,7 +556,7 @@ Salary : 3.5 to 4.5
     </footer>
   </div>
 
-  <!-- POPUP AD MODAL (Realistic Popup with Close Button) -->
+  <!-- POPUP AD MODAL -->
   <div id="adPopup" class="popup-overlay">
     <div class="popup-container">
       <button class="popup-close" id="closePopupBtn">
@@ -566,11 +622,20 @@ Salary : 3.5 to 4.5
 
     function formatDate(d) {
       if (!d) return '';
-      const diff = Math.ceil((new Date() - new Date(d)) / (1000 * 60 * 60 * 24));
-      if (diff === 0) return 'Today';
-      if (diff === 1) return 'Yesterday';
-      if (diff < 7) return `${diff} days ago`;
-      return new Date(d).toLocaleDateString('en-IN');
+      const now = new Date();
+      const date = new Date(d);
+      const diff = Math.ceil((now - date) / (1000 * 60 * 60 * 24));
+      
+      if (now.toDateString() === date.toDateString()) {
+        return 'Today';
+      }
+      if (diff === 1) {
+        return 'Yesterday';
+      }
+      if (diff < 7) {
+        return `${diff} days ago`;
+      }
+      return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
     }
 
     function getExperienceLevel(job) {
@@ -628,10 +693,12 @@ Salary : 3.5 to 4.5
         
         const totalJobsCount = allJobs.length;
         const uniqueCompanies = [...new Set(allJobs.map(j => j.company).filter(Boolean))].length;
+        const remoteCount = allJobs.filter(j => j.is_remote === true).length;
         
         document.getElementById('totalJobs').textContent = totalJobsCount;
         document.getElementById('newJobs').textContent = newTodayCount;
         document.getElementById('activeCompanies').textContent = uniqueCompanies;
+        document.getElementById('remoteJobs').textContent = remoteCount;
         
         applyFilters();
       } catch (err) {
@@ -645,6 +712,8 @@ Salary : 3.5 to 4.5
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
       const location = document.getElementById('locationFilter').value;
       const exp = document.getElementById('expFilter').value;
+      const remote = document.getElementById('remoteFilter').value;
+      
       filteredJobs = allJobs.filter(job => {
         if (searchTerm && !(job.title?.toLowerCase().includes(searchTerm) || job.company?.toLowerCase().includes(searchTerm))) return false;
         if (location && job.location !== location) return false;
@@ -654,6 +723,8 @@ Salary : 3.5 to 4.5
           if (exp === '1-2' && jobExp !== '1-2') return false;
           if (exp === '3+' && jobExp !== '3+') return false;
         }
+        if (remote === 'remote' && !job.is_remote) return false;
+        if (remote === 'on-site' && job.is_remote) return false;
         return true;
       });
       currentPage = 1;
@@ -669,20 +740,28 @@ Salary : 3.5 to 4.5
         document.getElementById('loadMoreContainer').style.display = 'none';
         return;
       }
-      grid.innerHTML = paginated.map(job => `
-        <div class="job-card tilt-card" onclick="window.location.href='job.html?id=${job.id}'">
-          <div class="job-title">${escapeHtml(job.title)}</div>
-          <div class="text-gray-400 text-sm mb-1">🏢 ${escapeHtml(job.company)}</div>
-          <div class="flex gap-3 text-xs text-gray-500 mb-2">
-            <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</span>
-            <span><i class="fas fa-calendar-alt"></i> ${formatDate(job.created_at)}</span>
+      grid.innerHTML = paginated.map(job => {
+        const remoteTag = job.is_remote ? ' 🌐 Remote' : '';
+        const jobTypeTag = job.job_type === 'IT' ? '💻 IT' : (job.job_type === 'Non-IT' ? '📊 Non-IT' : '');
+        const experienceTag = job.experience_level || 'Fresher';
+        
+        return `
+          <div class="job-card tilt-card" onclick="window.location.href='job.html?id=${job.id}'">
+            <div class="job-title">${escapeHtml(job.title)}</div>
+            <div class="text-gray-400 text-sm mb-1">🏢 ${escapeHtml(job.company)}${remoteTag}</div>
+            <div class="flex gap-2 text-xs text-gray-500 mb-2 flex-wrap">
+              <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</span>
+              <span><i class="fas fa-calendar-alt"></i> ${formatDate(job.created_at)}</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              ${jobTypeTag ? `<span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs">${jobTypeTag}</span>` : ''}
+              <span class="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full text-xs">📅 ${experienceTag}</span>
+              ${job.is_remote ? '<span class="bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full text-xs">🌐 Remote</span>' : ''}
+              ${isNewJob(job.created_at) ? '<span class="new-badge">✨ New</span>' : ''}
+            </div>
           </div>
-          <div class="flex items-center gap-2">
-            <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs">📅 ${getExperienceLevel(job)} years</span>
-            ${isNewJob(job.created_at) ? '<span class="new-badge">✨ New</span>' : ''}
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
       const hasMore = start + jobsPerPage < filteredJobs.length;
       document.getElementById('loadMoreContainer').style.display = hasMore ? 'block' : 'none';
     }
@@ -742,7 +821,6 @@ Salary : 3.5 to 4.5
     function showPopupAd() {
       const popup = document.getElementById('adPopup');
       popup.classList.add('active');
-      // Store that popup was shown in session
       sessionStorage.setItem('adPopupShown', 'true');
     }
 
@@ -751,17 +829,14 @@ Salary : 3.5 to 4.5
       popup.classList.remove('active');
     }
 
-    // Redirect on click (popup content click)
     function redirectToAdLink() {
       window.open('https://jobs.smartrecruiters.com/oneclick-ui/company/Sutherland/publication/00540916-b8ff-4b5b-be8b-92746e74a2b8?dcr_ci=Sutherland', '_blank');
       closePopupAd();
     }
 
-    // Event listeners for popup
     document.getElementById('closePopupBtn').addEventListener('click', closePopupAd);
     document.getElementById('popupAdLink').addEventListener('click', redirectToAdLink);
     
-    // Show popup after 2 seconds (only once per session)
     setTimeout(() => {
       if (!sessionStorage.getItem('adPopupShown')) {
         showPopupAd();
@@ -776,6 +851,7 @@ Salary : 3.5 to 4.5
     
     document.getElementById('locationFilter').addEventListener('change', applyFilters);
     document.getElementById('expFilter').addEventListener('change', applyFilters);
+    document.getElementById('remoteFilter').addEventListener('change', applyFilters);
     document.getElementById('loadMoreBtn').addEventListener('click', () => { currentPage++; renderJobs(); });
 
     fetchJobs();
