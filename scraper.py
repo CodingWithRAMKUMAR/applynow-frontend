@@ -14,28 +14,37 @@ logger = logging.getLogger(__name__)
 # ========== ENVIRONMENT VARIABLES ==========
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "").strip()
 SUPABASE_SERVICE_ROLE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "").strip()
-TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
 
-# ========== DEBUG ENVIRONMENT (Very Important) ==========
-logger.info("=" * 70)
-logger.info(f"SUPABASE_URL loaded     : {'YES' if SUPABASE_URL else 'NO'} | Length: {len(SUPABASE_URL)}")
-if SUPABASE_URL:
-    logger.info(f"URL starts with: {SUPABASE_URL[:50]}...")
-logger.info(f"SERVICE_ROLE_KEY loaded: {'YES' if SUPABASE_SERVICE_ROLE_KEY else 'NO'} | Length: {len(SUPABASE_SERVICE_ROLE_KEY)}")
-if SUPABASE_SERVICE_ROLE_KEY and len(SUPABASE_SERVICE_ROLE_KEY) > 20:
-    logger.info(f"Key starts with: {SUPABASE_SERVICE_ROLE_KEY[:30]}...")
-logger.info("=" * 70)
+# ========== DEBUG ENVIRONMENT ==========
+logger.info("=" * 80)
+logger.info("🔍 ENVIRONMENT DEBUG")
+logger.info(f"SUPABASE_URL          : {'✅ Loaded' if SUPABASE_URL else '❌ Missing'} | Length: {len(SUPABASE_URL)}")
+logger.info(f"SERVICE_ROLE_KEY      : {'✅ Loaded' if SUPABASE_SERVICE_ROLE_KEY else '❌ Missing'} | Length: {len(SUPABASE_SERVICE_ROLE_KEY)}")
+if SUPABASE_SERVICE_ROLE_KEY:
+    logger.info(f"Key Preview           : {SUPABASE_SERVICE_ROLE_KEY[:40]}...")
+logger.info(f"TELEGRAM_TOKEN        : {'✅ Loaded' if TELEGRAM_TOKEN else '❌ Missing'}")
+logger.info(f"TELEGRAM_CHAT_ID      : {'✅ Loaded' if TELEGRAM_CHAT_ID else '❌ Missing'}")
+logger.info("=" * 80)
 
-# ========== CREATE SUPABASE CLIENT ==========
+# ========== SUPABASE CLIENT ==========
+supabase = None
 try:
     if not SUPABASE_URL or not SUPABASE_SERVICE_ROLE_KEY:
-        raise ValueError("SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is missing!")
-    
+        raise ValueError("Missing Supabase URL or Service Role Key in environment variables")
+
+    logger.info("🔄 Creating Supabase client...")
     supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
     logger.info("✅ Supabase client created successfully")
+
+    # Test connection
+    test = supabase.table("ApplyMore").select("id").limit(1).execute()
+    logger.info("✅ Supabase connection test passed")
+
 except Exception as e:
-    logger.error(f"❌ Supabase client creation failed: {e}")
+    logger.error(f"❌ CRITICAL: Supabase initialization failed -> {e}")
+    logger.error("Please verify you are using the **service_role / secret key** (not publishable key)")
     raise
 
 # ========== CONFIGURATION ==========
@@ -71,7 +80,7 @@ HOURS_OLD = 72
 
 FRESHER_WORDS = {"fresher", "entry level", "graduate", "trainee", "junior", "0-2", "2024", "2025", "2026", "0-1"}
 SENIOR_WORDS = {"senior", "lead", "principal", "architect", "manager", "director", "head", "vp", "chief"}
-REMOTE_WORDS = {"remote", "work from home", "wfh", "hybrid", "telecommute", "virtual", "anywhere"}
+REMOTE_WORDS = {"remote", "work from home", "wfh", "hybrid", "telecommute"}
 
 def safe_str(v):
     if pd.isna(v) or v is None:
@@ -106,8 +115,8 @@ def extract_skills(desc):
     if not desc:
         return []
     text = desc.lower()
-    found = [skill for skill in ["python", "java", "react", "sql", "aws", "javascript", "django", "flutter"] if skill in text]
-    return list(set(found))[:5]
+    skills = [s for s in ["python", "java", "react", "sql", "aws", "javascript", "django"] if s in text]
+    return list(set(skills))[:5]
 
 def format_posted_date(posted):
     if not posted:
@@ -118,12 +127,9 @@ def format_posted_date(posted):
         else:
             posted_dt = datetime.fromisoformat(safe_str(posted).replace('Z', '+00:00'))
             diff = (datetime.now(timezone.utc) - posted_dt).days
-        if diff == 0:
-            return "Today"
-        elif diff == 1:
-            return "Yesterday"
-        else:
-            return f"{diff} days ago"
+        if diff == 0: return "Today"
+        elif diff == 1: return "Yesterday"
+        else: return f"{diff} days ago"
     except:
         return "Recently"
 
@@ -138,72 +144,46 @@ async def send_telegram(session, job, job_id, job_type):
     if len(desc) > 197:
         desc += "..."
 
-    posted_str = format_posted_date(job.get("posted_date"))
-    skills = extract_skills(job.get("description", ""))
-    skills_text = ", ".join(skills) if skills else "Not listed"
-    exp_level = extract_exp(title, job.get("description", ""))
-    remote = is_remote_job(title, job.get("description", ""), location)
-    remote_tag = " 🌐 Remote" if remote else ""
-
-    emoji = "💻" if job_type == "IT" else "📊"
-
     message = (
-        f"{emoji} *{job_type} Job{remote_tag}: {title}*\n"
+        f"{'💻' if job_type == 'IT' else '📊'} *{job_type} Job*: {title}\n"
         f"🏢 {company} | 📍 {location}\n"
-        f"📅 Posted: {posted_str}\n"
-        f"🎓 Experience: {exp_level}\n"
-        f"🔧 Skills: {skills_text}\n\n"
-        f"📝 *Description:*\n{desc}\n\n"
-        f"🔗 [Apply on ApplyMore]({link})\n"
-        f"⚡ *APPLY ASAP*"
+        f"🔗 [Apply Here]({link})"
     )
 
     try:
-        url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-        await session.post(url, json={
-            "chat_id": TELEGRAM_CHAT_ID,
-            "text": message,
-            "parse_mode": "Markdown",
-            "disable_web_page_preview": True
-        })
+        await session.post(
+            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+            json={"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "Markdown"}
+        )
         logger.info(f"✅ Telegram sent: {title}")
     except Exception as e:
-        logger.error(f"Telegram error: {e}")
+        logger.error(f"Telegram failed: {e}")
+
+# ==================== MAIN FUNCTIONS ====================
 
 async def check_links_activity():
-    logger.info("🔍 Checking for expired job links...")
+    logger.info("🔍 Checking expired job links...")
     try:
         resp = supabase.table("ApplyMore").select("id, url").execute()
         if not resp.data:
-            logger.info("No jobs to check")
             return 0
 
         deleted = 0
-        active = 0
         async with aiohttp.ClientSession() as session:
             for job in resp.data:
-                job_id = job['id']
-                url = job['url']
-                if not url:
-                    continue
                 try:
-                    async with session.head(url, timeout=5, allow_redirects=True) as response:
-                        if response.status >= 400:
-                            supabase.table("ApplyMore").delete().eq("id", job_id).execute()
+                    async with session.head(job['url'], timeout=6, allow_redirects=True) as r:
+                        if r.status >= 400:
+                            supabase.table("ApplyMore").delete().eq("id", job['id']).execute()
                             deleted += 1
-                            logger.info(f"🗑️ Deleted expired job: {url}")
-                        else:
-                            active += 1
                 except:
-                    supabase.table("ApplyMore").delete().eq("id", job_id).execute()
+                    supabase.table("ApplyMore").delete().eq("id", job['id']).execute()
                     deleted += 1
-                    logger.info(f"🗑️ Deleted unreachable job: {url}")
-                await asyncio.sleep(0.2)
-
-        logger.info(f"✅ Link check: {active} active, {deleted} deleted")
+                await asyncio.sleep(0.3)
+        logger.info(f"🗑️ Deleted {deleted} expired jobs")
         return deleted
     except Exception as e:
-        logger.error(f"Error checking links: {e}")
+        logger.error(f"Link check error: {e}")
         return 0
 
 async def scrape_city(session, city, is_it=True):
@@ -233,28 +213,13 @@ async def scrape_city(session, city, is_it=True):
                 company = safe_str(job.get('company'))
                 url = safe_str(job.get('job_url'))
                 desc = safe_str(job.get('description'))
-                
-                if not title or not company or not url:
-                    continue
-                if url in existing_urls or url in seen:
+
+                if not title or not company or not url or url in existing_urls or url in seen:
                     continue
                 if not is_fresher(title, desc):
                     continue
-                if is_it and not is_it_job(title, desc):
+                if (is_it and not is_it_job(title, desc)) or (not is_it and not is_non_it_job(title, desc)):
                     continue
-                if not is_it and not is_non_it_job(title, desc):
-                    continue
-
-                posted_iso = datetime.now(timezone.utc).isoformat()
-                posted = job.get('date_posted')
-                if posted is not None and not pd.isna(posted):
-                    try:
-                        if isinstance(posted, datetime):
-                            posted_iso = posted.isoformat()
-                        else:
-                            posted_iso = datetime.fromisoformat(safe_str(posted).replace('Z', '+00:00')).isoformat()
-                    except:
-                        pass
 
                 new_jobs.append({
                     "title": title[:500],
@@ -262,7 +227,7 @@ async def scrape_city(session, city, is_it=True):
                     "location": city.split(',')[0],
                     "url": url[:500],
                     "description": desc[:3000],
-                    "posted_date": posted_iso,
+                    "posted_date": datetime.now(timezone.utc).isoformat(),
                     "created_at": datetime.now(timezone.utc).isoformat(),
                     "experience_level": extract_exp(title, desc),
                     "job_type": "IT" if is_it else "Non-IT",
@@ -270,55 +235,45 @@ async def scrape_city(session, city, is_it=True):
                 })
                 seen.add(url)
         except Exception as e:
-            logger.error(f"Error scraping {city} - {term}: {e}")
+            logger.error(f"Error in {city} - {term}: {e}")
 
     return new_jobs
 
 async def main():
-    logger.info("🚀 ApplyMore Scraper Started")
+    logger.info("🚀 ApplyMore Job Scraper Started")
     start = datetime.now(timezone.utc)
 
-    deleted_count = await check_links_activity()
+    await check_links_activity()
 
-    # Scrape IT Jobs
-    logger.info("💻 Scraping IT jobs...")
+    # Scrape Jobs
     async with aiohttp.ClientSession() as session:
-        it_tasks = [scrape_city(session, city, is_it=True) for city in CITIES]
+        it_tasks = [scrape_city(session, city, True) for city in CITIES]
         it_results = await asyncio.gather(*it_tasks)
-    it_jobs = [job for city_jobs in it_results for job in city_jobs]
+        it_jobs = [job for sublist in it_results for job in sublist]
 
-    # Scrape Non-IT Jobs
-    logger.info("📊 Scraping Non-IT jobs...")
-    async with aiohttp.ClientSession() as session:
-        non_it_tasks = [scrape_city(session, city, is_it=False) for city in CITIES]
+        non_it_tasks = [scrape_city(session, city, False) for city in CITIES]
         non_it_results = await asyncio.gather(*non_it_tasks)
-    non_it_jobs = [job for city_jobs in non_it_results for job in city_jobs]
+        non_it_jobs = [job for sublist in non_it_results for job in sublist]
 
-    all_new = it_jobs + non_it_jobs
-    logger.info(f"📦 Total new jobs found: {len(all_new)}")
+    all_jobs = it_jobs + non_it_jobs
+    logger.info(f"📦 Total new jobs: {len(all_jobs)} (IT: {len(it_jobs)}, Non-IT: {len(non_it_jobs)})")
 
-    if not all_new:
+    if not all_jobs:
         logger.info("No new jobs found.")
         return
 
-    # Insert into Supabase
-    inserted_ids = []
-    for i in range(0, len(all_new), 50):
-        batch = all_new[i:i+50]
-        res = supabase.table("ApplyMore").insert(batch).execute()
-        if res.data:
-            inserted_ids.extend([row['id'] for row in res.data])
-        logger.info(f"📥 Inserted batch {i//50+1} ({len(batch)} jobs)")
+    # Insert to Supabase
+    inserted = 0
+    for i in range(0, len(all_jobs), 40):
+        batch = all_jobs[i:i+40]
+        try:
+            res = supabase.table("ApplyMore").insert(batch).execute()
+            inserted += len(res.data) if res.data else 0
+            logger.info(f"✅ Inserted batch {i//40 + 1}")
+        except Exception as e:
+            logger.error(f"Insert error: {e}")
 
-    # Send Telegram Notifications
-    async with aiohttp.ClientSession() as session:
-        for idx, jid in enumerate(inserted_ids):
-            job = all_new[idx]
-            await send_telegram(session, job, jid, job['job_type'])
-            await asyncio.sleep(0.3)
-
-    elapsed = (datetime.now(timezone.utc) - start).total_seconds()
-    logger.info(f"✅ Scraper completed in {elapsed:.1f} seconds. Inserted {len(inserted_ids)} jobs.")
+    logger.info(f"🎉 Scraper finished successfully! Inserted {inserted} jobs.")
 
 if __name__ == "__main__":
     asyncio.run(main())
