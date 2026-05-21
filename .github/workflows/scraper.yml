@@ -20,10 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install setuptools wheel
-          pip install jobspy==0.31.0
-          pip install aiohttp supabase pandas python-dotenv beautifulsoup4 requests playwright
-          playwright install chromium
+          pip install aiohttp pandas supabase beautifulsoup4 requests python-dotenv
       
       - name: Run scraper
         env:
@@ -31,4 +28,4 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scraper.py
+        run: python scraper_fixed.py
