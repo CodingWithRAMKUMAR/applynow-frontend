@@ -3,7 +3,7 @@ name: Run Job Scraper
 on:
   schedule:
     - cron: '0 */6 * * *'
-  workflow_dispatch:     # This allows you to run it manually
+  workflow_dispatch:
 
 jobs:
   scrape:
@@ -18,11 +18,29 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          playwright install --with-deps
+
+      - name: Install Playwright System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 \
+            libatk-bridge2.0-0 \
+            libdrm2 \
+            libxcomposite1 \
+            libxdamage1 \
+            libxrandr2 \
+            libgbm1 \
+            libasound2t64 \
+            libgtk-3-0t64 \
+            libxshmfence1 \
+            libxss1
+
+      - name: Install Playwright Browsers
+        run: playwright install chromium
 
       - name: Run scraper
         run: python scraper.py
