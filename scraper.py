@@ -6,25 +6,68 @@ import pandas as pd
 from datetime import datetime, timezone, timedelta
 from supabase import create_client
 from jobspy import scrape_jobs
+import logging
+from urllib.parse import urlparse
 
+# ========== LOGGING SETUP ==========
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# ========== ENVIRONMENT VARIABLES ==========
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_SERVICE_ROLE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY")
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
-SITES = ["linkedin", "indeed"]
-SEARCH_TERMS = [
+# ========== CONFIGURATION ==========
+SITES = ["linkedin", "indeed", "naukri", "monster", "glassdoor"]
+IT_SEARCH_TERMS = [
     "fresher software engineer", "graduate engineer trainee", "entry level developer",
-    "fresher data analyst", "trainee engineer"
+    "fresher data analyst", "trainee engineer", "junior developer",
+    "associate software engineer", "entry level programmer", "fresher python developer",
+    "trainee data scientist", "junior web developer", "fresher java developer"
 ]
-CITIES = ["Hyderabad, India", "Bangalore, India", "Chennai, India"]
-RESULTS_WANTED = 8
+NON_IT_SEARCH_TERMS = [
+    "fresher accountant", "entry level accountant", "trainee accountant",
+    "fresher hr executive", "entry level hr", "trainee hr",
+    "fresher sales executive", "entry level sales", "trainee sales",
+    "fresher marketing", "entry level marketing", "trainee marketing",
+    "fresher customer support", "entry level customer support", "trainee customer support",
+    "fresher data entry", "entry level data entry", "trainee data entry",
+    "fresher finance", "entry level finance", "trainee finance",
+    "fresher operations", "entry level operations", "trainee operations",
+    "fresher content writer", "entry level content writer", "trainee content writer",
+    "fresher social media", "entry level social media", "trainee social media",
+    "fresher designer", "entry level designer", "trainee designer",
+    "fresher digital marketing", "entry level digital marketing", "trainee digital marketing",
+    "fresher project coordinator", "entry level project coordinator", "trainee project coordinator"
+]
+CITIES = ["Hyderabad, India", "Bangalore, India", "Chennai, India", "Mumbai, India", "Delhi, India", "Pune, India"]
+RESULTS_WANTED = 6
 HOURS_OLD = 72
 
-FRESHER_WORDS = {"fresher", "entry level", "graduate", "trainee", "junior", "0-2", "2024", "2025"}
-SENIOR_WORDS = {"senior", "lead", "principal", "architect", "manager", "director", "head"}
+FRESHER_WORDS = {"fresher", "entry level", "graduate", "trainee", "junior", "0-2", "2024", "2025", "2026", "0-1"}
+SENIOR_WORDS = {"senior", "lead", "principal", "architect", "manager", "director", "head", "vp", "chief"}
 
-SKILLS_KEYWORDS = {"python", "sql", "java", "javascript", "react", "angular", "aws", "azure", "docker", "kubernetes", "excel", "tableau", "power bi", "git", "selenium", "django", "flask"}
+IT_KEYWORDS = {
+    "software", "developer", "programmer", "engineer", "data", "analyst", "cloud",
+    "python", "java", "javascript", "react", "angular", "aws", "azure", "docker",
+    "kubernetes", "sql", "excel", "tableau", "power bi", "git", "selenium",
+    "django", "flask", "node.js", "typescript", "mongodb", "postgresql", "mysql",
+    "linux", "rest", "graphql", "tensorflow", "pytorch", "scikit-learn", "jenkins",
+    "ansible", "terraform", "devops", "ai", "ml", "machine learning", "deep learning"
+}
+NON_IT_KEYWORDS = {
+    "accountant", "hr", "sales", "marketing", "customer support", "data entry",
+    "finance", "operations", "content writer", "social media", "designer",
+    "digital marketing", "project coordinator", "administrative", "receptionist",
+    "office assistant", "executive assistant", "client services", "accounts",
+    "bookkeeping", "recruiter", "talent acquisition", "business development",
+    "account manager", "customer service", "technical support", "quality analyst",
+    "process associate", "verification", "logistics", "supply chain", "procurement",
+    "audit", "tax", "billing", "payroll", "training", "development", "learning",
+    "employee relations", "compensation", "benefits"
+}
 
 supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
@@ -38,14 +81,27 @@ def is_fresher(title, desc):
     return any(k in text for k in FRESHER_WORDS) and not any(k in text for k in SENIOR_WORDS)
 
 def extract_exp(title, desc):
-    return "Fresher (0-2 years)"
+    text = (safe_str(title) + " " + safe_str(desc)).lower()
+    if any(k in text for k in SENIOR_WORDS):
+        return "Senior (3+ years)"
+    if any(k in text for k in FRESHER_WORDS):
+        return "Fresher (0-2 years)"
+    return "Entry Level"
 
 def extract_skills(desc):
     if not desc:
         return []
     text = desc.lower()
-    found = [skill for skill in SKILLS_KEYWORDS if skill in text]
-    return found[:4]
+    found = [skill for skill in IT_KEYWORDS if skill in text]
+    return list(set(found))[:5]
+
+def is_it_job(title, desc):
+    text = (safe_str(title) + " " + safe_str(desc)).lower()
+    return any(k in text for k in IT_KEYWORDS)
+
+def is_non_it_job(title, desc):
+    text = (safe_str(title) + " " + safe_str(desc)).lower()
+    return any(k in text for k in NON_IT_KEYWORDS)
 
 def format_posted_date(posted):
     if not posted:
@@ -65,7 +121,7 @@ def format_posted_date(posted):
     except:
         return "Recently"
 
-async def send_telegram(session, job, job_id):
+async def send_telegram(session, job, job_id, job_type):
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
         return
     link = f"https://applymore.vercel.app/job.html?id={job_id}"
@@ -78,16 +134,25 @@ async def send_telegram(session, job, job_id):
     posted_str = format_posted_date(job.get("posted_date"))
     skills = extract_skills(job.get("description", ""))
     skills_text = ", ".join(skills) if skills else "Not listed"
+    exp_level = extract_exp(title, job.get("description", ""))
+    
+    # Choose emoji based on job type
+    if job_type == "IT":
+        emoji = "💻"
+        job_type_label = "IT Job"
+    else:
+        emoji = "📊"
+        job_type_label = "Non-IT Job"
     
     message = (
-        f"🚀 *New: {title}*\n"
+        f"{emoji} *{job_type_label}: {title}*\n"
         f"🏢 {company} | 📍 {location}\n"
         f"📅 Posted: {posted_str}\n"
-        f"🎓 Experience: Fresher (0-2 years)\n"
+        f"🎓 Experience: {exp_level}\n"
         f"🔧 Skills: {skills_text}\n\n"
         f"📝 *Description:*\n{desc}\n\n"
         f"🔗 [Apply on ApplyMore]({link})\n"
-        f"⚠️ *APPLY ASAP*"
+        f"⚡ *APPLY ASAP*"
     )
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     try:
@@ -97,15 +162,74 @@ async def send_telegram(session, job, job_id):
             "parse_mode": "Markdown",
             "disable_web_page_preview": True
         })
+        logger.info(f"Telegram notification sent for {job_type} job: {title}")
     except Exception as e:
-        print(f"Telegram error: {e}")
+        logger.error(f"Telegram error: {e}")
 
-async def scrape_city(session, city):
+async def check_links_activity():
+    """Check if existing job links are still active and delete expired ones"""
+    logger.info("🔍 Checking existing job links for activity...")
+    try:
+        # Fetch all jobs with URLs
+        resp = supabase.table("ApplyMore").select("id, url").execute()
+        if not resp.data:
+            logger.info("No jobs found to check")
+            return
+        
+        jobs_to_check = resp.data
+        deleted_count = 0
+        active_count = 0
+        
+        async with aiohttp.ClientSession() as session:
+            for job in jobs_to_check:
+                job_id = job['id']
+                url = job['url']
+                
+                if not url:
+                    continue
+                
+                try:
+                    # Check if URL is active
+                    async with session.head(url, timeout=5, allow_redirects=True) as response:
+                        if response.status >= 400:
+                            # URL is dead (404, 403, 410, etc.)
+                            logger.info(f"❌ URL dead: {url} (Status: {response.status})")
+                            # Delete from Supabase
+                            supabase.table("ApplyMore").delete().eq("id", job_id).execute()
+                            deleted_count += 1
+                        else:
+                            # URL is active (200-299 or 3xx redirects)
+                            active_count += 1
+                            logger.debug(f"✅ URL active: {url}")
+                except asyncio.TimeoutError:
+                    logger.warning(f"⏱️ Timeout checking: {url} - considered dead")
+                    supabase.table("ApplyMore").delete().eq("id", job_id).execute()
+                    deleted_count += 1
+                except Exception as e:
+                    logger.error(f"⚠️ Error checking {url}: {e}")
+                    # If error, consider it dead and delete
+                    supabase.table("ApplyMore").delete().eq("id", job_id).execute()
+                    deleted_count += 1
+                
+                # Small delay to avoid rate limiting
+                await asyncio.sleep(0.3)
+        
+        logger.info(f"✅ Link check complete: {active_count} active, {deleted_count} deleted")
+        return deleted_count
+    except Exception as e:
+        logger.error(f"Error in link checking: {e}")
+        return 0
+
+async def scrape_city(session, city, is_it=True):
+    """Scrape jobs for a specific city"""
     new_jobs = []
     existing_resp = supabase.table("ApplyMore").select("url").execute()
     existing_urls = {row["url"] for row in existing_resp.data} if existing_resp.data else set()
     seen = set()
-    for term in SEARCH_TERMS:
+    
+    search_terms = IT_SEARCH_TERMS if is_it else NON_IT_SEARCH_TERMS
+    
+    for term in search_terms:
         try:
             df = scrape_jobs(
                 site_name=SITES,
@@ -124,23 +248,31 @@ async def scrape_city(session, city):
                 url = safe_str(job.get('job_url'))
                 desc = safe_str(job.get('description'))
                 posted = job.get('date_posted')
+                
                 if not title or not company or not url:
                     continue
                 if url in existing_urls or url in seen:
                     continue
                 if not is_fresher(title, desc):
                     continue
-                # Ensure posted_date is a valid ISO timestamp, never empty
+                
+                # Validate job type
+                if is_it and not is_it_job(title, desc):
+                    continue
+                if not is_it and not is_non_it_job(title, desc):
+                    continue
+                
+                # Ensure posted_date is a valid ISO timestamp
                 if posted is None or pd.isna(posted) or safe_str(posted) == "":
                     posted_iso = datetime.now(timezone.utc).isoformat()
                 elif isinstance(posted, datetime):
                     posted_iso = posted.isoformat()
                 else:
-                    # Try to parse string, fallback to now
                     try:
                         posted_iso = datetime.fromisoformat(safe_str(posted).replace('Z', '+00:00')).isoformat()
                     except:
                         posted_iso = datetime.now(timezone.utc).isoformat()
+                
                 new_jobs.append({
                     "title": title,
                     "company": company,
@@ -153,39 +285,61 @@ async def scrape_city(session, city):
                 })
                 seen.add(url)
         except Exception as e:
-            print(f"Error in {city} for {term}: {e}")
+            logger.error(f"Error in {city} for {term}: {e}")
     return new_jobs
 
 async def main():
-    print("⚡ ApplyMore – Enhanced Alerts Scraper Started (Fixed timestamp)")
+    logger.info("🚀 ApplyMore – Enhanced Scraper Started (IT + Non-IT + Link Check)")
     start = datetime.now(timezone.utc)
-
+    
+    # ========== STEP 1: Check expired links ==========
+    deleted_count = await check_links_activity()
+    logger.info(f"🗑️ Deleted {deleted_count} expired jobs")
+    
+    # ========== STEP 2: Scrape IT jobs ==========
+    logger.info("💻 Scraping IT jobs...")
     async with aiohttp.ClientSession() as session:
-        tasks = [scrape_city(session, city) for city in CITIES]
-        results = await asyncio.gather(*tasks)
-    all_new = [job for city_jobs in results for job in city_jobs]
-    print(f"New jobs found: {len(all_new)}")
-
+        it_tasks = [scrape_city(session, city, is_it=True) for city in CITIES]
+        it_results = await asyncio.gather(*it_tasks)
+    it_jobs = [job for city_jobs in it_results for job in city_jobs]
+    logger.info(f"💻 Found {len(it_jobs)} new IT jobs")
+    
+    # ========== STEP 3: Scrape Non-IT jobs ==========
+    logger.info("📊 Scraping Non-IT jobs...")
+    async with aiohttp.ClientSession() as session:
+        non_it_tasks = [scrape_city(session, city, is_it=False) for city in CITIES]
+        non_it_results = await asyncio.gather(*non_it_tasks)
+    non_it_jobs = [job for city_jobs in non_it_results for job in city_jobs]
+    logger.info(f"📊 Found {len(non_it_jobs)} new Non-IT jobs")
+    
+    all_new = it_jobs + non_it_jobs
+    logger.info(f"📦 Total new jobs found: {len(all_new)}")
+    
     if not all_new:
-        async with aiohttp.ClientSession() as session:
-            await session.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage", json={"chat_id": TELEGRAM_CHAT_ID, "text": "⚠️ No new fresher jobs found."})
+        logger.info("No new jobs found. Skipping insert.")
         return
-
+    
+    # ========== STEP 4: Insert jobs into Supabase ==========
     inserted_ids = []
     for i in range(0, len(all_new), 50):
         batch = all_new[i:i+50]
         res = supabase.table("ApplyMore").insert(batch).execute()
         if res.data:
             inserted_ids.extend([row['id'] for row in res.data])
-        print(f"Inserted batch {i//50+1} ({len(batch)} jobs)")
-
+        logger.info(f"📥 Inserted batch {i//50+1} ({len(batch)} jobs)")
+    
+    # ========== STEP 5: Send Telegram notifications ==========
     async with aiohttp.ClientSession() as session:
         for idx, jid in enumerate(inserted_ids):
-            await send_telegram(session, all_new[idx], jid)
-            await asyncio.sleep(0.5)
-
-    elapsed = (datetime.now(timezone.utc)-start).total_seconds()
-    print(f"✅ Finished in {elapsed:.1f}s. Inserted {len(inserted_ids)} jobs.")
+            job = all_new[idx]
+            # Determine job type for notification
+            job_type = "IT" if is_it_job(job['title'], job.get('description', '')) else "Non-IT"
+            await send_telegram(session, job, jid, job_type)
+            await asyncio.sleep(0.5)  # Rate limiting
+    
+    elapsed = (datetime.now(timezone.utc) - start).total_seconds()
+    logger.info(f"✅ Finished in {elapsed:.1f}s. Inserted {len(inserted_ids)} jobs.")
+    logger.info(f"📊 IT Jobs: {len(it_jobs)} | Non-IT Jobs: {len(non_it_jobs)}")
 
 if __name__ == "__main__":
     asyncio.run(main())
