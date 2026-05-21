@@ -2,7 +2,6 @@ name: Auto Job Scraper (IT + Non-IT)
 
 on:
   schedule:
-    # Runs every 6 hours
     - cron: '0 */6 * * *'
   workflow_dispatch:
 
@@ -21,7 +20,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install aiohttp supabase pandas jobspy python-dotenv
+          pip install aiohttp supabase pandas jobspy python-dotenv beautifulsoup4 requests lxml playwright
+          playwright install chromium
       
       - name: Run scraper
         env:
