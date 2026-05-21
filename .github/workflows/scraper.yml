@@ -1,22 +1,28 @@
-name: ApplyMore Job Scraper
+name: Auto Job Scraper (IT + Non-IT)
 
 on:
   schedule:
-    - cron: '0 */12 * * *'
+    # Runs every 6 hours
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
-  scrape:
+  run-scraper:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.10'
+      
       - name: Install dependencies
         run: |
-          pip install supabase aiohttp pandas python-jobspy
+          pip install --upgrade pip
+          pip install aiohttp supabase pandas jobspy python-dotenv
+      
       - name: Run scraper
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
