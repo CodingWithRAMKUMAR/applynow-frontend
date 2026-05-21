@@ -1,5 +1,5 @@
 aiohttp==3.9.1
-supabase==2.3.0
+supabase>=2.5.0
 pandas==2.1.4
 python-jobspy==1.1.82
 python-dotenv==1.0.0
