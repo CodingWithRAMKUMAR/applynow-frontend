@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install aiohttp supabase pandas jobspy python-dotenv beautifulsoup4 requests lxml playwright
+          pip install jobspy aiohttp supabase pandas python-dotenv playwright
           playwright install chromium
       
       - name: Run scraper
