@@ -1,4 +1,4 @@
-name: Auto Job Scraper (IT + Non-IT)
+name: ApplyMore Job Scraper
 
 on:
   schedule:
@@ -20,7 +20,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install aiohttp pandas supabase beautifulsoup4 requests python-dotenv
+          pip install aiohttp pandas supabase python-dotenv
+          pip install jobspy
+          pip install playwright
+          playwright install chromium
       
       - name: Run scraper
         env:
@@ -28,4 +31,4 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python scraper_fixed.py
+        run: python scraper.py
