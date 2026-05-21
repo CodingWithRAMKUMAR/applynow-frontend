@@ -1,7 +1,7 @@
 aiohttp==3.9.1
 supabase==2.3.0
 pandas==2.1.4
-jobspy==1.9.0
+python-jobspy==1.9.0
 python-dotenv==1.0.0
 beautifulsoup4==4.12.3
 requests==2.31.0
