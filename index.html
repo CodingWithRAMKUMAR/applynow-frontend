@@ -215,7 +215,6 @@
     
     @media (max-width: 840px) {
       .main-layout { flex-direction: column; }
-      .resources-column { order: 2; }
       .jobs-column { order: 1; }
     }
     
@@ -260,15 +259,15 @@
     <!-- Stats -->
     <div class="flex justify-center gap-6 mb-8 flex-wrap">
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="totalJobs">231</div>
+        <div class="stat-number" id="totalJobs">0</div>
         <div class="text-gray-400 text-sm">Total Jobs</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="newJobs">161</div>
+        <div class="stat-number" id="newJobs">0</div>
         <div class="text-gray-400 text-sm">New Today</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="activeCompanies">173</div>
+        <div class="stat-number" id="activeCompanies">0</div>
         <div class="text-gray-400 text-sm">Active Companies</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
@@ -390,20 +389,10 @@ Salary : 3.5 to 4.5
         </div>
       </div>
 
-      <div class="w-full md:w-72 resources-column">
-        <div class="glass rounded-xl p-4 mb-4">
-          <h2 class="text-xl font-bold text-blue-400 mb-3">📘 Interview Ready PDFs</h2>
-          <div id="pdfsContainer"></div>
-        </div>
-        
-        <div class="glass rounded-xl p-4">
-          <h2 class="text-xl font-bold text-blue-400 mb-3">🎓 Recommended Certifications</h2>
-          <div id="certsContainer"></div>
-        </div>
-      </div>
+      <!-- Resources Column Removed - All resources moved to footer -->
     </div>
 
-    <!-- Clean Footer -->
+    <!-- Upgraded Footer -->
     <footer class="mt-12 pt-8 border-t border-white/10 bg-gradient-to-b from-transparent to-black/30">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
@@ -427,7 +416,7 @@ Salary : 3.5 to 4.5
               <a href="https://www.linkedin.com/company/applymore/" target="_blank" class="w-8 h-8 rounded-full bg-white/5 hover:bg-blue-600 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition">
                 <i class="fab fa-linkedin text-sm"></i>
               </a>
-              <a href="mailto:applymore@gmail.com" class="w-8 h-8 rounded-full bg-white/5 hover:bg-purple-500 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition">
+              <a href="mailto:applymore.enquiry@gmail.com" target="_blank" class="w-8 h-8 rounded-full bg-white/5 hover:bg-purple-500 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition">
                 <i class="fas fa-envelope text-sm"></i>
               </a>
             </div>
@@ -446,18 +435,17 @@ Salary : 3.5 to 4.5
           </div>
 
           <!-- Resources -->
-         
-<div>
-  <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Resources</h3>
-  <ul class="space-y-2">
-    <li><a href="resources.html" class="text-gray-400 hover:text-blue-400 text-sm transition">📚 All Resources</a></li>
-    <li><a href="Learning_Hub.html" class="text-gray-400 hover:text-blue-400 text-sm transition">📚 Learning Hub</a></li>
-    <li><a href="Interview_Prep.html" class="text-gray-400 hover:text-purple-400 text-sm transition">🎯 Interview Prep</a></li>
-    <li><a href="/pdfs/Resume_Templates.pdf" class="text-gray-400 hover:text-green-400 text-sm transition">📄 Resume Templates</a></li>
-    <li><a href="/pdfs/Interview_Tips.pdf" class="text-gray-400 hover:text-yellow-400 text-sm transition">📝 Interview Tips</a></li>
-    <li><a href="/pdfs/Certification_Guides.pdf" class="text-gray-400 hover:text-pink-400 text-sm transition">🎓 Certification Guides</a></li>
-  </ul>
-</div>
+          <div>
+            <h3 class="text-white font-semibold mb-3 text-sm uppercase tracking-wider">Resources</h3>
+            <ul class="space-y-2">
+              <li><a href="resources.html" class="text-gray-400 hover:text-blue-400 text-sm transition">📚 All Resources</a></li>
+              <li><a href="Learning_Hub.html" class="text-gray-400 hover:text-blue-400 text-sm transition">📚 Learning Hub</a></li>
+              <li><a href="Interview_Prep.html" class="text-gray-400 hover:text-purple-400 text-sm transition">🎯 Interview Prep</a></li>
+              <li><a href="/pdfs/Resume_Templates.pdf" class="text-gray-400 hover:text-green-400 text-sm transition">📄 Resume Templates</a></li>
+              <li><a href="/pdfs/Interview_Tips.pdf" class="text-gray-400 hover:text-yellow-400 text-sm transition">📝 Interview Tips</a></li>
+              <li><a href="/pdfs/Certification_Guides.pdf" class="text-gray-400 hover:text-pink-400 text-sm transition">🎓 Certification Guides</a></li>
+            </ul>
+          </div>
 
           <!-- Contact & Legal -->
           <div>
@@ -466,7 +454,7 @@ Salary : 3.5 to 4.5
               <li><a href="contact.html" class="text-gray-400 hover:text-blue-400 text-sm transition">📧 Get in Touch</a></li>
               <li><a href="privacy.html" class="text-gray-400 hover:text-blue-400 text-sm transition">🔒 Privacy Policy</a></li>
               <li><a href="terms.html" class="text-gray-400 hover:text-blue-400 text-sm transition">⚖️ Terms of Service</a></li>
-              <li><a href="mailto:applymore.enquiry@gmail.com" class="text-gray-400 hover:text-blue-400 text-sm transition">📧 applymore@gmail.com</a></li>
+              <li><a href="mailto:applymore.enquiry@gmail.com" class="text-gray-400 hover:text-blue-400 text-sm transition">📧 applymore.enquiry@gmail.com</a></li>
               <li><a href="#" onclick="alert('📍 Based in India')" class="text-gray-400 hover:text-blue-400 text-sm transition">📍 India</a></li>
             </ul>
           </div>
@@ -699,7 +687,7 @@ Salary : 3.5 to 4.5
       if (popup) {
         popup.classList.add('active');
       }
-    }, 10000); // 10 seconds
+    }, 10000);
 
     function closePopupAd() {
       const popup = document.getElementById('adPopup');
@@ -713,7 +701,6 @@ Salary : 3.5 to 4.5
       closePopupAd();
     }
 
-    // Add event listeners if popup exists
     if (document.getElementById('closePopupBtn')) {
       document.getElementById('closePopupBtn').addEventListener('click', closePopupAd);
     }
