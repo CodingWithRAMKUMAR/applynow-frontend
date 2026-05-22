@@ -372,15 +372,15 @@
     <!-- Stats -->
     <div class="flex justify-center gap-6 mb-8 flex-wrap">
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="totalJobs">208</div>
+        <div class="stat-number" id="totalJobs">0</div>
         <div class="text-gray-400 text-sm">Total Jobs</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="newJobs">117</div>
+        <div class="stat-number" id="newJobs">0</div>
         <div class="text-gray-400 text-sm">New Today</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="activeCompanies">152</div>
+        <div class="stat-number" id="activeCompanies">0</div>
         <div class="text-gray-400 text-sm">Active Companies</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
@@ -651,8 +651,10 @@
 
     function isNewJob(postedDate) {
       if (!postedDate) return false;
-      const today = new Date(); today.setHours(0,0,0,0);
-      const jobDate = new Date(postedDate); jobDate.setHours(0,0,0,0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const jobDate = new Date(postedDate);
+      jobDate.setHours(0, 0, 0, 0);
       return jobDate.getTime() === today.getTime();
     }
 
@@ -713,12 +715,12 @@
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const jobs = await res.json();
         
-        // ===== FILTER: ONLY KEEP TODAY'S JOBS =====
-        const todayStr = new Date().toDateString();
+        // ===== FIX: USE UTC DATE FOR COMPARISON =====
+        const todayUTC = new Date().toISOString().split('T')[0];
         const todayJobs = jobs.filter(job => {
           if (!job.created_at) return false;
-          const jobDate = new Date(job.created_at);
-          return jobDate.toDateString() === todayStr;
+          const jobDateUTC = new Date(job.created_at).toISOString().split('T')[0];
+          return jobDateUTC === todayUTC;
         });
         
         // Shuffle today's jobs to mix cities
