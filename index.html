@@ -372,15 +372,15 @@
     <!-- Stats -->
     <div class="flex justify-center gap-6 mb-8 flex-wrap">
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="totalJobs">208</div>
+        <div class="stat-number" id="totalJobs">0</div>
         <div class="text-gray-400 text-sm">Total Jobs</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="newJobs">117</div>
+        <div class="stat-number" id="newJobs">0</div>
         <div class="text-gray-400 text-sm">New Today</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="activeCompanies">152</div>
+        <div class="stat-number" id="activeCompanies">0</div>
         <div class="text-gray-400 text-sm">Active Companies</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
@@ -713,8 +713,16 @@
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const jobs = await res.json();
         
-        // Shuffle jobs to mix cities
-        allJobs = shuffleJobsByCity(jobs);
+        // ===== FILTER: ONLY KEEP TODAY'S JOBS =====
+        const todayStr = new Date().toDateString();
+        const todayJobs = jobs.filter(job => {
+          if (!job.created_at) return false;
+          const jobDate = new Date(job.created_at);
+          return jobDate.toDateString() === todayStr;
+        });
+        
+        // Shuffle today's jobs to mix cities
+        allJobs = shuffleJobsByCity(todayJobs);
         applyFilters();
       } catch (err) {
         console.error('Job fetch error:', err);
@@ -836,7 +844,6 @@
       if (popup) {
         popup.classList.add('active');
         popupShown = true;
-        // Store in session storage to prevent showing again in same session
         sessionStorage.setItem('adPopupShown', 'true');
       }
     }
@@ -860,7 +867,6 @@
       document.getElementById('popupAdLink').addEventListener('click', redirectToAdLink);
     }
 
-    // Check if popup was already shown in this session
     if (sessionStorage.getItem('adPopupShown')) {
       popupShown = true;
     }
@@ -872,7 +878,6 @@
       if (totalJobs !== '0' && totalJobs !== '') {
         dataLoaded = true;
         clearInterval(checkDataLoaded);
-        // Show popup 10 seconds after data loads (only if not already shown)
         setTimeout(() => {
           if (!popupShown) {
             showPopupAd();
