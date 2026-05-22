@@ -372,15 +372,15 @@
     <!-- Stats -->
     <div class="flex justify-center gap-6 mb-8 flex-wrap">
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="totalJobs">208</div>
+        <div class="stat-number" id="totalJobs">0</div>
         <div class="text-gray-400 text-sm">Total Jobs</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="newJobs">117</div>
+        <div class="stat-number" id="newJobs">0</div>
         <div class="text-gray-400 text-sm">New Today</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
-        <div class="stat-number" id="activeCompanies">152</div>
+        <div class="stat-number" id="activeCompanies">0</div>
         <div class="text-gray-400 text-sm">Active Companies</div>
       </div>
       <div class="glow-card rounded-xl p-4 px-8 text-center min-w-[120px]">
@@ -478,8 +478,6 @@
           </button>
         </div>
       </div>
-
-      <!-- Resources Column Removed - All resources moved to footer -->
     </div>
 
     <!-- Footer -->
@@ -565,7 +563,7 @@
     </footer>
   </div>
 
-  <!-- ===== POPUP AD (Editable) ===== -->
+  <!-- ===== POPUP AD (Editable, Shows Once per Session) ===== -->
   <div id="adPopup" class="popup-overlay">
     <div class="popup-container">
       <button class="popup-close" id="closePopupBtn">
@@ -671,6 +669,40 @@
       }
     }
 
+    // ===== SHUFFLE FUNCTION TO MIX JOBS BY CITY =====
+    function shuffleJobsByCity(jobs) {
+      // Group jobs by city
+      const cityGroups = {};
+      jobs.forEach(job => {
+        const city = job.location || 'India';
+        if (!cityGroups[city]) {
+          cityGroups[city] = [];
+        }
+        cityGroups[city].push(job);
+      });
+      
+      // Extract city keys and shuffle them
+      const cities = Object.keys(cityGroups);
+      for (let i = cities.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cities[i], cities[j]] = [cities[j], cities[i]];
+      }
+      
+      // Interleave jobs from different cities
+      const result = [];
+      let hasMore = true;
+      while (hasMore) {
+        hasMore = false;
+        for (const city of cities) {
+          if (cityGroups[city].length > 0) {
+            result.push(cityGroups[city].shift());
+            hasMore = true;
+          }
+        }
+      }
+      return result;
+    }
+
     async function fetchJobs() {
       showSkeletons(true);
       try {
@@ -680,7 +712,9 @@
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const jobs = await res.json();
-        allJobs = jobs;
+        
+        // Shuffle jobs to mix cities
+        allJobs = shuffleJobsByCity(jobs);
         applyFilters();
       } catch (err) {
         console.error('Job fetch error:', err);
@@ -721,20 +755,27 @@
         document.getElementById('loadMoreContainer').style.display = 'none';
         return;
       }
-      grid.innerHTML = paginated.map(job => `
-        <div class="job-card tilt-card" onclick="window.location.href='job.html?id=${job.id}'">
-          <div class="job-title">${escapeHtml(job.title)}</div>
-          <div class="text-gray-400 text-sm mb-1">🏢 ${escapeHtml(job.company)}</div>
-          <div class="flex gap-2 text-xs text-gray-500 mb-2 flex-wrap">
-            <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</span>
-            <span><i class="fas fa-calendar-alt"></i> ${formatDate(job.created_at)}</span>
+      grid.innerHTML = paginated.map(job => {
+        const remoteTag = job.is_remote ? ' 🌐 Remote' : '';
+        const jobTypeTag = job.job_type === 'IT' ? '💻 IT' : (job.job_type === 'Non-IT' ? '📊 Non-IT' : '');
+        const experienceTag = job.experience_level || 'Fresher';
+        return `
+          <div class="job-card tilt-card" onclick="window.location.href='job.html?id=${job.id}'">
+            <div class="job-title">${escapeHtml(job.title)}</div>
+            <div class="text-gray-400 text-sm mb-1">🏢 ${escapeHtml(job.company)}${remoteTag}</div>
+            <div class="flex gap-2 text-xs text-gray-500 mb-2 flex-wrap">
+              <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(job.location || 'India')}</span>
+              <span><i class="fas fa-calendar-alt"></i> ${formatDate(job.created_at)}</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              ${jobTypeTag ? `<span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs">${jobTypeTag}</span>` : ''}
+              <span class="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full text-xs">📅 ${experienceTag}</span>
+              ${job.is_remote ? '<span class="bg-green-500/20 text-green-300 px-2 py-0.5 rounded-full text-xs">🌐 Remote</span>' : ''}
+              ${isNewJob(job.created_at) ? '<span class="new-badge">✨ New</span>' : ''}
+            </div>
           </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full text-xs">📅 ${getExperienceLevel(job)} years</span>
-            ${isNewJob(job.created_at) ? '<span class="new-badge">✨ New</span>' : ''}
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
       const hasMore = start + jobsPerPage < filteredJobs.length;
       document.getElementById('loadMoreContainer').style.display = hasMore ? 'block' : 'none';
     }
@@ -786,7 +827,7 @@
       }
     }
 
-    // ===== POPUP AD FUNCTIONALITY =====
+    // ===== POPUP AD FUNCTIONALITY (Shows Once Per Session) =====
     let popupShown = false;
 
     function showPopupAd() {
@@ -795,6 +836,8 @@
       if (popup) {
         popup.classList.add('active');
         popupShown = true;
+        // Store in session storage to prevent showing again in same session
+        sessionStorage.setItem('adPopupShown', 'true');
       }
     }
 
@@ -817,16 +860,23 @@
       document.getElementById('popupAdLink').addEventListener('click', redirectToAdLink);
     }
 
-    // ===== SHOW POPUP AFTER ALL DATA LOADS =====
+    // Check if popup was already shown in this session
+    if (sessionStorage.getItem('adPopupShown')) {
+      popupShown = true;
+    }
+
+    // ===== SHOW POPUP AFTER ALL DATA LOADS (Only Once) =====
     let dataLoaded = false;
     const checkDataLoaded = setInterval(() => {
       const totalJobs = document.getElementById('totalJobs').textContent;
       if (totalJobs !== '0' && totalJobs !== '') {
         dataLoaded = true;
         clearInterval(checkDataLoaded);
-        // Show popup 10 seconds after data loads
+        // Show popup 10 seconds after data loads (only if not already shown)
         setTimeout(() => {
-          showPopupAd();
+          if (!popupShown) {
+            showPopupAd();
+          }
         }, 10000);
       }
     }, 500);
