@@ -855,7 +855,14 @@
     }
 
     function redirectToAdLink() {
-      window.open('https://jobs.smartrecruiters.com/oneclick-ui/company/Sutherland/publication/00540916-b8ff-4b5b-be8b-92746e74a2b8?dcr_ci=Sutherland', '_blank');
+      // Get the URL from the popup content
+      const urlElement = document.querySelector('#popupAdLink .popup-ad-url');
+      if (urlElement) {
+        const url = urlElement.textContent.trim();
+        if (url) {
+          window.open(url, '_blank');
+        }
+      }
       closePopupAd();
     }
 
